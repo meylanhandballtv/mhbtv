@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>L'Équipe | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-equipe {
+      position: relative;
+      height: 420px;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 4rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 50%, #0a0a0a 100%);
+    }
+    .hero-equipe::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px);
+    }
+    .hero-equipe::after {
+      content: 'TEAM';
+      position: absolute;
+      right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20vw;
+      color: rgba(232,0,29,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .hero-accent { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(232,0,29,0.15) 0%, transparent 70%); pointer-events: none; }
+
+    /* Bureau grid */
+    .bureau-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .member-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.25s, border-color 0.25s;
+    }
+    .member-card:hover { transform: translateY(-5px); border-color: var(--red); }
+    .member-photo {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      display: block;
+      background: var(--darker);
+    }
+    .member-photo-placeholder {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: var(--darker);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: rgba(232,0,29,0.3);
+    }
+    .member-info { padding: 1.25rem 1rem; }
+    .member-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.04em;
+    }
+    .member-role {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .member-card.featured { border-color: rgba(232,0,29,0.35); }
+    .member-card.featured .member-role { color: var(--red); }
+
+    /* ICR badge */
+    .role-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      margin-top: 0.4rem;
+    }
+    .badge-bureau { background: rgba(232,0,29,0.15); color: var(--red); border: 1px solid rgba(232,0,29,0.3); }
+    .badge-icr { background: rgba(240,180,41,0.12); color: var(--gold); border: 1px solid rgba(240,180,41,0.25); }
+    .badge-membre { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+    /* Section séparateurs */
+    .team-section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .team-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Members grid (4 cols for délégués) */
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-equipe { padding: 2rem 1.5rem; }
+      .bureau-grid { grid-template-columns: 1fr 1fr; }
+      .members-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .bureau-grid { grid-template-columns: 1fr; }
+      .members-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <!-- HERO -->
+    <section class="hero-equipe">
+      <div class="hero-accent"></div>
+      <div class="hero-content" style="position:relative;z-index:1;">
+        <div class="hero-eyebrow">Saison 2025-2026</div>
+        <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6rem);line-height:0.9;color:var(--white);">L'Équipe <em style="color:var(--red);font-style:normal;">MHBTV</em></h1>
+        <p class="hero-sub">12 membres bénévoles passionnés au service du handball isérois.</p>
+      </div>
+    </section>
+
+    <!-- BUREAU -->
+    <section class="section">
+      <h2 class="section-title">Bureau <span>Directeur</span></h2>
+      <div class="section-line"></div>
+      <div class="team-section-title">Direction générale</div>
+      <div class="bureau-grid" style="margin-bottom:3rem;">
+        <div class="member-card featured">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_3791d14047924cf5b0b0568bdc959c29~mv2.jpg/v1/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/_MG_2232%20(2).jpg" alt="Xavier FINI" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Xavier FINI</div>
+            <div class="member-role">Coordinateur général</div>
+            <span class="role-badge badge-bureau">Bureau</span>
+          </div>
+        </div>
+        <div class="member-card featured">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_c9e4fa0772ae49b98f78b9a76aed4be0~mv2.jpeg/v1/crop/x_229,y_0,w_1542,h_1500/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202026-04-05%20at%2020_37_11.jpeg" alt="Marie DAL ZOTTO" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Marie DAL ZOTTO</div>
+            <div class="member-role">Coordinatrice adjointe</div>
+            <span class="role-badge badge-bureau">Bureau</span>
+          </div>
+        </div>
+        <div class="member-card featured">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_b70cbd03307845358b88f4884514a1bc~mv2.jpeg/v1/crop/x_530,y_289,w_670,h_651/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202026-04-05%20at%2020_22_19.jpeg" alt="Emmanuel ALVES DE MOURA" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Emmanuel ALVES DE MOURA</div>
+            <div class="member-role">Secrétaire général</div>
+            <span class="role-badge badge-bureau">Bureau</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ICR -->
+      <div class="team-section-title">Instance de Coordination des Retransmissions (ICR)</div>
+      <div class="members-grid" style="margin-bottom:3rem;">
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_1258452952b64fb999b4694245f88ed1~mv2.jpg/v1/crop/x_0,y_216,w_1200,h_1167/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_20250622_173607.jpg" alt="Nicolas MARIN" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Nicolas MARIN</div>
+            <div class="member-role">Président de l'ICR</div>
+            <span class="role-badge badge-icr">ICR</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_3fbbe61c2c324a32a0575778c22ff675~mv2.jpg/v1/crop/x_0,y_277,w_1536,h_1494/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202025-08-22%20%C3%A0%2018_37_52_38f7c792.jpg" alt="Yoan DUSSERT" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Yoan DUSSERT</div>
+            <div class="member-role">Vice-président de l'ICR</div>
+            <span class="role-badge badge-icr">ICR</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_e31bd779ac5a4cf38aa592fe73204bb9~mv2.jpeg/v1/crop/x_506,y_176,w_450,h_438/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202026-04-05%20at%2020_39_47.jpeg" alt="Enzo ACHOUR" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Enzo ACHOUR</div>
+            <div class="member-role">Coordinateur délégué de l'ICR</div>
+            <span class="role-badge badge-icr">ICR</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <div class="member-photo-placeholder">🎬</div>
+          <div class="member-info">
+            <div class="member-name">Nabil SABAH</div>
+            <div class="member-role">Coordinateur délégué de l'ICR</div>
+            <span class="role-badge badge-icr">ICR</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_5b566ba5c4bc4938afd9b8cab0429bc3~mv2.jpg/v1/crop/x_0,y_4,w_300,h_292/fill/w_420,h_409,al_c,lg_1,q_80,enc_avif,quality_auto/1000084110.jpg" alt="Tim TOUR" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Tim TOUR</div>
+            <div class="member-role">Coordinateur délégué de l'ICR</div>
+            <span class="role-badge badge-icr">ICR</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_28f414e3864e4a9eb4f05d693ee61713~mv2.jpg/v1/crop/x_0,y_216,w_1200,h_1167/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202025-08-22%20%C3%A0%2018_43_29_fb21d50b.jpg" alt="Dorina HELIE-JOLY" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Dorina HELIE-JOLY</div>
+            <div class="member-role">Coordinatrice déléguée de l'ICR</div>
+            <span class="role-badge badge-icr">ICR</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Membres -->
+      <div class="team-section-title">Membres de l'association</div>
+      <div class="members-grid">
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_0fc5d5943ab0449cbdfc332c045f44d8~mv2.jpg/v1/crop/x_0,y_15,w_1080,h_1051/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202025-08-22%20%C3%A0%2018_58_17_85fb79ef.jpg" alt="Gaetan FERRE" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Gaetan FERRE</div>
+            <div class="member-role">Membre de Meylan Handball TV</div>
+            <span class="role-badge badge-membre">Membre</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_7864b88d3369490b808289deb37af449~mv2.jpg/v1/crop/x_0,y_277,w_1536,h_1494/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202025-08-22%20%C3%A0%2018_52_03_1c873682.jpg" alt="Younes CHIKER" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Younes CHIKER</div>
+            <div class="member-role">Membre de Meylan Handball TV</div>
+            <span class="role-badge badge-membre">Membre</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_6cdf5e59a9fd4b3592ee4b0e2b54ee71~mv2.jpg/v1/crop/x_308,y_504,w_617,h_600/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ennio.jpg" alt="Ennio ARIZZI" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Ennio ARIZZI</div>
+            <div class="member-role">Membre de Meylan Handball TV</div>
+            <span class="role-badge badge-membre">Membre</span>
+          </div>
+        </div>
+        <div class="member-card">
+          <img class="member-photo" src="https://static.wixstatic.com/media/08ddad_eef6bd79c3504cfc9f5ee8f73e1fc0b2~mv2.jpg/v1/crop/x_0,y_3,w_198,h_193/fill/w_277,h_270,al_c,lg_1,q_80,enc_avif,quality_auto/photo%20kyliann.jpg" alt="Kyliann HEQUETTE" loading="lazy">
+          <div class="member-info">
+            <div class="member-name">Kyliann HEQUETTE</div>
+            <div class="member-role">Membre de Meylan Handball TV</div>
+            <span class="role-badge badge-membre">Membre</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

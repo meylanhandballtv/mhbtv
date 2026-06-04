@@ -9,14 +9,7 @@
         <li><a href="index.html" ${currentPage==='index.html'?'class="active"':''}>Accueil</a></li>
         <li><a href="diffusions.html" ${currentPage==='diffusions.html'?'class="active"':''}>Diffusions</a></li>
         <li><a href="equipe.html" ${currentPage==='equipe.html'?'class="active"':''}>L'Équipe</a></li>
-        <li class="nav-dropdown">
-          <a href="statuts.html" ${currentPage.startsWith('statut')||currentPage.startsWith('reglement')?'class="active"':''}>Statuts & Règlements</a>
-          <div class="dropdown-menu">
-            <a href="statuts.html">Statuts</a>
-            <a href="reglement-general.html">Règlement général</a>
-            <a href="reglement-retransmissions.html">Règlement retransmissions</a>
-          </div>
-        </li>
+        <li><a href="statuts.html" ${currentPage==='statuts.html'?'class="active"':''}>Statuts & Règlements</a></li>
         <li class="nav-dropdown">
           <a href="documentation.html" ${currentPage==='documentation.html'||currentPage==='audiences.html'||currentPage==='charte.html'?'class="active"':''}>Documentation</a>
           <div class="dropdown-menu">

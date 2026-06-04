@@ -1,0 +1,328 @@
+/* ===== MEYLAN HANDBALL TV — DESIGN SYSTEM ===== */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap');
+
+:root {
+  --red: #E8001D;
+  --red-dark: #b0001a;
+  --black: #0a0a0a;
+  --dark: #111111;
+  --darker: #0d0d0d;
+  --card: #161616;
+  --border: #2a2a2a;
+  --text: #e8e8e8;
+  --muted: #777;
+  --white: #ffffff;
+  --gold: #f0b429;
+  --silver: #b0bec5;
+  --bronze: #cd7f32;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--text);
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+/* === TOPBAR === */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  gap: 2rem;
+}
+
+.topbar-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topbar-logo span { color: var(--red); }
+
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  list-style: none;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+
+.topbar-nav a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 4px;
+  transition: color 0.2s, background 0.2s;
+  position: relative;
+}
+.topbar-nav a:hover, .topbar-nav a.active {
+  color: var(--white);
+  background: rgba(232,0,29,0.12);
+}
+.topbar-nav a.active { color: var(--red); }
+
+/* Dropdown */
+.nav-dropdown { position: relative; }
+.nav-dropdown > a::after { content: ' ▾'; font-size: 0.6rem; }
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  min-width: 220px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+}
+.nav-dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu a {
+  display: block;
+  padding: 0.6rem 1rem;
+  border-radius: 0;
+  font-size: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.dropdown-menu a:last-child { border-bottom: none; }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  margin-left: auto;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 2px;
+  background: var(--text);
+  transition: 0.3s;
+}
+
+/* === PAGE WRAPPER === */
+.page { padding-top: 64px; min-height: 100vh; }
+
+/* === HERO === */
+.hero {
+  position: relative;
+  height: 480px;
+  display: flex;
+  align-items: flex-end;
+  padding: 3rem 4rem;
+  overflow: hidden;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 50%, #0a0a0a 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px),
+    repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px);
+}
+.hero-accent {
+  position: absolute;
+  top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(232,0,29,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.5rem;
+}
+.hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 0.9;
+  letter-spacing: 0.03em;
+  color: var(--white);
+}
+.hero h1 em {
+  color: var(--red);
+  font-style: normal;
+}
+.hero-sub {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 500px;
+}
+
+/* === SECTIONS === */
+.section { padding: 4rem 4rem; }
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  margin-bottom: 0.25rem;
+}
+.section-title span { color: var(--red); }
+.section-line {
+  width: 48px; height: 3px;
+  background: var(--red);
+  margin-bottom: 2.5rem;
+}
+
+/* === CARDS === */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--red);
+}
+
+/* === GRID === */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
+/* === BUTTONS === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.75rem;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.btn-red { background: var(--red); color: var(--white); }
+.btn-red:hover { background: var(--red-dark); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--red); color: var(--red); }
+
+/* === TAG === */
+.tag {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  background: rgba(232,0,29,0.15);
+  color: var(--red);
+  border: 1px solid rgba(232,0,29,0.3);
+}
+
+/* === FOOTER === */
+footer {
+  background: var(--darker);
+  border-top: 1px solid var(--border);
+  padding: 3rem 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3rem;
+}
+.footer-brand .logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.footer-brand .logo-text span { color: var(--red); }
+.footer-brand p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+footer h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+footer ul { list-style: none; }
+footer ul li { margin-bottom: 0.4rem; }
+footer ul a {
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+footer ul a:hover { color: var(--white); }
+.footer-bottom {
+  background: var(--darker);
+  border-top: 1px solid var(--border);
+  padding: 1rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-bottom p { font-size: 0.75rem; color: var(--muted); }
+
+/* === DIVIDER === */
+.divider { height: 1px; background: var(--border); margin: 0 4rem; }
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .topbar-nav { display: none; }
+  .hamburger { display: flex; }
+  .topbar-nav.open { 
+    display: flex; flex-direction: column; align-items: flex-start;
+    position: fixed; top: 64px; left: 0; right: 0;
+    background: var(--dark); padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section { padding: 3rem 1.5rem; }
+  .hero { padding: 2rem 1.5rem; height: 380px; }
+  .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+  footer { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem; }
+  .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; }
+}
+@media (max-width: 600px) {
+  .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+}

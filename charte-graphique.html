@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charte Graphique | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .charte-section { padding: 4rem 4rem; }
+
+    /* Palette */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .color-swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .color-block { height: 100px; }
+    .color-info { padding: 0.75rem; background: var(--card); }
+    .color-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+    .color-hex {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Typography */
+    .typo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+    .typo-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+    }
+    .typo-sample-bebas { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--white); line-height: 1; margin-bottom: 0.75rem; }
+    .typo-sample-barlow { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.5rem; color: var(--white); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.75rem; }
+    .typo-sample-text { font-family: 'Barlow', sans-serif; font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+    .typo-meta {
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+    .typo-meta span {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-right: 1rem;
+    }
+
+    /* Logo showcase */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .logo-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .logo-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      min-height: 160px;
+    }
+    .logo-display.bg-black { background: #0a0a0a; }
+    .logo-display.bg-white { background: #ffffff; }
+    .logo-display.bg-red { background: var(--red); }
+    .logo-text-lg {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.12em;
+      line-height: 1.1;
+      text-align: center;
+    }
+    .logo-caption {
+      background: var(--card);
+      padding: 0.75rem 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* Do / Don't */
+    .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .rule-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .rule-header {
+      padding: 0.75rem 1.25rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .rule-header.do { background: rgba(0,180,100,0.12); color: #00b464; border-bottom: 1px solid rgba(0,180,100,0.2); }
+    .rule-header.dont { background: rgba(232,0,29,0.12); color: var(--red); border-bottom: 1px solid rgba(232,0,29,0.2); }
+    .rule-body { padding: 1.25rem; }
+    .rule-body ul { list-style: none; }
+    .rule-body ul li {
+      font-size: 0.85rem;
+      color: var(--muted);
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .rule-body ul li::before { content: '—'; color: var(--border); flex-shrink: 0; }
+
+    /* Wix image gallery */
+    .wix-gallery {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .wix-img-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .wix-img-card img {
+      width: 100%;
+      display: block;
+    }
+    .wix-img-caption {
+      padding: 0.6rem 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* Overlay badge */
+    .overlay-examples {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .overlay-ex {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    @media (max-width: 900px) {
+      .charte-section { padding: 3rem 1.5rem; }
+      .palette-grid { grid-template-columns: repeat(2, 1fr); }
+      .typo-grid, .logo-grid, .rules-grid { grid-template-columns: 1fr; }
+      .overlay-examples { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Documentation — Design</div>
+        <h1>Charte <em>Graphique</em></h1>
+        <p class="hero-sub">Identité visuelle officielle de Meylan Handball TV. Saison 2025-2026.</p>
+      </div>
+    </div>
+
+    <!-- PALETTE -->
+    <section class="charte-section">
+      <h2 class="section-title">Palette <span>de Couleurs</span></h2>
+      <div class="section-line"></div>
+      <p style="color:var(--muted);margin-bottom:2rem;max-width:600px;">Les couleurs officielles de MHBTV. Elles doivent être utilisées exclusivement dans toutes les productions visuelles du collectif.</p>
+
+      <div class="palette-grid">
+        <div class="color-swatch">
+          <div class="color-block" style="background:#E8001D;"></div>
+          <div class="color-info">
+            <div class="color-name">Rouge MHBTV</div>
+            <div class="color-hex">#E8001D</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-block" style="background:#0a0a0a;border-bottom:1px solid #2a2a2a;"></div>
+          <div class="color-info">
+            <div class="color-name">Noir Principal</div>
+            <div class="color-hex">#0A0A0A</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-block" style="background:#161616;border-bottom:1px solid #2a2a2a;"></div>
+          <div class="color-info">
+            <div class="color-name">Noir Card</div>
+            <div class="color-hex">#161616</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-block" style="background:#ffffff;"></div>
+          <div class="color-info" style="background:var(--card);">
+            <div class="color-name">Blanc</div>
+            <div class="color-hex">#FFFFFF</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="color-block" style="background:#777777;"></div>
+          <div class="color-info">
+            <div class="color-name">Gris Texte</div>
+            <div class="color-hex">#777777</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- TYPOGRAPHIE -->
+    <section class="charte-section">
+      <h2 class="section-title">Typo<span>graphie</span></h2>
+      <div class="section-line"></div>
+
+      <div class="typo-grid">
+        <div class="typo-card">
+          <div class="typo-sample-bebas">Bebas Neue</div>
+          <div class="typo-meta">
+            <span>Titres</span><span>Logos</span><span>Hero</span>
+            <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem;">Police principale pour tous les titres, le logo et les grandes typographies d'affiche.</p>
+          </div>
+        </div>
+        <div class="typo-card">
+          <div class="typo-sample-barlow">Barlow Condensed</div>
+          <div class="typo-meta">
+            <span>Navigation</span><span>Labels</span><span>Tags</span>
+            <p style="font-size:0.8rem;color:var(--muted);margin-top:0.5rem;">Utilisée pour la navigation, les boutons, les étiquettes et les légendes techniques.</p>
+          </div>
+        </div>
+        <div class="typo-card" style="grid-column: 1 / -1;">
+          <p class="typo-sample-text" style="font-size:1rem;">Barlow Regular — Corps de texte, descriptions, paragraphes. Police de lecture principale pour tout le contenu éditorial de MHBTV. Lisible, moderne, légèrement condensée pour les interfaces denses.</p>
+          <div class="typo-meta">
+            <span>Corps de texte</span><span>Descriptions</span><span>Paragraphes</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- LOGO -->
+    <section class="charte-section">
+      <h2 class="section-title">Déclinaisons <span>du Logo</span></h2>
+      <div class="section-line"></div>
+      <p style="color:var(--muted);margin-bottom:2rem;max-width:600px;">Le logo MHBTV se décline selon le fond sur lequel il est appliqué. Les trois versions officielles sont présentées ci-dessous.</p>
+
+      <div class="logo-grid">
+        <div class="logo-card">
+          <div class="logo-display bg-black">
+            <div class="logo-text-lg" style="color:#fff;">MEYLAN <span style="color:var(--red);">HANDBALL</span> TV</div>
+          </div>
+          <div class="logo-caption">Version principale · fond noir</div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-display bg-white">
+            <div class="logo-text-lg" style="color:#0a0a0a;">MEYLAN <span style="color:var(--red);">HANDBALL</span> TV</div>
+          </div>
+          <div class="logo-caption">Version fond blanc</div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-display bg-red">
+            <div class="logo-text-lg" style="color:#fff;">MEYLAN <span style="color:#0a0a0a;">HANDBALL</span> TV</div>
+          </div>
+          <div class="logo-caption">Version fond rouge</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ÉLÉMENTS VISUELS OFFICIELS (images Wix) -->
+    <section class="charte-section">
+      <h2 class="section-title">Visuels <span>Officiels</span></h2>
+      <div class="section-line"></div>
+      <p style="color:var(--muted);margin-bottom:2rem;max-width:600px;">Les planches de la nouvelle charte graphique MHBTV — saison 2025-2026. Ces visuels font référence pour toutes les productions du collectif.</p>
+
+      <div class="wix-gallery">
+        <div class="wix-img-card">
+          <img src="https://static.wixstatic.com/media/08ddad_37c19b752da544feb89dc2eefde5acf5~mv2.jpg/v1/fill/w_980,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Nouveau%20logo%20MHBTV1.jpg" alt="Nouvelle charte graphique MHBTV — planche 1" loading="lazy">
+          <div class="wix-img-caption">Planche 1 — Identité principale</div>
+        </div>
+        <div class="wix-img-card">
+          <img src="https://static.wixstatic.com/media/08ddad_b04fa228491e47a8abd84dc6611f5c97~mv2.jpg/v1/fill/w_980,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Nouveau%20logo%20MHBTV2.jpg" alt="Nouvelle charte graphique MHBTV — planche 2" loading="lazy">
+          <div class="wix-img-caption">Planche 2 — Couleurs & typographie</div>
+        </div>
+        <div class="wix-img-card">
+          <img src="https://static.wixstatic.com/media/08ddad_ce250fc356344254b928c937ce6e5ea4~mv2.jpg/v1/fill/w_980,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Nouveau%20logo%20MHBTV3%20(1).jpg" alt="Nouvelle charte graphique MHBTV — planche 3" loading="lazy">
+          <div class="wix-img-caption">Planche 3 — Déclinaisons logo</div>
+        </div>
+        <div class="wix-img-card">
+          <img src="https://static.wixstatic.com/media/08ddad_b8dceb11923448aa90fe0a72d1fe7818~mv2.jpg/v1/fill/w_980,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Nouveau%20logo%20MHBTV4%20(1).jpg" alt="Nouvelle charte graphique MHBTV — planche 4" loading="lazy">
+          <div class="wix-img-caption">Planche 4 — Applications</div>
+        </div>
+        <div class="wix-img-card">
+          <img src="https://static.wixstatic.com/media/08ddad_6496dc9c75884c21b4cd67a404928441~mv2.jpg/v1/fill/w_980,h_404,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Nouveau%20logo%20MHBTV10.jpg" alt="Nouvelle charte graphique MHBTV — planche 5" loading="lazy">
+          <div class="wix-img-caption">Planche 5 — Templates & supports</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- DO / DON'T -->
+    <section class="charte-section">
+      <h2 class="section-title">Bonnes <span>Pratiques</span></h2>
+      <div class="section-line"></div>
+
+      <div class="rules-grid">
+        <div class="rule-card">
+          <div class="rule-header do">✓ À faire</div>
+          <div class="rule-body">
+            <ul>
+              <li>Utiliser uniquement les polices officielles (Bebas Neue, Barlow Condensed, Barlow)</li>
+              <li>Respecter les codes couleur HEX exacts de la charte</li>
+              <li>Maintenir un contraste suffisant entre le texte et le fond</li>
+              <li>Utiliser les templates validés pour les affiches et visuels de retransmission</li>
+              <li>Conserver des zones de protection autour du logo (minimum 1× la hauteur du logo)</li>
+              <li>Soumettre tout nouveau visuel au Bureau avant publication</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-header dont">✕ À éviter</div>
+          <div class="rule-body">
+            <ul>
+              <li>Déformer, étirer ou pivoter le logo MHBTV</li>
+              <li>Utiliser des couleurs non prévues par la charte sur des productions officielles</li>
+              <li>Modifier le générique, l'habillage graphique ou le jingle sans autorisation</li>
+              <li>Utiliser le nom, le logo ou l'identité visuelle MHBTV à des fins personnelles</li>
+              <li>Créer des visuels avec des polices tierces non validées</li>
+              <li>Publier des supports visuels au nom du collectif sans validation préalable</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte-graphique.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

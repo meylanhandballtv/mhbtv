@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentation | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-hub-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Featured doc card */
+    .doc-featured {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.25s, border-color 0.25s;
+      position: relative;
+    }
+    .doc-featured:hover { transform: translateY(-4px); border-color: var(--red); }
+    .doc-featured-header {
+      background: linear-gradient(135deg, rgba(232,0,29,0.15), rgba(232,0,29,0.05));
+      padding: 3rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .doc-featured-icon {
+      font-size: 3.5rem;
+      flex-shrink: 0;
+    }
+    .doc-featured-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .doc-featured-header p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+    .doc-featured-body { padding: 1.5rem 2.5rem; }
+    .doc-featured-body p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; margin-bottom: 1.25rem; }
+
+    /* Side cards stack */
+    .doc-side-stack { display: flex; flex-direction: column; gap: 1.5rem; }
+    .doc-side-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      text-decoration: none;
+      display: block;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .doc-side-card:hover { transform: translateY(-3px); border-color: var(--red); }
+    .doc-side-icon {
+      width: 44px; height: 44px;
+      background: rgba(232,0,29,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .doc-side-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    .doc-side-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+    .doc-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    /* Info banner */
+    .info-banner {
+      background: rgba(240,180,41,0.07);
+      border: 1px solid rgba(240,180,41,0.2);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .info-banner-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .info-banner p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+    .info-banner p strong { color: var(--gold); }
+
+    @media (max-width: 900px) {
+      .doc-hub-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Ressources membres</div>
+        <h1>Docu<em>mentation</em></h1>
+        <p class="hero-sub">Charte graphique, audiences officielles et comptes-rendus des assemblées générales.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title">Espace <span>Documentation</span></h2>
+      <div class="section-line"></div>
+
+      <div class="info-banner">
+        <div class="info-banner-icon">💡</div>
+        <p>Dans cet espace vous pouvez retrouver la <strong>charte graphique officielle</strong> de Meylan Handball TV, les <strong>audiences officielles</strong> dès qu'elles sont publiées, et les <strong>comptes-rendus des Assemblées générales</strong> ordinaires, extraordinaires et électives.</p>
+      </div>
+
+      <div class="doc-hub-grid">
+        <!-- Featured: Charte graphique -->
+        <a href="charte.html" class="doc-featured">
+          <div class="doc-featured-header">
+            <div class="doc-featured-icon">🎨</div>
+            <div>
+              <h3>Charte Graphique</h3>
+              <p>L'identité visuelle officielle de Meylan Handball TV — couleurs, typographies, logos et règles d'usage.</p>
+            </div>
+          </div>
+          <div class="doc-featured-body">
+            <p>La charte graphique définit l'ensemble des éléments visuels qui constituent l'identité de MHBTV. Elle est à utiliser pour tous les supports de communication, habillages d'écran et publications de l'association.</p>
+            <span class="doc-link">Consulter la charte →</span>
+          </div>
+        </a>
+
+        <div class="doc-side-stack">
+          <!-- Audiences -->
+          <a href="audiences.html" class="doc-side-card">
+            <div class="doc-side-icon">📊</div>
+            <h3>Audiences officielles</h3>
+            <p>Statistiques de vues et d'audience des diffusions publiées officiellement par le bureau.</p>
+            <span class="doc-link">Voir les audiences →</span>
+          </a>
+
+          <!-- Comptes-rendus AG -->
+          <a href="documentation.html#ag" class="doc-side-card">
+            <div class="doc-side-icon">📁</div>
+            <h3>Comptes-rendus des AG</h3>
+            <p>Archives des comptes-rendus des Assemblées générales ordinaires, extraordinaires et électives.</p>
+            <span class="doc-link">Accéder aux documents →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Section AG -->
+    <section class="section" id="ag">
+      <h2 class="section-title">Comptes-rendus <span>des AG</span></h2>
+      <div class="section-line"></div>
+
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+        <!-- AG Entry -->
+        <div style="display:flex;align-items:center;gap:1.5rem;padding:1.25rem 2rem;border-bottom:1px solid var(--border);">
+          <div style="font-size:1.5rem;width:40px;text-align:center;">📄</div>
+          <div style="flex:1;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--white);font-size:1rem;">AG Ordinaire — Août 2025</div>
+            <div style="font-size:0.8rem;color:var(--muted);">Assemblée générale de rentrée saison 2025-2026</div>
+          </div>
+          <div class="tag">AG Ordinaire</div>
+          <a href="#" class="btn btn-outline" style="padding:0.4rem 1rem;font-size:0.72rem;">Télécharger</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:1.5rem;padding:1.25rem 2rem;border-bottom:1px solid var(--border);">
+          <div style="font-size:1.5rem;width:40px;text-align:center;">📄</div>
+          <div style="flex:1;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--white);font-size:1rem;">AG Élective — Juin 2025</div>
+            <div style="font-size:0.8rem;color:var(--muted);">Renouvellement du bureau — Saison 2025-2026</div>
+          </div>
+          <div class="tag" style="background:rgba(240,180,41,0.1);color:var(--gold);border-color:rgba(240,180,41,0.25);">AG Élective</div>
+          <a href="#" class="btn btn-outline" style="padding:0.4rem 1rem;font-size:0.72rem;">Télécharger</a>
+        </div>
+        <div style="padding:2rem;text-align:center;">
+          <p style="font-size:0.85rem;color:var(--muted);">D'autres comptes-rendus seront ajoutés au fil des assemblées. Pour toute demande, contactez le secrétaire général.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Liens vers statuts -->
+    <section class="section" style="text-align:center;padding:4rem;">
+      <div style="max-width:520px;margin:0 auto;">
+        <div class="tag" style="margin-bottom:1.5rem;">Documents officiels</div>
+        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--white);margin-bottom:1rem;letter-spacing:0.05em;">Statuts & Règlements</h2>
+        <p style="color:var(--muted);margin-bottom:2rem;">Les textes fondateurs et règlements encadrant le fonctionnement de l'association sont disponibles dans la section dédiée.</p>
+        <a href="statuts.html" class="btn btn-red">Accéder aux statuts & règlements →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche d'Inscription — MHBTV 2026-2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #151720;
+    --surface2: #1c1f2e;
+    --border: #252840;
+    --accent: #e8502a;
+    --accent2: #f5a623;
+    --text: #e8e9f0;
+    --muted: #7a7d94;
+    --success: #3ecf8e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  .header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-logo { display: flex; align-items: center; gap: 14px; }
+  .logo-mark {
+    width: 44px; height: 44px;
+    background: var(--accent);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px;
+    color: #fff; letter-spacing: -0.5px; flex-shrink: 0;
+  }
+  .header-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--text); }
+  .header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .progress-bar-wrap { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+  .progress-bar { width: 180px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  .steps-nav { display: flex; gap: 6px; margin-bottom: 40px; flex-wrap: wrap; }
+  .step-dot { width: 32px; height: 4px; border-radius: 2px; background: var(--border); cursor: pointer; transition: background 0.3s; }
+  .step-dot.active { background: var(--accent); }
+  .step-dot.done { background: var(--success); }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header { margin-bottom: 32px; }
+  .section-num {
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;
+  }
+  .section-title { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; line-height: 1.2; color: var(--text); }
+  .section-desc {
+    font-size: 14px; color: var(--muted); margin-top: 10px; line-height: 1.6;
+    border-left: 3px solid var(--border); padding-left: 14px;
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .form-grid.single { grid-template-columns: 1fr; }
+  .form-grid.triple { grid-template-columns: 1fr 1fr 1fr; }
+
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field.full { grid-column: 1 / -1; }
+
+  label { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.5px; text-transform: uppercase; }
+  label span.req { color: var(--accent); margin-left: 2px; }
+
+  input[type="text"], input[type="email"], input[type="tel"],
+  input[type="date"], textarea, select {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
+    padding: 12px 16px; transition: border-color 0.2s, box-shadow 0.2s; width: 100%; outline: none;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,80,42,0.12);
+  }
+  textarea { min-height: 90px; resize: vertical; }
+  select option { background: var(--surface2); }
+
+  .check-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+  .check-item {
+    display: flex; align-items: center; gap: 9px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 16px; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+    font-size: 14px; user-select: none;
+  }
+  .check-item:hover { border-color: var(--accent); }
+  .check-item input[type="checkbox"], .check-item input[type="radio"] {
+    width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0;
+  }
+  .check-item.selected { border-color: var(--accent); background: rgba(232,80,42,0.08); }
+
+  .field-label-standalone {
+    font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 8px; display: block;
+  }
+
+  .avail-table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 20px; font-size: 14px; }
+  .avail-table thead th {
+    background: var(--surface2); padding: 12px 14px; text-align: center;
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted);
+    font-weight: 500; border-bottom: 1px solid var(--border);
+  }
+  .avail-table thead th:first-child { text-align: left; }
+  .avail-table tbody td { padding: 11px 14px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle; }
+  .avail-table tbody tr:last-child td { border-bottom: none; }
+  .avail-table tbody td:not(:first-child) { text-align: center; }
+  .avail-table input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; }
+
+  .sub-title {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent2); margin-bottom: 14px;
+  }
+
+  .info-box {
+    background: rgba(61,207,142,0.07); border: 1px solid rgba(61,207,142,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 13px; color: var(--success);
+    margin-bottom: 24px; line-height: 1.5;
+  }
+  .warn-box {
+    background: rgba(245,166,35,0.07); border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 10px; padding: 16px 20px; font-size: 13px; color: var(--accent2);
+    margin-bottom: 24px; line-height: 1.5;
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  .engage-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .engage-list li {
+    display: flex; align-items: flex-start; gap: 10px; font-size: 14px;
+    color: var(--muted); line-height: 1.5; padding: 12px 16px;
+    background: var(--surface2); border-radius: 8px; border-left: 3px solid var(--border);
+  }
+  .engage-list li::before { content: '—'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+  .consent-item {
+    display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 10px;
+    margin-bottom: 12px; cursor: pointer; transition: border-color 0.2s; font-size: 14px; line-height: 1.5;
+  }
+  .consent-item:hover { border-color: var(--accent); }
+  .consent-item input { width: 18px; height: 18px; accent-color: var(--accent); margin-top: 2px; flex-shrink: 0; }
+
+  .nav-buttons { display: flex; justify-content: space-between; margin-top: 40px; gap: 12px; }
+  .btn {
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 0.5px;
+    padding: 14px 28px; border-radius: 10px; border: none; cursor: pointer;
+    transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+  }
+  .btn-ghost { background: var(--surface2); color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--muted); }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: #c73f1e; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(232,80,42,0.3); }
+  .btn-success { background: var(--success); color: #0d0f14; }
+  .btn-success:hover { background: #2bb07a; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(61,207,142,0.3); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+  /* Loader */
+  .loader {
+    display: none; position: fixed; inset: 0; background: rgba(13,15,20,0.85);
+    z-index: 999; align-items: center; justify-content: center; flex-direction: column; gap: 16px;
+  }
+  .loader.active { display: flex; }
+  .spinner { width: 48px; height: 48px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loader-text { font-family: 'Syne', sans-serif; font-size: 16px; color: var(--muted); }
+
+  /* Toast notification */
+  .toast {
+    position: fixed; bottom: 32px; right: 32px; z-index: 9999;
+    padding: 16px 24px; border-radius: 12px; font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 10px;
+    opacity: 0; transform: translateY(16px); transition: all 0.35s ease;
+    pointer-events: none; max-width: 380px; line-height: 1.4;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.success { background: var(--success); color: #0d0f14; }
+  .toast.error { background: var(--accent); color: #fff; }
+  .toast-icon { font-size: 20px; flex-shrink: 0; }
+
+  /* Success screen */
+  .success-screen {
+    display: none; text-align: center; padding: 60px 20px;
+    animation: fadeIn 0.4s ease;
+  }
+  .success-screen.active { display: block; }
+  .success-icon {
+    width: 80px; height: 80px; background: rgba(61,207,142,0.12);
+    border: 2px solid var(--success); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; margin: 0 auto 24px;
+  }
+  .success-title {
+    font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 700;
+    color: var(--success); margin-bottom: 12px;
+  }
+  .success-desc { font-size: 15px; color: var(--muted); line-height: 1.6; max-width: 480px; margin: 0 auto; }
+
+  @media (max-width: 640px) {
+    .header { padding: 16px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .form-grid, .form-grid.triple { grid-template-columns: 1fr; }
+    .container { padding: 28px 16px 60px; }
+    .section-title { font-size: 22px; }
+    .progress-bar-wrap { display: none; }
+    .toast { bottom: 16px; right: 16px; left: 16px; max-width: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════ CONFIGURATION EMAILJS ════════════════════════════ -->
+<script>
+  // ⚠️ REMPLACEZ CES VALEURS PAR VOS IDENTIFIANTS EMAILJS
+  const EMAILJS_CONFIG = {
+    publicKey:  '2EYsWCwGZ3DzfdnAI',    // Compte > API Keys > Public Key
+    serviceId:  'service_uba7d6x',    // Email Services > Service ID
+    templateId: 'template_vnlhc5k',  // Email Templates > Template ID
+    toEmail:    'meylanhandballtv@gmail.com' // Adresse de réception des inscriptions
+  };
+</script>
+<!-- ═════════════════════════════════════════════════════════════════════════════ -->
+
+<div class="loader" id="loader">
+  <div class="spinner"></div>
+  <div class="loader-text" id="loader-text">Envoi en cours…</div>
+</div>
+
+<div class="toast" id="toast">
+  <span class="toast-icon" id="toast-icon"></span>
+  <span id="toast-msg"></span>
+</div>
+
+<header class="header">
+  <div class="header-logo">
+    <div class="logo-mark">MHB</div>
+    <div>
+      <div class="header-title">Meylan Handball TV</div>
+      <div class="header-sub">Fiche d'inscription — Saison 2026-2027</div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <span id="progress-label">Étape 1 / 7</span>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="steps-nav" id="steps-nav"></div>
+
+  <!-- ══ SEC 1 — Identité ══ -->
+  <div class="section active" id="sec-1">
+    <div class="section-header">
+      <div class="section-num">Section 01</div>
+      <div class="section-title">Identité du membre</div>
+      <div class="section-desc">Informations personnelles du candidat à l'adhésion.</div>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>Nom <span class="req">*</span></label><input type="text" id="nom" placeholder="DUPONT"></div>
+      <div class="field"><label>Prénom <span class="req">*</span></label><input type="text" id="prenom" placeholder="Jean"></div>
+      <div class="field"><label>Date de naissance</label><input type="date" id="naissance"></div>
+      <div class="field"><label>Téléphone <span class="req">*</span></label><input type="tel" id="tel" placeholder="06 xx xx xx xx"></div>
+      <div class="field full"><label>Adresse e-mail <span class="req">*</span></label><input type="email" id="email" placeholder="jean.dupont@email.com"></div>
+      <div class="field"><label>Adresse</label><input type="text" id="adresse" placeholder="12 rue des Lilas"></div>
+      <div class="field"><label>Code postal</label><input type="text" id="codepostal" placeholder="38240"></div>
+      <div class="field"><label>Ville</label><input type="text" id="ville" placeholder="Meylan"></div>
+      <div class="field"><label>N° licence FFHB</label><input type="text" id="licence" placeholder="FFHB-XXXXXXX"></div>
+      <div class="field"><label>Club d'appartenance</label><input type="text" id="club" placeholder="Meylan Handball"></div>
+    </div>
+  </div>
+
+  <!-- ══ SEC 2 — Lien club ══ -->
+  <div class="section" id="sec-2">
+    <div class="section-header">
+      <div class="section-num">Section 02</div>
+      <div class="section-title">Lien avec le club & Adhésion</div>
+      <div class="section-desc">Seules les personnes licenciées au club ou entretenant des relations avec le collectif peuvent adhérer (Art. 5.2 des Statuts).</div>
+    </div>
+    <span class="field-label-standalone">Situation <span class="req">*</span></span>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="situation" value="Licencié(e) au club de Meylan Handball"> Licencié(e) au club de Meylan Handball</label>
+      <label class="check-item"><input type="radio" name="situation" value="Personne extérieure"> Personne extérieure</label>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>Numéro de licence FFHB/FFSA</label><input type="text" id="num_licence" placeholder="FFHB-XXXXXXX"></div>
+      <div class="field"><label>Équipe / section du club</label><input type="text" id="equipe" placeholder="Seniors masculins, U18…"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="sub-title">Type de membre demandé (Art. 5 des statuts)</div>
+    <div class="info-box">
+      Un membre est « actif » s'il participe à ≥ 4 retransmissions sur les 3 derniers mois ou tient un poste régulier (Art. 5.1.1). En deçà, il est « occasionnel ». Le statut est révisé mensuellement.
+    </div>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="statut" value="Membre actif"> <span><strong>Membre actif</strong> — Engagement régulier (Art. 5.1.1)</span></label>
+      <label class="check-item"><input type="radio" name="statut" value="Membre occasionnel"> <span><strong>Membre occasionnel</strong> — Participation ponctuelle (Art. 5.1.2)</span></label>
+      <label class="check-item"><input type="radio" name="statut" value="Membre d'honneur"> <span><strong>Membre d'honneur</strong> — Ancien membre uniquement (Art. 5.1.3)</span></label>
+    </div>
+    <label class="consent-item">
+      <input type="checkbox" id="ck_integration">
+      J'ai pris connaissance de la période d'intégration d'un mois pouvant s'appliquer à toute nouvelle recrue (Art. 11.2 du RG).
+    </label>
+  </div>
+
+  <!-- ══ SEC 3 — Rôle & Compétences ══ -->
+  <div class="section" id="sec-3">
+    <div class="section-header">
+      <div class="section-num">Section 03</div>
+      <div class="section-title">Rôle souhaité & Compétences</div>
+      <div class="section-desc">L'accréditation est obligatoire pour les postes de Responsable de retransmission et de Commentateur sportif (Art. 12 RG).</div>
+    </div>
+    <span class="field-label-standalone">Postes et fonctions souhaités <span class="req">*</span></span>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="postes" value="Cadreur principal"> Cadreur principal</label>
+      <label class="check-item"><input type="checkbox" name="postes" value="Cadreur secondaire/mobile"> Cadreur secondaire/mobile</label>
+      <label class="check-item"><input type="checkbox" name="postes" value="Réalisateur / Superviseur"> Réalisateur / Superviseur</label>
+      <label class="check-item"><input type="checkbox" name="postes" value="Commentateur sportif"> Commentateur sportif</label>
+      <label class="check-item"><input type="checkbox" name="postes" value="Responsable de retransmission"> Responsable de retransmission</label>
+      <label class="check-item"><input type="checkbox" name="postes" value="Graphiste / Habillage"> Graphiste / Habillage</label>
+      <label class="check-item"><input type="checkbox" name="postes" value="Reporter / Journaliste"> Reporter / Journaliste</label>
+    </div>
+    <div class="form-grid single" style="margin-bottom:24px">
+      <div class="field"><label>Autre poste (préciser)</label><input type="text" id="autre_poste" placeholder="Préciser…"></div>
+    </div>
+    <div class="divider"></div>
+    <div class="sub-title">Niveaux d'expérience</div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Niveau en captation vidéo</label>
+        <select id="niv_captation">
+          <option value="">— Sélectionner —</option>
+          <option>Aucune</option><option>Débutant(e)</option><option>Intermédiaire</option><option>Expérimenté(e)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Niveau en gestion de diffusion</label>
+        <select id="niv_diffusion">
+          <option value="">— Sélectionner —</option>
+          <option>Aucune</option><option>Débutant(e)</option><option>Intermédiaire</option><option>Expérimenté(e)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Niveau en commentaires</label>
+        <select id="niv_commentaire">
+          <option value="">— Sélectionner —</option>
+          <option>Aucune</option><option>Débutant(e)</option><option>Intermédiaire</option><option>Expérimenté(e)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Connaissance du handball</label>
+        <select id="niv_handball">
+          <option value="">— Sélectionner —</option>
+          <option>Débutant(e)</option><option>Intermédiaire</option><option>Expérimenté(e)</option>
+        </select>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="sub-title">Accréditations (Art. 12 RG)</div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Accréditation Resp. retransmission</label>
+        <select id="accred_resp">
+          <option value="Accréditation non encore passée">Non encore passée</option>
+          <option value="Questionnaire en cours">Questionnaire en cours</option>
+          <option value="Accréditation obtenue">Obtenue</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Accréditation Commentateur sportif</label>
+        <select id="accred_comm">
+          <option value="Accréditation non encore passée">Non encore passée</option>
+          <option value="Questionnaire en cours">Questionnaire en cours</option>
+          <option value="Accréditation obtenue">Obtenue</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SEC 4 — Disponibilités ══ -->
+  <div class="section" id="sec-4">
+    <div class="section-header">
+      <div class="section-num">Section 04</div>
+      <div class="section-title">Disponibilités</div>
+      <div class="section-desc">Les retransmissions ont lieu principalement les week-ends. Des déplacements extérieurs sont possibles (Art. 13 & 14 du RR).</div>
+    </div>
+    <div class="sub-title">Disponibilités par catégorie</div>
+    <table class="avail-table">
+      <thead>
+        <tr>
+          <th>Catégorie</th><th>Samedis</th><th>Dimanches</th><th>Soirs</th><th>Vacances</th>
+        </tr>
+      </thead>
+      <tbody id="avail-body"></tbody>
+    </table>
+    <div class="form-grid">
+      <div class="field">
+        <label>Possède un véhicule (Art. 14 RR)</label>
+        <select id="vehicule">
+          <option value="">— Sélectionner —</option><option>Oui</option><option>Non</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Déplacements extérieurs</label>
+        <select id="deplacements">
+          <option value="">— Sélectionner —</option>
+          <option>À volonté</option><option>Occasionnellement</option><option>Domicile uniquement</option>
+        </select>
+      </div>
+      <div class="field"><label>Contraintes particulières</label><input type="text" id="contraintes" placeholder="Examens, vacances d'été…"></div>
+      <div class="field"><label>Rythme souhaité (retransmissions / mois)</label><input type="text" id="rythme" placeholder="ex : 2 à 3 par mois"></div>
+    </div>
+  </div>
+
+  <!-- ══ SEC 5 — Discipline ══ -->
+  <div class="section" id="sec-5">
+    <div class="section-header">
+      <div class="section-num">Section 05</div>
+      <div class="section-title">Engagement disciplinaire & Vie collective</div>
+    </div>
+    <div class="sub-title">Principes fondamentaux (Art. 2 RG & Art. 15, 16 RR)</div>
+    <ul class="engage-list">
+      <li>Respecter les valeurs fondamentales du collectif : respect, bienveillance, collaboration et engagement.</li>
+      <li>Respecter le principe de neutralité lors de chaque retransmission : impartialité, absence de propos partisans, respect des arbitres et officiels (Art. 15 RR).</li>
+      <li>Assurer ma présence sur les retransmissions confirmées. Tout désistement à moins de 3 jours sans motif légitime est un abandon de poste (Art. 21.2 RR).</li>
+      <li>Ne pas utiliser le nom, le logo ou l'image de MHBTV sans autorisation de la Coordination générale (Art. D3).</li>
+      <li>Signaler tout incident via le formulaire en ligne sur le site interne (Art. 22 RR).</li>
+      <li>Ne jamais me présenter à un poste sans accréditation correspondante (Art. 12 RG).</li>
+    </ul>
+    <label class="consent-item">
+      <input type="checkbox" id="ck_icr">
+      J'ai pris connaissance de la procédure disciplinaire et du rôle de l'Instance Compétente des Retransmissions (ICR).
+    </label>
+    <div class="divider"></div>
+    <div class="sub-title">Participation à la vie du collectif</div>
+    <span class="field-label-standalone">Assemblées générales (trimestrielles)</span>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="ag" value="Oui, systématiquement"> Oui, systématiquement</label>
+      <label class="check-item"><input type="radio" name="ag" value="Si possible"> Si possible</label>
+      <label class="check-item"><input type="radio" name="ag" value="Difficilement"> Difficilement</label>
+    </div>
+    <span class="field-label-standalone">Réunions de planification / ICR</span>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="reunion" value="Oui"> Oui</label>
+      <label class="check-item"><input type="radio" name="reunion" value="Non"> Non</label>
+      <label class="check-item"><input type="radio" name="reunion" value="Selon disponibilités"> Selon disponibilités</label>
+    </div>
+    <span class="field-label-standalone">Formations internes</span>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="formation" value="Oui, intéressé(e)"> Oui, intéressé(e)</label>
+      <label class="check-item"><input type="radio" name="formation" value="Non"> Non</label>
+    </div>
+    <div class="divider"></div>
+    <div class="sub-title">Communication & Gouvernance</div>
+    <span class="field-label-standalone">Moyen de communication préféré</span>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="com_pref" value="WhatsApp"> WhatsApp</label>
+      <label class="check-item"><input type="radio" name="com_pref" value="Email"> Email</label>
+      <label class="check-item"><input type="radio" name="com_pref" value="Autre"> Autre</label>
+    </div>
+    <span class="field-label-standalone">Intérêt pour la gouvernance (Art. 7 & 8 statuts)</span>
+    <div class="check-grid">
+      <label class="check-item"><input type="radio" name="gouv" value="Oui"> Oui</label>
+      <label class="check-item"><input type="radio" name="gouv" value="Non"> Non</label>
+      <label class="check-item"><input type="radio" name="gouv" value="Peut-être à terme"> Peut-être à terme</label>
+    </div>
+    <span class="field-label-standalone">Poste(s) visé(s)</span>
+    <div class="check-grid">
+      <label class="check-item"><input type="checkbox" name="poste_gouv" value="Coordinateur(trice) général(e)"> Coordinateur/trice général(e)</label>
+      <label class="check-item"><input type="checkbox" name="poste_gouv" value="Coordinateur(trice) adjoint(e)"> Coordinateur/trice adjoint(e)</label>
+      <label class="check-item"><input type="checkbox" name="poste_gouv" value="Secrétaire général(e)"> Secrétaire général(e)</label>
+      <label class="check-item"><input type="checkbox" name="poste_gouv" value="Membre de l'ICR"> Membre de l'ICR</label>
+    </div>
+  </div>
+
+  <!-- ══ SEC 6 — Droits à l'image ══ -->
+  <div class="section" id="sec-6">
+    <div class="section-header">
+      <div class="section-num">Section 06</div>
+      <div class="section-title">Droits à l'image & Données personnelles</div>
+      <div class="section-desc">Conformément à l'Article 19 du règlement général. La Coordination générale tient un registre des consentements (Art. 19.2.1).</div>
+    </div>
+    <span class="field-label-standalone">Utilisation image dans les productions et communications</span>
+    <div class="check-grid" style="margin-bottom:20px">
+      <label class="check-item"><input type="radio" name="img_activites" value="Oui"> Oui</label>
+      <label class="check-item"><input type="radio" name="img_activites" value="Non"> Non</label>
+    </div>
+    <span class="field-label-standalone">Publication du nom (générique, site interne)</span>
+    <div class="check-grid" style="margin-bottom:20px">
+      <label class="check-item"><input type="radio" name="img_nom" value="Oui"> Oui</label>
+      <label class="check-item"><input type="radio" name="img_nom" value="Non"> Non</label>
+    </div>
+    <span class="field-label-standalone">Image dans les activités officielles (réseaux sociaux, site…)</span>
+    <div class="check-grid" style="margin-bottom:20px">
+      <label class="check-item"><input type="radio" name="img_officielles" value="Autorisé(e)"> Autorisé(e)</label>
+      <label class="check-item"><input type="radio" name="img_officielles" value="Refusé(e)"> Refusé(e)</label>
+    </div>
+    <label class="consent-item">
+      <input type="checkbox" id="ck_rgpd">
+      J'accepte que mes données personnelles soient traitées conformément au RGPD, uniquement à des fins de gestion interne.
+    </label>
+  </div>
+
+  <!-- ══ SEC 7 — Signature ══ -->
+  <div class="section" id="sec-7">
+    <div class="section-header">
+      <div class="section-num">Section 07</div>
+      <div class="section-title">Engagement final & Signature</div>
+    </div>
+    <div class="info-box" style="margin-bottom:20px; color:var(--muted); background:var(--surface2); border-color:var(--border)">
+      <em>Je soussigné(e) certifie l'exactitude des informations fournies dans ce formulaire. J'ai pris connaissance des statuts de Meylan Handball TV (version du 20 décembre 2025), du règlement général (version du 22 janvier 2026) et du règlement applicables aux retransmissions (version du 12 janvier 2026). Je m'engage à respecter l'ensemble de ces textes pour toute la durée de mon adhésion.</em>
+    </div>
+    <label class="consent-item">
+      <input type="checkbox" id="ck_final">
+      <strong>Je certifie avoir lu et accepté l'intégralité des textes statutaires et réglementaires de Meylan Handball TV.</strong>
+    </label>
+    <div class="form-grid" style="margin-top:24px">
+      <div class="field"><label>Fait à</label><input type="text" id="sign_lieu" placeholder="Meylan"></div>
+      <div class="field"><label>Le</label><input type="date" id="sign_date"></div>
+    </div>
+  </div>
+
+  <!-- Écran succès -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Inscription envoyée !</div>
+    <div class="success-desc">
+      Votre fiche d'inscription a bien été transmise à la coordination de Meylan Handball TV.<br>
+      Vous recevrez une confirmation par e-mail dans les prochains jours.
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav-buttons" id="nav-buttons">
+    <button class="btn btn-ghost" id="btn-prev" onclick="navigate(-1)" style="display:none">← Précédent</button>
+    <div></div>
+    <button class="btn btn-primary" id="btn-next" onclick="navigate(1)">Suivant →</button>
+    <button class="btn btn-success" id="btn-submit" onclick="submitForm()" style="display:none">✉ Envoyer l'inscription</button>
+  </div>
+
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+// INIT EMAILJS
+// ══════════════════════════════════════════════
+emailjs.init(EMAILJS_CONFIG.publicKey);
+
+// ══════════════════════════════════════════════
+// DONNÉES DU FORMULAIRE
+// ══════════════════════════════════════════════
+const TOTAL_STEPS = 7;
+let currentStep = 1;
+
+// Tableau disponibilités
+const availCategories = [
+  'Seniors Masculins', 'Seniors Féminines', 'U18', 'U16', 'U14', 'Autres'
+];
+const availCols = ['Samedis', 'Dimanches', 'Soirs', 'Vacances'];
+
+function buildAvailTable() {
+  const tbody = document.getElementById('avail-body');
+  availCategories.forEach(cat => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${cat}</td>` + availCols.map(col =>
+      `<td><input type="checkbox" name="avail_${cat.replace(/\s/g,'_')}_${col}" value="Oui"></td>`
+    ).join('');
+    tbody.appendChild(tr);
+  });
+}
+
+// Steps nav
+function buildStepsNav() {
+  const nav = document.getElementById('steps-nav');
+  for (let i = 1; i <= TOTAL_STEPS; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'step-dot' + (i === 1 ? ' active' : '');
+    dot.dataset.step = i;
+    dot.onclick = () => goTo(i);
+    nav.appendChild(dot);
+  }
+}
+
+function updateUI() {
+  // Sections
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(`sec-${currentStep}`)?.classList.add('active');
+
+  // Dots
+  document.querySelectorAll('.step-dot').forEach(d => {
+    const n = parseInt(d.dataset.step);
+    d.className = 'step-dot' + (n === currentStep ? ' active' : n < currentStep ? ' done' : '');
+  });
+
+  // Progress
+  const pct = ((currentStep - 1) / (TOTAL_STEPS - 1)) * 100;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = `Étape ${currentStep} / ${TOTAL_STEPS}`;
+
+  // Boutons
+  document.getElementById('btn-prev').style.display = currentStep > 1 ? 'flex' : 'none';
+  document.getElementById('btn-next').style.display = currentStep < TOTAL_STEPS ? 'flex' : 'none';
+  document.getElementById('btn-submit').style.display = currentStep === TOTAL_STEPS ? 'flex' : 'none';
+}
+
+function navigate(dir) {
+  const next = currentStep + dir;
+  if (next < 1 || next > TOTAL_STEPS) return;
+  currentStep = next;
+  updateUI();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goTo(step) {
+  if (step < 1 || step > TOTAL_STEPS) return;
+  currentStep = step;
+  updateUI();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════════════════
+// COLLECTE DES DONNÉES
+// ══════════════════════════════════════════════
+function getVal(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
+}
+
+function getRadio(name) {
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? el.value : '—';
+}
+
+function getCheckboxes(name) {
+  const els = document.querySelectorAll(`input[name="${name}"]:checked`);
+  return els.length ? Array.from(els).map(e => e.value).join(', ') : '—';
+}
+
+function getCheckbox(id) {
+  const el = document.getElementById(id);
+  return el && el.checked ? 'Oui' : 'Non';
+}
+
+function getAvailabilities() {
+  let lines = [];
+  availCategories.forEach(cat => {
+    const dispo = availCols.filter(col => {
+      const cb = document.querySelector(`input[name="avail_${cat.replace(/\s/g,'_')}_${col}"]`);
+      return cb && cb.checked;
+    });
+    lines.push(`  ${cat} : ${dispo.length ? dispo.join(', ') : 'Aucune'}`);
+  });
+  return lines.join('\n');
+}
+
+function collectFormData() {
+  return {
+    // Identité
+    nom: getVal('nom'),
+    prenom: getVal('prenom'),
+    naissance: getVal('naissance'),
+    tel: getVal('tel'),
+    email: getVal('email'),
+    adresse: getVal('adresse'),
+    codepostal: getVal('codepostal'),
+    ville: getVal('ville'),
+    licence: getVal('licence'),
+    club: getVal('club'),
+    // Lien club
+    situation: getRadio('situation'),
+    num_licence: getVal('num_licence'),
+    equipe: getVal('equipe'),
+    statut: getRadio('statut'),
+    ck_integration: getCheckbox('ck_integration'),
+    // Rôle
+    postes: getCheckboxes('postes'),
+    autre_poste: getVal('autre_poste'),
+    niv_captation: getVal('niv_captation'),
+    niv_diffusion: getVal('niv_diffusion'),
+    niv_commentaire: getVal('niv_commentaire'),
+    niv_handball: getVal('niv_handball'),
+    accred_resp: getVal('accred_resp'),
+    accred_comm: getVal('accred_comm'),
+    // Disponibilités
+    disponibilites: getAvailabilities(),
+    vehicule: getVal('vehicule'),
+    deplacements: getVal('deplacements'),
+    contraintes: getVal('contraintes'),
+    rythme: getVal('rythme'),
+    // Discipline
+    ck_icr: getCheckbox('ck_icr'),
+    ag: getRadio('ag'),
+    reunion: getRadio('reunion'),
+    formation: getRadio('formation'),
+    com_pref: getRadio('com_pref'),
+    gouv: getRadio('gouv'),
+    poste_gouv: getCheckboxes('poste_gouv'),
+    // Image
+    img_activites: getRadio('img_activites'),
+    img_nom: getRadio('img_nom'),
+    img_officielles: getRadio('img_officielles'),
+    ck_rgpd: getCheckbox('ck_rgpd'),
+    // Signature
+    ck_final: getCheckbox('ck_final'),
+    sign_lieu: getVal('sign_lieu'),
+    sign_date: getVal('sign_date'),
+  };
+}
+
+function buildEmailContent(d) {
+  return `FICHE D'INSCRIPTION MEYLAN HANDBALL TV — SAISON 2026-2027
+Soumise le : ${new Date().toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit',year:'numeric'})} à ${new Date().toLocaleTimeString('fr-FR')}
+
+════════════════════════════════════════
+SECTION 01 — IDENTITÉ DU MEMBRE
+════════════════════════════════════════
+Nom           : ${d.nom}
+Prénom        : ${d.prenom}
+Date naissance: ${d.naissance || '—'}
+Téléphone     : ${d.tel}
+E-mail        : ${d.email}
+Adresse       : ${d.adresse || '—'}, ${d.codepostal || ''} ${d.ville || ''}
+N° Licence    : ${d.licence || '—'}
+Club          : ${d.club || '—'}
+
+════════════════════════════════════════
+SECTION 02 — LIEN CLUB & ADHÉSION
+════════════════════════════════════════
+Situation          : ${d.situation}
+N° Licence FFHB/FFSA: ${d.num_licence || '—'}
+Équipe/section     : ${d.equipe || '—'}
+Type de membre     : ${d.statut}
+Période intégration lue : ${d.ck_integration}
+
+════════════════════════════════════════
+SECTION 03 — RÔLE & COMPÉTENCES
+════════════════════════════════════════
+Postes souhaités   : ${d.postes}
+Autre poste        : ${d.autre_poste || '—'}
+Captation vidéo    : ${d.niv_captation || '—'}
+Gestion diffusion  : ${d.niv_diffusion || '—'}
+Commentaires       : ${d.niv_commentaire || '—'}
+Handball           : ${d.niv_handball || '—'}
+Accréditation Resp.: ${d.accred_resp}
+Accréditation Comm.: ${d.accred_comm}
+
+════════════════════════════════════════
+SECTION 04 — DISPONIBILITÉS
+════════════════════════════════════════
+${d.disponibilites}
+
+Véhicule           : ${d.vehicule || '—'}
+Déplacements ext.  : ${d.deplacements || '—'}
+Contraintes        : ${d.contraintes || '—'}
+Rythme souhaité    : ${d.rythme || '—'}
+
+════════════════════════════════════════
+SECTION 05 — ENGAGEMENT & VIE COLLECTIVE
+════════════════════════════════════════
+Procédure ICR lue  : ${d.ck_icr}
+Assemblées générales: ${d.ag}
+Réunions planif.   : ${d.reunion}
+Formations internes: ${d.formation}
+Communication préf.: ${d.com_pref}
+Intérêt gouvernance: ${d.gouv}
+Poste(s) visé(s)   : ${d.poste_gouv}
+
+════════════════════════════════════════
+SECTION 06 — DROITS À L'IMAGE
+════════════════════════════════════════
+Image productions  : ${d.img_activites}
+Publication nom    : ${d.img_nom}
+Image officielles  : ${d.img_officielles}
+Consentement RGPD  : ${d.ck_rgpd}
+
+════════════════════════════════════════
+SECTION 07 — SIGNATURE
+════════════════════════════════════════
+Engagement final   : ${d.ck_final}
+Fait à             : ${d.sign_lieu || '—'}
+Le                 : ${d.sign_date || '—'}
+
+════════════════════════════════════════
+— Fin de la fiche d'inscription —
+Meylan Handball TV · mhbtv.fr
+`;
+}
+
+// ══════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════
+function showToast(msg, type = 'success') {
+  const toast = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  document.getElementById('toast-icon').textContent = type === 'success' ? '✓' : '✕';
+  toast.className = `toast ${type}`;
+  void toast.offsetWidth;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 5000);
+}
+
+// ══════════════════════════════════════════════
+// ENVOI VIA EMAILJS
+// ══════════════════════════════════════════════
+async function submitForm() {
+  // Validation minimale
+  const nom = getVal('nom');
+  const prenom = getVal('prenom');
+  const email = getVal('email');
+  const tel = getVal('tel');
+  const ckFinal = document.getElementById('ck_final').checked;
+
+  if (!nom || !prenom) {
+    showToast('Veuillez renseigner votre nom et prénom (Section 01).', 'error');
+    goTo(1); return;
+  }
+  if (!email) {
+    showToast('Veuillez renseigner votre adresse e-mail (Section 01).', 'error');
+    goTo(1); return;
+  }
+  if (!tel) {
+    showToast('Veuillez renseigner votre téléphone (Section 01).', 'error');
+    goTo(1); return;
+  }
+  if (!ckFinal) {
+    showToast('Vous devez cocher l\'engagement final (Section 07).', 'error');
+    return;
+  }
+
+  // Vérification config EmailJS
+  if (EMAILJS_CONFIG.publicKey === 'YOUR_PUBLIC_KEY') {
+    showToast('⚠️ EmailJS non configuré. Remplacez les clés dans le code.', 'error');
+    return;
+  }
+
+  const loader = document.getElementById('loader');
+  const btnSubmit = document.getElementById('btn-submit');
+  btnSubmit.disabled = true;
+  loader.classList.add('active');
+
+  try {
+    const data = collectFormData();
+    const content = buildEmailContent(data);
+
+    await emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, {
+      to_email: EMAILJS_CONFIG.toEmail,
+      subject: `[MHBTV] Nouvelle inscription — ${data.prenom} ${data.nom} — Saison 2026-2027`,
+      content: content,
+      // Variables individuelles utilisables dans le template EmailJS :
+      from_name: `${data.prenom} ${data.nom}`,
+      from_email: data.email,
+      tel: data.tel,
+      statut: data.statut,
+      situation: data.situation,
+      postes: data.postes,
+      sign_date: data.sign_date,
+      sign_lieu: data.sign_lieu,
+    });
+
+    loader.classList.remove('active');
+
+    // Masquer le formulaire, afficher l'écran de succès
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('success-screen').classList.add('active');
+    document.getElementById('nav-buttons').style.display = 'none';
+    document.getElementById('steps-nav').style.display = 'none';
+    document.getElementById('progress-label').textContent = 'Terminé ✓';
+    document.getElementById('progress-fill').style.width = '100%';
+
+    showToast(`Inscription envoyée avec succès !`, 'success');
+
+  } catch (err) {
+    loader.classList.remove('active');
+    btnSubmit.disabled = false;
+    console.error('EmailJS error:', err);
+    showToast(`Échec de l'envoi (${err.text || err.message || 'erreur réseau'}). Réessayez.`, 'error');
+  }
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+buildAvailTable();
+buildStepsNav();
+updateUI();
+
+// Pré-remplir la date de signature avec aujourd'hui
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('sign_date').value = today;
+</script>
+
+</body>
+</html>

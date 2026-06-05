@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gratification | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══ HERO ═══ */
+    .grат-hero {
+      position: relative;
+      padding: 5.5rem 4rem 3.5rem;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .grат-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(240,180,41,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(232,0,29,0.08) 0%, transparent 60%),
+        repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(255,255,255,0.012) 80px, rgba(255,255,255,0.012) 81px);
+    }
+    .grат-hero-bg-text {
+      position: absolute;
+      right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(22vw, 280px);
+      color: rgba(240,180,41,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+    .grат-hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .grат-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .grат-hero h1 span { color: var(--gold); }
+    .grат-hero p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 520px; }
+
+    /* ═══ TAB NAV ═══ */
+    .tab-nav {
+      display: flex;
+      gap: 0;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 4rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 1.1rem 1.6rem;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--white); }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ═══ SYSTÈME PAGE ═══ */
+    .system-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 3rem 4rem;
+    }
+    .system-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    .system-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .system-card h3 .step-num {
+      width: 32px; height: 32px;
+      background: var(--red);
+      border-radius: 50%;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .system-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+    .steps-list { list-style: none; counter-reset: steps; }
+    .steps-list li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .steps-list li:last-child { border-bottom: none; }
+    .steps-list li::before {
+      content: counter(steps);
+      min-width: 26px; height: 26px;
+      background: rgba(232,0,29,0.15);
+      color: var(--red);
+      border-radius: 50%;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Grades */
+    .grades-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 0 4rem 3rem;
+    }
+    .grade-card {
+      border-radius: 10px;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      border: 1px solid;
+    }
+    .grade-card.nouveau {
+      background: rgba(255,255,255,0.03);
+      border-color: var(--border);
+    }
+    .grade-card.bronze {
+      background: linear-gradient(135deg, rgba(205,127,50,0.1) 0%, transparent 100%);
+      border-color: rgba(205,127,50,0.35);
+    }
+    .grade-card.silver {
+      background: linear-gradient(135deg, rgba(176,190,197,0.1) 0%, transparent 100%);
+      border-color: rgba(176,190,197,0.35);
+    }
+    .grade-card.gold {
+      background: linear-gradient(135deg, rgba(240,180,41,0.12) 0%, transparent 100%);
+      border-color: rgba(240,180,41,0.4);
+    }
+    .grade-icon { font-size: 2.5rem; margin-bottom: 0.6rem; display: block; }
+    .grade-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+    .grade-card.nouveau .grade-name { color: var(--muted); }
+    .grade-card.bronze .grade-name { color: var(--bronze); }
+    .grade-card.silver .grade-name { color: var(--silver); }
+    .grade-card.gold .grade-name { color: var(--gold); }
+    .grade-range {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Points table */
+    .points-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    .points-table thead tr {
+      background: rgba(232,0,29,0.08);
+      border-bottom: 2px solid var(--red);
+    }
+    .points-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      padding: 0.75rem 1.25rem;
+      text-align: left;
+    }
+    .points-table td {
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+    .points-table tr:last-child td { border-bottom: none; }
+    .points-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .pts-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.25rem;
+      color: var(--gold);
+    }
+    .pts-bonus {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: #4caf50;
+    }
+
+    /* ═══ CLASSEMENT PAGE ═══ */
+    .classement-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      padding: 3rem 4rem;
+      align-items: start;
+    }
+
+    /* Podium */
+    .podium-wrap {
+      margin-bottom: 2.5rem;
+    }
+    .podium-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .podium {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 0.5rem;
+      height: 200px;
+      padding: 0 1rem;
+    }
+    .podium-slot {
+      flex: 1;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 1rem 0.5rem 1.25rem;
+      position: relative;
+      transition: transform 0.3s;
+    }
+    .podium-slot:hover { transform: translateY(-4px); }
+    .podium-slot.p1 {
+      background: linear-gradient(180deg, rgba(240,180,41,0.2) 0%, rgba(240,180,41,0.06) 100%);
+      border: 1px solid rgba(240,180,41,0.35);
+      height: 190px;
+    }
+    .podium-slot.p2 {
+      background: linear-gradient(180deg, rgba(176,190,197,0.15) 0%, rgba(176,190,197,0.04) 100%);
+      border: 1px solid rgba(176,190,197,0.25);
+      height: 150px;
+    }
+    .podium-slot.p3 {
+      background: linear-gradient(180deg, rgba(205,127,50,0.15) 0%, rgba(205,127,50,0.04) 100%);
+      border: 1px solid rgba(205,127,50,0.25);
+      height: 125px;
+    }
+    .podium-rank {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .podium-slot.p1 .podium-rank { color: var(--gold); }
+    .podium-slot.p2 .podium-rank { color: var(--silver); }
+    .podium-slot.p3 .podium-rank { color: var(--bronze); }
+    .podium-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-top: 0.2rem;
+    }
+    .podium-pts {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    /* Period selector */
+    .period-sel {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .period-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.45rem 1rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .period-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .period-btn.active {
+      background: rgba(240,180,41,0.12);
+      border-color: rgba(240,180,41,0.5);
+      color: var(--gold);
+    }
+
+    /* Leaderboard rows */
+    .leaderboard { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+    .lb-header {
+      display: grid;
+      grid-template-columns: 48px 1fr 80px 100px;
+      gap: 0;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.25rem;
+    }
+    .lb-header span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .lb-row {
+      display: grid;
+      grid-template-columns: 48px 1fr 80px 100px;
+      align-items: center;
+      gap: 0;
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+      cursor: default;
+    }
+    .lb-row:last-child { border-bottom: none; }
+    .lb-row:hover { background: rgba(255,255,255,0.03); }
+    .lb-row.rank-1 { background: rgba(240,180,41,0.05); }
+    .lb-row.rank-2 { background: rgba(176,190,197,0.04); }
+    .lb-row.rank-3 { background: rgba(205,127,50,0.04); }
+    .lb-rank {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      text-align: center;
+    }
+    .lb-row.rank-1 .lb-rank { color: var(--gold); }
+    .lb-row.rank-2 .lb-rank { color: var(--silver); }
+    .lb-row.rank-3 .lb-rank { color: var(--bronze); }
+    .lb-row:not(.rank-1):not(.rank-2):not(.rank-3) .lb-rank { color: var(--muted); }
+    .lb-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .lb-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      color: var(--white);
+    }
+    .lb-grade {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .lb-pts {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--white);
+      text-align: right;
+    }
+    .lb-pts .pts-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      color: var(--muted);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+    }
+
+    /* Progress bar */
+    .lb-progress { position: relative; }
+    .progress-bar-outer {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 2px;
+      margin-top: 0.3rem;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 1s ease;
+    }
+
+    /* No data row */
+    .lb-row.no-data .lb-name { color: var(--muted); font-style: italic; }
+    .lb-row.no-data .lb-pts { color: var(--muted); font-size: 1.1rem; }
+
+    /* Sidebar classement */
+    .classement-sidebar { position: sticky; top: 80px; }
+    .side-info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .side-info-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .side-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.82rem;
+    }
+    .side-row:last-child { border-bottom: none; }
+    .side-row .label { color: var(--muted); }
+    .side-row .val {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+      font-size: 1rem;
+    }
+
+    /* ═══ MISSIONS PAGE ═══ */
+    .missions-layout {
+      padding: 3rem 4rem;
+    }
+    .mission-category {
+      margin-bottom: 3rem;
+    }
+    .mission-cat-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .mission-cat-icon {
+      font-size: 1.8rem;
+      width: 52px; height: 52px;
+      background: rgba(232,0,29,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(232,0,29,0.2);
+    }
+    .mission-cat-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+    .mission-cat-header .cat-count {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-left: auto;
+    }
+    .missions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .mission-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--red);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .mission-card:hover { border-color: rgba(232,0,29,0.4); transform: translateY(-2px); }
+    .mission-card:hover::before { opacity: 1; }
+    .mission-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .mission-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Tip */
+    .tip-box {
+      background: rgba(240,180,41,0.06);
+      border: 1px solid rgba(240,180,41,0.25);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+    .tip-box .tip-icon { font-size: 1.4rem; flex-shrink: 0; }
+    .tip-box p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+    .tip-box strong { color: var(--gold); }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 1000px) {
+      .classement-layout { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .classement-sidebar { position: static; }
+    }
+    @media (max-width: 900px) {
+      .grат-hero { padding: 5rem 1.5rem 2.5rem; }
+      .tab-nav { padding: 0 1.5rem; }
+      .system-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .grades-row { grid-template-columns: 1fr 1fr; margin: 0 1.5rem 2rem; }
+      .missions-layout { padding: 2rem 1.5rem; }
+      .lb-header, .lb-row { grid-template-columns: 40px 1fr 70px 80px; padding: 0.75rem 1rem; }
+    }
+    @media (max-width: 600px) {
+      .grades-row { grid-template-columns: 1fr 1fr; }
+      .podium { height: 160px; }
+      .podium-slot.p1 { height: 150px; }
+      .podium-slot.p2 { height: 118px; }
+      .podium-slot.p3 { height: 98px; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- HERO -->
+    <div class="grат-hero">
+      <div class="grат-hero-bg-text">SCORE</div>
+      <div class="grат-hero-content">
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(240,180,41,0.12);border:1px solid rgba(240,180,41,0.3);border-radius:4px;padding:0.3rem 0.8rem;margin-bottom:1.25rem;">
+          <span style="font-size:0.85rem;">🏆</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);">Système de gratification</span>
+        </div>
+        <h1>Missions <span>&amp; Points</span></h1>
+        <p>Valorisez votre participation, progressez dans les grades et grimpez dans le classement. Un système lancé par le Bureau MHBTV à l'AG d'août 2025.</p>
+        <div style="display:flex;gap:1rem;margin-top:1.75rem;flex-wrap:wrap;">
+          <button class="btn btn-red" onclick="showTab('classement')">🏅 Voir le classement</button>
+          <button class="btn btn-outline" onclick="showTab('missions')">📋 Voir les missions</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tab-nav" id="tabNav">
+      <button class="tab-btn active" onclick="showTab('systeme', this)">⚙️ Fonctionnement</button>
+      <button class="tab-btn" onclick="showTab('classement', this)">🏆 Classement</button>
+      <button class="tab-btn" onclick="showTab('missions', this)">📋 Missions</button>
+    </div>
+
+    <!-- ══════════════════════ TAB : SYSTÈME ══════════════════════ -->
+    <div class="tab-panel active" id="tab-systeme">
+
+      <!-- Grades -->
+      <div style="padding:3rem 4rem 1.5rem;">
+        <h2 class="section-title">Les <span>Grades</span></h2>
+        <div class="section-line"></div>
+      </div>
+      <div class="grades-row">
+        <div class="grade-card nouveau">
+          <span class="grade-icon">⬜</span>
+          <div class="grade-name">Sans grade</div>
+          <div class="grade-range">< 50 points cumulés</div>
+        </div>
+        <div class="grade-card bronze">
+          <span class="grade-icon">🥉</span>
+          <div class="grade-name">Bronze</div>
+          <div class="grade-range">50 – 200 points</div>
+        </div>
+        <div class="grade-card silver">
+          <span class="grade-icon">🥈</span>
+          <div class="grade-name">Argent</div>
+          <div class="grade-range">200 – 450 points</div>
+        </div>
+        <div class="grade-card gold">
+          <span class="grade-icon">🥇</span>
+          <div class="grade-name">Or</div>
+          <div class="grade-range">> 450 points cumulés</div>
+        </div>
+      </div>
+
+      <!-- Comment ça marche + Points -->
+      <div class="system-grid">
+
+        <!-- Steps -->
+        <div class="system-card">
+          <h3><span class="step-num" style="background:var(--gold);color:var(--black);">?</span>Comment ça marche ?</h3>
+          <ol class="steps-list">
+            <li>Tu choisis une mission parmi celles proposées.</li>
+            <li>Tu réalises la mission pendant un match ou un événement.</li>
+            <li>Tu déclares ta mission réalisée auprès du responsable.</li>
+            <li>Tu gagnes des points selon la mission effectuée.</li>
+            <li>Tu débloques des badges et maîtrises tes rôles.</li>
+            <li>Les points sont ajoutés à ton profil et au classement interne.</li>
+          </ol>
+          <div class="tip-box" style="margin-top:1.25rem;margin-bottom:0;">
+            <span class="tip-icon">💡</span>
+            <p><strong>Astuce :</strong> tu peux cumuler plusieurs missions dans un même match si elles sont compatibles — par exemple <em>caméra terrain</em> + <em>interview</em>.</p>
+          </div>
+        </div>
+
+        <!-- Points table -->
+        <div class="system-card" style="padding:0;overflow:hidden;">
+          <div style="padding:1.75rem 2rem 1.25rem;">
+            <h3 style="margin-bottom:0;"><span class="step-num">★</span>Barème des points</h3>
+          </div>
+          <table class="points-table">
+            <thead>
+              <tr>
+                <th>Action / Mission</th>
+                <th style="text-align:right;">Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Match complet — Large / Terrain / Commentateur</td>
+                <td><span class="pts-badge">15 pts</span></td>
+              </tr>
+              <tr>
+                <td>Match complet — Zoom / Régie / Scoring</td>
+                <td><span class="pts-badge">20 pts</span></td>
+              </tr>
+              <tr>
+                <td>Montage / clip / reportage photo</td>
+                <td><span class="pts-badge">10 pts</span></td>
+              </tr>
+              <tr>
+                <td>Événement majeur</td>
+                <td><span class="pts-bonus">+10 bonus</span></td>
+              </tr>
+              <tr>
+                <td>Formation d'un membre à un poste</td>
+                <td><span class="pts-bonus">+15 bonus</span></td>
+              </tr>
+              <tr>
+                <td>Formation d'un nouveau membre</td>
+                <td><span class="pts-bonus">+20 bonus</span></td>
+              </tr>
+              <tr>
+                <td style="color:var(--muted);font-size:0.82rem;">Mission de base</td>
+                <td><span class="pts-badge" style="color:var(--muted);font-size:1rem;">5 pts</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pourquoi -->
+        <div class="system-card" style="grid-column:1/-1;">
+          <h3><span class="step-num" style="background:rgba(232,0,29,0.2);color:var(--red);">1</span>Pourquoi ce système existe ?</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:0.75rem;">
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.4rem;flex-shrink:0;">🌟</span>
+              <div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--white);font-size:0.95rem;margin-bottom:0.25rem;">Valorisation</div>
+                <div style="font-size:0.82rem;color:var(--muted);">Reconnaître la participation de chacun.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.4rem;flex-shrink:0;">🎯</span>
+              <div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--white);font-size:0.95rem;margin-bottom:0.25rem;">Polyvalence</div>
+                <div style="font-size:0.82rem;color:var(--muted);">Encourager la progression et la diversité des rôles.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.4rem;flex-shrink:0;">🎮</span>
+              <div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--white);font-size:0.95rem;margin-bottom:0.25rem;">Motivation</div>
+                <div style="font-size:0.82rem;color:var(--muted);">Rendre la contribution plus fun et motivante.</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:flex-start;">
+              <span style="font-size:1.4rem;flex-shrink:0;">📁</span>
+              <div>
+                <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--white);font-size:0.95rem;margin-bottom:0.25rem;">Traçabilité</div>
+                <div style="font-size:0.82rem;color:var(--muted);">Garder une trace des réalisations de chaque membre.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /tab-systeme -->
+
+
+    <!-- ══════════════════════ TAB : CLASSEMENT ══════════════════════ -->
+    <div class="tab-panel" id="tab-classement">
+      <div class="classement-layout">
+        <div>
+          <!-- Period selector -->
+          <div style="margin-bottom:1.5rem;">
+            <h2 class="section-title">Classement <span>Général</span></h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="period-sel">
+            <button class="period-btn active" onclick="showPeriod('avr', this)">Avril 2026 (en cours)</button>
+            <button class="period-btn" onclick="showPeriod('jan', this)">Janv. – Mars 2026</button>
+            <button class="period-btn" onclick="showPeriod('sep', this)">Sept. – Déc. 2025</button>
+          </div>
+
+          <!-- ─── PÉRIODE : AVRIL 2026 ─── -->
+          <div id="period-avr">
+            <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;padding:0.8rem 1.25rem;background:rgba(240,180,41,0.06);border:1px solid rgba(240,180,41,0.2);border-radius:6px;">
+              <span>📅</span>
+              <span style="font-size:0.85rem;color:var(--muted);">Mis à jour le <strong style="color:var(--white);">18 avril 2026</strong> · Saison en cours</span>
+            </div>
+            <div class="leaderboard">
+              <div class="lb-header">
+                <span>#</span><span>Membre</span><span style="text-align:center;">Grade</span><span style="text-align:right;">Points</span>
+              </div>
+              <!-- tous à 0 pour cette période -->
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">X</div>Xavier</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">M</div>Marie</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">E</div>Ennio</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Ma</div>Manu</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Nb</div>Nabil</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">T</div>Tim</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">D</div>Dorina</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+            </div>
+            <p style="font-size:0.8rem;color:var(--muted);margin-top:1rem;text-align:center;">La saison d'avril 2026 vient de démarrer. Les points seront mis à jour après chaque événement.</p>
+          </div>
+
+          <!-- ─── PÉRIODE : JANV–MARS 2026 ─── -->
+          <div id="period-jan" style="display:none;">
+            <!-- Podium -->
+            <div class="podium-wrap">
+              <div class="podium-title">🏆 Podium — Janvier à Mars 2026</div>
+              <div class="podium">
+                <div class="podium-slot p2">
+                  <div class="podium-rank">2e</div>
+                  <div class="podium-name">Ennio</div>
+                  <div class="podium-pts">2 510 pts</div>
+                </div>
+                <div class="podium-slot p1">
+                  <div class="podium-rank">1er</div>
+                  <div class="podium-name">Marie</div>
+                  <div class="podium-pts">2 710 pts</div>
+                </div>
+                <div class="podium-slot p3">
+                  <div class="podium-rank">3e</div>
+                  <div class="podium-name">Nicolas</div>
+                  <div class="podium-pts">1 990 pts</div>
+                </div>
+              </div>
+            </div>
+            <div class="leaderboard">
+              <div class="lb-header">
+                <span>#</span><span>Membre</span><span style="text-align:center;">Grade</span><span style="text-align:right;">Points</span>
+              </div>
+              <div class="lb-row rank-1"><span class="lb-rank">1</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(240,180,41,0.2);color:var(--gold);">M</div>Marie</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">2 710 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row rank-2"><span class="lb-rank">2</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(176,190,197,0.18);color:var(--silver);">E</div>Ennio</div><span class="lb-grade" style="color:var(--silver);">🥇 Or</span><div class="lb-pts">2 510 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row rank-3"><span class="lb-rank">3</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(205,127,50,0.18);color:var(--bronze);">X</div>Xavier</div><span class="lb-grade" style="color:var(--bronze);">🥇 Or</span><div class="lb-pts">2 430 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">4</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">1 990 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">5</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">1 460 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">6</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ma</div>Manu</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">1 490 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">7</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Nb</div>Nabil</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">800 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">8</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">T</div>Tim</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">480 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">9</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">420 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">10</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--bronze);">🥉 Bronze</span><div class="lb-pts" style="color:var(--muted);">240 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">11</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">D</div>Dorina</div><span class="lb-grade" style="color:var(--bronze);">🥉 Bronze</span><div class="lb-pts" style="color:var(--muted);">160 <span class="pts-label">pts</span></div></div>
+              <!-- membres à 0 -->
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">A</div>Aymeric</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">K</div>Khalil</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">Yo</div>Younes</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">R</div>Rémi</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">J</div>Johanne</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
+            </div>
+          </div>
+
+          <!-- ─── PÉRIODE : SEPT–DÉC 2025 ─── -->
+          <div id="period-sep" style="display:none;">
+            <!-- Podium -->
+            <div class="podium-wrap">
+              <div class="podium-title">🏆 Podium — Septembre à Décembre 2025</div>
+              <div class="podium">
+                <div class="podium-slot p2">
+                  <div class="podium-rank">2e</div>
+                  <div class="podium-name">Enzo</div>
+                  <div class="podium-pts">1 550 pts</div>
+                </div>
+                <div class="podium-slot p1">
+                  <div class="podium-rank">1er</div>
+                  <div class="podium-name">Nicolas</div>
+                  <div class="podium-pts">1 390 pts</div>
+                </div>
+                <div class="podium-slot p3">
+                  <div class="podium-rank">3e</div>
+                  <div class="podium-name">Ennio</div>
+                  <div class="podium-pts">835 pts</div>
+                </div>
+              </div>
+            </div>
+            <div class="leaderboard">
+              <div class="lb-header">
+                <span>#</span><span>Membre</span><span style="text-align:center;">Grade</span><span style="text-align:right;">Points</span>
+              </div>
+              <div class="lb-row rank-1"><span class="lb-rank">1</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(240,180,41,0.2);color:var(--gold);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">1 390 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row rank-2"><span class="lb-rank">2</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(176,190,197,0.18);color:var(--silver);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">1 550 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">*</span><div class="lb-name" style="opacity:0.6;"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">X</div>Xavier</div><span class="lb-grade" style="color:var(--gold);opacity:0.6;">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">2 440 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row rank-3"><span class="lb-rank">3</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(205,127,50,0.18);color:var(--bronze);">E</div>Ennio</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">835 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">4</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">M</div>Marie</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">800 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">5</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">T</div>Tim</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">610 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">6</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">560 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">7</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">560 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">8</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ma</div>Manu</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">470 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">9</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ay</div>Aymeric</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">460 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">10</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">K</div>Khalil</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">450 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">11</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Nb</div>Nabil</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">400 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">12</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Yo</div>Younes</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">390 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">13</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">R</div>Rémi</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">380 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">14</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">J</div>Johanne</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">355 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">15</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">D</div>Dorina</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">310 <span class="pts-label">pts</span></div></div>
+            </div>
+            <p style="font-size:0.78rem;color:var(--muted);margin-top:0.75rem;">* Xavier (2 440 pts) n'est pas classé sur cette période selon les données officielles.</p>
+          </div>
+
+        </div><!-- /main col -->
+
+        <!-- Sidebar -->
+        <aside class="classement-sidebar">
+          <div class="side-info-card" style="background:rgba(240,180,41,0.05);border-color:rgba(240,180,41,0.2);">
+            <h4>Meilleurs scores cumulés</h4>
+            <div class="side-row"><span class="label">🥇 Marie</span><span class="val" style="color:var(--gold);">3 510 pts</span></div>
+            <div class="side-row"><span class="label">🥈 Xavier</span><span class="val" style="color:var(--silver);">4 870 pts</span></div>
+            <div class="side-row"><span class="label">🥉 Ennio</span><span class="val" style="color:var(--bronze);">3 345 pts</span></div>
+          </div>
+          <div class="side-info-card">
+            <h4>Rappel des grades</h4>
+            <div class="side-row"><span class="label">⬜ Sans grade</span><span class="val" style="color:var(--muted);font-size:0.85rem;">< 50 pts</span></div>
+            <div class="side-row"><span class="label" style="color:var(--bronze);">🥉 Bronze</span><span class="val" style="color:var(--muted);font-size:0.85rem;">50–200</span></div>
+            <div class="side-row"><span class="label" style="color:var(--silver);">🥈 Argent</span><span class="val" style="color:var(--muted);font-size:0.85rem;">200–450</span></div>
+            <div class="side-row"><span class="label" style="color:var(--gold);">🥇 Or</span><span class="val" style="color:var(--muted);font-size:0.85rem;">> 450</span></div>
+          </div>
+          <div class="side-info-card">
+            <h4>Périodes de la saison</h4>
+            <div class="side-row"><span class="label">Sept – Déc 2025</span><span class="val">✅</span></div>
+            <div class="side-row"><span class="label">Janv – Mars 2026</span><span class="val">✅</span></div>
+            <div class="side-row"><span class="label" style="color:var(--gold);">Avril 2026+</span><span class="val" style="color:var(--gold);font-size:0.85rem;">En cours</span></div>
+          </div>
+          <div class="side-info-card" style="background:rgba(232,0,29,0.05);border-color:rgba(232,0,29,0.2);">
+            <h4>À savoir</h4>
+            <p style="font-size:0.82rem;color:var(--muted);line-height:1.7;">Les points de chaque période sont indépendants. Le classement cumulé est calculé sur toute la saison 2025-2026.</p>
+          </div>
+        </aside>
+      </div>
+    </div><!-- /tab-classement -->
+
+
+    <!-- ══════════════════════ TAB : MISSIONS ══════════════════════ -->
+    <div class="tab-panel" id="tab-missions">
+      <div class="missions-layout">
+
+        <div class="tip-box">
+          <span class="tip-icon">💡</span>
+          <p><strong>Cumul possible :</strong> tu peux réaliser plusieurs missions lors d'un même match si elles sont compatibles (ex. caméra terrain + interview). Déclare chaque mission séparément auprès du responsable après l'événement.</p>
+        </div>
+
+        <!-- 🎥 Caméraman Large -->
+        <div class="mission-category">
+          <div class="mission-cat-header">
+            <div class="mission-cat-icon">🎥</div>
+            <h3>Caméraman Large</h3>
+            <span class="cat-count">5 missions</span>
+          </div>
+          <div class="missions-grid">
+            <div class="mission-card"><div class="mission-name">Configurer la caméra</div><div class="mission-desc">Réaliser correctement tous les préparatifs avant la diffusion.</div></div>
+            <div class="mission-card"><div class="mission-name">Sécurité du trépied</div><div class="mission-desc">Poser et sécuriser le trépied dans les règles de l'art.</div></div>
+            <div class="mission-card"><div class="mission-name">Sans coupure</div><div class="mission-desc">Filmer tout un match sans jamais perdre la balle du cadre.</div></div>
+            <div class="mission-card"><div class="mission-name">Prévisionniste</div><div class="mission-desc">Anticiper un changement de côté et cadrer avant la passe décisive.</div></div>
+            <div class="mission-card"><div class="mission-name">Travelling fluide</div><div class="mission-desc">Accompagner un joueur sur plus de 15m sans la moindre secousse.</div></div>
+          </div>
+        </div>
+
+        <!-- 🔍 Caméraman Zoom -->
+        <div class="mission-category">
+          <div class="mission-cat-header">
+            <div class="mission-cat-icon">🔍</div>
+            <h3>Caméraman Zoom</h3>
+            <span class="cat-count">3 missions</span>
+          </div>
+          <div class="missions-grid">
+            <div class="mission-card"><div class="mission-name">Blocage parfait</div><div class="mission-desc">Zoomer sur une parade spectaculaire du gardien au bon moment.</div></div>
+            <div class="mission-card"><div class="mission-name">Zoom émotion</div><div class="mission-desc">Attraper une grimace, un sourire ou une colère en gros plan.</div></div>
+            <div class="mission-card"><div class="mission-name">Duel de gardien</div><div class="mission-desc">Capter une série de tirs/arrêts sur 7m sans rater un instant.</div></div>
+          </div>
+        </div>
+
+        <!-- 🏃 Caméraman Terrain -->
+        <div class="mission-category">
+          <div class="mission-cat-header">
+            <div class="mission-cat-icon">🏃</div>
+            <h3>Caméraman Terrain</h3>
+            <span class="cat-count">5 missions</span>
+          </div>
+          <div class="missions-grid">
+            <div class="mission-card"><div class="mission-name">Comme sur BeInSport</div><div class="mission-desc">Filmer une entrée de joueurs avec style et dynamisme.</div></div>
+            <div class="mission-card"><div class="mission-name">Temps morts</div><div class="mission-desc">Capter les réactions du banc de touche pendant les temps morts.</div></div>
+            <div class="mission-card"><div class="mission-name">Journaliste express</div><div class="mission-desc">Ramener une réaction rapide et claire d'un joueur ou coach pendant un temps mort.</div></div>
+            <div class="mission-card"><div class="mission-name">Infiltré discret</div><div class="mission-desc">Se faufiler sans gêner arbitres, bancs ou joueurs.</div></div>
+            <div class="mission-card"><div class="mission-name">Spotlight capitaine</div><div class="mission-desc">Ramener une image forte du capitaine (avant engagement, motivation, discussion).</div></div>
+          </div>
+        </div>
+
+        <!-- 🎙 Commentateur -->
+        <div class="mission-category">
+          <div class="mission-cat-header">
+            <div class="mission-cat-icon">🎙️</div>
+            <h3>Commentateur</h3>
+            <span class="cat-count">6 missions</span>
+          </div>
+          <div class="missions-grid">
+            <div class="mission-card"><div class="mission-name">Sans arrêt</div><div class="mission-desc">Commenter un match complet sans temps morts dans le flux.</div></div>
+            <div class="mission-card"><div class="mission-name">Interviewer</div><div class="mission-desc">Animer une interview live en bord de terrain.</div></div>
+            <div class="mission-card"><div class="mission-name">Avant-match</div><div class="mission-desc">Présenter les deux équipes avant le coup d'envoi.</div></div>
+            <div class="mission-card"><div class="mission-name">Stat-man</div><div class="mission-desc">Donner des informations statistiques pertinentes en direct (buts, sanctions, séries).</div></div>
+            <div class="mission-card"><div class="mission-name">Duo complice</div><div class="mission-desc">Interagir avec un co-commentateur de façon fluide et dynamique.</div></div>
+            <div class="mission-card"><div class="mission-name">Énergie constante</div><div class="mission-desc">Maintenir un ton entraînant du début à la fin du match.</div></div>
+          </div>
+        </div>
+
+        <!-- 🎛 Régie -->
+        <div class="mission-category">
+          <div class="mission-cat-header">
+            <div class="mission-cat-icon">🎛️</div>
+            <h3>Régie</h3>
+            <span class="cat-count">7 missions</span>
+          </div>
+          <div class="missions-grid">
+            <div class="mission-card"><div class="mission-name">Bandeaux</div><div class="mission-desc">Mettre à l'antenne des graphiques et bandeaux en direct.</div></div>
+            <div class="mission-card"><div class="mission-name">Préparatifs</div><div class="mission-desc">Vérifier le flux audio/vidéo avant le début de la diffusion.</div></div>
+            <div class="mission-card"><div class="mission-name">Timing parfait</div><div class="mission-desc">Lancer un habillage (score, logo, sponsor) pile au bon moment.</div></div>
+            <div class="mission-card"><div class="mission-name">Anti-panne</div><div class="mission-desc">Gérer une galère technique sans couper la diffusion.</div></div>
+            <div class="mission-card"><div class="mission-name">Silhouette invisible</div><div class="mission-desc">Coordonner toute l'équipe sans que ça se ressente à l'écran.</div></div>
+            <div class="mission-card"><div class="mission-name">Replay master</div><div class="mission-desc">Déclencher un ralenti ou une rediffusion bien calée (si disponible).</div></div>
+            <div class="mission-card"><div class="mission-name">Silence radio</div><div class="mission-desc">Gérer une coupure son et rétablir le flux rapidement.</div></div>
+          </div>
+        </div>
+
+        <!-- 📊 Scoring -->
+        <div class="mission-category">
+          <div class="mission-cat-header">
+            <div class="mission-cat-icon">📊</div>
+            <h3>Scoring</h3>
+            <span class="cat-count">4 missions</span>
+          </div>
+          <div class="missions-grid">
+            <div class="mission-card"><div class="mission-name">Zéro erreur</div><div class="mission-desc">Match géré du début à la fin sans faute de score ni sanction.</div></div>
+            <div class="mission-card"><div class="mission-name">Flash update</div><div class="mission-desc">Mettre à jour le score en moins de 2 secondes après un but.</div></div>
+            <div class="mission-card"><div class="mission-name">Carton express</div><div class="mission-desc">Afficher une sanction avant que l'arbitre ait fini son geste.</div></div>
+            <div class="mission-card"><div class="mission-name">Parfait chrono</div><div class="mission-desc">Arrêter/reprendre le chrono pile avec le coup de sifflet.</div></div>
+          </div>
+        </div>
+
+        <!-- 📷 Bonus Créatif -->
+        <div class="mission-category">
+          <div class="mission-cat-header">
+            <div class="mission-cat-icon">📷</div>
+            <h3>Missions Créatives / Bonus</h3>
+            <span class="cat-count">5 missions</span>
+          </div>
+          <div class="missions-grid">
+            <div class="mission-card" style="border-color:rgba(240,180,41,0.2);background:linear-gradient(135deg,rgba(240,180,41,0.05),transparent);">
+              <div class="mission-name" style="color:var(--gold);">Interview flash</div>
+              <div class="mission-desc">Mini-interview (30 secondes max) d'un joueur, coach ou spectateur en bord de terrain.</div>
+            </div>
+            <div class="mission-card" style="border-color:rgba(240,180,41,0.2);background:linear-gradient(135deg,rgba(240,180,41,0.05),transparent);">
+              <div class="mission-name" style="color:var(--gold);">Interview public</div>
+              <div class="mission-desc">Demander à un spectateur son ressenti à chaud.</div>
+            </div>
+            <div class="mission-card" style="border-color:rgba(240,180,41,0.2);background:linear-gradient(135deg,rgba(240,180,41,0.05),transparent);">
+              <div class="mission-name" style="color:var(--gold);">Photo "équipe TV"</div>
+              <div class="mission-desc">Prendre un cliché de l'équipe MHBTV en action (caméraman, régie, commentateur).</div>
+            </div>
+            <div class="mission-card" style="border-color:rgba(240,180,41,0.2);background:linear-gradient(135deg,rgba(240,180,41,0.05),transparent);">
+              <div class="mission-name" style="color:var(--gold);">Coulisses instantanées</div>
+              <div class="mission-desc">Partager une séquence coulisses en story ou photo (prépa matos, régie en plein match).</div>
+            </div>
+            <div class="mission-card" style="border-color:rgba(240,180,41,0.2);background:linear-gradient(135deg,rgba(240,180,41,0.05),transparent);">
+              <div class="mission-name" style="color:var(--gold);">Photo express</div>
+              <div class="mission-desc">Prendre et partager une photo clé du match (but décisif, célébration, ambiance) en direct.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /tab-missions -->
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+
+  <script>
+    function showTab(id, clickedBtn) {
+      // panels
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      // buttons
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (clickedBtn) {
+        clickedBtn.classList.add('active');
+      } else {
+        // find button by text content
+        document.querySelectorAll('.tab-btn').forEach(b => {
+          if (b.textContent.toLowerCase().includes(id)) b.classList.add('active');
+        });
+      }
+      // scroll to tabs
+      document.getElementById('tabNav').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function showPeriod(id, btn) {
+      document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      ['avr','jan','sep'].forEach(p => {
+        const el = document.getElementById('period-' + p);
+        if (el) el.style.display = (p === id) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

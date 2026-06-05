@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accréditations | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══ HERO ═══ */
+    .accred-hero {
+      position: relative;
+      padding: 5.5rem 4rem 3.5rem;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .accred-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 85% 40%, rgba(232,0,29,0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 50% at 5% 90%, rgba(255,255,255,0.02) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 72px, rgba(255,255,255,0.012) 72px, rgba(255,255,255,0.012) 73px);
+    }
+    .hero-watermark {
+      position: absolute;
+      right: -1rem; top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(20vw, 260px);
+      color: rgba(232,0,29,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+    .accred-hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .accred-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .accred-hero h1 span { color: var(--red); }
+    .accred-hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 500px;
+    }
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+    .hero-meta-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .hero-meta-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-sep {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+      margin: 0.2rem 0;
+    }
+
+    /* ═══ ALERT ARTICLE 12 ═══ */
+    .rule-alert {
+      margin: 0 4rem;
+      padding: 1.2rem 1.75rem;
+      background: rgba(232,0,29,0.06);
+      border: 1px solid rgba(232,0,29,0.25);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+    .rule-alert-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .rule-alert-body {}
+    .rule-alert-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.35rem;
+    }
+    .rule-alert-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .rule-alert-text strong { color: var(--text); }
+
+    /* ═══ LAYOUT PRINCIPAL ═══ */
+    .accred-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2.5rem;
+      padding: 3rem 4rem;
+      align-items: start;
+    }
+
+    /* ═══ POSTES CARDS ═══ */
+    .postes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+    .poste-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .poste-card-header {
+      padding: 1.4rem 1.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .poste-icon {
+      width: 46px; height: 46px;
+      background: rgba(232,0,29,0.1);
+      border: 1px solid rgba(232,0,29,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .poste-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    .poste-card-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .poste-card-body { padding: 1.25rem 1.75rem; }
+    .poste-info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.84rem;
+    }
+    .poste-info-row:last-child { border-bottom: none; }
+    .poste-info-row .pi-label {
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 80px;
+    }
+    .poste-info-row .pi-val { color: var(--text); }
+    .poste-card-footer {
+      padding: 1rem 1.75rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    /* ═══ MEMBRES TABLE ═══ */
+    .members-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+    .search-input {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      padding: 0.5rem 0.9rem 0.5rem 2.2rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 200px;
+    }
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus { border-color: var(--red); }
+
+    /* Filter chips */
+    .filter-chips {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .chip {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .chip:hover { color: var(--white); border-color: #555; }
+    .chip.active { background: rgba(232,0,29,0.12); border-color: rgba(232,0,29,0.4); color: var(--red); }
+
+    /* Table */
+    .members-table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .members-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .members-table thead tr {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+    }
+    .members-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.75rem 1.25rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .members-table td {
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: middle;
+      font-size: 0.88rem;
+    }
+    .members-table tbody tr:last-child td { border-bottom: none; }
+    .members-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+    .member-name-cell {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .m-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      color: var(--white);
+    }
+    .m-fullname {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--white);
+    }
+    .m-role {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* Statut badges */
+    .statut {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    .statut-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .statut.accredite {
+      background: rgba(34,197,94,0.12);
+      color: #4ade80;
+      border: 1px solid rgba(34,197,94,0.25);
+    }
+    .statut.accredite .statut-dot { background: #4ade80; }
+    .statut.en-attente {
+      background: rgba(250,204,21,0.1);
+      color: #fbbf24;
+      border: 1px solid rgba(250,204,21,0.25);
+    }
+    .statut.en-attente .statut-dot { background: #fbbf24; animation: blink 2s infinite; }
+    .statut.non-accredite {
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .statut.non-accredite .statut-dot { background: var(--muted); }
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* Grade badge */
+    .grade-pill {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 3px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .grade-or { background: rgba(240,180,41,0.15); color: #f0b429; border: 1px solid rgba(240,180,41,0.3); }
+    .grade-argent { background: rgba(176,190,197,0.12); color: #b0bec5; border: 1px solid rgba(176,190,197,0.25); }
+    .grade-bronze { background: rgba(205,127,50,0.12); color: #cd7f32; border: 1px solid rgba(205,127,50,0.25); }
+    .grade-none { background: rgba(255,255,255,0.04); color: var(--muted); border: 1px solid var(--border); }
+
+    /* Poste pill (caméra/commentateur) */
+    .poste-pill {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.18rem 0.5rem;
+      border-radius: 3px;
+      margin-right: 0.3rem;
+      margin-bottom: 0.2rem;
+    }
+    .pill-resp { background: rgba(232,0,29,0.12); color: #ff6b6b; border: 1px solid rgba(232,0,29,0.25); }
+    .pill-comm { background: rgba(99,179,237,0.1); color: #63b3ed; border: 1px solid rgba(99,179,237,0.2); }
+
+    /* Actions col */
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .action-btn:hover { border-color: var(--red); color: var(--red); }
+
+    /* ═══ SIDEBAR ═══ */
+    .accred-sidebar { position: sticky; top: 80px; }
+    .sidebar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .proc-step {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.83rem;
+    }
+    .proc-step:last-child { border-bottom: none; }
+    .proc-num {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(232,0,29,0.15);
+      color: var(--red);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .proc-text { color: var(--muted); line-height: 1.5; }
+    .proc-text strong { color: var(--text); }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.83rem;
+    }
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row .s-label { color: var(--muted); }
+    .stat-row .s-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .s-val.green { color: #4ade80; }
+    .s-val.yellow { color: #fbbf24; }
+    .s-val.gray { color: var(--muted); }
+
+    /* Légende */
+    .legend-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ═══ TABLE FOOTER ═══ */
+    .table-footer {
+      padding: 0.75rem 1.25rem;
+      background: rgba(255,255,255,0.02);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .table-footer-info {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ═══ HIDDEN ROWS ═══ */
+    .member-row { transition: opacity 0.15s; }
+    .member-row.hidden { display: none; }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 1050px) {
+      .accred-layout { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .accred-sidebar { position: static; }
+      .postes-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 900px) {
+      .accred-hero { padding: 5rem 1.5rem 2.5rem; }
+      .rule-alert { margin: 0 1.5rem; flex-direction: column; gap: 0.75rem; }
+      .members-header { flex-direction: column; align-items: flex-start; }
+      .search-input { width: 100%; }
+      /* Masquer colonnes secondaires sur mobile */
+      .col-grade, .col-postes { display: none; }
+    }
+    @media (max-width: 600px) {
+      .members-table th, .members-table td { padding: 0.7rem 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- ═══ HERO ═══ -->
+    <div class="accred-hero">
+      <div class="hero-watermark">ACCRÉD</div>
+      <div class="accred-hero-content">
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,0,29,0.1);border:1px solid rgba(232,0,29,0.25);border-radius:4px;padding:0.3rem 0.8rem;margin-bottom:1.25rem;">
+          <span style="width:7px;height:7px;background:var(--red);border-radius:50%;display:inline-block;"></span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);">Accès réservé aux membres</span>
+        </div>
+        <h1>Carte<br><span>d'Accréditation</span></h1>
+        <p>L'accréditation est obligatoire pour être désigné Responsable de retransmission ou Commentateur. Elle valide vos compétences techniques et organisationnelles selon l'article 12 du Règlement général.</p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="hero-meta-value" id="stat-accredite">—</span>
+            <span class="hero-meta-label">Membres accrédités</span>
+          </div>
+          <div class="hero-sep"></div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-value" id="stat-attente">—</span>
+            <span class="hero-meta-label">En attente</span>
+          </div>
+          <div class="hero-sep"></div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-value" id="stat-total">—</span>
+            <span class="hero-meta-label">Membres au total</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ALERTE ARTICLE 12 ═══ -->
+    <div class="rule-alert" style="margin-top:2rem;">
+      <span class="rule-alert-icon">⚖️</span>
+      <div class="rule-alert-body">
+        <div class="rule-alert-title">Article 12 — Règlement général MHBTV</div>
+        <div class="rule-alert-text">
+          L'accréditation est <strong>obligatoire</strong> pour être désigné sur un poste de <strong>Responsable de retransmission</strong> ou de <strong>Commentateur sportif</strong>. Toute affectation sans accréditation valide expose le membre à une procédure disciplinaire auprès de l'ICR. En cas de non-obtention, la Coordination générale peut proposer un accompagnement ou une formation avant un nouveau passage.
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LAYOUT PRINCIPAL ═══ -->
+    <div class="accred-layout">
+      <div>
+
+        <!-- POSTES NÉCESSITANT UNE ACCRÉDITATION -->
+        <div style="margin-bottom:2rem;">
+          <h2 class="section-title">Postes <span>accrédités</span></h2>
+          <div class="section-line"></div>
+          <div class="postes-grid">
+
+            <!-- Responsable retransmission -->
+            <div class="poste-card">
+              <div class="poste-card-header">
+                <div class="poste-icon">🎬</div>
+                <div>
+                  <div class="poste-card-title">Responsable de retransmission</div>
+                  <div class="poste-card-sub">Supervise techniquement la diffusion entière. Coordonne l'équipe sur le terrain.</div>
+                </div>
+              </div>
+              <div class="poste-card-body">
+                <div class="poste-info-row">
+                  <span class="pi-label">Périmètre</span>
+                  <span class="pi-val">Régie, flux vidéo/audio, coordination équipe, gestion des imprévus techniques</span>
+                </div>
+                <div class="poste-info-row">
+                  <span class="pi-label">Prérequis</span>
+                  <span class="pi-val">Avoir participé à au moins une retransmission en observation, maîtriser le matériel MHBTV</span>
+                </div>
+                <div class="poste-info-row">
+                  <span class="pi-label">Validité</span>
+                  <span class="pi-val">Saison en cours — renouvelable à chaque AG</span>
+                </div>
+                <div class="poste-info-row">
+                  <span class="pi-label">Art. 12</span>
+                  <span class="pi-val">Obligatoire · Non-respect → saisine ICR</span>
+                </div>
+              </div>
+              <div class="poste-card-footer">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScF034R6E8LM4GSUzNs_N9pmBcnOS699qhX60Gqc1QmZLZLYA/viewform" target="_blank" class="btn btn-red" style="font-size:0.75rem;padding:0.55rem 1.1rem;">Passer le questionnaire →</a>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;color:var(--muted);align-self:center;letter-spacing:0.05em;">via Google Forms</span>
+              </div>
+            </div>
+
+            <!-- Commentateur -->
+            <div class="poste-card">
+              <div class="poste-card-header">
+                <div class="poste-icon">🎙️</div>
+                <div>
+                  <div class="poste-card-title">Commentateur sportif</div>
+                  <div class="poste-card-sub">Commente en direct les rencontres diffusées. Peut animer les interviews.</div>
+                </div>
+              </div>
+              <div class="poste-card-body">
+                <div class="poste-info-row">
+                  <span class="pi-label">Périmètre</span>
+                  <span class="pi-val">Commentaire match complet, avant-match, interviews bord terrain, duo commentateur</span>
+                </div>
+                <div class="poste-info-row">
+                  <span class="pi-label">Prérequis</span>
+                  <span class="pi-val">Bonne connaissance du handball, aisance à l'oral, respecter le principe de neutralité (art. 15)</span>
+                </div>
+                <div class="poste-info-row">
+                  <span class="pi-label">Validité</span>
+                  <span class="pi-val">Saison en cours — renouvelable à chaque AG</span>
+                </div>
+                <div class="poste-info-row">
+                  <span class="pi-label">Art. 12</span>
+                  <span class="pi-val">Obligatoire · Non-respect → saisine ICR</span>
+                </div>
+              </div>
+              <div class="poste-card-footer">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScR_t2WWO_lhg6oX4ls4FpdoUZnzQgNkkbcVTauhexTP3mxuw/viewform" target="_blank" class="btn btn-red" style="font-size:0.75rem;padding:0.55rem 1.1rem;">Passer le questionnaire →</a>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;color:var(--muted);align-self:center;letter-spacing:0.05em;">via Google Forms</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TABLEAU MEMBRES -->
+        <div>
+          <div class="members-header">
+            <div>
+              <h2 class="section-title">Statut des <span>membres</span></h2>
+              <div class="section-line" style="margin-bottom:0;"></div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+              <div class="filter-chips">
+                <button class="chip active" onclick="filterTable('all',this)">Tous</button>
+                <button class="chip" onclick="filterTable('accredite',this)">Accrédités</button>
+                <button class="chip" onclick="filterTable('en-attente',this)">En attente</button>
+                <button class="chip" onclick="filterTable('non-accredite',this)">Non accrédités</button>
+              </div>
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input class="search-input" type="text" placeholder="Rechercher…" id="searchInput" oninput="searchMembers(this.value)">
+              </div>
+            </div>
+          </div>
+
+          <div class="members-table-wrap">
+            <table class="members-table" id="membersTable">
+              <thead>
+                <tr>
+                  <th style="width:220px;">Membre</th>
+                  <th>Poste dans MHBTV</th>
+                  <th class="col-grade">Grade</th>
+                  <th class="col-postes">Accréditations</th>
+                  <th>Resp. retr.</th>
+                  <th>Commentateur</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="membersBody">
+                <!-- Les lignes sont injectées par JS -->
+              </tbody>
+            </table>
+            <div class="table-footer">
+              <span class="table-footer-info" id="tableCount">— membres affichés</span>
+              <span class="table-footer-info" style="color:var(--muted);">Mis à jour — Saison 2025-2026</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div><!-- /main col -->
+
+      <!-- ═══ SIDEBAR ═══ -->
+      <aside class="accred-sidebar">
+
+        <!-- Stats -->
+        <div class="sidebar-card">
+          <h4>Vue d'ensemble</h4>
+          <div class="stat-row">
+            <span class="s-label">✅ Accrédités</span>
+            <span class="s-val green" id="sb-accredite">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="s-label">⏳ En attente</span>
+            <span class="s-val yellow" id="sb-attente">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="s-label">⬜ Non accrédités</span>
+            <span class="s-val gray" id="sb-non">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="s-label">Total membres</span>
+            <span class="s-val" style="color:var(--white);" id="sb-total">—</span>
+          </div>
+        </div>
+
+        <!-- Procédure -->
+        <div class="sidebar-card">
+          <h4>Procédure d'accréditation</h4>
+          <div class="proc-step">
+            <div class="proc-num">1</div>
+            <div class="proc-text">Choisir le questionnaire correspondant au poste visé.</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">2</div>
+            <div class="proc-text">Compléter le formulaire Google Forms et soumettre.</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">3</div>
+            <div class="proc-text"><strong>La Coordination générale</strong> examine les réponses et valide ou non l'accréditation.</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">4</div>
+            <div class="proc-text">En cas d'échec, une <strong>formation ou période d'observation</strong> peut être proposée avant un nouveau passage.</div>
+          </div>
+          <div class="proc-step">
+            <div class="proc-num">5</div>
+            <div class="proc-text">L'accréditation est valable <strong>pour la saison en cours</strong>, renouvelable à chaque AG.</div>
+          </div>
+        </div>
+
+        <!-- Légende -->
+        <div class="sidebar-card">
+          <h4>Légende des statuts</h4>
+          <div class="legend-block">
+            <div class="legend-row">
+              <span class="statut accredite"><span class="statut-dot"></span>Accrédité</span>
+              <span>Questionnaire validé par la Coordination</span>
+            </div>
+            <div class="legend-row">
+              <span class="statut en-attente"><span class="statut-dot"></span>En attente</span>
+              <span>Formulaire soumis, en cours d'examen</span>
+            </div>
+            <div class="legend-row">
+              <span class="statut non-accredite"><span class="statut-dot"></span>Non accrédité</span>
+              <span>Questionnaire non passé ou non validé</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="sidebar-card" style="background:rgba(232,0,29,0.05);border-color:rgba(232,0,29,0.2);">
+          <h4>Un problème ?</h4>
+          <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Pour toute question sur votre accréditation ou en cas de litige, contactez la Coordination générale.</p>
+          <a href="equipe.html" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.78rem;">Voir les contacts →</a>
+        </div>
+
+      </aside>
+    </div><!-- /layout -->
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="accreditations.html">Accréditations</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+
+  <script>
+    /* ─── DONNÉES MEMBRES ─── */
+    const MEMBRES = [
+      {
+        prenom: "Xavier", nom: "FINI",
+        initiales: "XF", couleur: "#c0392b",
+        role: "Coordinateur général",
+        isBureau: true,
+        grade: "or",
+        resp: "accredite",
+        comm: "accredite"
+      },
+      {
+        prenom: "Marie", nom: "DAL ZOTTO",
+        initiales: "MD", couleur: "#8e44ad",
+        role: "Coordinatrice adjointe",
+        isBureau: true,
+        grade: "or",
+        resp: "accredite",
+        comm: "accredite"
+      },
+      {
+        prenom: "Emmanuel", nom: "ALVES DE MOURA",
+        initiales: "EM", couleur: "#2980b9",
+        role: "Secrétaire général",
+        isBureau: true,
+        grade: "or",
+        resp: "accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Nicolas", nom: "MARIN",
+        initiales: "NM", couleur: "#27ae60",
+        role: "Président de l'ICR",
+        isBureau: true,
+        grade: "or",
+        resp: "accredite",
+        comm: "accredite"
+      },
+      {
+        prenom: "Yoan", nom: "DUSSERT",
+        initiales: "YD", couleur: "#e67e22",
+        role: "Vice-président de l'ICR",
+        isBureau: true,
+        grade: "argent",
+        resp: "accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Enzo", nom: "ACHOUR",
+        initiales: "EA", couleur: "#16a085",
+        role: "Coordinateur délégué ICR",
+        isBureau: true,
+        grade: "or",
+        resp: "accredite",
+        comm: "en-attente"
+      },
+      {
+        prenom: "Nabil", nom: "SABAH",
+        initiales: "NS", couleur: "#d35400",
+        role: "Coordinateur délégué ICR",
+        isBureau: true,
+        grade: "argent",
+        resp: "en-attente",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Tim", nom: "TOUR",
+        initiales: "TT", couleur: "#7f8c8d",
+        role: "Coordinateur délégué ICR",
+        isBureau: true,
+        grade: "or",
+        resp: "accredite",
+        comm: "accredite"
+      },
+      {
+        prenom: "Dorina", nom: "HELIE-JOLY",
+        initiales: "DH", couleur: "#9b59b6",
+        role: "Coordinatrice déléguée ICR",
+        isBureau: true,
+        grade: "argent",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Gaetan", nom: "FERRE",
+        initiales: "GF", couleur: "#34495e",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "argent",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Younes", nom: "CHIKER",
+        initiales: "YC", couleur: "#1abc9c",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "argent",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Ennio", nom: "ARIZZI",
+        initiales: "ENA", couleur: "#e74c3c",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "or",
+        resp: "accredite",
+        comm: "en-attente"
+      },
+      {
+        prenom: "Kyliann", nom: "HEQUETTE",
+        initiales: "KH", couleur: "#3498db",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "none",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Aymeric", nom: "",
+        initiales: "AY", couleur: "#2c3e50",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "argent",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Khalil", nom: "",
+        initiales: "KH", couleur: "#c0392b",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "argent",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Rémi", nom: "",
+        initiales: "RE", couleur: "#8e44ad",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "argent",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      },
+      {
+        prenom: "Johanne", nom: "",
+        initiales: "JO", couleur: "#27ae60",
+        role: "Membre MHBTV",
+        isBureau: false,
+        grade: "argent",
+        resp: "non-accredite",
+        comm: "non-accredite"
+      }
+    ];
+
+    /* ─── RENDU STATUT ─── */
+    function statutHTML(type) {
+      if (type === 'accredite') return `<span class="statut accredite"><span class="statut-dot"></span>Accrédité</span>`;
+      if (type === 'en-attente') return `<span class="statut en-attente"><span class="statut-dot"></span>En attente</span>`;
+      return `<span class="statut non-accredite"><span class="statut-dot"></span>—</span>`;
+    }
+
+    function gradeHTML(grade) {
+      const map = {
+        or: `<span class="grade-pill grade-or">🥇 Or</span>`,
+        argent: `<span class="grade-pill grade-argent">🥈 Argent</span>`,
+        bronze: `<span class="grade-pill grade-bronze">🥉 Bronze</span>`,
+        none: `<span class="grade-pill grade-none">—</span>`
+      };
+      return map[grade] || map.none;
+    }
+
+    /* Statut global d'un membre (le meilleur de ses deux accréditations) */
+    function statutGlobal(m) {
+      if (m.resp === 'accredite' || m.comm === 'accredite') return 'accredite';
+      if (m.resp === 'en-attente' || m.comm === 'en-attente') return 'en-attente';
+      return 'non-accredite';
+    }
+
+    /* ─── INJECTION TABLE ─── */
+    function renderTable(data) {
+      const tbody = document.getElementById('membersBody');
+      tbody.innerHTML = '';
+      data.forEach(m => {
+        const sg = statutGlobal(m);
+        const nomComplet = [m.prenom, m.nom].filter(Boolean).join(' ');
+        const accreds = [];
+        if (m.resp !== 'non-accredite') accreds.push(`<span class="poste-pill pill-resp">Resp. retr.</span>`);
+        if (m.comm !== 'non-accredite') accreds.push(`<span class="poste-pill pill-comm">Commentateur</span>`);
+
+        const tr = document.createElement('tr');
+        tr.className = `member-row`;
+        tr.dataset.statut = sg;
+        tr.dataset.name = nomComplet.toLowerCase();
+        tr.innerHTML = `
+          <td>
+            <div class="member-name-cell">
+              <div class="m-avatar" style="background:${m.couleur}22;border:1px solid ${m.couleur}44;color:${m.couleur};">${m.initiales}</div>
+              <div>
+                <div class="m-fullname">${nomComplet}</div>
+                <div class="m-role">${m.role}${m.isBureau ? ' <span style="font-size:0.65rem;color:var(--red);opacity:0.7;">●</span>' : ''}</div>
+              </div>
+            </div>
+          </td>
+          <td style="color:var(--muted);font-size:0.82rem;">${m.role}</td>
+          <td class="col-grade">${gradeHTML(m.grade)}</td>
+          <td class="col-postes">${accreds.length ? accreds.join('') : '<span style="color:var(--muted);font-size:0.78rem;">Aucune</span>'}</td>
+          <td>${statutHTML(m.resp)}</td>
+          <td>${statutHTML(m.comm)}</td>
+          <td><a href="equipe.html" class="action-btn">Profil →</a></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      updateCount();
+    }
+
+    /* ─── STATS ─── */
+    function updateStats() {
+      const acc = MEMBRES.filter(m => statutGlobal(m) === 'accredite').length;
+      const att = MEMBRES.filter(m => statutGlobal(m) === 'en-attente').length;
+      const non = MEMBRES.filter(m => statutGlobal(m) === 'non-accredite').length;
+      const tot = MEMBRES.length;
+
+      ['stat-accredite','sb-accredite'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = acc; });
+      ['stat-attente','sb-attente'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = att; });
+      ['stat-total','sb-total'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = tot; });
+      const sbNon = document.getElementById('sb-non'); if(sbNon) sbNon.textContent = non;
+    }
+
+    function updateCount() {
+      const visible = document.querySelectorAll('.member-row:not(.hidden)').length;
+      const el = document.getElementById('tableCount');
+      if (el) el.textContent = `${visible} membre${visible > 1 ? 's' : ''} affiché${visible > 1 ? 's' : ''}`;
+    }
+
+    /* ─── FILTRES ─── */
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function applyFilters() {
+      document.querySelectorAll('.member-row').forEach(row => {
+        const matchFilter = currentFilter === 'all' || row.dataset.statut === currentFilter;
+        const matchSearch = row.dataset.name.includes(currentSearch.toLowerCase());
+        row.classList.toggle('hidden', !(matchFilter && matchSearch));
+      });
+      updateCount();
+    }
+
+    function filterTable(type, btn) {
+      currentFilter = type;
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    }
+
+    function searchMembers(val) {
+      currentSearch = val;
+      applyFilters();
+    }
+
+    /* ─── INIT ─── */
+    renderTable(MEMBRES);
+    updateStats();
+  </script>
+</body>
+</html>

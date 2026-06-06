@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instance Compétente des Retransmissions | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .icr-hero {
+      position: relative;
+      padding: 5.5rem 4rem 3.5rem;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .icr-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 85% 30%, rgba(99,179,237,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 50% at 5% 90%, rgba(232,0,29,0.05) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 72px,
+          rgba(255,255,255,0.012) 72px, rgba(255,255,255,0.012) 73px);
+    }
+    .icr-hero-wm {
+      position: absolute; right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(20vw, 260px);
+      color: rgba(99,179,237,0.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .icr-hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .icr-eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(99,179,237,0.1); border: 1px solid rgba(99,179,237,0.25);
+      border-radius: 4px; padding: .3rem .8rem; margin-bottom: 1.25rem;
+    }
+    .icr-eyebrow span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: #63b3ed;
+    }
+    .icr-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: .88; letter-spacing: .02em; color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .icr-hero h1 span { color: #63b3ed; }
+    .icr-hero p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 520px; }
+
+    /* KPIs hero */
+    .hero-kpis {
+      display: flex; gap: .75rem; margin-top: 2rem; flex-wrap: wrap;
+    }
+    .hkpi {
+      background: rgba(255,255,255,.03); border: 1px solid var(--border);
+      border-radius: 8px; padding: .85rem 1.1rem; text-align: center; min-width: 100px;
+    }
+    .hkpi-val {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+      color: var(--white); line-height: 1; display: block;
+    }
+    .hkpi-val.blue { color: #63b3ed; }
+    .hkpi-lab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); margin-top: .2rem; display: block;
+    }
+
+    /* ══════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════ */
+    .icr-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      padding: 3rem 4rem;
+      align-items: start;
+    }
+
+    /* ══════════════════════════════════════
+       TABS
+    ══════════════════════════════════════ */
+    .icr-tabs {
+      display: flex; gap: 0;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 4rem;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .icr-tabs::-webkit-scrollbar { display: none; }
+    .icr-tab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .8rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      padding: 1rem 1.5rem; border: none; background: none;
+      cursor: pointer; border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s; white-space: nowrap;
+    }
+    .icr-tab:hover { color: var(--white); }
+    .icr-tab.active { color: #63b3ed; border-bottom-color: #63b3ed; }
+    .icr-panel { display: none; }
+    .icr-panel.active { display: block; }
+
+    /* ══════════════════════════════════════
+       MEMBRES
+    ══════════════════════════════════════ */
+    .membres-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .membre-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .membre-card:hover { border-color: rgba(99,179,237,.35); transform: translateY(-3px); }
+    .membre-card.president { border-color: rgba(99,179,237,.35); }
+    .membre-card.vice-president { border-color: rgba(99,179,237,.2); }
+
+    .membre-card-top {
+      padding: 1.4rem 1.5rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1rem;
+      background: rgba(255,255,255,.02);
+    }
+    .membre-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--white);
+      border: 2px solid;
+    }
+    .membre-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.05rem; color: var(--white);
+      line-height: 1.2;
+    }
+    .membre-role-badge {
+      display: inline-flex; align-items: center; gap: .35rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; padding: .22rem .6rem;
+      border-radius: 3px; margin-top: .25rem;
+    }
+    .badge-president {
+      background: rgba(99,179,237,.15); color: #63b3ed;
+      border: 1px solid rgba(99,179,237,.3);
+    }
+    .badge-vice {
+      background: rgba(99,179,237,.08); color: #90cdf4;
+      border: 1px solid rgba(99,179,237,.2);
+    }
+    .badge-membre {
+      background: rgba(255,255,255,.06); color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .membre-card-body { padding: 1.1rem 1.5rem; }
+    .membre-info-row {
+      display: flex; align-items: flex-start; gap: .6rem;
+      padding: .42rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .83rem;
+    }
+    .membre-info-row:last-child { border-bottom: none; }
+    .mir-label { color: var(--muted); min-width: 80px; flex-shrink: 0; }
+    .mir-val { color: var(--text); line-height: 1.4; }
+
+    /* Accréd pills */
+    .accred-pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; padding: .18rem .5rem;
+      border-radius: 3px; margin-right: .3rem;
+    }
+    .pill-yes {
+      background: rgba(74,222,128,.1); color: #4ade80;
+      border: 1px solid rgba(74,222,128,.25);
+    }
+    .pill-no {
+      background: rgba(255,255,255,.05); color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ══════════════════════════════════════
+       RÈGLES JURIDIQUES
+    ══════════════════════════════════════ */
+    .rule-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .rule-card-head {
+      display: flex; align-items: center; gap: .85rem;
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,.025);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      transition: background .15s;
+    }
+    .rule-card-head:hover { background: rgba(255,255,255,.04); }
+    .rule-art-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem; letter-spacing: .06em;
+      color: #63b3ed; min-width: 56px; line-height: 1;
+    }
+    .rule-art-source {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .6rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; padding: .15rem .45rem;
+      border-radius: 3px; margin-left: .35rem;
+    }
+    .src-rarc {
+      background: rgba(99,179,237,.1); color: #63b3ed;
+      border: 1px solid rgba(99,179,237,.25);
+    }
+    .src-rg {
+      background: rgba(232,0,29,.1); color: var(--red);
+      border: 1px solid rgba(232,0,29,.25);
+    }
+    .rule-art-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem; color: var(--white);
+      flex: 1;
+    }
+    .rule-toggle {
+      font-size: .75rem; color: var(--muted);
+      transition: transform .25s;
+    }
+    .rule-toggle.open { transform: rotate(180deg); }
+    .rule-card-body {
+      padding: 1.25rem 1.5rem;
+      display: none;
+    }
+    .rule-card-body.open { display: block; }
+    .rule-card-body p {
+      font-size: .875rem; color: var(--muted); line-height: 1.75;
+      margin-bottom: .65rem;
+    }
+    .rule-card-body p:last-child { margin-bottom: 0; }
+    .rule-card-body strong { color: var(--text); }
+    .rule-card-body ul {
+      list-style: none; display: flex; flex-direction: column;
+      gap: .35rem; margin: .5rem 0;
+    }
+    .rule-card-body ul li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      font-size: .85rem; color: var(--muted); line-height: 1.55;
+    }
+    .rule-card-body ul li::before {
+      content: '▸'; color: #63b3ed; flex-shrink: 0; margin-top: .05rem;
+    }
+
+    /* infobox */
+    .info-box {
+      border-radius: 7px; padding: 1rem 1.25rem;
+      display: flex; gap: .85rem; align-items: flex-start;
+      margin: .85rem 0;
+    }
+    .info-box.blue { background: rgba(99,179,237,.06); border: 1px solid rgba(99,179,237,.2); }
+    .info-box.red  { background: rgba(232,0,29,.07); border: 1px solid rgba(232,0,29,.25); }
+    .info-box.gold { background: rgba(240,180,41,.07); border: 1px solid rgba(240,180,41,.25); }
+    .info-box.green{ background: rgba(74,222,128,.06); border: 1px solid rgba(74,222,128,.2); }
+    .info-box-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: .05rem; }
+    .info-box-body {}
+    .info-box-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .7rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; margin-bottom: .3rem;
+    }
+    .info-box.blue .info-box-title { color: #63b3ed; }
+    .info-box.red  .info-box-title { color: var(--red); }
+    .info-box.gold .info-box-title { color: var(--gold); }
+    .info-box.green .info-box-title { color: #4ade80; }
+    .info-box p { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+    .info-box p strong { color: var(--text); }
+
+    /* Petit tableau générique */
+    .mini-table {
+      width: 100%; border-collapse: collapse; font-size: .84rem;
+      margin: .75rem 0;
+    }
+    .mini-table thead tr {
+      background: rgba(99,179,237,.07);
+      border-bottom: 1px solid rgba(99,179,237,.2);
+    }
+    .mini-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      color: #63b3ed; padding: .55rem 1rem; text-align: left;
+    }
+    .mini-table td {
+      padding: .55rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text); vertical-align: top; line-height: 1.5;
+    }
+    .mini-table tr:last-child td { border-bottom: none; }
+    .mini-table tr:hover td { background: rgba(255,255,255,.02); }
+
+    /* ══════════════════════════════════════
+       PROCÉDURES & SANCTIONS
+    ══════════════════════════════════════ */
+    .proc-steps {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .ps {
+      display: grid; grid-template-columns: 40px 1fr;
+      gap: 1rem; position: relative;
+    }
+    .ps::before {
+      content: '';
+      position: absolute;
+      left: 19px; top: 38px; bottom: -1px;
+      width: 2px; background: var(--border);
+    }
+    .ps:last-child::before { display: none; }
+    .ps-num-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: .1rem;
+    }
+    .ps-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(99,179,237,.12); color: #63b3ed;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(99,179,237,.25); flex-shrink: 0; z-index: 1;
+    }
+    .ps-body { padding-bottom: 1.5rem; }
+    .ps-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .62rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .2rem; display: block;
+    }
+    .ps-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .98rem; color: var(--white); margin-bottom: .3rem;
+    }
+    .ps-body p { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+    .ps-body ul { list-style: none; margin-top: .4rem; display: flex; flex-direction: column; gap: .3rem; }
+    .ps-body ul li { font-size: .83rem; color: var(--muted); display: flex; align-items: flex-start; gap: .5rem; line-height: 1.5; }
+    .ps-body ul li::before { content: '·'; color: #63b3ed; flex-shrink: 0; }
+
+    /* Jury table */
+    .jury-table {
+      width: 100%; border-collapse: collapse; font-size: .84rem; margin: .75rem 0;
+    }
+    .jury-table thead tr { background: rgba(99,179,237,.07); border-bottom: 1px solid rgba(99,179,237,.2); }
+    .jury-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .63rem; letter-spacing: .15em; text-transform: uppercase;
+      color: #63b3ed; padding: .55rem 1rem; text-align: left;
+    }
+    .jury-table td {
+      padding: .6rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text); line-height: 1.5; vertical-align: top;
+    }
+    .jury-table tr:last-child td { border-bottom: none; }
+
+    /* Délais table */
+    .delai-table { width: 100%; border-collapse: collapse; font-size: .84rem; margin: .75rem 0; }
+    .delai-table thead tr { background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border); }
+    .delai-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .63rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); padding: .55rem 1rem; text-align: left;
+    }
+    .delai-table td { padding: .6rem 1rem; border-bottom: 1px solid rgba(255,255,255,.04); color: var(--text); vertical-align: top; line-height: 1.5; }
+    .delai-table tr:last-child td { border-bottom: none; }
+    .delai-table tr:hover td { background: rgba(255,255,255,.02); }
+    .delai-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: #63b3ed; }
+
+    /* Sanctions liste */
+    .sanctions-list { display: flex; flex-direction: column; gap: .6rem; margin-top: .75rem; }
+    .sanction-row {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 7px; padding: .8rem 1.25rem;
+      transition: border-color .15s;
+    }
+    .sanction-row:hover { border-color: rgba(232,0,29,.3); }
+    .sanction-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+      color: var(--red); min-width: 28px; text-align: center; line-height: 1;
+    }
+    .sanction-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .95rem; color: var(--white); flex: 1;
+    }
+    .sev-dots { display: flex; gap: .2rem; }
+    .sev-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+    /* Comportements proscrits */
+    .cat-block { margin-bottom: 2rem; }
+    .cat-header {
+      display: flex; align-items: center; gap: .75rem;
+      padding-bottom: .5rem; margin-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-icon {
+      width: 36px; height: 36px;
+      background: rgba(232,0,29,.1); border: 1px solid rgba(232,0,29,.2);
+      border-radius: 7px; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cat-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+      letter-spacing: .04em; color: var(--white);
+    }
+    .cat-art {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .62rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--muted); margin-left: auto;
+    }
+    .manquements-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: .65rem;
+    }
+    .manquement-pill {
+      background: rgba(255,255,255,.03); border: 1px solid var(--border);
+      border-radius: 6px; padding: .7rem 1rem;
+      font-size: .83rem; color: var(--muted); line-height: 1.45;
+      transition: border-color .15s;
+    }
+    .manquement-pill:hover { border-color: rgba(232,0,29,.3); color: var(--text); }
+
+    /* Circonstances */
+    .circ-block { margin-bottom: 1.5rem; }
+    .circ-header {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .65rem 1rem; border-radius: 6px; margin-bottom: .65rem;
+    }
+    .circ-header.att { background: rgba(74,222,128,.07); border: 1px solid rgba(74,222,128,.2); }
+    .circ-header.agg { background: rgba(251,191,36,.07); border: 1px solid rgba(251,191,36,.2); }
+    .circ-header.tres { background: rgba(232,0,29,.07); border: 1px solid rgba(232,0,29,.25); }
+    .circ-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+    }
+    .circ-header.att .circ-label { color: #4ade80; }
+    .circ-header.agg .circ-label { color: #fbbf24; }
+    .circ-header.tres .circ-label { color: var(--red); }
+    .circ-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+    .circ-list li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      font-size: .83rem; color: var(--muted); line-height: 1.5;
+    }
+    .circ-list li::before { content: '▸'; flex-shrink: 0; margin-top: .05rem; }
+    .circ-header.att ~ .circ-list li::before { color: #4ade80; }
+    .circ-header.agg ~ .circ-list li::before { color: #fbbf24; }
+    .circ-header.tres ~ .circ-list li::before { color: var(--red); }
+
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .icr-sidebar { position: sticky; top: 80px; }
+    .sb-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.4rem; margin-bottom: 1.25rem;
+    }
+    .sb-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; letter-spacing: .22em; text-transform: uppercase;
+      color: #63b3ed; margin-bottom: 1rem;
+    }
+    .sb-row {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: .48rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .82rem; gap: .5rem;
+    }
+    .sb-row:last-child { border-bottom: none; }
+    .sb-row .label { color: var(--muted); flex-shrink: 0; }
+    .sb-row .val { color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 600; text-align: right; }
+    .sb-orga-member {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .45rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .sb-orga-member:last-child { border-bottom: none; }
+    .sb-av {
+      width: 28px; height: 28px; border-radius: 50%;
+      font-family: 'Bebas Neue', sans-serif; font-size: .7rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--white);
+    }
+    .sb-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .88rem; color: var(--white); }
+    .sb-role { font-size: .7rem; color: var(--muted); display: block; }
+
+    /* Quick links */
+    .quick-link {
+      display: flex; align-items: center; gap: .65rem;
+      padding: .55rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      text-decoration: none; transition: color .15s;
+    }
+    .quick-link:last-child { border-bottom: none; }
+    .quick-link:hover .ql-label { color: var(--white); }
+    .ql-icon { font-size: 1rem; flex-shrink: 0; }
+    .ql-label {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .88rem; color: var(--muted); flex: 1;
+      transition: color .15s;
+    }
+    .ql-arr { font-size: .75rem; color: var(--muted); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 1050px) {
+      .icr-layout { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .icr-sidebar { position: static; }
+    }
+    @media (max-width: 900px) {
+      .icr-hero { padding: 5rem 1.5rem 2.5rem; }
+      .icr-tabs { padding: 0 1.5rem; }
+      .membres-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- ══════════════════ HERO ══════════════════ -->
+    <div class="icr-hero">
+      <div class="icr-hero-wm">ICR</div>
+      <div class="icr-hero-content">
+        <div class="icr-eyebrow">
+          <span style="width:7px;height:7px;background:#63b3ed;border-radius:50%;display:inline-block;"></span>
+          <span>Organe indépendant · RARC Art. 3</span>
+        </div>
+        <h1>Instance Compétente<br><span>des Retransmissions</span></h1>
+        <p>L'ICR est l'organe indépendant de contrôle, de régulation opérationnelle et de discipline de Meylan Handball TV. Elle veille au respect des règlements, à la qualité des retransmissions et au traitement équitable des manquements.</p>
+        <div class="hero-kpis">
+          <div class="hkpi">
+            <span class="hkpi-val blue">6</span>
+            <span class="hkpi-lab">Membres ICR</span>
+          </div>
+          <div class="hkpi">
+            <span class="hkpi-val">2 ans</span>
+            <span class="hkpi-lab">Durée mandat</span>
+          </div>
+          <div class="hkpi">
+            <span class="hkpi-val">9</span>
+            <span class="hkpi-lab">Catégories de fautes</span>
+          </div>
+          <div class="hkpi">
+            <span class="hkpi-val">6</span>
+            <span class="hkpi-lab">Niveaux de sanction</span>
+          </div>
+          <div class="hkpi">
+            <span class="hkpi-val blue">23/04</span>
+            <span class="hkpi-lab">Règlement en vigueur</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ TABS ══════════════════ -->
+    <div class="icr-tabs">
+      <button class="icr-tab active" onclick="showTab('composition',this)">👥 Composition</button>
+      <button class="icr-tab" onclick="showTab('reglement',this)">📜 Règlement &amp; attributions</button>
+      <button class="icr-tab" onclick="showTab('procedure',this)">⚖️ Procédure disciplinaire</button>
+      <button class="icr-tab" onclick="showTab('fautes',this)">🚫 Fautes &amp; sanctions</button>
+      <button class="icr-tab" onclick="showTab('elections',this)">🗳️ Contentieux électoral</button>
+    </div>
+
+    <!-- ══════════════════ LAYOUT ══════════════════ -->
+    <div class="icr-layout">
+      <div>
+
+        <!-- ════ PANEL : COMPOSITION ════ -->
+        <div class="icr-panel active" id="panel-composition">
+
+          <h2 class="section-title" style="margin-bottom:.25rem;">Composition <span>2025-2026</span></h2>
+          <div class="section-line"></div>
+
+          <div class="info-box blue" style="margin-bottom:1.75rem;">
+            <span class="info-box-icon">📌</span>
+            <div>
+              <div class="info-box-title">Art. 5 RARC — Composition</div>
+              <p>L'ICR est composée de <strong>3 à 7 membres titulaires</strong>. Les membres élus de la Coordination générale sont éligibles. La présidence est attribuée au membre ayant obtenu le plus grand nombre de suffrages lors du scrutin. La vice-présidence revient au deuxième.</p>
+            </div>
+          </div>
+
+          <div class="membres-grid">
+            <!-- Président -->
+            <div class="membre-card president">
+              <div class="membre-card-top">
+                <div class="membre-avatar" style="background:#27ae6033;border-color:#27ae6066;color:#27ae60;">NM</div>
+                <div>
+                  <div class="membre-name">Nicolas MARIN</div>
+                  <div><span class="membre-role-badge badge-president">⭐ Président ICR</span></div>
+                </div>
+              </div>
+              <div class="membre-card-body">
+                <div class="membre-info-row">
+                  <span class="mir-label">Mandat</span>
+                  <span class="mir-val">Saison 2025-2026 · 2 ans renouvelable</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Rôle BCG</span>
+                  <span class="mir-val">Membre de la Coordination générale</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Accréditations</span>
+                  <span class="mir-val">
+                    <span class="accred-pill pill-yes">✓ Resp. retr.</span>
+                    <span class="accred-pill pill-yes">✓ Commentateur</span>
+                  </span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Déport</span>
+                  <span class="mir-val">Obligatoire si cumul fonctions Coord. adjointe (Art. 7 RARC)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Vice-président -->
+            <div class="membre-card vice-president">
+              <div class="membre-card-top">
+                <div class="membre-avatar" style="background:#e67e2233;border-color:#e67e2266;color:#e67e22;">YD</div>
+                <div>
+                  <div class="membre-name">Yoan DUSSERT</div>
+                  <div><span class="membre-role-badge badge-vice">🔹 Vice-président ICR</span></div>
+                </div>
+              </div>
+              <div class="membre-card-body">
+                <div class="membre-info-row">
+                  <span class="mir-label">Mandat</span>
+                  <span class="mir-val">Saison 2025-2026 · 2 ans renouvelable</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Rôle BCG</span>
+                  <span class="mir-val">Membre de la Coordination générale</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Accréditations</span>
+                  <span class="mir-val">
+                    <span class="accred-pill pill-yes">✓ Resp. retr.</span>
+                    <span class="accred-pill pill-no">— Commentateur</span>
+                  </span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Suppléance</span>
+                  <span class="mir-val">Préside la séance en cas de déport du Président (Art. 7 RARC)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Enzo -->
+            <div class="membre-card">
+              <div class="membre-card-top">
+                <div class="membre-avatar" style="background:#16a08533;border-color:#16a08566;color:#16a085;">EA</div>
+                <div>
+                  <div class="membre-name">Enzo ACHOUR</div>
+                  <div><span class="membre-role-badge badge-membre">Membre ICR</span></div>
+                </div>
+              </div>
+              <div class="membre-card-body">
+                <div class="membre-info-row">
+                  <span class="mir-label">Mandat</span>
+                  <span class="mir-val">Saison 2025-2026 · 2 ans renouvelable</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Accréditations</span>
+                  <span class="mir-val">
+                    <span class="accred-pill pill-yes">✓ Resp. retr.</span>
+                    <span class="accred-pill pill-no">⏳ Commentateur</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nabil -->
+            <div class="membre-card">
+              <div class="membre-card-top">
+                <div class="membre-avatar" style="background:#d3540033;border-color:#d3540066;color:#d35400;">NS</div>
+                <div>
+                  <div class="membre-name">Nabil SABAH</div>
+                  <div><span class="membre-role-badge badge-membre">Membre ICR</span></div>
+                </div>
+              </div>
+              <div class="membre-card-body">
+                <div class="membre-info-row">
+                  <span class="mir-label">Mandat</span>
+                  <span class="mir-val">Saison 2025-2026 · 2 ans renouvelable</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Accréditations</span>
+                  <span class="mir-val">
+                    <span class="accred-pill pill-no">⏳ Resp. retr.</span>
+                    <span class="accred-pill pill-no">— Commentateur</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tim -->
+            <div class="membre-card">
+              <div class="membre-card-top">
+                <div class="membre-avatar" style="background:#7f8c8d33;border-color:#7f8c8d66;color:#b0bec5;">TT</div>
+                <div>
+                  <div class="membre-name">Tim TOUR</div>
+                  <div><span class="membre-role-badge badge-membre">Membre ICR</span></div>
+                </div>
+              </div>
+              <div class="membre-card-body">
+                <div class="membre-info-row">
+                  <span class="mir-label">Mandat</span>
+                  <span class="mir-val">Saison 2025-2026 · 2 ans renouvelable</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Accréditations</span>
+                  <span class="mir-val">
+                    <span class="accred-pill pill-yes">✓ Resp. retr.</span>
+                    <span class="accred-pill pill-yes">✓ Commentateur</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dorina -->
+            <div class="membre-card">
+              <div class="membre-card-top">
+                <div class="membre-avatar" style="background:#9b59b633;border-color:#9b59b666;color:#9b59b6;">DH</div>
+                <div>
+                  <div class="membre-name">Dorina HELIE-JOLY</div>
+                  <div><span class="membre-role-badge badge-membre">Membre ICR</span></div>
+                </div>
+              </div>
+              <div class="membre-card-body">
+                <div class="membre-info-row">
+                  <span class="mir-label">Mandat</span>
+                  <span class="mir-val">Saison 2025-2026 · 2 ans renouvelable</span>
+                </div>
+                <div class="membre-info-row">
+                  <span class="mir-label">Accréditations</span>
+                  <span class="mir-val">
+                    <span class="accred-pill pill-no">— Resp. retr.</span>
+                    <span class="accred-pill pill-no">— Commentateur</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Règles de déport -->
+          <h2 class="section-title" style="margin-bottom:.25rem;margin-top:2rem;">Règles de <span>déport</span></h2>
+          <div class="section-line"></div>
+          <div class="info-box red">
+            <span class="info-box-icon">⚖️</span>
+            <div>
+              <div class="info-box-title">Art. 7 RARC — Conflits d'intérêts et déport obligatoire</div>
+              <p>Tout conflit d'intérêts réel ou potentiel impose une <strong>obligation immédiate de déport</strong>. Le déport est automatique, obligatoire et mentionné au procès-verbal.</p>
+              <p style="margin-top:.5rem;">En cas de déport du Président, la présidence de séance revient de plein droit au Vice-président. Si le Vice-président est également en déport ou empêchement, les membres présents désignent un <strong>président de séance ad hoc</strong>.</p>
+              <p style="margin-top:.5rem;">Le membre déporté <strong>ne peut en aucun cas</strong> participer aux débats, délibérations ni au vote concerné.</p>
+            </div>
+          </div>
+
+          <!-- Fin de mandat -->
+          <div style="margin-top:1.5rem;">
+            <h2 class="section-title" style="margin-bottom:.25rem;">Fin de <span>mandat</span></h2>
+            <div class="section-line"></div>
+            <div class="info-box blue">
+              <span class="info-box-icon">📋</span>
+              <div>
+                <div class="info-box-title">Art. 8–9 RARC</div>
+                <p>Le mandat des membres est fixé à <strong>2 ans, renouvelable sans limitation</strong>. Il prend fin par : démission, empêchement définitif, ou destitution prononcée par l'Assemblée générale après procédure contradictoire (Art. 34 RARC).</p>
+              </div>
+            </div>
+          </div>
+        </div><!-- /panel-composition -->
+
+
+        <!-- ════ PANEL : RÈGLEMENT & ATTRIBUTIONS ════ -->
+        <div class="icr-panel" id="panel-reglement">
+
+          <h2 class="section-title" style="margin-bottom:.25rem;">Principes <span>fondateurs</span></h2>
+          <div class="section-line"></div>
+
+          <div class="info-box blue" style="margin-bottom:1.5rem;">
+            <span class="info-box-icon">🏗️</span>
+            <div>
+              <div class="info-box-title">Art. 3 RARC — Nature de l'ICR</div>
+              <p>L'ICR est un organe <strong>indépendant</strong> de contrôle, de surveillance, de régulation et, le cas échéant, de discipline interne. Elle <strong>n'exerce aucune fonction exécutive globale</strong> et ne se substitue pas aux organes dirigeants. Elle agit en toute indépendance vis-à-vis de la Coordination générale.</p>
+            </div>
+          </div>
+
+          <!-- Articles clés -->
+          <div style="margin-bottom:.75rem;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);">Articles clés — cliquez pour développer</span>
+          </div>
+
+          <!-- Art. 4 -->
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 4 <span class="rule-art-source src-rarc">RARC</span></span>
+              <span class="rule-art-title">Principes directeurs</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <p>L'ICR exerce ses missions dans le respect strict des principes suivants :</p>
+              <ul>
+                <li>De la <strong>légalité interne</strong></li>
+                <li>De l'<strong>impartialité et de l'objectivité</strong></li>
+                <li>Du <strong>principe du contradictoire</strong></li>
+                <li>De l'<strong>égalité de traitement</strong></li>
+                <li>De la <strong>proportionnalité des décisions</strong></li>
+                <li>De la <strong>confidentialité des délibérations</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Art. 6 -->
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 6 <span class="rule-art-source src-rarc">RARC</span></span>
+              <span class="rule-art-title">Conditions d'éligibilité aux postes ICR</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <p>Peut être membre de l'ICR tout membre actif ou occasionnel du collectif :</p>
+              <ul>
+                <li>À jour de son accréditation</li>
+                <li>Jouissant de ses droits associatifs</li>
+                <li>Disposant d'une connaissance suffisante des textes internes <strong>ou s'engageant à les maîtriser</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Art. 10 -->
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 10 <span class="rule-art-source src-rarc">RARC</span></span>
+              <span class="rule-art-title">Attributions de l'ICR</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body open">
+              <p>En matière de <strong>retransmissions</strong>, l'ICR est compétente pour :</p>
+              <ul>
+                <li>Établir le calendrier prévisionnel des retransmissions</li>
+                <li>Désigner les rencontres faisant l'objet d'une retransmission</li>
+                <li>Prioriser les compétitions selon les moyens disponibles</li>
+                <li>Valider les équipes de retransmission et leurs rôles</li>
+                <li>Définir et faire appliquer les protocoles</li>
+                <li>Autoriser, suspendre ou interdire une retransmission</li>
+              </ul>
+              <p style="margin-top:.75rem;">En matière de <strong>discipline et contrôle</strong>, elle est compétente pour :</p>
+              <ul>
+                <li>Veiller au respect des règles internes et des statuts</li>
+                <li>Traiter les signalements et les manquements aux obligations</li>
+                <li>Engager et mener les procédures disciplinaires</li>
+                <li>Prononcer les sanctions appropriées</li>
+                <li>Contrôler la régularité des processus électoraux</li>
+                <li>Statuer sur toute situation non prévue par le règlement</li>
+                <li>Décider des mesures en cas d'incident ou de manquement</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Art. 11 -->
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 11 <span class="rule-art-source src-rarc">RARC</span></span>
+              <span class="rule-art-title">Planification des retransmissions</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <p>Le calendrier prévisionnel est établi en tenant compte :</p>
+              <ul>
+                <li>Du calendrier sportif officiel</li>
+                <li>Des moyens humains et techniques disponibles</li>
+                <li>De l'intérêt sportif, associatif ou institutionnel des rencontres</li>
+                <li>Des contraintes logistiques et organisationnelles</li>
+              </ul>
+              <p>L'ICR <strong>peut modifier le calendrier à tout moment</strong> en cas d'imprévu sportif, technique ou organisationnel.</p>
+            </div>
+          </div>
+
+          <!-- Art. 12 -->
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 12 <span class="rule-art-source src-rarc">RARC</span></span>
+              <span class="rule-art-title">Désignation du Responsable de Retransmission</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <p>Pour chaque rencontre, l'ICR désigne un Responsable de Retransmission. Il est l'<strong>interlocuteur unique</strong> pour toute question relative à la retransmission concernée.</p>
+              <p>Il est identifiable de manière obligatoire grâce à un <strong>gilet portant le logo MHBTV</strong>, qu'il doit porter durant toute la durée de l'événement.</p>
+              <p>Le RR ne détient pas d'autorité disciplinaire, mais dispose d'une <strong>autorité fonctionnelle</strong> pour assurer une retransmission fluide, sécurisée et conforme aux standards MHBTV.</p>
+            </div>
+          </div>
+
+          <!-- Interruption -->
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 13–17 <span class="rule-art-source src-rarc">RARC</span></span>
+              <span class="rule-art-title">Procédures en cas d'incident lors d'un direct</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <div class="info-box red" style="margin-bottom:.85rem;">
+                <span class="info-box-icon">🔴</span>
+                <div>
+                  <div class="info-box-title">Règle fondamentale — Art. 13</div>
+                  <p>Le RR <strong>ne peut pas décider seul</strong> de l'interruption définitive d'un direct. Il doit impérativement obtenir l'aval préalable du Coordinateur adjoint. En urgence absolue : suspension provisoire autorisée suivie d'une information immédiate.</p>
+                </div>
+              </div>
+              <table class="mini-table">
+                <thead><tr><th>Type d'incident</th><th>Procédure</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Demande d'arrêt d'un officiel</strong> (Art. 14)</td><td>Suspension immédiate, puis aval Coord. adjoint obligatoire. CR à l'ICR.</td></tr>
+                  <tr><td><strong>Incident technique mineur</strong> (Art. 15)</td><td>Maintenir la diffusion, adapter les moyens. Pas d'interruption.</td></tr>
+                  <tr><td><strong>Incident sportif sensible</strong> (Art. 16)</td><td>Adapter la captation. Retenue, neutralité, respect des personnes.</td></tr>
+                  <tr><td><strong>Dommages matériels</strong> (Art. 17)</td><td>Sécuriser la zone en priorité. CR circonstancié à l'ICR obligatoire.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div><!-- /panel-reglement -->
+
+
+        <!-- ════ PANEL : PROCÉDURE DISCIPLINAIRE ════ -->
+        <div class="icr-panel" id="panel-procedure">
+
+          <h2 class="section-title" style="margin-bottom:.25rem;">Procédure <span>disciplinaire complète</span></h2>
+          <div class="section-line"></div>
+
+          <div class="info-box blue" style="margin-bottom:1.75rem;">
+            <span class="info-box-icon">⚖️</span>
+            <div>
+              <div class="info-box-title">Art. 18 RARC — Principes généraux</div>
+              <p>Toute procédure respecte impérativement : le <strong>principe du contradictoire</strong>, le droit à l'information, le droit à la défense, l'impartialité des membres, et la <strong>motivation écrite des décisions</strong>. Aucune décision défavorable ne peut être prise sans que la personne concernée ait pu présenter ses observations.</p>
+            </div>
+          </div>
+
+          <!-- Signalement -->
+          <div style="margin-bottom:1.75rem;">
+            <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;">Étape préalable — Art. 22</h3>
+            <div class="info-box gold">
+              <span class="info-box-icon">📬</span>
+              <div>
+                <div class="info-box-title">Réception des signalements par le Bureau</div>
+                <p>Tout signalement est adressé au <strong>Bureau de la Coordination générale</strong> via le formulaire du site interne — c'est le <strong>point d'entrée unique et obligatoire</strong>. Le Bureau enregistre, accuse réception et transmet sans délai à l'ICR. Le Bureau <strong>n'a aucun pouvoir d'appréciation sur le fond</strong>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Timeline procédure -->
+          <div class="proc-steps">
+            <div class="ps">
+              <div class="ps-num-wrap"><div class="ps-num">1</div></div>
+              <div class="ps-body">
+                <span class="ps-tag">Art. 23 RARC · ICR</span>
+                <div class="ps-title">Examen de recevabilité</div>
+                <p>L'ICR se réunit pour examiner la recevabilité du signalement.</p>
+                <p style="margin-top:.4rem;">Sont irrecevables : signalements anonymes, manifestement infondés, abusifs ou hors délai.</p>
+                <p style="margin-top:.5rem;"><strong style="color:var(--white);">3 décisions possibles :</strong></p>
+                <table class="mini-table" style="margin-top:.5rem;">
+                  <thead><tr><th>Décision</th><th>Conséquence</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong style="color:#4ade80;">Ouverture procédure disciplinaire</strong></td><td>Procédure formelle — articles 24 et suivants</td></tr>
+                    <tr><td><strong style="color:#fbbf24;">Avertissement direct</strong></td><td>Faits établis mais ne justifiant pas de sanctions plus lourdes</td></tr>
+                    <tr><td><strong style="color:var(--muted);">Irrecevabilité</strong></td><td>Décision motivée et notifiée. Aucune suite.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="ps">
+              <div class="ps-num-wrap"><div class="ps-num">2</div></div>
+              <div class="ps-body">
+                <span class="ps-tag">Art. 24 RARC · Président ICR</span>
+                <div class="ps-title">Ouverture &amp; désignation du jury de rapporteurs</div>
+                <p>Le Président de l'ICR désigne un <strong>jury de 3 rapporteurs</strong> :</p>
+                <table class="jury-table" style="margin-top:.6rem;">
+                  <thead><tr><th>Rôle</th><th>Attributions</th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Rapporteur Général</strong></td>
+                      <td>Pilote l'instruction. Coordonne le jury, dirige les auditions, rédige le rapport final.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Rapporteur Subordonné</strong></td>
+                      <td>Assiste le Rapporteur Général. Prend le relais en cas d'empêchement.</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Consultant</strong></td>
+                      <td>Avis consultatif lors des délibérations. <em>Pas de voix délibérative.</em></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="info-box blue" style="margin-top:.85rem;">
+                  <span class="info-box-icon">📅</span>
+                  <div><p>La commission disciplinaire se tient <strong>en visioconférence</strong>, dans un délai de <strong>2 semaines</strong> à compter de la décision d'ouverture. La convocation est adressée au moins <strong>7 jours avant</strong> la séance.</p></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ps">
+              <div class="ps-num-wrap"><div class="ps-num">3</div></div>
+              <div class="ps-body">
+                <span class="ps-tag">Art. 24bis RARC · Si délai impossible</span>
+                <div class="ps-title">Impossibilité de fixer la date</div>
+                <p>Si la commission ne peut être fixée dans les 2 semaines, l'ICR réexamine la décision initiale et peut :</p>
+                <ul>
+                  <li>Maintenir l'ouverture et fixer une nouvelle date</li>
+                  <li>Substituer une <strong>sanction proportionnée</strong> sans commission (si non très aggravant)</li>
+                  <li>Substituer un <strong>avertissement écrit direct</strong></li>
+                  <li>Prononcer un <strong>classement sans suite motivé</strong></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="ps">
+              <div class="ps-num-wrap"><div class="ps-num">4</div></div>
+              <div class="ps-body">
+                <span class="ps-tag">Art. 25–26 RARC · Jury de rapporteurs</span>
+                <div class="ps-title">Instruction &amp; droits de la défense</div>
+                <p>L'instruction comprend : collecte et analyse des éléments, auditions éventuelles, et rédaction d'un <strong>rapport écrit</strong> transmis à tous les membres de l'ICR avant la commission.</p>
+                <p style="margin-top:.5rem;">La personne mise en cause peut : <strong>consulter son dossier intégral</strong>, présenter des observations écrites, être entendue, et se faire assister par la personne de son choix.</p>
+              </div>
+            </div>
+
+            <div class="ps">
+              <div class="ps-num-wrap"><div class="ps-num">5</div></div>
+              <div class="ps-body">
+                <span class="ps-tag">Art. 27–28 RARC · Commission</span>
+                <div class="ps-title">Commission disciplinaire &amp; délibérations</div>
+                <p>La commission entend successivement le jury (présentation du rapport) puis la personne mise en cause et les témoins. Les débats sont conduits par le Président ou, en cas de déport, par le Vice-président.</p>
+                <p style="margin-top:.5rem;">À l'issue, le jury se réunit immédiatement en <strong>délibéré strictement confidentiel</strong>. Le résultat ne peut être communiqué avant les délais réglementaires (Art. 29).</p>
+              </div>
+            </div>
+
+            <div class="ps">
+              <div class="ps-num-wrap"><div class="ps-num">6</div></div>
+              <div class="ps-body">
+                <span class="ps-tag">Art. 29 RARC · Communication</span>
+                <div class="ps-title">Communication des décisions</div>
+                <table class="delai-table">
+                  <thead><tr><th>Destinataire</th><th>Délai</th><th>Modalité</th></tr></thead>
+                  <tbody>
+                    <tr>
+                      <td>Bureau de la Coordination générale</td>
+                      <td><span class="delai-val">3 j</span></td>
+                      <td>Transmission écrite confidentielle</td>
+                    </tr>
+                    <tr>
+                      <td>Membres directement concernés</td>
+                      <td><span class="delai-val">7 j</span></td>
+                      <td>Notification écrite de la décision motivée</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="info-box red" style="margin-top:.75rem;">
+                  <span class="info-box-icon">🔒</span>
+                  <div><p>Toute communication avant l'expiration des délais constitue un <strong>manquement aux obligations de confidentialité</strong> — sanction possible (Art. 9.2 de l'annexe).</p></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="ps">
+              <div class="ps-num-wrap"><div class="ps-num">7</div></div>
+              <div class="ps-body">
+                <span class="ps-tag">Art. 30 RARC</span>
+                <div class="ps-title">Décision finale &amp; sanctions</div>
+                <p>L'ICR peut classer sans suite si la faute n'est pas caractérisée, ou prononcer une sanction dans le respect du barème de l'annexe disciplinaire.</p>
+                <div class="sanctions-list">
+                  <div class="sanction-row"><span class="sanction-num">1</span><span class="sanction-label">Avertissement oral</span><div class="sev-dots"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
+                  <div class="sanction-row"><span class="sanction-num">2</span><span class="sanction-label">Avertissement écrit</span><div class="sev-dots"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
+                  <div class="sanction-row"><span class="sanction-num">3</span><span class="sanction-label">Suspension temporaire de retransmission</span><div class="sev-dots"><span class="sev-dot" style="background:#fbbf24;"></span><span class="sev-dot" style="background:#fbbf24;"></span><span class="sev-dot" style="background:#fbbf24;"></span></div></div>
+                  <div class="sanction-row"><span class="sanction-num">4</span><span class="sanction-label">Suspension temporaire sur la saison sportive</span><div class="sev-dots"><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span></div></div>
+                  <div class="sanction-row" style="border-color:rgba(232,0,29,.25);"><span class="sanction-num" style="color:#ff4444;">5</span><span class="sanction-label">Exclusion temporaire</span><div class="sev-dots"><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span></div></div>
+                  <div class="sanction-row" style="border-color:rgba(232,0,29,.4);background:rgba(232,0,29,.04);"><span class="sanction-num" style="color:var(--red);">6</span><span class="sanction-label" style="color:var(--red);">Exclusion définitive</span><div class="sev-dots"><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /panel-procedure -->
+
+
+        <!-- ════ PANEL : FAUTES & SANCTIONS ════ -->
+        <div class="icr-panel" id="panel-fautes">
+
+          <h2 class="section-title" style="margin-bottom:.25rem;">Comportements <span>proscrits</span></h2>
+          <div class="section-line"></div>
+
+          <div class="info-box gold" style="margin-bottom:1.75rem;">
+            <span class="info-box-icon">⚡</span>
+            <div>
+              <div class="info-box-title">Règle de sévérité — Annexe disciplinaire</div>
+              <p>Toute <strong>circonstance aggravante</strong> avérée entraîne automatiquement l'application du palier médian. L'ICR ne peut prononcer une sanction inférieure à ce palier. En cas de fautes multiples lors d'un même événement, la <strong>sanction la plus lourde est appliquée</strong> avec majoration possible.</p>
+            </div>
+          </div>
+
+          <!-- Les 9 catégories -->
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">📅</div><div class="cat-title">I — Présence, ponctualité et engagement</div><span class="cat-art">Art. 21.1 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Absence non justifiée à une retransmission ou réunion obligatoire</div>
+              <div class="manquement-pill">Absence justifiée sans prévenir (min. 24h) et sans proposer de remplacement</div>
+              <div class="manquement-pill">Abandon de poste en cours de retransmission sans motif valable</div>
+              <div class="manquement-pill">Départ anticipé non autorisé avant le bilan post-retransmission</div>
+              <div class="manquement-pill">Inactivité injustifiée de plus de 3 mois</div>
+              <div class="manquement-pill">Retard injustifié &gt; 5 min entraînant un démarrage tardif</div>
+              <div class="manquement-pill">Retard injustifié répété (3 occurrences ou plus sur la saison)</div>
+              <div class="manquement-pill">Refus répété de participer aux sessions de formation interne</div>
+              <div class="manquement-pill">Non-participation injustifiée à une journée de travail collectif</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">📛</div><div class="cat-title">II — Accréditation, rôles et identité opérationnelle</div><span class="cat-art">Art. 21.2 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Occupation d'un poste (RR ou commentateur) sans accréditation valide</div>
+              <div class="manquement-pill">Falsification d'une accréditation ou d'un questionnaire d'aptitude</div>
+              <div class="manquement-pill">Usurpation de rôle ou d'identité lors d'une retransmission</div>
+              <div class="manquement-pill">Non-port du gilet MHBTV obligatoire pendant l'événement</div>
+              <div class="manquement-pill">Refus d'appliquer une consigne du RR désigné en cours d'événement</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">🎥</div><div class="cat-title">III — Production, qualité technique et éditorial</div><span class="cat-art">Art. 21.3 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Qualité image ou son volontairement négligée</div>
+              <div class="manquement-pill">Coupure intempestive du direct par négligence évitable</div>
+              <div class="manquement-pill">Non-vérification du matériel avant retransmission</div>
+              <div class="manquement-pill">Non-déclaration d'un incident constaté lors d'un événement</div>
+              <div class="manquement-pill">Non-respect du conducteur ou changement de poste sans accord</div>
+              <div class="manquement-pill">Utilisation non autorisée d'effets ou incrustations</div>
+              <div class="manquement-pill">Modification non autorisée du générique ou de l'habillage graphique</div>
+              <div class="manquement-pill">Propos inappropriés en direct (insultes, humour déplacé…)</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Propos discriminatoires en direct (racisme, sexisme, homophobie…)</div>
+              <div class="manquement-pill">Prise de position polémique ou politique en direct</div>
+              <div class="manquement-pill">Dénigrement public d'un membre, du club ou d'un adversaire en direct</div>
+              <div class="manquement-pill">Révélation d'informations confidentielles en direct</div>
+              <div class="manquement-pill">Intervention non autorisée d'une personne extérieure en direct</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">🎒</div><div class="cat-title">IV — Matériel, équipements et ressources</div><span class="cat-art">Art. 21.4 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Utilisation du matériel à des fins personnelles sans autorisation</div>
+              <div class="manquement-pill">Non-respect des procédures d'utilisation ou non-retour dans les délais</div>
+              <div class="manquement-pill">Perte de matériel sans signalement immédiat</div>
+              <div class="manquement-pill">Dégradation de matériel par négligence</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Dégradation volontaire de matériel</div>
+              <div class="manquement-pill">Accès non autorisé ou partage d'identifiants des comptes du collectif</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Suppression non autorisée de fichiers ou archives du collectif</div>
+              <div class="manquement-pill">Partage non autorisé de rushes ou projets internes</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">🏷️</div><div class="cat-title">V — Image du collectif et représentation externe</div><span class="cat-art">Art. 21.5 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Utilisation du nom ou logo MHBTV à des fins personnelles sans autorisation</div>
+              <div class="manquement-pill">Prise de contact non autorisée avec des partenaires au nom du collectif</div>
+              <div class="manquement-pill">Création d'un compte imitant le collectif</div>
+              <div class="manquement-pill">Publication non autorisée de contenus au nom du collectif</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Propos dénigrants ou diffamatoires envers le collectif</div>
+              <div class="manquement-pill">Diffusion de fausses informations concernant le collectif</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Cyberharcèlement envers un membre</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">🔒</div><div class="cat-title">VI — Droits de diffusion, données et confidentialité</div><span class="cat-art">Art. 21.6 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Retransmission non autorisée d'un événement privé ou protégé</div>
+              <div class="manquement-pill">Enregistrement non autorisé d'une réunion interne</div>
+              <div class="manquement-pill">Divulgation d'informations confidentielles internes à l'extérieur</div>
+              <div class="manquement-pill">Publication de photos ou vidéos de membres sans consentement</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">🤝</div><div class="cat-title">VII — Vie interne et relations entre membres</div><span class="cat-art">Art. 21.7 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Comportement irrespectueux ou propos humiliants envers un membre</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Propos ou attitudes discriminatoires</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Harcèlement moral répété</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.4);background:rgba(232,0,29,.04);">Harcèlement sexuel (paroles, gestes, messages non consentis)</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Violence psychologique, manipulation ou intimidation</div>
+              <div class="manquement-pill">Mise à l'écart volontaire d'un membre (ostracisme)</div>
+              <div class="manquement-pill">Comportement perturbateur lors d'une réunion ou session interne</div>
+              <div class="manquement-pill">Consommation d'alcool ou de substances avant/pendant une retransmission</div>
+              <div class="manquement-pill">Introduction de personnes non autorisées dans les espaces du collectif</div>
+              <div class="manquement-pill">Conflit ouvert ou sabotage délibéré de la réputation d'un membre</div>
+              <div class="manquement-pill">Refus persistant de coopérer avec un autre membre</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">🏛️</div><div class="cat-title">VIII — Responsabilités et gouvernance interne</div><span class="cat-art">Art. 21.8 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Prise de décision engageant le collectif sans mandat</div>
+              <div class="manquement-pill">Conflit d'intérêts non déclaré dans une décision</div>
+              <div class="manquement-pill">Abus de position hiérarchique ou inactivité caractérisée</div>
+              <div class="manquement-pill">Opacité, refus de rendre compte ou dépense non validée</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.4);background:rgba(232,0,29,.04);">Détournement à profit personnel de ressources du collectif</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Tentative d'intimidation sur un membre de l'ICR</div>
+            </div>
+          </div>
+
+          <div class="cat-block">
+            <div class="cat-header"><div class="cat-icon">🔁</div><div class="cat-title">IX — Récidive et non-respect de la procédure disciplinaire</div><span class="cat-art">Art. 21.9 RARC</span></div>
+            <div class="manquements-grid">
+              <div class="manquement-pill">Récidive d'une faute déjà sanctionnée dans la même saison</div>
+              <div class="manquement-pill">Cumul de 3 avertissements écrits sur une même saison</div>
+              <div class="manquement-pill">Cumul de 2 suspensions sur une même saison</div>
+              <div class="manquement-pill">Refus de se présenter à une convocation ICR</div>
+              <div class="manquement-pill">Fausse déclaration lors d'une procédure disciplinaire interne</div>
+              <div class="manquement-pill" style="border-color:rgba(232,0,29,.3);">Non-respect d'une sanction prononcée</div>
+              <div class="manquement-pill">Divulgation publique des délibérations confidentielles de l'ICR</div>
+            </div>
+          </div>
+
+          <!-- Circonstances -->
+          <div style="margin-top:2.5rem;">
+            <h2 class="section-title" style="margin-bottom:.25rem;">Tableau des <span>circonstances</span></h2>
+            <div class="section-line"></div>
+
+            <div class="circ-block">
+              <div class="circ-header att"><span style="font-size:1rem;">✅</span><span class="circ-label">Circonstances atténuantes</span></div>
+              <ul class="circ-list">
+                <li>Première faute ou absence totale d'antécédents disciplinaires</li>
+                <li>Reconnaissance immédiate et spontanée des faits</li>
+                <li>Contexte de tension exceptionnel clairement établi et documenté</li>
+                <li>Comportement antérieur irréprochable sur au moins deux saisons consécutives</li>
+                <li>Excuses présentées spontanément et acceptées par la partie lésée avant saisine</li>
+                <li>Coopération active avec l'ICR lors de l'instruction</li>
+              </ul>
+            </div>
+
+            <div class="circ-block">
+              <div class="circ-header agg"><span style="font-size:1rem;">⚠️</span><span class="circ-label">Circonstances aggravantes → palier médian automatique</span></div>
+              <ul class="circ-list">
+                <li>Victime étant un officiel (arbitre, délégué, OTM, RSEC, encadrant)</li>
+                <li>Faits commis après avertissement préalable de la Coordination ou de l'ICR</li>
+                <li>Atteinte avérée à l'image du collectif, du club ou de la compétition</li>
+                <li>Abus d'autorité ou de position hiérarchique</li>
+                <li>Faits commis par une personne investie d'une responsabilité au sein du collectif</li>
+                <li>Faits ayant perturbé ou interrompu une retransmission ou un événement</li>
+                <li>Première récidive ou réitération de faits similaires dans la même saison</li>
+                <li>Mise en danger d'autrui, même sans dommage effectif constaté</li>
+                <li>Faits commis en présence de mineurs ou de personnes en formation</li>
+              </ul>
+            </div>
+
+            <div class="circ-block">
+              <div class="circ-header tres"><span style="font-size:1rem;">🔴</span><span class="circ-label">Circonstances très aggravantes</span></div>
+              <ul class="circ-list">
+                <li>Récidive multiple ou récidive caractérisée (3 fois ou plus)</li>
+                <li>Victime étant un mineur, une personne en formation ou en situation de vulnérabilité</li>
+                <li>Violences physiques ou menaces caractérisées envers un membre ou un tiers</li>
+                <li>Atteinte grave à la dignité ou à l'intégrité morale d'une personne</li>
+                <li>Faits commis avec préméditation ou de façon organisée et concertée</li>
+                <li>Faits ayant entraîné l'arrêt, l'abandon ou l'exclusion d'un membre</li>
+                <li>Refus explicite de se conformer aux décisions disciplinaires de l'ICR</li>
+                <li>Faits impliquant une atteinte directe aux instances du collectif (ICR, Coord. générale)</li>
+                <li>Faits ayant fait l'objet d'une plainte externe ou d'une médiatisation</li>
+              </ul>
+            </div>
+          </div>
+
+        </div><!-- /panel-fautes -->
+
+
+        <!-- ════ PANEL : CONTENTIEUX ÉLECTORAL ════ -->
+        <div class="icr-panel" id="panel-elections">
+
+          <h2 class="section-title" style="margin-bottom:.25rem;">Contentieux <span>électoral</span></h2>
+          <div class="section-line"></div>
+
+          <div class="info-box blue" style="margin-bottom:1.5rem;">
+            <span class="info-box-icon">🗳️</span>
+            <div>
+              <div class="info-box-title">Art. 31–32 RARC — Pouvoirs de l'ICR en matière électorale</div>
+              <p>Toute contestation électorale doit être déposée dans un délai de <strong>72 heures</strong>. Les décisions de l'ICR s'imposent à toutes les instances.</p>
+            </div>
+          </div>
+
+          <!-- Pouvoirs ICR -->
+          <div class="rule-card" style="margin-bottom:1.5rem;">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 32 <span class="rule-art-source src-rarc">RARC</span></span>
+              <span class="rule-art-title">Pouvoirs de l'ICR en matière électorale</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body open">
+              <p>L'ICR peut :</p>
+              <ul>
+                <li><strong>Invalider une candidature</strong> — non-respect des conditions d'éligibilité (Art. 6 RG)</li>
+                <li><strong>Annuler tout ou partie du scrutin</strong> — irrégularité dans le déroulement du vote</li>
+                <li><strong>Ordonner un nouveau vote</strong> — en cas d'annulation du scrutin initial</li>
+              </ul>
+              <p style="margin-top:.6rem;">Ses décisions s'imposent à toutes les instances du collectif, y compris la Coordination générale.</p>
+            </div>
+          </div>
+
+          <!-- Règles électorales clés -->
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;">Règles électorales en vigueur — RG</h3>
+
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 8.2 <span class="rule-art-source src-rg">RG</span></span>
+              <span class="rule-art-title">Modalités de vote</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <ul>
+                <li>Vote à <strong>bulletin secret</strong> — y compris pour les membres en visioconférence</li>
+                <li>Vote par procuration admis dans la limite de <strong>2 procurations par membre</strong></li>
+                <li>Fonctions uninominales (BCG) : <strong>1 voix par électeur</strong></li>
+                <li>Fonctions collégiales (ICR) : <strong>autant de voix que de sièges</strong>, librement réparties entre les candidats</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 8.6 <span class="rule-art-source src-rg">RG</span></span>
+              <span class="rule-art-title">Vacance de poste &amp; succession</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <p>En cas de vacance d'un poste, la succession est attribuée au candidat non élu ayant obtenu le plus grand nombre de voix lors du scrutin initial. En cas d'égalité, priorité à l'<strong>ancienneté</strong>, puis tirage au sort public.</p>
+              <div class="info-box blue" style="margin-top:.75rem;">
+                <span class="info-box-icon">📌</span>
+                <div><p><strong>Exemple appliqué — AG du 3 avril 2026 :</strong> à la suite de la démission d'Enzo ACHOUR du poste de Secrétaire général, Emmanuel ALVES DE MOURA, arrivé en 2e position avec une ancienneté supérieure à Nabil SABAH (égalité de voix), a été désigné Secrétaire général de plein droit.</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rule-card">
+            <div class="rule-card-head" onclick="toggleRule(this)">
+              <span class="rule-art-num">Art. 8.3 <span class="rule-art-source src-rg">RG</span></span>
+              <span class="rule-art-title">Modification du nombre de sièges ICR en cours de mandat</span>
+              <span class="rule-toggle">▼</span>
+            </div>
+            <div class="rule-card-body">
+              <p>Le Président de l'ICR peut, avec l'accord du Vice-président et du Bureau de la Coordination générale, décider d'<strong>élargir le nombre de sièges</strong> en cours de mandat.</p>
+              <p style="margin-top:.5rem;">Les candidats ayant obtenu des suffrages sans avoir été élus peuvent être intégrés par ordre décroissant de voix. À défaut, une <strong>élection partielle</strong> est organisée.</p>
+            </div>
+          </div>
+
+        </div><!-- /panel-elections -->
+
+      </div><!-- /main col -->
+
+      <!-- ══════════════════ SIDEBAR ══════════════════ -->
+      <aside class="icr-sidebar">
+
+        <!-- Membres rapide -->
+        <div class="sb-card" style="border-color:rgba(99,179,237,.2);">
+          <h4>Membres ICR — Saison 2025-2026</h4>
+          <div class="sb-orga-member">
+            <div class="sb-av" style="background:#27ae6033;color:#27ae60;">NM</div>
+            <div><div class="sb-name">Nicolas MARIN</div><span class="sb-role">Président ICR</span></div>
+          </div>
+          <div class="sb-orga-member">
+            <div class="sb-av" style="background:#e67e2233;color:#e67e22;">YD</div>
+            <div><div class="sb-name">Yoan DUSSERT</div><span class="sb-role">Vice-président ICR</span></div>
+          </div>
+          <div class="sb-orga-member">
+            <div class="sb-av" style="background:#16a08533;color:#16a085;">EA</div>
+            <div><div class="sb-name">Enzo ACHOUR</div><span class="sb-role">Membre ICR</span></div>
+          </div>
+          <div class="sb-orga-member">
+            <div class="sb-av" style="background:#d3540033;color:#d35400;">NS</div>
+            <div><div class="sb-name">Nabil SABAH</div><span class="sb-role">Membre ICR</span></div>
+          </div>
+          <div class="sb-orga-member">
+            <div class="sb-av" style="background:#7f8c8d33;color:#b0bec5;">TT</div>
+            <div><div class="sb-name">Tim TOUR</div><span class="sb-role">Membre ICR</span></div>
+          </div>
+          <div class="sb-orga-member">
+            <div class="sb-av" style="background:#9b59b633;color:#9b59b6;">DH</div>
+            <div><div class="sb-name">Dorina HELIE-JOLY</div><span class="sb-role">Membre ICR</span></div>
+          </div>
+        </div>
+
+        <!-- Délais clés -->
+        <div class="sb-card">
+          <h4>Délais clés à retenir</h4>
+          <div class="sb-row"><span class="label">Contestation électorale</span><span class="val">72 h</span></div>
+          <div class="sb-row"><span class="label">Commission après ouverture</span><span class="val">2 semaines</span></div>
+          <div class="sb-row"><span class="label">Convocation avant séance</span><span class="val">7 jours</span></div>
+          <div class="sb-row"><span class="label">Notif. Bureau après délib.</span><span class="val">3 jours</span></div>
+          <div class="sb-row"><span class="label">Notif. parties concernées</span><span class="val">7 jours</span></div>
+          <div class="sb-row"><span class="label">Dépôt candidature AG</span><span class="val">7 jours avant</span></div>
+          <div class="sb-row"><span class="label">Réexamen anticipé accréditation</span><span class="val">Préavis 15 j</span></div>
+        </div>
+
+        <!-- Règlements source -->
+        <div class="sb-card">
+          <h4>Documents de référence</h4>
+          <a class="quick-link" href="reglement-general.html">
+            <span class="ql-icon">📋</span>
+            <span class="ql-label">Règlement Général MHBTV</span>
+            <span class="ql-arr">→</span>
+          </a>
+          <a class="quick-link" href="reglement-retransmissions.html">
+            <span class="ql-icon">📺</span>
+            <span class="ql-label">Règlement des Retransmissions</span>
+            <span class="ql-arr">→</span>
+          </a>
+          <a class="quick-link" href="accreditations.html">
+            <span class="ql-icon">🎖️</span>
+            <span class="ql-label">Accréditations des membres</span>
+            <span class="ql-arr">→</span>
+          </a>
+          <a class="quick-link" href="guides.html">
+            <span class="ql-icon">📖</span>
+            <span class="ql-label">Guide du bénévole</span>
+            <span class="ql-arr">→</span>
+          </a>
+        </div>
+
+        <!-- Signalement -->
+        <div class="sb-card" style="background:rgba(232,0,29,.04);border-color:rgba(232,0,29,.2);">
+          <h4>Signaler un comportement</h4>
+          <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Tout signalement est adressé au Bureau de la Coordination générale — point d'entrée unique et obligatoire (Art. 22 RARC).</p>
+          <a href="https://meylanhandballtv.wixsite.com/meylan-handball-tv/signaler-un-comportement" target="_blank" class="btn btn-red" style="width:100%;justify-content:center;font-size:.75rem;">Accéder au formulaire →</a>
+        </div>
+
+      </aside>
+    </div><!-- /layout -->
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="accreditations.html">Accréditations</a></li>
+        <li><a href="guides.html">Guides &amp; formations</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="reglement-retransmissions.html">Règlement retransmissions</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · RG &amp; RARC version du 23 avril 2026</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+
+  <script>
+    /* ── TABS ── */
+    function showTab(id, btn) {
+      document.querySelectorAll('.icr-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.icr-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    /* ── ACCORDÉON RÈGLES ── */
+    function toggleRule(head) {
+      const body = head.nextElementSibling;
+      const toggle = head.querySelector('.rule-toggle');
+      const isOpen = body.classList.contains('open');
+      body.classList.toggle('open', !isOpen);
+      toggle.classList.toggle('open', !isOpen);
+    }
+
+    /* ── Ouvrir Art.10 par défaut ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      // Art 10 est déjà ouvert via la classe open dans le HTML
+    });
+  </script>
+</body>
+</html>

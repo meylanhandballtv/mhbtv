@@ -7,6 +7,7 @@
       <a href="index.html" class="topbar-logo">MEYLAN <span>HANDBALL</span> TV</a>
       <ul class="topbar-nav" id="mainNav">
         <li><a href="index.html" ${currentPage==='index.html'?'class="active"':''}>Accueil</a></li>
+        <li><a href="accreditations.html" ${currentPage==='accreditations.html'?'class="active"':''}>Accréditations</a></li>
         <li><a href="diffusions.html" ${currentPage==='diffusions.html'?'class="active"':''}>Diffusions</a></li>
         <li><a href="equipe.html" ${currentPage==='equipe.html'?'class="active"':''}>L'Équipe</a></li>
         <li><a href="statuts.html" ${currentPage==='statuts.html'?'class="active"':''}>Statuts & Règlements</a></li>

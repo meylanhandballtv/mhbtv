@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guides & Formations | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .guide-hero {
+      position: relative;
+      padding: 5.5rem 4rem 3.5rem;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .guide-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 55% 80% at 90% 35%, rgba(232,0,29,0.07) 0%, transparent 65%),
+        radial-gradient(ellipse 30% 50% at 5% 80%, rgba(240,180,41,0.04) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 70px,
+          rgba(255,255,255,0.013) 70px, rgba(255,255,255,0.013) 71px);
+    }
+    .guide-hero-wm {
+      position: absolute; right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(20vw, 270px);
+      color: rgba(232,0,29,0.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .guide-hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .guide-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.2rem, 7.5vw, 6rem);
+      line-height: .88; letter-spacing: .02em; color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .guide-hero h1 span { color: var(--red); }
+    .guide-hero p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 500px; }
+    .guide-hero-meta {
+      display: flex; gap: 1rem; margin-top: 1.75rem; flex-wrap: wrap;
+    }
+    .guide-hero-meta .hmeta {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .75rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+    }
+
+    /* ══════════════════════════════════════
+       LAYOUT GLOBAL
+    ══════════════════════════════════════ */
+    .guide-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      min-height: calc(100vh - 64px);
+      align-items: start;
+    }
+
+    /* ══════════════════════════════════════
+       SOMMAIRE LATÉRAL (sticky)
+    ══════════════════════════════════════ */
+    .guide-toc {
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+      border-right: 1px solid var(--border);
+      background: var(--darker);
+      padding: 1.5rem 0 3rem;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+    .guide-toc::-webkit-scrollbar { width: 3px; }
+    .guide-toc::-webkit-scrollbar-thumb { background: var(--border); }
+
+    .toc-section { margin-bottom: .25rem; }
+    .toc-part {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--red);
+      padding: .9rem 1.25rem .3rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .toc-part-num {
+      width: 18px; height: 18px;
+      background: rgba(232,0,29,.15);
+      border-radius: 3px;
+      font-size: .65rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--red);
+    }
+    .toc-link {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .38rem 1.25rem .38rem 2.1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .82rem; font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .15s, background .15s;
+      border-left: 2px solid transparent;
+      cursor: pointer;
+    }
+    .toc-link:hover { color: var(--white); background: rgba(255,255,255,.03); }
+    .toc-link.active {
+      color: var(--white);
+      border-left-color: var(--red);
+      background: rgba(232,0,29,.06);
+    }
+    .toc-link-icon { font-size: .95rem; flex-shrink: 0; width: 18px; text-align: center; }
+
+    /* ══════════════════════════════════════
+       CONTENU
+    ══════════════════════════════════════ */
+    .guide-content {
+      padding: 3rem 4rem;
+      max-width: 900px;
+    }
+
+    /* Ancre de section */
+    .guide-section {
+      margin-bottom: 4.5rem;
+      scroll-margin-top: 80px;
+    }
+
+    /* Titre de partie */
+    .part-header {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1.25rem 1.75rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 8px;
+      margin-bottom: 2.5rem;
+    }
+    .part-icon { font-size: 2rem; }
+    .part-header-text {}
+    .part-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .25em;
+      text-transform: uppercase; color: var(--red); margin-bottom: .2rem;
+    }
+    .part-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem; letter-spacing: .04em; color: var(--white);
+      line-height: 1;
+    }
+
+    /* Fiche de poste */
+    .fiche {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      scroll-margin-top: 80px;
+    }
+    .fiche-head {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 1.25rem;
+      background: rgba(255,255,255,.02);
+    }
+    .fiche-icon {
+      font-size: 2.2rem; flex-shrink: 0;
+      width: 56px; height: 56px;
+      background: rgba(232,0,29,.1);
+      border: 1px solid rgba(232,0,29,.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .fiche-head-text {}
+    .fiche-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; letter-spacing: .05em; color: var(--white);
+      line-height: 1; margin-bottom: .3rem;
+    }
+    .fiche-subtitle { font-size: .85rem; color: var(--muted); line-height: 1.5; }
+    .fiche-accred {
+      display: inline-flex; align-items: center; gap: .4rem;
+      margin-top: .5rem;
+      background: rgba(232,0,29,.1);
+      border: 1px solid rgba(232,0,29,.25);
+      border-radius: 4px;
+      padding: .25rem .65rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .fiche-body { padding: 1.75rem 2rem; }
+
+    /* Grille infos poste */
+    .fiche-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: .75rem;
+      margin-bottom: 1.75rem;
+    }
+    .fiche-meta-item {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: .75rem 1rem;
+    }
+    .fmi-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .3rem;
+    }
+    .fmi-val { font-size: .88rem; color: var(--text); line-height: 1.4; }
+
+    /* Sous-sections de fiche */
+    .fiche-subsec { margin-bottom: 1.5rem; }
+    .fiche-subsec-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--red);
+      padding-bottom: .5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: .85rem;
+    }
+    .fiche-list { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .fiche-list li {
+      display: flex; align-items: flex-start; gap: .65rem;
+      font-size: .88rem; color: var(--text); line-height: 1.55;
+    }
+    .fiche-list li::before {
+      content: '▸';
+      color: var(--red); flex-shrink: 0; margin-top: .05rem;
+    }
+
+    /* Table */
+    .fiche-table {
+      width: 100%; border-collapse: collapse;
+      font-size: .85rem; margin-bottom: .5rem;
+    }
+    .fiche-table thead tr {
+      background: rgba(232,0,29,.07);
+      border-bottom: 1px solid rgba(232,0,29,.25);
+    }
+    .fiche-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--red); padding: .6rem 1rem; text-align: left;
+    }
+    .fiche-table td {
+      padding: .6rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text); vertical-align: top;
+    }
+    .fiche-table tr:last-child td { border-bottom: none; }
+    .fiche-table tr:hover td { background: rgba(255,255,255,.02); }
+
+    /* Règle d'or / alerte */
+    .rule-box {
+      border-radius: 7px;
+      padding: 1rem 1.25rem;
+      display: flex; gap: .85rem; align-items: flex-start;
+      margin: 1rem 0;
+    }
+    .rule-box.gold {
+      background: rgba(240,180,41,.07);
+      border: 1px solid rgba(240,180,41,.25);
+    }
+    .rule-box.red {
+      background: rgba(232,0,29,.07);
+      border: 1px solid rgba(232,0,29,.25);
+    }
+    .rule-box.blue {
+      background: rgba(99,179,237,.06);
+      border: 1px solid rgba(99,179,237,.2);
+    }
+    .rule-box.green {
+      background: rgba(74,222,128,.06);
+      border: 1px solid rgba(74,222,128,.2);
+    }
+    .rule-box-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .05rem; }
+    .rule-box p { font-size: .86rem; color: var(--muted); line-height: 1.65; }
+    .rule-box p strong { color: var(--text); }
+    .rule-box-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; margin-bottom: .3rem;
+    }
+    .rule-box.gold .rule-box-title { color: var(--gold); }
+    .rule-box.red  .rule-box-title { color: var(--red); }
+    .rule-box.blue .rule-box-title { color: #63b3ed; }
+    .rule-box.green .rule-box-title { color: #4ade80; }
+
+    /* Standards qualité */
+    .quality-row {
+      display: flex; align-items: flex-start; gap: .85rem;
+      padding: .65rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .86rem;
+    }
+    .quality-row:last-child { border-bottom: none; }
+    .quality-cat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .82rem; letter-spacing: .05em;
+      color: var(--white); min-width: 70px; flex-shrink: 0;
+    }
+    .quality-val { color: var(--muted); line-height: 1.5; }
+
+    /* Gouvernance */
+    .orga-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .orga-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5rem;
+    }
+    .orga-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem; letter-spacing: .05em; color: var(--white);
+      margin-bottom: .25rem;
+    }
+    .orga-card-sub { font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+    .orga-member {
+      display: flex; align-items: center; gap: .65rem;
+      padding: .45rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .orga-member:last-child { border-bottom: none; }
+    .orga-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      font-family: 'Bebas Neue', sans-serif; font-size: .72rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--white);
+    }
+    .orga-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .88rem; font-weight: 600; color: var(--white);
+    }
+    .orga-role { font-size: .72rem; color: var(--muted); display: block; }
+
+    /* Organigramme */
+    .orgchart {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 2rem;
+      margin-bottom: 1.5rem; text-align: center;
+    }
+    .orgchart-top {
+      background: rgba(232,0,29,.1); border: 1px solid rgba(232,0,29,.3);
+      border-radius: 8px; padding: .85rem 1.5rem; display: inline-block;
+      margin-bottom: 1.25rem;
+    }
+    .orgchart-top-label {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .65rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--red);
+      margin-bottom: .2rem;
+    }
+    .orgchart-top-name {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+      color: var(--white); letter-spacing: .05em;
+    }
+    .orgchart-branches {
+      display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+    }
+    .orgchart-branch {
+      background: rgba(255,255,255,.03); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem 1.25rem; min-width: 180px;
+    }
+    .orgchart-branch-title {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .68rem;
+      font-weight: 700; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: .65rem;
+    }
+    .orgchart-branch-item {
+      font-size: .8rem; color: var(--text); padding: .2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .orgchart-branch-item:last-child { border-bottom: none; }
+    .orgchart-branch-item span { color: var(--muted); font-size: .72rem; display: block; }
+
+    /* Procédures */
+    .proc-timeline { display: flex; flex-direction: column; gap: 0; }
+    .proc-step {
+      display: grid; grid-template-columns: 40px 1fr;
+      gap: 1rem; position: relative;
+    }
+    .proc-step::before {
+      content: '';
+      position: absolute;
+      left: 19px; top: 40px; bottom: -1px;
+      width: 2px; background: var(--border);
+    }
+    .proc-step:last-child::before { display: none; }
+    .proc-num-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      padding-top: .15rem;
+    }
+    .proc-num {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(232,0,29,.15); color: var(--red);
+      font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(232,0,29,.3); flex-shrink: 0; z-index: 1;
+    }
+    .proc-body { padding-bottom: 1.5rem; }
+    .proc-body-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .95rem; color: var(--white);
+      margin-bottom: .3rem;
+    }
+    .proc-body-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: .4rem; display: block;
+    }
+    .proc-body p { font-size: .86rem; color: var(--muted); line-height: 1.6; }
+    .proc-body ul {
+      list-style: none; display: flex; flex-direction: column; gap: .3rem;
+      margin-top: .45rem;
+    }
+    .proc-body ul li {
+      font-size: .84rem; color: var(--muted); display: flex;
+      align-items: flex-start; gap: .5rem; line-height: 1.5;
+    }
+    .proc-body ul li::before { content: '·'; color: var(--red); flex-shrink: 0; }
+
+    /* Sanctions */
+    .sanctions-list { display: flex; flex-direction: column; gap: .6rem; }
+    .sanction-row {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 7px; padding: .8rem 1.25rem;
+      transition: border-color .15s;
+    }
+    .sanction-row:hover { border-color: rgba(232,0,29,.3); }
+    .sanction-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+      color: var(--red); min-width: 28px; text-align: center; line-height: 1;
+    }
+    .sanction-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .95rem; color: var(--white);
+      flex: 1;
+    }
+    .sanction-sev {
+      display: flex; gap: .2rem;
+    }
+    .sev-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+    }
+
+    /* Progression */
+    .parcours-steps {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .parcours-step {
+      display: grid; grid-template-columns: 56px 1fr;
+      gap: 1.25rem; position: relative;
+    }
+    .parcours-step::before {
+      content: '';
+      position: absolute;
+      left: 27px; top: 52px; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, rgba(232,0,29,.3), transparent);
+    }
+    .parcours-step:last-child::before { display: none; }
+    .p-step-icon-wrap {
+      display: flex; align-items: flex-start; padding-top: .3rem;
+    }
+    .p-step-icon {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: var(--card); border: 2px solid var(--border);
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; z-index: 1;
+      transition: border-color .2s;
+    }
+    .parcours-step:hover .p-step-icon { border-color: var(--red); }
+    .p-step-body { padding-bottom: 1.75rem; }
+    .p-step-phase {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--red); margin-bottom: .2rem;
+    }
+    .p-step-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1.05rem; color: var(--white);
+      margin-bottom: .4rem;
+    }
+    .p-step-desc { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* Barème gratification */
+    .bareme-table {
+      width: 100%; border-collapse: collapse;
+      font-size: .88rem;
+    }
+    .bareme-table thead tr { background: rgba(240,180,41,.08); border-bottom: 1px solid rgba(240,180,41,.25); }
+    .bareme-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); padding: .65rem 1.25rem; text-align: left;
+    }
+    .bareme-table td {
+      padding: .65rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text);
+    }
+    .bareme-table tr:last-child td { border-bottom: none; }
+    .pts {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+      color: var(--gold);
+    }
+    .pts.bonus { color: #4ade80; }
+
+    /* Synthèse incidents */
+    .synth-table {
+      width: 100%; border-collapse: collapse; font-size: .84rem;
+    }
+    .synth-table thead tr { background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border); }
+    .synth-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); padding: .6rem 1rem; text-align: left;
+    }
+    .synth-table td {
+      padding: .6rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text); vertical-align: top; line-height: 1.5;
+    }
+    .synth-table tr:last-child td { border-bottom: none; }
+    .synth-table tr:hover td { background: rgba(255,255,255,.02); }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 1100px) {
+      .guide-layout { grid-template-columns: 220px 1fr; }
+      .guide-content { padding: 2.5rem 2rem; }
+    }
+    @media (max-width: 900px) {
+      .guide-hero { padding: 5rem 1.5rem 2.5rem; }
+      .guide-layout { grid-template-columns: 1fr; }
+      .guide-toc {
+        position: static; height: auto;
+        border-right: none; border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+        display: flex; overflow-x: auto; gap: 0;
+        scrollbar-width: none;
+      }
+      .guide-toc::-webkit-scrollbar { display: none; }
+      .toc-section { display: flex; align-items: center; flex-shrink: 0; }
+      .toc-part { display: none; }
+      .toc-link { padding: .45rem 1rem; white-space: nowrap; border-left: none; border-bottom: 2px solid transparent; }
+      .toc-link.active { border-left: none; border-bottom-color: var(--red); }
+      .guide-content { padding: 2rem 1.5rem; max-width: 100%; }
+      .orga-grid { grid-template-columns: 1fr; }
+      .fiche-meta-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .fiche-meta-grid { grid-template-columns: 1fr; }
+      .fiche-head { flex-direction: column; gap: .75rem; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- ══════════════════ HERO ══════════════════ -->
+    <div class="guide-hero">
+      <div class="guide-hero-wm">GUIDE</div>
+      <div class="guide-hero-content">
+        <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,0,29,.1);border:1px solid rgba(232,0,29,.25);border-radius:4px;padding:.3rem .8rem;margin-bottom:1.2rem;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);">📖 Guide officiel · Version 2.0</span>
+        </div>
+        <h1>Guide Complet<br><span>du Bénévole</span></h1>
+        <p>Fiches de poste, procédures, gouvernance, règlements et système de gratification. Tout ce dont tu as besoin pour t'impliquer efficacement au sein de Meylan Handball TV.</p>
+        <div class="guide-hero-meta">
+          <span class="hmeta">📅 Saison 2025–2026</span>
+          <span class="hmeta" style="color:var(--border);">|</span>
+          <span class="hmeta">📋 5 parties · 8 fiches de poste</span>
+          <span class="hmeta" style="color:var(--border);">|</span>
+          <span class="hmeta">⚖️ Basé sur RG &amp; RARC en vigueur</span>
+        </div>
+        <div style="display:flex;gap:.75rem;margin-top:1.75rem;flex-wrap:wrap;">
+          <a href="#postes" class="btn btn-red" onclick="scrollTo('postes')">📋 Fiches de poste</a>
+          <a href="#procedures" class="btn btn-outline" onclick="scrollTo('procedures')">⚙️ Procédures</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ LAYOUT ══════════════════ -->
+    <div class="guide-layout">
+
+      <!-- SOMMAIRE -->
+      <nav class="guide-toc" id="guideToc">
+
+        <div class="toc-section">
+          <div class="toc-part"><span class="toc-part-num">I</span>Postes</div>
+          <a class="toc-link active" onclick="scrollToSection('postes')" id="toc-postes"><span class="toc-link-icon">📋</span>Vue d'ensemble</a>
+          <a class="toc-link" onclick="scrollToSection('rr')" id="toc-rr"><span class="toc-link-icon">🎬</span>Responsable retr.</a>
+          <a class="toc-link" onclick="scrollToSection('superviseur')" id="toc-superviseur"><span class="toc-link-icon">🎓</span>Superviseur</a>
+          <a class="toc-link" onclick="scrollToSection('realisateur')" id="toc-realisateur"><span class="toc-link-icon">🎞️</span>Réalisateur</a>
+          <a class="toc-link" onclick="scrollToSection('cam-large')" id="toc-cam-large"><span class="toc-link-icon">📷</span>Cadreur Large</a>
+          <a class="toc-link" onclick="scrollToSection('cam-serre')" id="toc-cam-serre"><span class="toc-link-icon">🔎</span>Cadreur Serré</a>
+          <a class="toc-link" onclick="scrollToSection('cam-terrain')" id="toc-cam-terrain"><span class="toc-link-icon">🏟️</span>Cadreur Terrain</a>
+          <a class="toc-link" onclick="scrollToSection('commentateur')" id="toc-commentateur"><span class="toc-link-icon">🎙️</span>Commentateur</a>
+          <a class="toc-link" onclick="scrollToSection('ots')" id="toc-ots"><span class="toc-link-icon">📊</span>OTS</a>
+        </div>
+
+        <div class="toc-section">
+          <div class="toc-part"><span class="toc-part-num">II</span>Gouvernance</div>
+          <a class="toc-link" onclick="scrollToSection('gouvernance')" id="toc-gouvernance"><span class="toc-link-icon">🏗️</span>Structure</a>
+          <a class="toc-link" onclick="scrollToSection('bcg')" id="toc-bcg"><span class="toc-link-icon">⚙️</span>Bureau (BCG)</a>
+          <a class="toc-link" onclick="scrollToSection('icr')" id="toc-icr"><span class="toc-link-icon">🎛️</span>ICR</a>
+        </div>
+
+        <div class="toc-section">
+          <div class="toc-part"><span class="toc-part-num">III</span>Procédures</div>
+          <a class="toc-link" onclick="scrollToSection('procedures')" id="toc-procedures"><span class="toc-link-icon">✅</span>Check-list match</a>
+          <a class="toc-link" onclick="scrollToSection('incidents')" id="toc-incidents"><span class="toc-link-icon">⚠️</span>Gestion incidents</a>
+          <a class="toc-link" onclick="scrollToSection('discipline')" id="toc-discipline"><span class="toc-link-icon">⚖️</span>Procédure discipl.</a>
+        </div>
+
+        <div class="toc-section">
+          <div class="toc-part"><span class="toc-part-num">IV</span>Gratification</div>
+          <a class="toc-link" onclick="scrollToSection('gratification')" id="toc-gratification"><span class="toc-link-icon">🏆</span>Système &amp; barème</a>
+        </div>
+
+        <div class="toc-section">
+          <div class="toc-part"><span class="toc-part-num">V</span>Intégration</div>
+          <a class="toc-link" onclick="scrollToSection('integration')" id="toc-integration"><span class="toc-link-icon">🚀</span>Parcours membre</a>
+          <a class="toc-link" onclick="scrollToSection('conduite')" id="toc-conduite"><span class="toc-link-icon">🤝</span>Code de conduite</a>
+        </div>
+
+      </nav>
+
+      <!-- CONTENU -->
+      <div class="guide-content">
+
+        <!-- ══════ PARTIE I — POSTES ══════ -->
+        <div class="guide-section" id="postes">
+          <div class="part-header">
+            <span class="part-icon">📋</span>
+            <div class="part-header-text">
+              <div class="part-num">Partie I</div>
+              <div class="part-title">Les postes de retransmission</div>
+            </div>
+          </div>
+
+          <!-- Vue d'ensemble -->
+          <div class="rule-box blue" style="margin-bottom:1.5rem;">
+            <span class="rule-box-icon">ℹ️</span>
+            <div>
+              <div class="rule-box-title">Composition d'une équipe — Art. 13 RG</div>
+              <p>Une retransmission repose idéalement sur : un cadreur principal, un cadreur secondaire ou opérateur mobile, un réalisateur ou superviseur technique, et un commentateur. La composition peut varier selon les ressources disponibles, le matériel et les contraintes du lieu.</p>
+            </div>
+          </div>
+
+          <!-- Tableau récap postes -->
+          <div style="overflow-x:auto;margin-bottom:2rem;">
+            <table class="fiche-table">
+              <thead>
+                <tr>
+                  <th>Poste</th>
+                  <th>Effectif type</th>
+                  <th>Arrivée H-</th>
+                  <th>Rattachement</th>
+                  <th>Accréditation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>🎬 Responsable de retransmission</td><td>1</td><td>2h00</td><td>ICR</td><td><span style="color:var(--red);font-weight:600;">Obligatoire</span></td></tr>
+                <tr><td>🎓 Superviseur</td><td>1 (si formation)</td><td>1h30</td><td>ICR / RR</td><td>—</td></tr>
+                <tr><td>🎞️ Réalisateur</td><td>1</td><td>1h00</td><td>RR</td><td>—</td></tr>
+                <tr><td>📷 Cadreur Plan Large</td><td>1</td><td>45 min</td><td>Réalisateur</td><td>—</td></tr>
+                <tr><td>🔎 Cadreur Plan Serré</td><td>1</td><td>45 min</td><td>Réalisateur</td><td>—</td></tr>
+                <tr><td>🏟️ Cadreur Terrain/Vestiaire</td><td>1 (parfois 2)</td><td>45 min</td><td>Réalisateur</td><td>—</td></tr>
+                <tr><td>🎙️ Commentateur sportif</td><td>1 à 3</td><td>1h00</td><td>RR / Réalisateur</td><td><span style="color:var(--red);font-weight:600;">Obligatoire</span></td></tr>
+                <tr><td>📊 OTS (Officiel Technique Score)</td><td>1</td><td>30 min</td><td>Réalisateur / RR</td><td>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : RESPONSABLE RETRANSMISSION ══ -->
+        <div class="guide-section" id="rr">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">🎬</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Responsable de Retransmission</div>
+                <div class="fiche-subtitle">Chef d'équipe opérationnel de chaque retransmission</div>
+                <div class="fiche-accred">⚖️ Accréditation qualifiée obligatoire · Art. 12 RG</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">Instance Compétente des Retransmissions (ICR)</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Effectif type</div><div class="fmi-val">1 par retransmission</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 2h avant le coup d'envoi</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Organisation, leadership, gestion du stress, connaissance technique</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Tenue</div><div class="fmi-val">Gilet MHBTV obligatoire toute la durée (install + match + rangement)</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Autorité</div><div class="fmi-val">Fonctionnelle (pas disciplinaire) sur l'équipe de retransmission</div></div>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Préparation &amp; anticipation</div>
+                <ul class="fiche-list">
+                  <li>Prendre connaissance de la fiche de match transmise par l'ICR (date, heure, lieu, équipes, enjeux).</li>
+                  <li>Vérifier l'état du matériel : batteries, connexions, contraintes du lieu.</li>
+                  <li>Coordonner la composition de l'équipe avec les Coordinateurs délégués.</li>
+                  <li>Informer l'équipe des consignes, horaires et plan de déploiement.</li>
+                </ul>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Installation &amp; supervision</div>
+                <ul class="fiche-list">
+                  <li>Superviser le positionnement du matériel en respectant les zones de sécurité (Art. 16.2 RG).</li>
+                  <li>S'assurer que les câbles sont protégés et ne traversent aucune zone de passage.</li>
+                  <li>Briefer l'équipe sur les rôles de chacun avant le lancement du direct.</li>
+                  <li>Surveiller le bon déroulement technique et logistique en temps réel.</li>
+                </ul>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Rangement &amp; rapport</div>
+                <ul class="fiche-list">
+                  <li>S'assurer du rangement complet du matériel, laisser l'espace en parfait état.</li>
+                  <li>Rédiger un compte rendu d'incident si nécessaire, transmis à l'ICR.</li>
+                  <li>Remonter tout comportement problématique à la Coordination générale.</li>
+                </ul>
+              </div>
+
+              <div class="rule-box red">
+                <span class="rule-box-icon">🔴</span>
+                <div>
+                  <div class="rule-box-title">Art. 13 &amp; 14 RARC — Procédure d'interruption</div>
+                  <p>Le RR <strong>ne peut pas décider seul</strong> d'interrompre définitivement un direct. Il doit obligatoirement obtenir l'aval du Coordinateur adjoint. En cas d'urgence absolue : suspension provisoire autorisée, suivi d'une information immédiate. Toute demande d'arrêt d'un officiel doit être suivie immédiatement, sans discussion.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : SUPERVISEUR ══ -->
+        <div class="guide-section" id="superviseur">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">🎓</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Superviseur</div>
+                <div class="fiche-subtitle">Formateur — accompagnateur d'un membre à la prise d'un poste</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">ICR / Responsable de Retransmission</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Effectif type</div><div class="fmi-val">1 par retransmission (si formation active)</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Disponibilité</div><div class="fmi-val">De H-1h30 jusqu'à la fin de la retransmission</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Expertise technique, vision éditoriale, calme sous pression</div></div>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Avant la retransmission</div>
+                <ul class="fiche-list">
+                  <li>Prendre contact avec le membre à former dès la désignation — transmettre la fiche de poste.</li>
+                  <li>Briefer sur le matériel, le positionnement et les consignes du match.</li>
+                  <li>Identifier les points de vigilance spécifiques au poste et à la salle.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Pendant la retransmission</div>
+                <ul class="fiche-list">
+                  <li>Observer avant de corriger — laisser faire en premier.</li>
+                  <li>Intervenir discrètement en cas d'erreur, sans perturber la retransmission.</li>
+                  <li>Guider les décisions complexes (zooms, gestion d'incident technique…).</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Après la retransmission</div>
+                <ul class="fiche-list">
+                  <li>Réaliser un débriefing individualisé : points forts, axes de progression.</li>
+                  <li>Transmettre une évaluation synthétique au Bureau de la Coordination générale.</li>
+                  <li>Signaler si le membre est prêt pour une future désignation en autonomie.</li>
+                </ul>
+              </div>
+
+              <div class="rule-box gold">
+                <span class="rule-box-icon">💡</span>
+                <div>
+                  <div class="rule-box-title">Philosophie de la formation MHBTV</div>
+                  <p>La formation se fait par l'expérience réelle, pas uniquement par la théorie. Le Superviseur adopte une posture de <strong>guide bienveillant</strong> : il encourage, valorise les réussites et corrige sans juger. L'objectif est de rendre le membre formé autonome le plus rapidement possible. Ne jamais reprendre le matériel des mains du formé, sauf urgence.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : RÉALISATEUR ══ -->
+        <div class="guide-section" id="realisateur">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">🎞️</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Réalisateur</div>
+                <div class="fiche-subtitle">Maître de la mise en image — direction artistique en régie</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">Responsable de Retransmission</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Effectif type</div><div class="fmi-val">1 par retransmission</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 1h avant le coup d'envoi</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Sens de l'image, réactivité, connaissance du handball, maîtrise OBS</div></div>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Configuration pré-match</div>
+                <ul class="fiche-list">
+                  <li>Vérifier les retours caméras sur le mélangeur et valider chaque source.</li>
+                  <li>Configurer l'habillage graphique : générique d'intro, scoreboard, logos MHBTV.</li>
+                  <li>Briefer les cadreurs sur le type de plans attendus.</li>
+                  <li>Tester l'intercom avec tous les postes.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Pendant le match</div>
+                <ul class="fiche-list">
+                  <li>Sélectionner en temps réel les plans à diffuser : large, serré, terrain.</li>
+                  <li>Anticiper les phases de jeu pour demander les bons angles avant l'action.</li>
+                  <li>Communiquer en continu avec les cadreurs via l'intercom.</li>
+                  <li>Gérer les ralentis, replays et insertions graphiques (score, fautes, mi-temps).</li>
+                  <li>Gérer les transitions : intro mi-temps, temps morts, fin de match.</li>
+                  <li>Respecter scrupuleusement la charte graphique MHBTV (Art. 18 RG).</li>
+                </ul>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Grammaire des plans</div>
+                <table class="fiche-table">
+                  <thead><tr><th>Plan</th><th>Usage</th><th>Moment idéal</th></tr></thead>
+                  <tbody>
+                    <tr><td><strong>Plan large</strong></td><td>Vue d'ensemble du terrain</td><td>Phases de jeu, contre-attaque, placement défensif</td></tr>
+                    <tr><td><strong>Plan serré</strong></td><td>Focus joueur / action</td><td>Tir, parade, réaction, duel</td></tr>
+                    <tr><td><strong>Plan terrain</strong></td><td>Ambiance bords de salle</td><td>Banc, zone technique, réaction coach</td></tr>
+                    <tr><td><strong>Plan vestiaire</strong></td><td>Coulisses &amp; préparation</td><td>Échauffement, temps mort, célébration</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Standards de qualité</div>
+                <div class="quality-row"><span class="quality-cat">Vidéo</span><span class="quality-val">Stabilité de l'image, exposition correcte, absence de flou de bougé excessif</span></div>
+                <div class="quality-row"><span class="quality-cat">Audio</span><span class="quality-val">Niveau sonore équilibré (-12 dB à -6 dB), absence de saturation</span></div>
+                <div class="quality-row"><span class="quality-cat">Stream</span><span class="quality-val">Réseau stable, latence maîtrisée, déconnexions nulles ou documentées</span></div>
+                <div class="quality-row"><span class="quality-cat">Graphisme</span><span class="quality-val">Score à jour, logos présents, habillage conforme à la charte MHBTV</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : CADREUR LARGE ══ -->
+        <div class="guide-section" id="cam-large">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">📷</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Cadreur — Plan Large</div>
+                <div class="fiche-subtitle">La colonne vertébrale visuelle de la retransmission</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Position</div><div class="fmi-val">En hauteur : tribune, balcon, estrade</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">Réalisateur</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 45 min avant le coup d'envoi</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Stabilité, patience, anticipation du jeu, maîtrise du zoom</div></div>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Installation</div>
+                <ul class="fiche-list">
+                  <li>Installer la caméra sur le trépied à l'emplacement désigné par le RR.</li>
+                  <li><strong>Cadre de référence : les deux buts entièrement visibles, terrain centré.</strong></li>
+                  <li>Vérifier la stabilité du pied — anticiper vibrations du public, soufflerie.</li>
+                  <li>Connecter et tester le retour vidéo vers la régie avant le match.</li>
+                  <li>Respecter les règles de sécurité : trépied éloigné des zones de circulation (Art. 16.2 RG).</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Pendant le match</div>
+                <ul class="fiche-list">
+                  <li>Maintenir un cadre stable et lisible en permanence : horizon droit, terrain entier.</li>
+                  <li>Suivre le ballon avec un zoom légèrement ouvert pour conserver le contexte de jeu.</li>
+                  <li>Ne jamais couper le flux, même lors des temps morts — rester à l'image.</li>
+                  <li>Anticiper les contre-attaques en gardant un cadre plus large lors des transitions.</li>
+                  <li>Tout mouvement de caméra doit être fluide : éviter les panoramiques brusques.</li>
+                </ul>
+              </div>
+              <div class="rule-box gold">
+                <span class="rule-box-icon">🎯</span>
+                <div>
+                  <div class="rule-box-title">Règle d'or du plan large</div>
+                  <p>Le plan large doit permettre au spectateur de <strong>lire le jeu</strong> : position du ballon, défense, attaque, contexte tactique. Si le spectateur ne peut pas lire le jeu, le cadre est trop serré.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : CADREUR SERRÉ ══ -->
+        <div class="guide-section" id="cam-serre">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">🔎</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Cadreur — Plan Serré</div>
+                <div class="fiche-subtitle">Le capteur d'émotions et d'actions décisives</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">Réalisateur</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 45 min avant le coup d'envoi</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Réactivité, anticipation, sens du sport, maîtrise du zoom rapide</div></div>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Préparation</div>
+                <ul class="fiche-list">
+                  <li>Repérer les joueurs clés des deux équipes (numéro, position) pour les suivre facilement.</li>
+                  <li>Identifier les zones clés : 6m, zone de tir, cage.</li>
+                  <li>Vérifier la plage de zoom et les conditions lumineuses.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Pendant le match</div>
+                <ul class="fiche-list">
+                  <li>Couvrir les actions proches : tirs, parades, duels en zone.</li>
+                  <li>Cadrer le porteur de balle et son vis-à-vis lors des phases de circulation.</li>
+                  <li>Capturer les réactions : joie, frustration, encouragements du banc.</li>
+                  <li>Rester disponible et réactif aux consignes du Réalisateur via l'intercom.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Temps forts — positionnements clés</div>
+                <ul class="fiche-list">
+                  <li><strong>Penalty :</strong> se positionner face au tireur si possible.</li>
+                  <li><strong>Temps mort :</strong> filmer le rassemblement de l'équipe et l'entraîneur.</li>
+                  <li><strong>But :</strong> rester sur la cage 2–3 secondes après le but pour la réaction du gardien.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : CADREUR TERRAIN ══ -->
+        <div class="guide-section" id="cam-terrain">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">🏟️</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Cadreur — Plan Terrain &amp; Vestiaire</div>
+                <div class="fiche-subtitle">Le capteur de l'ambiance et des coulisses</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Mobilité</div><div class="fmi-val">Le plus mobile de l'équipe</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Effectif type</div><div class="fmi-val">1 (parfois 2 en dispositif exceptionnel)</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 45 min avant le coup d'envoi</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Discrétion, mobilité, sens du récit, adaptabilité</div></div>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Avant le match</div>
+                <ul class="fiche-list">
+                  <li>Filmer l'arrivée des équipes, l'entrée en salle, les premières minutes d'échauffement.</li>
+                  <li>Couvrir l'échauffement : exercices techniques, tirs au but, échanges entre joueurs.</li>
+                  <li>Capturer les moments de cohésion (cercle, discours de capitaine).</li>
+                  <li>Si accès vestiaire accordé : images de préparation avec accord préalable du RR.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Pendant le match</div>
+                <ul class="fiche-list">
+                  <li>Bords de terrain : réactions du banc, zones techniques, arbitres.</li>
+                  <li>Sur les temps morts : réunion tactique, échanges staff-joueurs.</li>
+                  <li>Tribune supporters : ambiance, banderoles, animations.</li>
+                  <li>Sorties sur blessure ou cartons : images sobres et respectueuses.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Après le match</div>
+                <ul class="fiche-list">
+                  <li>Célébrations ou réactions post-match de l'équipe.</li>
+                  <li>Interviews courtes si le dispositif MHBTV le prévoit.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : COMMENTATEUR ══ -->
+        <div class="guide-section" id="commentateur">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">🎙️</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Commentateur Sportif</div>
+                <div class="fiche-subtitle">La voix et l'âme de la retransmission</div>
+                <div class="fiche-accred">⚖️ Accréditation qualifiée obligatoire · Art. 12 RG</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">RR / Réalisateur</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Effectif type</div><div class="fmi-val">1 à 3 (duo commentateur + consultant possible)</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 1h avant le coup d'envoi</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Diction, culture handball, réactivité, gestion du silence, préparation</div></div>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Préparation</div>
+                <ul class="fiche-list">
+                  <li>Étudier la fiche de match : effectifs, classements, historiques de confrontation.</li>
+                  <li>Préparer anecdotes, statistiques et contextes pour les phases calmes.</li>
+                  <li>Se familiariser avec les noms et numéros des joueurs des deux équipes.</li>
+                  <li>Vérifier le bon fonctionnement du micro et du monitoring audio.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Pendant la retransmission</div>
+                <ul class="fiche-list">
+                  <li>Lancer la retransmission : accueil, présentation des équipes et des enjeux.</li>
+                  <li>Décrire l'action avec précision, sans anticiper l'issue avant confirmation.</li>
+                  <li>Alterner description des actions et contextualisation (classement, tactique, joueur).</li>
+                  <li>Gérer le silence : laisser la foule parler lors des moments forts.</li>
+                  <li>Présenter les temps morts, mi-temps et fin de match avec fluidité.</li>
+                </ul>
+              </div>
+
+              <div class="rule-box red">
+                <span class="rule-box-icon">⚖️</span>
+                <div>
+                  <div class="rule-box-title">Principe de neutralité — Art. 15 RG &amp; Art. 21.3 RARC</div>
+                  <p>Attitude impartiale et respectueuse en toutes circonstances. Équité de traitement des deux équipes. Neutralité dans les interactions avec le public, joueurs, staff et officiels. <strong>Tout manquement de plus de 5 minutes peut entraîner une saisine de l'ICR.</strong></p>
+                </div>
+              </div>
+
+              <div class="fiche-subsec" style="margin-top:1.25rem;">
+                <div class="fiche-subsec-title">Charte éditoriale MHBTV</div>
+                <div class="quality-row"><span class="quality-cat">Ton</span><span class="quality-val">Dynamique, respectueux, professionnel</span></div>
+                <div class="quality-row"><span class="quality-cat">Équilibre</span><span class="quality-val">Couverture équitable des deux équipes sur toute la durée</span></div>
+                <div class="quality-row"><span class="quality-cat">Langage</span><span class="quality-val">Clair et accessible, jargon technique expliqué</span></div>
+                <div class="quality-row"><span class="quality-cat">Incidents</span><span class="quality-val">Rester factuel sur les décisions arbitrales, ne pas contester publiquement</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ FICHE : OTS ══ -->
+        <div class="guide-section" id="ots">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">📊</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Officiel Technique Score (OTS)</div>
+                <div class="fiche-subtitle">Le gardien de l'exactitude des données diffusées</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-meta-grid">
+                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">Réalisateur / RR</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Effectif type</div><div class="fmi-val">1 par retransmission</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 30 min avant le coup d'envoi</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Rigueur, rapidité de frappe, concentration, connaissance des règles</div></div>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Configuration pré-match</div>
+                <ul class="fiche-list">
+                  <li>Configurer le scoreboard : noms des équipes, couleurs, logos, numéros et noms des joueurs.</li>
+                  <li>Vérifier l'affichage dans la régie et le direct — validation avec le Réalisateur.</li>
+                  <li>Préparer la feuille de match officielle des deux équipes.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Pendant le match</div>
+                <ul class="fiche-list">
+                  <li>Mettre à jour le score immédiatement à chaque but — ni anticiper, ni retarder.</li>
+                  <li>Gérer le chronomètre en synchronisation avec la table de marque officielle.</li>
+                  <li>Saisir les avertissements, exclusions temporaires (2 min) et disqualifications.</li>
+                  <li>Vérifier la cohérence du score avec la table officielle à chaque arrêt de jeu.</li>
+                </ul>
+              </div>
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Gestion des erreurs</div>
+                <ul class="fiche-list">
+                  <li>En cas de score erroné : corriger immédiatement et prévenir le Réalisateur.</li>
+                  <li>Ne jamais corriger discrètement — toujours informer l'équipe.</li>
+                  <li>En cas de doute sur un but : afficher la dernière valeur certaine, attendre confirmation.</li>
+                </ul>
+              </div>
+              <div class="rule-box gold">
+                <span class="rule-box-icon">⚡</span>
+                <div>
+                  <div class="rule-box-title">Règle absolue de l'OTS</div>
+                  <p>Le score affiché doit être <strong>exact à 100% du temps</strong>. En cas de doute, afficher la dernière valeur certaine et attendre la confirmation officielle des arbitres avant toute mise à jour.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════ PARTIE II — GOUVERNANCE ══════ -->
+        <div class="guide-section" id="gouvernance">
+          <div class="part-header">
+            <span class="part-icon">🏗️</span>
+            <div class="part-header-text">
+              <div class="part-num">Partie II</div>
+              <div class="part-title">La gouvernance de MHBTV</div>
+            </div>
+          </div>
+
+          <!-- Organigramme -->
+          <div class="orgchart">
+            <div class="orgchart-top">
+              <div class="orgchart-top-label">Direction</div>
+              <div class="orgchart-top-name">COORDINATION GÉNÉRALE</div>
+            </div>
+            <div class="orgchart-branches">
+              <div class="orgchart-branch" style="border-color:rgba(232,0,29,.25);">
+                <div class="orgchart-branch-title" style="color:var(--red);">Bureau (BCG)</div>
+                <div class="orgchart-branch-item">Xavier FINI<span>Coordinateur général</span></div>
+                <div class="orgchart-branch-item">Marie DAL ZOTTO<span>Coordinatrice adjointe</span></div>
+                <div class="orgchart-branch-item">Emmanuel ALVES DE MOURA<span>Secrétaire général</span></div>
+              </div>
+              <div class="orgchart-branch" style="border-color:rgba(99,179,237,.2);">
+                <div class="orgchart-branch-title" style="color:#63b3ed;">ICR (indépendante)</div>
+                <div class="orgchart-branch-item">Nicolas MARIN<span>Président</span></div>
+                <div class="orgchart-branch-item">Yoan DUSSERT<span>Vice-président</span></div>
+                <div class="orgchart-branch-item">+ 4 membres</div>
+              </div>
+              <div class="orgchart-branch">
+                <div class="orgchart-branch-title">Équipes retr.</div>
+                <div class="orgchart-branch-item">RR · Superviseur</div>
+                <div class="orgchart-branch-item">Réalisateur · Cadreurs</div>
+                <div class="orgchart-branch-item">Commentateur · OTS</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rule-box blue">
+            <span class="rule-box-icon">🏗️</span>
+            <div>
+              <div class="rule-box-title">Principe fondateur</div>
+              <p>La gouvernance repose sur la <strong>collégialité et l'indépendance des organes</strong>. Le BCG assure la direction stratégique et exécutive. L'ICR est un organe indépendant de régulation opérationnelle et de discipline — elle n'exerce aucune fonction exécutive globale.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-section" id="bcg">
+          <h2 class="section-title">Bureau de la <span>Coordination</span> (BCG)</h2>
+          <div class="section-line"></div>
+          <div class="orga-grid">
+            <div class="orga-card" style="border-color:rgba(232,0,29,.2);">
+              <div class="orga-card-title">Coordinateur Général</div>
+              <div class="orga-card-sub">Représentant du collectif · Élu en AG</div>
+              <div class="orga-member">
+                <div class="orga-avatar" style="background:#c0392b33;color:#c0392b;">XF</div>
+                <div><div class="orga-name">Xavier FINI</div><span class="orga-role">Saison 2025-2026</span></div>
+              </div>
+            </div>
+            <div class="orga-card">
+              <div class="orga-card-title">Coordinatrice Adjointe</div>
+              <div class="orga-card-sub">Vie associative · Communication · Planification</div>
+              <div class="orga-member">
+                <div class="orga-avatar" style="background:#8e44ad33;color:#8e44ad;">MD</div>
+                <div><div class="orga-name">Marie DAL ZOTTO</div><span class="orga-role">Saison 2025-2026</span></div>
+              </div>
+            </div>
+            <div class="orga-card">
+              <div class="orga-card-title">Secrétaire Général</div>
+              <div class="orga-card-sub">CR réunions · Registre membres · Communications</div>
+              <div class="orga-member">
+                <div class="orga-avatar" style="background:#2980b933;color:#2980b9;">EM</div>
+                <div><div class="orga-name">Emmanuel ALVES DE MOURA</div><span class="orga-role">Saison 2025-2026</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-section" id="icr">
+          <h2 class="section-title">Instance Compétente des <span>Retransmissions</span></h2>
+          <div class="section-line"></div>
+          <div class="orga-grid">
+            <div class="orga-card" style="border-color:rgba(99,179,237,.2);">
+              <div class="orga-card-title">Composition 2025-2026</div>
+              <div class="orga-card-sub">6 membres · Mandat 2 ans renouvelable</div>
+              <div class="orga-member"><div class="orga-avatar" style="background:#27ae6033;color:#27ae60;">NM</div><div><div class="orga-name">Nicolas MARIN</div><span class="orga-role">Président</span></div></div>
+              <div class="orga-member"><div class="orga-avatar" style="background:#e67e2233;color:#e67e22;">YD</div><div><div class="orga-name">Yoan DUSSERT</div><span class="orga-role">Vice-président</span></div></div>
+              <div class="orga-member"><div class="orga-avatar" style="background:#9b59b633;color:#9b59b6;">DH</div><div><div class="orga-name">Dorina HELIE-JOLY</div><span class="orga-role">Membre ICR</span></div></div>
+              <div class="orga-member"><div class="orga-avatar" style="background:#7f8c8d33;color:#7f8c8d;">TT</div><div><div class="orga-name">Tim TOUR</div><span class="orga-role">Membre ICR</span></div></div>
+              <div class="orga-member"><div class="orga-avatar" style="background:#16a08533;color:#16a085;">EA</div><div><div class="orga-name">Enzo ACHOUR</div><span class="orga-role">Membre ICR</span></div></div>
+              <div class="orga-member"><div class="orga-avatar" style="background:#d3540033;color:#d35400;">NS</div><div><div class="orga-name">Nabil SABAH</div><span class="orga-role">Membre ICR</span></div></div>
+            </div>
+            <div class="orga-card">
+              <div class="orga-card-title">Attributions</div>
+              <div class="orga-card-sub">Régulation · Discipline · Contrôle</div>
+              <ul class="fiche-list" style="margin-top:.5rem;">
+                <li>Établir le calendrier des retransmissions</li>
+                <li>Désigner le RR pour chaque rencontre</li>
+                <li>Valider les équipes et leurs rôles</li>
+                <li>Traiter les signalements et manquements</li>
+                <li>Engager les procédures disciplinaires</li>
+                <li>Contrôler la régularité des élections</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════ PARTIE III — PROCÉDURES ══════ -->
+        <div class="guide-section" id="procedures">
+          <div class="part-header">
+            <span class="part-icon">⚙️</span>
+            <div class="part-header-text">
+              <div class="part-num">Partie III</div>
+              <div class="part-title">Procédures &amp; règlements</div>
+            </div>
+          </div>
+
+          <h2 class="section-title" style="margin-bottom:.25rem;">Check-list <span>type d'un match</span></h2>
+          <div class="section-line"></div>
+
+          <div class="proc-timeline">
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">1</div></div>
+              <div class="proc-body">
+                <span class="proc-body-tag">J-7 à J-3 · ICR / Coordinateurs délégués</span>
+                <div class="proc-body-title">Préparation en amont</div>
+                <ul>
+                  <li>Confirmation de la date, du lieu et des équipes avec le club.</li>
+                  <li>Désignation du Responsable de Retransmission par l'ICR.</li>
+                  <li>Constitution et confirmation de l'équipe bénévole.</li>
+                  <li>Envoi de la fiche de match à l'ensemble de l'équipe.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">2</div></div>
+              <div class="proc-body">
+                <span class="proc-body-tag">J-1 · Responsable de Retransmission</span>
+                <div class="proc-body-title">Vérifications la veille</div>
+                <ul>
+                  <li>Vérification de l'état du matériel : batteries, câbles, logiciels à jour.</li>
+                  <li>Test du réseau de diffusion sur site si possible.</li>
+                  <li>Confirmation finale de l'équipe et des horaires d'arrivée.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">3</div></div>
+              <div class="proc-body">
+                <span class="proc-body-tag">Jour J · H-2h · Toute l'équipe</span>
+                <div class="proc-body-title">Installation</div>
+                <ul>
+                  <li>Arrivée de l'équipe technique minimum 2h avant le coup d'envoi.</li>
+                  <li>Déploiement selon le plan de salle, respect des zones de sécurité (Art. 16.2 RG).</li>
+                  <li>Test de tous les équipements : caméras, micro, encodeur, réseau.</li>
+                  <li>Briefing d'équipe animé par le RR : rôles, consignes, plan B.</li>
+                  <li>Lancement du direct en mode test (non public) 15 min avant le match.</li>
+                  <li>Passage en mode public à H-10 min.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">4</div></div>
+              <div class="proc-body">
+                <span class="proc-body-tag">Après le match</span>
+                <div class="proc-body-title">Clôture &amp; rangement</div>
+                <ul>
+                  <li>Clôture propre du direct (outro, coupure).</li>
+                  <li>Rangement complet et inventaire du matériel — laisser l'espace en parfait état.</li>
+                  <li>Compte rendu d'incident transmis à l'ICR si nécessaire.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gestion incidents -->
+        <div class="guide-section" id="incidents">
+          <h2 class="section-title">Gestion des <span>incidents en direct</span></h2>
+          <div class="section-line"></div>
+
+          <div style="overflow-x:auto;margin-bottom:1.5rem;">
+            <table class="synth-table">
+              <thead>
+                <tr>
+                  <th>Type d'incident</th>
+                  <th>Qui agit</th>
+                  <th>Action immédiate</th>
+                  <th>Escalade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Incident technique mineur</strong><br><span style="font-size:.78rem;color:var(--muted);">Perte audio, dégradation image, latence</span></td>
+                  <td>Équipe en autonomie</td>
+                  <td>Maintenir la diffusion, adapter les moyens</td>
+                  <td>RR informe le Réalisateur</td>
+                </tr>
+                <tr>
+                  <td><strong>Incident sportif sensible</strong><br><span style="font-size:.78rem;color:var(--muted);">Blessure grave, altercation, envahissement</span></td>
+                  <td>RR + Réalisateur</td>
+                  <td>Adapter la captation, retenue et neutralité dans les plans</td>
+                  <td>Suivre consignes des officiels en priorité</td>
+                </tr>
+                <tr>
+                  <td><strong>Dommages matériels</strong><br><span style="font-size:.78rem;color:var(--muted);">Impact ballon, contact joueur</span></td>
+                  <td>RR</td>
+                  <td>Sécuriser la zone. Adapter la retr. selon le matériel restant</td>
+                  <td>Compte rendu ICR obligatoire</td>
+                </tr>
+                <tr>
+                  <td><strong>Demande d'arrêt d'un officiel</strong><br><span style="font-size:.78rem;color:var(--muted);">Arbitre, délégué, club organisateur</span></td>
+                  <td>RR</td>
+                  <td><strong style="color:var(--red);">Suspension IMMÉDIATE</strong></td>
+                  <td>RR contacte le Coordinateur adjoint pour validation définitive</td>
+                </tr>
+                <tr>
+                  <td><strong>Interruption définitive envisagée</strong><br><span style="font-size:.78rem;color:var(--muted);">Panne majeure, sécurité, problème juridique</span></td>
+                  <td>RR + Coordinateur adjoint</td>
+                  <td>Suspension provisoire possible par le RR en urgence absolue</td>
+                  <td><strong style="color:var(--red);">RR ne peut pas décider seul</strong> · Aval du Coord. adjoint obligatoire</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="rule-box red">
+            <span class="rule-box-icon">⚠️</span>
+            <div>
+              <div class="rule-box-title">Rappel fondamental</div>
+              <p>Aucune contestation ne peut être formulée directement auprès des officiels pendant l'événement. En cas de désaccord avec une demande d'arrêt, le RR en informe uniquement la Coordination générale, <strong>après coup</strong>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Discipline -->
+        <div class="guide-section" id="discipline">
+          <h2 class="section-title">Procédure <span>disciplinaire</span></h2>
+          <div class="section-line"></div>
+
+          <div class="proc-timeline" style="margin-bottom:1.5rem;">
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">1</div></div>
+              <div class="proc-body"><div class="proc-body-title">Signalement</div><p>Signalement écrit et circonstancié transmis à la Coordination générale via le site MHBTV.</p></div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">2</div></div>
+              <div class="proc-body"><div class="proc-body-title">Examen de recevabilité</div><p>L'ICR examine la recevabilité du signalement.</p></div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">3</div></div>
+              <div class="proc-body"><div class="proc-body-title">Ouverture de procédure</div><p>Si recevable : ouverture d'une procédure disciplinaire.</p></div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">4</div></div>
+              <div class="proc-body"><div class="proc-body-title">Instruction</div><p>Instruction par un rapporteur désigné par l'ICR.</p></div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">5</div></div>
+              <div class="proc-body"><div class="proc-body-title">Décision &amp; notification</div><p>Délibération confidentielle. Décision motivée, notifiée par écrit.</p></div>
+            </div>
+          </div>
+
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.75rem;">Échelle des sanctions — Art. 29 RARC</div>
+          <div class="sanctions-list">
+            <div class="sanction-row"><span class="sanction-num">1</span><span class="sanction-label">Avertissement oral</span><div class="sanction-sev"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
+            <div class="sanction-row"><span class="sanction-num">2</span><span class="sanction-label">Avertissement écrit</span><div class="sanction-sev"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
+            <div class="sanction-row"><span class="sanction-num">3</span><span class="sanction-label">Suspension temporaire de retransmission</span><div class="sanction-sev"><span class="sev-dot" style="background:#fbbf24;"></span><span class="sev-dot" style="background:#fbbf24;"></span><span class="sev-dot" style="background:#fbbf24;"></span></div></div>
+            <div class="sanction-row"><span class="sanction-num">4</span><span class="sanction-label">Suspension temporaire sur la saison sportive</span><div class="sanction-sev"><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span></div></div>
+            <div class="sanction-row" style="border-color:rgba(232,0,29,.25);"><span class="sanction-num" style="color:#ff4444;">5</span><span class="sanction-label">Exclusion temporaire</span><div class="sanction-sev"><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span></div></div>
+            <div class="sanction-row" style="border-color:rgba(232,0,29,.4);background:rgba(232,0,29,.04);"><span class="sanction-num" style="color:var(--red);">6</span><span class="sanction-label" style="color:var(--red);">Exclusion définitive</span><div class="sanction-sev"><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span></div></div>
+          </div>
+        </div>
+
+        <!-- ══════ PARTIE IV — GRATIFICATION ══════ -->
+        <div class="guide-section" id="gratification">
+          <div class="part-header">
+            <span class="part-icon">🏆</span>
+            <div class="part-header-text">
+              <div class="part-num">Partie IV</div>
+              <div class="part-title">Système de gratification</div>
+            </div>
+          </div>
+
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;">Lancé lors de l'AG d'août 2025 pour valoriser la participation, encourager la polyvalence et garder une trace des réalisations de chaque membre.</p>
+
+          <div class="fiche-subsec">
+            <div class="fiche-subsec-title">Comment ça marche</div>
+            <ol class="fiche-list" style="counter-reset:steps;list-style:none;">
+              <li>Choisir une mission parmi celles proposées sur le site.</li>
+              <li>Réaliser la mission pendant un match ou un événement.</li>
+              <li>Déclarer la mission auprès du Responsable de Retransmission.</li>
+              <li>Gagner les points correspondants.</li>
+              <li>Débloquer des badges et maîtriser les rôles.</li>
+              <li>Les points sont ajoutés au profil et au classement interne.</li>
+            </ol>
+          </div>
+
+          <div class="rule-box gold" style="margin-bottom:1.5rem;">
+            <span class="rule-box-icon">💡</span>
+            <div><p><strong>Cumul possible :</strong> plusieurs missions peuvent être réalisées dans un même match si elles sont compatibles (ex. caméra terrain + interview).</p></div>
+          </div>
+
+          <div style="overflow-x:auto;">
+            <table class="bareme-table">
+              <thead><tr><th>Action / Mission</th><th style="text-align:right;">Points</th></tr></thead>
+              <tbody>
+                <tr><td>Match complet — Plan Large, Terrain ou Commentateur</td><td style="text-align:right;"><span class="pts">15 pts</span></td></tr>
+                <tr><td>Match complet — Plan Serré, Régie ou Scoring</td><td style="text-align:right;"><span class="pts">20 pts</span></td></tr>
+                <tr><td>Montage / clip / reportage photo</td><td style="text-align:right;"><span class="pts">10 pts</span></td></tr>
+                <tr><td>Événement majeur</td><td style="text-align:right;"><span class="pts bonus">+10 bonus</span></td></tr>
+                <tr><td>Formation d'un membre à un poste (Superviseur)</td><td style="text-align:right;"><span class="pts bonus">+15 bonus</span></td></tr>
+                <tr><td>Formation d'un nouveau membre (intégration)</td><td style="text-align:right;"><span class="pts bonus">+20 bonus</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="text-align:center;margin-top:1.5rem;">
+            <a href="gratification.html" class="btn btn-red">🏆 Voir le classement complet →</a>
+          </div>
+        </div>
+
+        <!-- ══════ PARTIE V — INTÉGRATION ══════ -->
+        <div class="guide-section" id="integration">
+          <div class="part-header">
+            <span class="part-icon">🚀</span>
+            <div class="part-header-text">
+              <div class="part-num">Partie V</div>
+              <div class="part-title">Intégration &amp; progression des membres</div>
+            </div>
+          </div>
+
+          <h2 class="section-title" style="margin-bottom:.25rem;">Parcours de <span>progression</span></h2>
+          <div class="section-line"></div>
+
+          <div class="parcours-steps">
+            <div class="parcours-step">
+              <div class="p-step-icon-wrap"><div class="p-step-icon">👀</div></div>
+              <div class="p-step-body">
+                <div class="p-step-phase">Étape 1</div>
+                <div class="p-step-title">Découverte</div>
+                <div class="p-step-desc">Visite de site, présentation du matériel, rencontre avec l'équipe. Observation lors d'une retransmission complète.</div>
+              </div>
+            </div>
+            <div class="parcours-step">
+              <div class="p-step-icon-wrap"><div class="p-step-icon">🤝</div></div>
+              <div class="p-step-body">
+                <div class="p-step-phase">Étape 2</div>
+                <div class="p-step-title">Prise de poste accompagnée</div>
+                <div class="p-step-desc">1re retransmission sur un poste simple avec un Superviseur désigné. Apprentissage par l'expérience réelle.</div>
+              </div>
+            </div>
+            <div class="parcours-step">
+              <div class="p-step-icon-wrap"><div class="p-step-icon">🎯</div></div>
+              <div class="p-step-body">
+                <div class="p-step-phase">Étape 3</div>
+                <div class="p-step-title">Autonomie progressive</div>
+                <div class="p-step-desc">Après 2–3 retransmissions accompagnées, prise de poste en autonomie. Le Superviseur s'efface progressivement.</div>
+              </div>
+            </div>
+            <div class="parcours-step">
+              <div class="p-step-icon-wrap"><div class="p-step-icon">📜</div></div>
+              <div class="p-step-body">
+                <div class="p-step-phase">Étape 4 — Si visée</div>
+                <div class="p-step-title">Accréditation qualifiée</div>
+                <div class="p-step-desc">Passer le questionnaire d'accréditation de Responsable de Retransmission ou Commentateur sportif sur le site MHBTV.</div>
+                <div style="margin-top:.75rem;display:flex;gap:.6rem;flex-wrap:wrap;">
+                  <a href="accreditations.html" class="btn btn-outline" style="font-size:.72rem;padding:.4rem .85rem;">Voir les accréditations →</a>
+                </div>
+              </div>
+            </div>
+            <div class="parcours-step">
+              <div class="p-step-icon-wrap"><div class="p-step-icon">🎓</div></div>
+              <div class="p-step-body">
+                <div class="p-step-phase">Étape 5</div>
+                <div class="p-step-title">Superviseur</div>
+                <div class="p-step-desc">Après plusieurs retransmissions, former à son tour de nouveaux membres. Bonus de gratification : +15 à +20 pts.</div>
+              </div>
+            </div>
+            <div class="parcours-step">
+              <div class="p-step-icon-wrap"><div class="p-step-icon">🏅</div></div>
+              <div class="p-step-body">
+                <div class="p-step-phase">Étape 6</div>
+                <div class="p-step-title">Responsabilités</div>
+                <div class="p-step-desc">Candidature possible aux postes de l'ICR ou du Bureau de la Coordination générale lors des prochaines élections en AG.</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.75rem;margin-top:2rem;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;">Catégories de membres</div>
+            <table class="fiche-table">
+              <thead><tr><th>Catégorie</th><th>Critère</th><th>Droits</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Membre actif</strong></td><td>≥ 4 retransmissions / 3 mois ou engagement régulier</td><td>Vote AG · Éligible Coordination</td></tr>
+                <tr><td><strong>Membre occasionnel</strong></td><td>&lt; 6 retransmissions sur la saison</td><td>Vote AG · Éligible Coordination</td></tr>
+                <tr><td><strong>Membre d'honneur</strong></td><td>Soutien notable (anciens membres)</td><td>Pas de pouvoir décisionnel</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Code de conduite -->
+        <div class="guide-section" id="conduite">
+          <h2 class="section-title">Code de <span>conduite</span></h2>
+          <div class="section-line"></div>
+
+          <div class="rule-box green" style="margin-bottom:1.5rem;">
+            <span class="rule-box-icon">🤝</span>
+            <div>
+              <div class="rule-box-title">Nos valeurs fondamentales — Art. 2 RG</div>
+              <p>Le collectif repose sur des valeurs de <strong>RESPECT, BIENVEILLANCE, COLLABORATION et ENGAGEMENT</strong>. Chaque membre s'engage à incarner ces principes dans toutes ses interactions, internes et externes.</p>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:1.5rem;">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
+              <div style="font-size:1.4rem;margin-bottom:.5rem;">📅</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Honorer ses engagements</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Prévenir au plus tôt en cas d'empêchement — ne pas laisser l'équipe sans nouvelles.</div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
+              <div style="font-size:1.4rem;margin-bottom:.5rem;">⚖️</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Respecter la neutralité</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Le principe de neutralité s'applique à toutes les retransmissions, quel que soit le poste.</div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
+              <div style="font-size:1.4rem;margin-bottom:.5rem;">🎒</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Prendre soin du matériel</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Le matériel appartient au collectif. Vérification avant usage, rangement soigneux après.</div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
+              <div style="font-size:1.4rem;margin-bottom:.5rem;">🎬</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Respecter le RR</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Suivre les consignes du Responsable de Retransmission en toutes circonstances.</div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
+              <div style="font-size:1.4rem;margin-bottom:.5rem;">🚨</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Signaler les problèmes</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Tout comportement inapproprié doit être signalé via le site MHBTV.</div>
+            </div>
+          </div>
+
+          <div style="background:rgba(232,0,29,.05);border:1px solid rgba(232,0,29,.2);border-radius:8px;padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem;">Signalement d'un comportement</div>
+              <div style="font-size:.85rem;color:var(--muted);">Comportement discriminatoire, agressif, sexiste, raciste ou portant atteinte à l'image du collectif.</div>
+            </div>
+            <a href="https://meylanhandballtv.wixsite.com/meylan-handball-tv/signaler-un-comportement" target="_blank" class="btn btn-red" style="font-size:.78rem;">Signaler via le site →</a>
+          </div>
+        </div>
+
+      </div><!-- /guide-content -->
+    </div><!-- /guide-layout -->
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="accreditations.html">Accréditations</a></li>
+        <li><a href="planning.html">Planning</a></li>
+        <li><a href="guides.html">Guides &amp; formations</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Guide bénévole v2.0</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+
+  <script>
+    /* ── Scroll vers section ── */
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* ── Highlight TOC au scroll ── */
+    const sections = [
+      'postes','rr','superviseur','realisateur','cam-large','cam-serre',
+      'cam-terrain','commentateur','ots',
+      'gouvernance','bcg','icr',
+      'procedures','incidents','discipline',
+      'gratification',
+      'integration','conduite'
+    ];
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          document.querySelectorAll('.toc-link').forEach(l => l.classList.remove('active'));
+          const active = document.getElementById('toc-' + id);
+          if (active) {
+            active.classList.add('active');
+            // scroll TOC si nécessaire
+            const toc = document.getElementById('guideToc');
+            if (toc.scrollHeight > toc.clientHeight) {
+              active.scrollIntoView({ block: 'nearest' });
+            }
+          }
+        }
+      });
+    }, { rootMargin: '-64px 0px -60% 0px', threshold: 0 });
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  </script>
+</body>
+</html>

@@ -44,9 +44,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     /* ══ CONFIGURATION EMAILJS — À REMPLIR ══════════════════════════ */
-    const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';   // ex: 'service_abc123'
-    const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';  // ex: 'template_xyz789'
-    const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';   // ex: 'aBcDeFgHiJkLmNoP'
+    const EMAILJS_SERVICE_ID  = 'service_kn7s3y7';   // ex: 'service_abc123'
+    const EMAILJS_TEMPLATE_ID = 'template_k1axl8m';  // ex: 'template_xyz789'
+    const EMAILJS_PUBLIC_KEY  = 'xB-UzHyCSxTTTliMV';   // ex: 'aBcDeFgHiJkLmNoP'
     /* ══════════════════════════════════════════════════════════════ */
 
     emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
@@ -792,9 +792,9 @@
        DÉTECTION CONFIG EMAILJS
     ══════════════════════════════════════════════════════════════ */
     const isConfigured =
-      EMAILJS_SERVICE_ID  !== 'service_kn7s3y7'  &&
-      EMAILJS_TEMPLATE_ID !== 'template_k1axl8m' &&
-      EMAILJS_PUBLIC_KEY  !== 'xB-UzHyCSxTTTliMV';
+      EMAILJS_SERVICE_ID  !== 'VOTRE_SERVICE_ID'  &&
+      EMAILJS_TEMPLATE_ID !== 'VOTRE_TEMPLATE_ID' &&
+      EMAILJS_PUBLIC_KEY  !== 'VOTRE_PUBLIC_KEY';
 
     // Masquer la bannière si tout est configuré
     if (isConfigured) {

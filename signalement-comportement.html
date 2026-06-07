@@ -5,14 +5,128 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signalement | Meylan Handball TV</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗
+       ║  EMAILJS — GUIDE DE CONFIGURATION                          ║
+       ║                                                              ║
+       ║  1. Créer un compte sur https://www.emailjs.com             ║
+       ║                                                              ║
+       ║  2. Créer un "Email Service" (Gmail, Outlook…)              ║
+       ║     → Dashboard > Email Services > Add New Service          ║
+       ║     → Récupérer le SERVICE_ID                               ║
+       ║                                                              ║
+       ║  3. Créer un "Email Template"                               ║
+       ║     → Dashboard > Email Templates > Create New Template     ║
+       ║     → Dans le corps du template, utiliser ces variables :   ║
+       ║                                                              ║
+       ║       De : {{plaignant}}                                     ║
+       ║       Contre : {{contre}}                                    ║
+       ║       Date des faits : {{date_faits}}                        ║
+       ║       Motifs : {{motifs}}                                    ║
+       ║       Description : {{description}}                          ║
+       ║       Témoins : {{temoins}}                                  ║
+       ║       Preuves : {{preuves}}                                  ║
+       ║       Envoyé le : {{date_envoi}}                             ║
+       ║                                                              ║
+       ║     → Récupérer le TEMPLATE_ID                              ║
+       ║                                                              ║
+       ║  4. Récupérer ta PUBLIC_KEY                                  ║
+       ║     → Dashboard > Account > General > Public Key            ║
+       ║                                                              ║
+       ║  5. Remplacer les 3 valeurs ci-dessous :                    ║
+       ║     EMAILJS_SERVICE_ID   → ton Service ID                   ║
+       ║     EMAILJS_TEMPLATE_ID  → ton Template ID                  ║
+       ║     EMAILJS_PUBLIC_KEY   → ta Public Key                    ║
+       ║                                                              ║
+       ║  ⚠ Plan gratuit EmailJS : 200 emails/mois                   ║
+       ╚══════════════════════════════════════════════════════════════╝ -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    /* ══ CONFIGURATION EMAILJS — À REMPLIR ══════════════════════════ */
+    const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';   // ex: 'service_abc123'
+    const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';  // ex: 'template_xyz789'
+    const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';   // ex: 'aBcDeFgHiJkLmNoP'
+    /* ══════════════════════════════════════════════════════════════ */
+
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  </script>
+
   <style>
-    /* ── FORM LAYOUT ── */
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .sig-hero {
+      position: relative;
+      padding: 5.5rem 4rem 3.5rem;
+      background: var(--black);
+      overflow: hidden;
+    }
+    .sig-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 70% at 85% 35%, rgba(232,0,29,0.08) 0%, transparent 65%),
+        repeating-linear-gradient(0deg, transparent, transparent 72px,
+          rgba(255,255,255,0.012) 72px, rgba(255,255,255,0.012) 73px);
+    }
+    .sig-hero-wm {
+      position: absolute; right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(20vw, 260px);
+      color: rgba(232,0,29,0.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .sig-hero-content { position: relative; z-index: 1; max-width: 640px; }
+    .sig-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: .88; letter-spacing: .02em; color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .sig-hero h1 span { color: var(--red); }
+    .sig-hero p { color: var(--muted); font-size: 1rem; line-height: 1.7; max-width: 500px; }
+
+    /* ══════════════════════════════════════
+       BANNER CONFIG (visible si placeholders non remplacés)
+    ══════════════════════════════════════ */
+    .config-banner {
+      margin: 0 4rem 0;
+      padding: 1rem 1.5rem;
+      background: rgba(240,180,41,0.08);
+      border: 1px solid rgba(240,180,41,0.3);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .config-banner-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .config-banner-body {}
+    .config-banner-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: .3rem;
+    }
+    .config-banner p { font-size: .84rem; color: var(--muted); line-height: 1.6; }
+    .config-banner code {
+      background: rgba(240,180,41,0.12); color: var(--gold);
+      padding: .1rem .4rem; border-radius: 3px;
+      font-size: .82rem; font-family: 'Courier New', monospace;
+    }
+
+    /* ══════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════ */
     .form-wrapper {
       display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 3rem;
+      grid-template-columns: 1fr 320px;
+      gap: 2.5rem;
+      padding: 3rem 4rem;
       align-items: start;
     }
+
+    /* ══════════════════════════════════════
+       CARD FORMULAIRE
+    ══════════════════════════════════════ */
     .form-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -22,31 +136,28 @@
     .form-card-header {
       background: rgba(232,0,29,0.06);
       border-bottom: 1px solid var(--border);
-      padding: 1.5rem 2rem;
+      padding: 1.25rem 2rem;
+      display: flex; align-items: center; gap: .75rem;
     }
     .form-card-header h2 {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--white);
+      font-size: 1rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--white);
     }
     .form-card-body { padding: 2rem; }
 
-    /* ── FORM FIELDS ── */
+    /* ══════════════════════════════════════
+       FIELDS
+    ══════════════════════════════════════ */
     .field-group { margin-bottom: 1.5rem; }
     .field-label {
       display: block;
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.5rem;
+      font-size: .75rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: .5rem;
     }
-    .field-label .required { color: var(--red); margin-left: 2px; }
+    .field-label .req { color: var(--red); margin-left: 2px; }
     .field-input,
     .field-textarea,
     .field-select {
@@ -56,252 +167,259 @@
       border-radius: 5px;
       color: var(--text);
       font-family: 'Barlow', sans-serif;
-      font-size: 0.92rem;
-      padding: 0.7rem 1rem;
+      font-size: .9rem;
+      padding: .7rem 1rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color .2s, box-shadow .2s;
       appearance: none;
     }
     .field-input:focus,
     .field-textarea:focus,
     .field-select:focus {
       border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(232,0,29,.08);
     }
+    .field-input.error,
+    .field-textarea.error { border-color: var(--red); }
     .field-input::placeholder,
     .field-textarea::placeholder { color: #444; }
-    .field-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
-    .field-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
-    .field-select option { background: var(--card); }
-    .date-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; }
-
-    /* ── ACCORDION CATEGORIES ── */
-    .acc-section { margin-bottom: 0.5rem; }
-    .acc-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.9rem 1.1rem;
-      background: var(--darker);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      transition: border-color 0.2s;
-      user-select: none;
+    .field-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+    .field-select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center;
+      padding-right: 2.5rem; cursor: pointer;
     }
-    .acc-header:hover { border-color: rgba(232,0,29,0.35); }
-    .acc-header.open { border-color: rgba(232,0,29,0.4); border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+    .field-select option { background: var(--card); }
+    .field-hint { font-size: .77rem; color: #555; margin-top: .35rem; }
+    .date-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .75rem; }
+
+    /* ══════════════════════════════════════
+       ACCORDÉONS MOTIFS
+    ══════════════════════════════════════ */
+    .acc-section { margin-bottom: .45rem; }
+    .acc-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .85rem 1.1rem;
+      background: var(--darker); border: 1px solid var(--border);
+      border-radius: 6px; cursor: pointer;
+      transition: border-color .2s; user-select: none;
+    }
+    .acc-header:hover { border-color: rgba(232,0,29,.35); }
+    .acc-header.open {
+      border-color: rgba(232,0,29,.4);
+      border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+    }
     .acc-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--white);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      font-size: .88rem; font-weight: 700; color: var(--white);
+      display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
     }
-    .acc-count {
+    .acc-badge {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: var(--red);
-      background: rgba(232,0,29,0.1);
-      border: 1px solid rgba(232,0,29,0.25);
-      padding: 0.15rem 0.45rem;
-      border-radius: 3px;
+      font-size: .65rem; font-weight: 700; letter-spacing: .1em;
+      color: var(--red); background: rgba(232,0,29,.1);
+      border: 1px solid rgba(232,0,29,.25);
+      padding: .12rem .45rem; border-radius: 3px;
     }
-    .acc-arrow {
-      color: var(--muted);
-      font-size: 0.7rem;
-      transition: transform 0.2s;
-    }
+    .acc-arrow { color: var(--muted); font-size: .65rem; transition: transform .2s; }
     .acc-header.open .acc-arrow { transform: rotate(180deg); }
     .acc-body {
       display: none;
-      border: 1px solid rgba(232,0,29,0.25);
-      border-top: none;
-      border-radius: 0 0 6px 6px;
-      overflow: hidden;
+      border: 1px solid rgba(232,0,29,.25); border-top: none;
+      border-radius: 0 0 6px 6px; overflow: hidden;
     }
     .acc-body.open { display: block; }
     .check-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.8rem;
-      padding: 0.75rem 1.1rem;
-      border-bottom: 1px solid var(--border);
-      transition: background 0.15s;
-      cursor: pointer;
+      display: flex; align-items: flex-start; gap: .85rem;
+      padding: .7rem 1.1rem; border-bottom: 1px solid var(--border);
+      transition: background .15s; cursor: pointer;
     }
     .check-item:last-child { border-bottom: none; }
-    .check-item:hover { background: rgba(255,255,255,0.02); }
+    .check-item:hover { background: rgba(255,255,255,.025); }
     .check-item input[type="checkbox"] {
-      flex-shrink: 0;
-      width: 15px; height: 15px;
-      margin-top: 3px;
-      accent-color: var(--red);
-      cursor: pointer;
+      flex-shrink: 0; width: 15px; height: 15px; margin-top: 2px;
+      accent-color: var(--red); cursor: pointer;
     }
     .check-label {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.5;
-      cursor: pointer;
-      transition: color 0.15s;
+      font-size: .84rem; color: var(--muted); line-height: 1.5;
+      cursor: pointer; transition: color .15s;
     }
     .check-item:hover .check-label { color: var(--text); }
     .check-item input:checked ~ .check-label { color: var(--text); }
 
-    /* ── SELECTED SUMMARY ── */
+    /* ══════════════════════════════════════
+       SÉLECTION RÉSUMÉ
+    ══════════════════════════════════════ */
     .selected-summary {
-      background: var(--darker);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-      min-height: 60px;
+      background: var(--darker); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.1rem 1.25rem;
+      margin-bottom: 1.25rem; min-height: 58px;
+      transition: border-color .2s;
     }
+    .selected-summary.has-items { border-color: rgba(232,0,29,.25); }
     .selected-summary-title {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
+      font-size: .65rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .6rem;
     }
-    .selected-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .selected-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
     .selected-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      background: rgba(232,0,29,0.12);
-      border: 1px solid rgba(232,0,29,0.3);
-      color: var(--red);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      padding: 0.2rem 0.6rem;
-      border-radius: 3px;
+      display: inline-flex; align-items: center; gap: .35rem;
+      background: rgba(232,0,29,.1); border: 1px solid rgba(232,0,29,.25);
+      color: var(--red); font-family: 'Barlow Condensed', sans-serif;
+      font-size: .7rem; font-weight: 600; letter-spacing: .04em;
+      padding: .22rem .6rem; border-radius: 3px;
     }
-    .selected-empty {
-      font-size: 0.85rem;
-      color: #444;
-      font-style: italic;
-    }
+    .selected-empty { font-size: .84rem; color: #444; font-style: italic; }
 
-    /* ── SIDEBAR INFO ── */
-    .sidebar { position: sticky; top: 84px; }
-    .info-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
-    .info-card h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: var(--white);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .info-card p { font-size: 0.84rem; color: var(--muted); line-height: 1.65; }
-    .info-card ul { list-style: none; }
-    .info-card ul li {
-      font-size: 0.84rem;
-      color: var(--muted);
-      padding: 0.35rem 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 0.6rem;
-      line-height: 1.5;
-    }
-    .info-card ul li:last-child { border-bottom: none; }
-    .info-card ul li::before { content: '→'; color: var(--red); flex-shrink: 0; }
-    .warning-card {
-      background: rgba(232,0,29,0.05);
-      border: 1px solid rgba(232,0,29,0.2);
-      border-left: 4px solid var(--red);
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-      font-size: 0.83rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-    .warning-card strong { color: var(--red); display: block; margin-bottom: 0.25rem; }
-
-    /* ── SUBMIT ── */
+    /* ══════════════════════════════════════
+       SUBMIT ZONE
+    ══════════════════════════════════════ */
     .submit-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border); flex-wrap: wrap;
     }
-    .submit-note {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-    .btn-submit {
-      background: var(--red);
-      color: var(--white);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.85rem 2rem;
-      border-radius: 4px;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-submit:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .submit-note { font-size: .78rem; color: var(--muted); }
 
-    /* ── SUCCESS STATE ── */
-    .success-screen {
-      display: none;
-      text-align: center;
-      padding: 4rem 2rem;
+    /* Bouton avec état chargement */
+    .btn-submit {
+      position: relative;
+      background: var(--red); color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .9rem;
+      letter-spacing: .15em; text-transform: uppercase;
+      padding: .85rem 2rem; border-radius: 4px;
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+      display: flex; align-items: center; gap: .6rem;
+      min-width: 220px; justify-content: center;
     }
-    .success-icon {
-      width: 72px; height: 72px;
-      background: rgba(232,0,29,0.12);
-      border: 2px solid rgba(232,0,29,0.3);
+    .btn-submit:hover:not(:disabled) { background: var(--red-dark); transform: translateY(-1px); }
+    .btn-submit:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+    .btn-spinner {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: var(--white);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 1.5rem;
+      animation: spin .7s linear infinite;
+      display: none;
+    }
+    .btn-submit.loading .btn-spinner { display: block; }
+    .btn-submit.loading .btn-text::after { content: 'Envoi en cours…'; }
+    .btn-submit:not(.loading) .btn-text::after { content: 'Envoyer le signalement →'; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ══════════════════════════════════════
+       MESSAGES D'ÉTAT
+    ══════════════════════════════════════ */
+    .status-msg {
+      display: none;
+      padding: 1rem 1.25rem;
+      border-radius: 7px;
+      margin-top: 1.25rem;
+      font-size: .88rem; line-height: 1.6;
+    }
+    .status-msg.show { display: flex; gap: .75rem; align-items: flex-start; }
+    .status-msg.success {
+      background: rgba(74,222,128,.08); border: 1px solid rgba(74,222,128,.25);
+      color: #4ade80;
+    }
+    .status-msg.error {
+      background: rgba(232,0,29,.07); border: 1px solid rgba(232,0,29,.25);
+      color: #ff8080;
+    }
+    .status-msg-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .status-msg-body { color: var(--muted); }
+    .status-msg-body strong { display: block; margin-bottom: .2rem; }
+    .status-msg.success .status-msg-body strong { color: #4ade80; }
+    .status-msg.error .status-msg-body strong { color: #ff8080; }
+
+    /* ══════════════════════════════════════
+       ÉCRAN SUCCÈS COMPLET
+    ══════════════════════════════════════ */
+    #successCard { display: none; }
+    .success-screen {
+      padding: 4rem 2rem; text-align: center;
+    }
+    .success-icon-big {
+      width: 80px; height: 80px;
+      background: rgba(74,222,128,.1); border: 2px solid rgba(74,222,128,.3);
+      border-radius: 50%; font-size: 2.2rem;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.75rem;
     }
     .success-screen h2 {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 2rem;
-      color: var(--white);
-      letter-spacing: 0.05em;
-      margin-bottom: 0.75rem;
+      font-size: 2.2rem; color: var(--white); letter-spacing: .05em; margin-bottom: .75rem;
     }
-    .success-screen p { color: var(--muted); font-size: 0.92rem; max-width: 400px; margin: 0 auto; line-height: 1.7; }
+    .success-screen p { color: var(--muted); font-size: .92rem; max-width: 440px; margin: 0 auto; line-height: 1.7; }
+    .success-ref {
+      display: inline-block;
+      margin-top: 1.25rem;
+      background: rgba(255,255,255,.04); border: 1px solid var(--border);
+      border-radius: 6px; padding: .6rem 1.25rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .78rem; letter-spacing: .1em;
+      color: var(--muted);
+    }
+    .success-ref strong { color: var(--white); }
 
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .form-sidebar { position: sticky; top: 80px; }
+    .sb-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.4rem; margin-bottom: 1.25rem;
+    }
+    .sb-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem; letter-spacing: .06em;
+      color: var(--white); margin-bottom: .75rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .sb-card p { font-size: .84rem; color: var(--muted); line-height: 1.65; }
+    .sb-steps { list-style: none; counter-reset: steps; }
+    .sb-steps li {
+      counter-increment: steps;
+      display: flex; align-items: flex-start; gap: .75rem;
+      padding: .5rem 0; border-bottom: 1px solid var(--border);
+      font-size: .84rem; color: var(--muted); line-height: 1.5;
+    }
+    .sb-steps li:last-child { border-bottom: none; }
+    .sb-steps li::before {
+      content: counter(steps);
+      width: 22px; height: 22px;
+      background: rgba(232,0,29,.15); color: var(--red);
+      border-radius: 50%; font-family: 'Bebas Neue', sans-serif;
+      font-size: .85rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .warning-card {
+      background: rgba(232,0,29,.05); border: 1px solid rgba(232,0,29,.2);
+      border-left: 4px solid var(--red); border-radius: 6px;
+      padding: 1rem 1.25rem; font-size: .83rem; color: var(--muted); line-height: 1.6;
+    }
+    .warning-card strong { color: var(--red); display: block; margin-bottom: .25rem; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 1050px) {
+      .form-wrapper { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .form-sidebar { position: static; }
+      .config-banner { margin: 0 1.5rem; }
+    }
     @media (max-width: 900px) {
-      .form-wrapper { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .date-row { grid-template-columns: 1fr 1fr; }
+      .sig-hero { padding: 5rem 1.5rem 2.5rem; }
     }
     @media (max-width: 600px) {
       .form-card-body { padding: 1.25rem; }
       .date-row { grid-template-columns: 1fr; }
       .submit-row { flex-direction: column; align-items: stretch; }
-      .btn-submit { width: 100%; text-align: center; }
+      .btn-submit { width: 100%; }
     }
   </style>
 </head>
@@ -309,280 +427,336 @@
   <script src="nav.js"></script>
 
   <main class="page">
+
     <!-- HERO -->
-    <section class="hero">
-      <div class="hero-accent"></div>
-      <div class="hero-content">
-        <div class="hero-eyebrow">Meylan Handball TV · Commission disciplinaire (ICR)</div>
-        <h1>Rapport de<em> Signalement</em></h1>
-        <p class="hero-sub">Signalez tout comportement inapproprié ou manquement au règlement de l'association. Votre signalement est transmis à la commission disciplinaire.</p>
+    <div class="sig-hero">
+      <div class="sig-hero-wm">SIGNAL</div>
+      <div class="sig-hero-content">
+        <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,0,29,.1);border:1px solid rgba(232,0,29,.25);border-radius:4px;padding:.3rem .8rem;margin-bottom:1.2rem;">
+          <span style="width:7px;height:7px;background:var(--red);border-radius:50%;display:inline-block;"></span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);">Commission disciplinaire · ICR</span>
+        </div>
+        <h1>Rapport de<br><span>Signalement</span></h1>
+        <p>Signalez tout comportement inapproprié ou manquement au règlement du collectif. Votre signalement est transmis directement à l'Instance Compétente des Retransmissions (ICR).</p>
       </div>
-    </section>
+    </div>
 
-    <section class="section">
-      <div class="form-wrapper">
-        <!-- FORM -->
-        <div>
-          <div class="form-card" id="formCard">
-            <div class="form-card-header">
-              <h2>📋 Formulaire de signalement</h2>
+    <!-- BANNER CONFIG (masquée automatiquement si EmailJS est configuré) -->
+    <div class="config-banner" id="configBanner" style="margin-top:2rem;">
+      <span class="config-banner-icon">⚙️</span>
+      <div class="config-banner-body">
+        <div class="config-banner-title">Configuration EmailJS requise</div>
+        <p>
+          Le formulaire est prêt mais l'envoi par e-mail n'est pas encore activé.
+          Ouvre le fichier <code>signalement.html</code> et remplace les 3 constantes en haut du code :
+          <code>EMAILJS_SERVICE_ID</code>, <code>EMAILJS_TEMPLATE_ID</code> et <code>EMAILJS_PUBLIC_KEY</code>.
+          Consulte le commentaire dans le <code>&lt;head&gt;</code> pour le guide complet.
+        </p>
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="form-wrapper">
+
+      <!-- FORMULAIRE -->
+      <div>
+        <div class="form-card" id="formCard">
+          <div class="form-card-header">
+            <h2>📋 Formulaire de signalement</h2>
+          </div>
+          <div class="form-card-body">
+
+            <!-- Identité du plaignant -->
+            <div class="field-group">
+              <label class="field-label" for="plaignant">
+                Prénom et nom du plaignant <span class="req">*</span>
+              </label>
+              <input class="field-input" type="text" id="plaignant"
+                placeholder="Ex : Jean DUPONT" autocomplete="name">
+              <div class="field-hint">Votre identité reste confidentielle au sein de l'ICR (Art. 4 RARC).</div>
             </div>
-            <div class="form-card-body">
 
-              <!-- Identité -->
-              <div class="field-group">
-                <label class="field-label" for="plaignant">Prénom et nom du plaignant <span class="required">*</span></label>
-                <input class="field-input" type="text" id="plaignant" placeholder="Ex : Jean Dupont" required>
+            <!-- Personne concernée -->
+            <div class="field-group">
+              <label class="field-label" for="contre">
+                Signalement à l'encontre de <span class="req">*</span>
+              </label>
+              <input class="field-input" type="text" id="contre"
+                placeholder="Prénom, nom ou rôle de la personne concernée">
+            </div>
+
+            <!-- Date des faits -->
+            <div class="field-group">
+              <label class="field-label">Date des faits <span class="req">*</span></label>
+              <div class="date-row">
+                <input class="field-input" type="number" id="date-jour"
+                  placeholder="Jour" min="1" max="31">
+                <select class="field-select" id="date-mois">
+                  <option value="">Mois</option>
+                  <option>Janvier</option><option>Février</option><option>Mars</option>
+                  <option>Avril</option><option>Mai</option><option>Juin</option>
+                  <option>Juillet</option><option>Août</option><option>Septembre</option>
+                  <option>Octobre</option><option>Novembre</option><option>Décembre</option>
+                </select>
+                <input class="field-input" type="number" id="date-annee"
+                  placeholder="Année" min="2024" max="2030" value="2026">
               </div>
+            </div>
 
-              <div class="field-group">
-                <label class="field-label" for="contre">Signalement contre <span class="required">*</span></label>
-                <input class="field-input" type="text" id="contre" placeholder="Prénom, nom ou rôle de la personne concernée" required>
-              </div>
+            <!-- Motifs -->
+            <div class="field-group">
+              <label class="field-label">
+                Motif(s) du signalement <span class="req">*</span>
+              </label>
+              <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;">
+                Développez les catégories et cochez un ou plusieurs motifs correspondant aux faits constatés.
+              </p>
 
-              <!-- Date -->
-              <div class="field-group">
-                <label class="field-label">Date des faits <span class="required">*</span></label>
-                <div class="date-row">
-                  <input class="field-input" type="number" id="date-jour" placeholder="Jour" min="1" max="31">
-                  <select class="field-select" id="date-mois">
-                    <option value="">Mois</option>
-                    <option>Janvier</option><option>Février</option><option>Mars</option>
-                    <option>Avril</option><option>Mai</option><option>Juin</option>
-                    <option>Juillet</option><option>Août</option><option>Septembre</option>
-                    <option>Octobre</option><option>Novembre</option><option>Décembre</option>
-                  </select>
-                  <input class="field-input" type="number" id="date-annee" placeholder="Année" min="2024" max="2030" value="2026">
+              <!-- Résumé sélection -->
+              <div class="selected-summary" id="selectedSummary">
+                <div class="selected-summary-title">Motifs sélectionnés</div>
+                <div class="selected-tags" id="selectedTags">
+                  <span class="selected-empty">Aucun motif sélectionné</span>
                 </div>
               </div>
 
-              <!-- Motifs -->
-              <div class="field-group">
-                <label class="field-label">Motif(s) du signalement <span class="required">*</span></label>
-                <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1rem;">Sélectionnez un ou plusieurs motifs en développant les catégories concernées.</p>
+              <!-- Accordéons -->
+              <div id="accordions">
 
-                <!-- Selected summary -->
-                <div class="selected-summary" id="selectedSummary">
-                  <div class="selected-summary-title">Motifs sélectionnés</div>
-                  <div class="selected-tags" id="selectedTags">
-                    <span class="selected-empty">Aucun motif sélectionné</span>
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">📅 Présence, ponctualité &amp; engagement</span>
+                    <span class="acc-arrow">▼</span>
+                  </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Absence non justifiée à une retransmission ou à une réunion interne obligatoire"><span class="check-label">Absence non justifiée à une retransmission ou à une réunion interne obligatoire</span></label>
+                    <label class="check-item"><input type="checkbox" value="Absence justifiée sans prévenir dans un délai raisonnable (min. 24h) et sans proposer de remplacement"><span class="check-label">Absence justifiée sans prévenir dans un délai raisonnable (min. 24h) et sans proposer de remplacement</span></label>
+                    <label class="check-item"><input type="checkbox" value="Abandon de poste en cours de retransmission ou d'une mission bénévole sans motif valable"><span class="check-label">Abandon de poste en cours de retransmission ou d'une mission bénévole sans motif valable</span></label>
+                    <label class="check-item"><input type="checkbox" value="Départ anticipé non autorisé avant la fin du bilan post-retransmission"><span class="check-label">Départ anticipé non autorisé avant la fin du bilan post-retransmission</span></label>
+                    <label class="check-item"><input type="checkbox" value="Inactivité injustifiée de plus de 3 mois au sein des activités du collectif"><span class="check-label">Inactivité injustifiée de plus de 3 mois au sein des activités du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Retard injustifié entraînant un démarrage tardif de retransmission (> 5 min)"><span class="check-label">Retard injustifié entraînant un démarrage tardif de retransmission (&gt; 5 min)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Retard injustifié répété (3 occurrences ou plus sur la saison)"><span class="check-label">Retard injustifié répété (3 occurrences ou plus sur la saison)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Refus répété de participer aux sessions de formation interne"><span class="check-label">Refus répété de participer aux sessions de formation interne</span></label>
+                    <label class="check-item"><input type="checkbox" value="Non-participation injustifiée à une journée de travail collectif ou de préparation technique"><span class="check-label">Non-participation injustifiée à une journée de travail collectif ou de préparation technique</span></label>
                   </div>
                 </div>
 
-                <!-- Categories -->
-                <div id="accordions">
-
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">👥 Vie interne & relations entre membres</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Comportement irrespectueux, moqueries ou propos humiliants / vexatoires envers un membre"><span class="check-label">Comportement irrespectueux, moqueries ou propos humiliants / vexatoires envers un membre</span></label>
-                      <label class="check-item"><input type="checkbox" value="Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.)"><span class="check-label">Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Harcèlement moral répété envers un membre du collectif"><span class="check-label">Harcèlement moral répété envers un membre du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis)"><span class="check-label">Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Violence psychologique, manipulation ou intimidation envers un membre"><span class="check-label">Violence psychologique, manipulation ou intimidation envers un membre</span></label>
-                      <label class="check-item"><input type="checkbox" value="Mise à l'écart volontaire d'un membre (ostracisme, exclusion sociale)"><span class="check-label">Mise à l'écart volontaire d'un membre (ostracisme, exclusion sociale)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Comportement perturbateur lors d'une réunion ou session interne"><span class="check-label">Comportement perturbateur lors d'une réunion ou session interne</span></label>
-                      <label class="check-item"><input type="checkbox" value="Consommation d'alcool ou de substances avant ou pendant une retransmission"><span class="check-label">Consommation d'alcool ou de substances avant ou pendant une retransmission</span></label>
-                      <label class="check-item"><input type="checkbox" value="Introduction de personnes non autorisées pendant une retransmission"><span class="check-label">Introduction de personnes non autorisées pendant une retransmission</span></label>
-                      <label class="check-item"><input type="checkbox" value="Conflit ouvert ou sabotage délibéré de la réputation d'un membre"><span class="check-label">Conflit ouvert ou sabotage délibéré de la réputation d'un membre</span></label>
-                      <label class="check-item"><input type="checkbox" value="Refus persistant de coopérer avec un autre membre lors d'une production"><span class="check-label">Refus persistant de coopérer avec un autre membre lors d'une production</span></label>
-                    </div>
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">🪪 Accréditation, rôles &amp; identité opérationnelle</span>
+                    <span class="acc-arrow">▼</span>
                   </div>
-
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">⚖️ Responsabilités & gouvernance interne</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Prise de décision engageant le collectif sans mandat / non-respect d'une décision collective"><span class="check-label">Prise de décision engageant le collectif sans mandat / non-respect d'une décision collective</span></label>
-                      <label class="check-item"><input type="checkbox" value="Conflit d'intérêts non déclaré dans une décision engageant le collectif"><span class="check-label">Conflit d'intérêts non déclaré dans une décision engageant le collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Abus de position hiérarchique ou inactivité d'un responsable"><span class="check-label">Abus de position hiérarchique ou inactivité d'un responsable</span></label>
-                      <label class="check-item"><input type="checkbox" value="Opacité, refus de rendre compte ou dépense non validée au nom du collectif"><span class="check-label">Opacité, refus de rendre compte ou dépense non validée au nom du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Détournement à profit personnel de ressources ou équipements du collectif"><span class="check-label">Détournement à profit personnel de ressources ou équipements du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire (ICR)"><span class="check-label">Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire (ICR)</span></label>
-                    </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Occupation d'un poste (responsable de retransmission, commentateur) sans accréditation valide"><span class="check-label">Occupation d'un poste (responsable de retransmission, commentateur) sans accréditation valide</span></label>
+                    <label class="check-item"><input type="checkbox" value="Falsification d'une accréditation ou d'un questionnaire d'aptitude"><span class="check-label">Falsification d'une accréditation ou d'un questionnaire d'aptitude</span></label>
+                    <label class="check-item"><input type="checkbox" value="Usurpation de rôle ou d'identité lors d'une retransmission"><span class="check-label">Usurpation de rôle ou d'identité lors d'une retransmission</span></label>
+                    <label class="check-item"><input type="checkbox" value="Non-port du gilet identifié MHBTV obligatoire pendant la durée complète de l'événement"><span class="check-label">Non-port du gilet identifié MHBTV obligatoire pendant la durée complète de l'événement</span></label>
+                    <label class="check-item"><input type="checkbox" value="Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement"><span class="check-label">Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement</span></label>
                   </div>
+                </div>
 
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">⏰ Présence, ponctualité & engagement</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Absence non justifiée à une retransmission ou à une réunion interne obligatoire"><span class="check-label">Absence non justifiée à une retransmission ou à une réunion interne obligatoire</span></label>
-                      <label class="check-item"><input type="checkbox" value="Absence justifiée sans prévenir dans un délai raisonnable (min. 24h) et sans proposer de remplacement"><span class="check-label">Absence justifiée sans prévenir dans un délai raisonnable (min. 24h) et sans proposer de remplacement</span></label>
-                      <label class="check-item"><input type="checkbox" value="Abandon de poste en cours de retransmission ou d'une mission bénévole sans motif valable"><span class="check-label">Abandon de poste en cours de retransmission ou d'une mission bénévole sans motif valable</span></label>
-                      <label class="check-item"><input type="checkbox" value="Départ anticipé non autorisé avant la fin du bilan post-retransmission"><span class="check-label">Départ anticipé non autorisé avant la fin du bilan post-retransmission</span></label>
-                      <label class="check-item"><input type="checkbox" value="Inactivité injustifiée de plus de 3 mois au sein des activités du collectif"><span class="check-label">Inactivité injustifiée de plus de 3 mois au sein des activités du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Retard injustifié entraînant un démarrage tardif de retransmission (> 5 min)"><span class="check-label">Retard injustifié entraînant un démarrage tardif de retransmission (&gt; 5 min)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Retard injustifié répété (3 occurrences ou plus sur la saison)"><span class="check-label">Retard injustifié répété (3 occurrences ou plus sur la saison)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Refus répété de participer aux sessions de formation interne"><span class="check-label">Refus répété de participer aux sessions de formation interne</span></label>
-                      <label class="check-item"><input type="checkbox" value="Non-participation injustifiée à une journée de travail collectif ou de préparation technique"><span class="check-label">Non-participation injustifiée à une journée de travail collectif ou de préparation technique</span></label>
-                    </div>
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">📡 Production, qualité technique &amp; éditoriale</span>
+                    <span class="acc-arrow">▼</span>
                   </div>
-
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">🪪 Accréditation, rôles & identité opérationnelle</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Occupation d'un poste (responsable de retransmission, commentateur) sans accréditation valide"><span class="check-label">Occupation d'un poste sans accréditation valide (responsable de retransmission, commentateur)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Falsification d'une accréditation ou d'un questionnaire d'aptitude"><span class="check-label">Falsification d'une accréditation ou d'un questionnaire d'aptitude</span></label>
-                      <label class="check-item"><input type="checkbox" value="Usurpation de rôle ou d'identité lors d'une retransmission"><span class="check-label">Usurpation de rôle ou d'identité lors d'une retransmission</span></label>
-                      <label class="check-item"><input type="checkbox" value="Non-port du gilet identifié MHBTV obligatoire pendant la durée complète de l'événement"><span class="check-label">Non-port du gilet identifié MHBTV obligatoire pendant la durée complète de l'événement</span></label>
-                      <label class="check-item"><input type="checkbox" value="Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement"><span class="check-label">Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement</span></label>
-                    </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé…)"><span class="check-label">Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé…)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Coupure intempestive du direct causée par une négligence technique évitable"><span class="check-label">Coupure intempestive du direct causée par une négligence technique évitable</span></label>
+                    <label class="check-item"><input type="checkbox" value="Non-vérification du matériel avant la retransmission entraînant un dysfonctionnement"><span class="check-label">Non-vérification du matériel avant la retransmission entraînant un dysfonctionnement</span></label>
+                    <label class="check-item"><input type="checkbox" value="Non-déclaration d'un incident technique, comportemental ou matériel constaté lors d'un événement"><span class="check-label">Non-déclaration d'un incident technique, comportemental ou matériel constaté lors d'un événement</span></label>
+                    <label class="check-item"><input type="checkbox" value="Non-respect du conducteur, du plan de retransmission ou changement de poste sans accord"><span class="check-label">Non-respect du conducteur, du plan de retransmission ou changement de poste sans accord</span></label>
+                    <label class="check-item"><input type="checkbox" value="Utilisation non autorisée d'effets, filtres, overlays ou incrustations non validés"><span class="check-label">Utilisation non autorisée d'effets, filtres, overlays ou incrustations non validés</span></label>
+                    <label class="check-item"><input type="checkbox" value="Modification ou suppression non autorisée du générique, habillage graphique ou jingle officiel"><span class="check-label">Modification ou suppression non autorisée du générique, habillage graphique ou jingle officiel</span></label>
+                    <label class="check-item"><input type="checkbox" value="Propos inappropriés en direct (insultes, humour déplacé, hors-sujet, irrespectueux)"><span class="check-label">Propos inappropriés en direct (insultes, humour déplacé, hors-sujet, irrespectueux)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.)"><span class="check-label">Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Prise de position polémique, partisane ou politique en direct sans lien avec la retransmission"><span class="check-label">Prise de position polémique, partisane ou politique en direct sans lien avec la retransmission</span></label>
+                    <label class="check-item"><input type="checkbox" value="Dénigrement public d'un membre du collectif, du club ou d'un adversaire en direct"><span class="check-label">Dénigrement public d'un membre du collectif, du club ou d'un adversaire en direct</span></label>
+                    <label class="check-item"><input type="checkbox" value="Révélation d'informations confidentielles en direct (données internes, privées ou réservées)"><span class="check-label">Révélation d'informations confidentielles en direct (données internes, privées ou réservées)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Intervention non autorisée d'une personne extérieure pendant une retransmission en direct"><span class="check-label">Intervention non autorisée d'une personne extérieure pendant une retransmission en direct</span></label>
                   </div>
+                </div>
 
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">📡 Production, qualité technique & éditoriale</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé…)"><span class="check-label">Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé…)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Coupure intempestive du direct causée par une négligence technique évitable"><span class="check-label">Coupure intempestive du direct causée par une négligence technique évitable</span></label>
-                      <label class="check-item"><input type="checkbox" value="Non-vérification du matériel avant la retransmission entraînant un dysfonctionnement"><span class="check-label">Non-vérification du matériel avant la retransmission entraînant un dysfonctionnement</span></label>
-                      <label class="check-item"><input type="checkbox" value="Non-déclaration d'un incident technique, comportemental ou matériel constaté lors d'un événement"><span class="check-label">Non-déclaration d'un incident technique, comportemental ou matériel constaté</span></label>
-                      <label class="check-item"><input type="checkbox" value="Non-respect du conducteur, du plan de retransmission ou changement de poste sans accord"><span class="check-label">Non-respect du conducteur ou du plan de retransmission sans accord</span></label>
-                      <label class="check-item"><input type="checkbox" value="Utilisation non autorisée d'effets, filtres, overlays ou incrustations non validés"><span class="check-label">Utilisation non autorisée d'effets, filtres, overlays ou incrustations</span></label>
-                      <label class="check-item"><input type="checkbox" value="Modification ou suppression non autorisée du générique, habillage graphique ou jingle officiel"><span class="check-label">Modification ou suppression non autorisée du générique, habillage ou jingle officiel</span></label>
-                      <label class="check-item"><input type="checkbox" value="Propos inappropriés en direct (insultes, humour déplacé, hors-sujet, irrespectueux)"><span class="check-label">Propos inappropriés en direct (insultes, humour déplacé, hors-sujet)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.)"><span class="check-label">Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme…)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Prise de position polémique, partisane ou politique en direct sans lien avec la retransmission"><span class="check-label">Prise de position polémique, partisane ou politique en direct</span></label>
-                      <label class="check-item"><input type="checkbox" value="Dénigrement public d'un membre du collectif, du club ou d'un adversaire en direct"><span class="check-label">Dénigrement public d'un membre, du club ou d'un adversaire en direct</span></label>
-                      <label class="check-item"><input type="checkbox" value="Révélation d'informations confidentielles en direct"><span class="check-label">Révélation d'informations confidentielles en direct</span></label>
-                      <label class="check-item"><input type="checkbox" value="Intervention non autorisée d'une personne extérieure pendant une retransmission en direct"><span class="check-label">Intervention non autorisée d'une personne extérieure pendant une retransmission</span></label>
-                    </div>
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">🎒 Matériel, équipements &amp; ressources du collectif</span>
+                    <span class="acc-arrow">▼</span>
                   </div>
-
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">🎒 Matériel, équipements & ressources du collectif</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Utilisation du matériel à des fins personnelles sans autorisation ou prêt non autorisé à un tiers"><span class="check-label">Utilisation du matériel à des fins personnelles ou prêt non autorisé à un tiers</span></label>
-                      <label class="check-item"><input type="checkbox" value="Non-respect des procédures d'utilisation ou de rangement / non-retour dans les délais"><span class="check-label">Non-respect des procédures d'utilisation / rangement ou non-retour dans les délais</span></label>
-                      <label class="check-item"><input type="checkbox" value="Perte de matériel lors d'un déplacement sans signalement immédiat"><span class="check-label">Perte de matériel lors d'un déplacement sans signalement immédiat</span></label>
-                      <label class="check-item"><input type="checkbox" value="Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie…)"><span class="check-label">Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie…)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Dégradation volontaire de matériel ou d'équipements du collectif"><span class="check-label">Dégradation volontaire de matériel ou d'équipements du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Accès non autorisé ou partage d'identifiants/mots de passe des comptes du collectif"><span class="check-label">Accès non autorisé ou partage d'identifiants/mots de passe des comptes du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Suppression non autorisée de fichiers, archives ou projets du collectif"><span class="check-label">Suppression non autorisée de fichiers, archives ou projets du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Partage non autorisé de rushes, archives ou projets internes à l'extérieur"><span class="check-label">Partage non autorisé de rushes, archives ou projets internes à l'extérieur</span></label>
-                    </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Utilisation du matériel à des fins personnelles sans autorisation ou prêt non autorisé à un tiers"><span class="check-label">Utilisation du matériel à des fins personnelles sans autorisation ou prêt non autorisé à un tiers</span></label>
+                    <label class="check-item"><input type="checkbox" value="Non-respect des procédures d'utilisation ou de rangement / non-retour dans les délais"><span class="check-label">Non-respect des procédures d'utilisation ou de rangement / non-retour dans les délais</span></label>
+                    <label class="check-item"><input type="checkbox" value="Perte de matériel lors d'un déplacement sans signalement immédiat"><span class="check-label">Perte de matériel lors d'un déplacement sans signalement immédiat</span></label>
+                    <label class="check-item"><input type="checkbox" value="Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie…)"><span class="check-label">Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie…)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Dégradation volontaire de matériel ou d'équipements du collectif"><span class="check-label">Dégradation volontaire de matériel ou d'équipements du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Accès non autorisé ou partage d'identifiants/mots de passe des comptes et outils du collectif"><span class="check-label">Accès non autorisé ou partage d'identifiants/mots de passe des comptes et outils du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Suppression non autorisée de fichiers, archives ou projets du collectif"><span class="check-label">Suppression non autorisée de fichiers, archives ou projets du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Partage non autorisé de rushes, archives ou projets internes du collectif à l'extérieur"><span class="check-label">Partage non autorisé de rushes, archives ou projets internes du collectif à l'extérieur</span></label>
                   </div>
+                </div>
 
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">🌐 Image du collectif, représentation externe & partenaires</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Utilisation du nom, du logo ou de l'identité visuelle MHBTV à des fins personnelles sans autorisation"><span class="check-label">Utilisation du nom, logo ou identité visuelle MHBTV à des fins personnelles sans autorisation</span></label>
-                      <label class="check-item"><input type="checkbox" value="Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif"><span class="check-label">Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Création d'un compte ou d'une page imitant le collectif ou l'un de ses membres"><span class="check-label">Création d'un compte ou page imitant le collectif ou l'un de ses membres</span></label>
-                      <label class="check-item"><input type="checkbox" value="Publication, modification ou suppression non autorisée de contenus au nom du collectif"><span class="check-label">Publication, modification ou suppression non autorisée de contenus au nom du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux, public)"><span class="check-label">Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux, public)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Diffusion de fausses informations concernant le collectif ou ses membres"><span class="check-label">Diffusion de fausses informations concernant le collectif ou ses membres</span></label>
-                      <label class="check-item"><input type="checkbox" value="Cyberharcèlement envers un membre du collectif (messages répétés, intimidation en ligne)"><span class="check-label">Cyberharcèlement envers un membre du collectif (messages répétés, intimidation en ligne)</span></label>
-                      <label class="check-item"><input type="checkbox" value="Prise de parole publique au nom du collectif sans mandat"><span class="check-label">Prise de parole publique au nom du collectif sans mandat</span></label>
-                      <label class="check-item"><input type="checkbox" value="Commentaires blessants ou moqueries publiques envers un membre du collectif"><span class="check-label">Commentaires blessants ou moqueries publiques envers un membre du collectif</span></label>
-                    </div>
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">🌐 Image du collectif, représentation externe &amp; partenaires</span>
+                    <span class="acc-arrow">▼</span>
                   </div>
-
-                  <div class="acc-section">
-                    <div class="acc-header" onclick="toggleAcc(this)">
-                      <span class="acc-title">🔒 Droits de diffusion, données personnelles & confidentialité</span>
-                      <span class="acc-arrow">▼</span>
-                    </div>
-                    <div class="acc-body">
-                      <label class="check-item"><input type="checkbox" value="Retransmission non autorisée d'un événement privé ou protégé"><span class="check-label">Retransmission non autorisée d'un événement privé ou protégé</span></label>
-                      <label class="check-item"><input type="checkbox" value="Enregistrement non autorisé d'une réunion interne du collectif"><span class="check-label">Enregistrement non autorisé d'une réunion interne du collectif</span></label>
-                      <label class="check-item"><input type="checkbox" value="Divulgation d'informations confidentielles internes (décisions, finances, personnels) à l'extérieur"><span class="check-label">Divulgation d'informations confidentielles internes à l'extérieur</span></label>
-                      <label class="check-item"><input type="checkbox" value="Publication de photos ou vidéos de membres sans consentement explicite"><span class="check-label">Publication de photos ou vidéos de membres sans consentement explicite</span></label>
-                    </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Utilisation du nom, du logo ou de l'identité visuelle MHBTV à des fins personnelles sans autorisation"><span class="check-label">Utilisation du nom, du logo ou de l'identité visuelle MHBTV à des fins personnelles sans autorisation</span></label>
+                    <label class="check-item"><input type="checkbox" value="Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif"><span class="check-label">Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Création d'un compte ou d'une page imitant le collectif ou l'un de ses membres"><span class="check-label">Création d'un compte ou d'une page imitant le collectif ou l'un de ses membres</span></label>
+                    <label class="check-item"><input type="checkbox" value="Publication, modification ou suppression non autorisée de contenus au nom ou sous l'identité du collectif"><span class="check-label">Publication, modification ou suppression non autorisée de contenus au nom ou sous l'identité du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux sociaux, espace public)"><span class="check-label">Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux sociaux, espace public)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Diffusion de fausses informations concernant le collectif ou ses membres"><span class="check-label">Diffusion de fausses informations concernant le collectif ou ses membres</span></label>
+                    <label class="check-item"><input type="checkbox" value="Cyberharcèlement envers un membre du collectif (messages répétés, intimidation en ligne)"><span class="check-label">Cyberharcèlement envers un membre du collectif (messages répétés, intimidation en ligne)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Prise de parole publique au nom du collectif sans mandat ou partage de contenus attentatoires à son image"><span class="check-label">Prise de parole publique au nom du collectif sans mandat ou partage de contenus attentatoires à son image</span></label>
+                    <label class="check-item"><input type="checkbox" value="Commentaires blessants ou moqueries publiques envers un membre du collectif"><span class="check-label">Commentaires blessants ou moqueries publiques envers un membre du collectif</span></label>
                   </div>
+                </div>
 
-                </div><!-- /accordions -->
-              </div><!-- /field-group motifs -->
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">🔒 Droits de diffusion, données personnelles &amp; confidentialité</span>
+                    <span class="acc-arrow">▼</span>
+                  </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Retransmission non autorisée d'un événement privé ou protégé par des droits de diffusion"><span class="check-label">Retransmission non autorisée d'un événement privé ou protégé par des droits de diffusion</span></label>
+                    <label class="check-item"><input type="checkbox" value="Enregistrement non autorisé d'une réunion interne du collectif"><span class="check-label">Enregistrement non autorisé d'une réunion interne du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Divulgation d'informations confidentielles internes (décisions, finances, données personnelles) à l'extérieur"><span class="check-label">Divulgation d'informations confidentielles internes (décisions, finances, données personnelles) à l'extérieur</span></label>
+                    <label class="check-item"><input type="checkbox" value="Publication de photos ou vidéos de membres sans consentement explicite des personnes concernées"><span class="check-label">Publication de photos ou vidéos de membres sans consentement explicite des personnes concernées</span></label>
+                  </div>
+                </div>
 
-              <!-- Description libre -->
-              <div class="field-group">
-                <label class="field-label" for="description">Description des faits <span class="required">*</span></label>
-                <textarea class="field-textarea" id="description" rows="5" placeholder="Décrivez les faits de manière précise et factuelle : contexte, lieu, date, personnes présentes, éléments constatés..."></textarea>
-              </div>
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">👥 Vie interne &amp; relations entre membres</span>
+                    <span class="acc-arrow">▼</span>
+                  </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Comportement irrespectueux, moqueries ou propos humiliants / vexatoires envers un membre"><span class="check-label">Comportement irrespectueux, moqueries ou propos humiliants / vexatoires envers un membre</span></label>
+                    <label class="check-item"><input type="checkbox" value="Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.)"><span class="check-label">Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Harcèlement moral répété envers un membre du collectif"><span class="check-label">Harcèlement moral répété envers un membre du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis)"><span class="check-label">Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Violence psychologique, manipulation ou intimidation envers un membre"><span class="check-label">Violence psychologique, manipulation ou intimidation envers un membre</span></label>
+                    <label class="check-item"><input type="checkbox" value="Mise à l'écart volontaire d'un membre (ostracisme, exclusion sociale au sein du groupe)"><span class="check-label">Mise à l'écart volontaire d'un membre (ostracisme, exclusion sociale au sein du groupe)</span></label>
+                    <label class="check-item"><input type="checkbox" value="Comportement perturbateur lors d'une réunion, session interne ou nuisant à la concentration de l'équipe"><span class="check-label">Comportement perturbateur lors d'une réunion, session interne ou nuisant à la concentration de l'équipe</span></label>
+                    <label class="check-item"><input type="checkbox" value="Consommation d'alcool ou de substances avant ou pendant une retransmission"><span class="check-label">Consommation d'alcool ou de substances avant ou pendant une retransmission</span></label>
+                    <label class="check-item"><input type="checkbox" value="Introduction de personnes non autorisées dans les espaces du collectif pendant une retransmission"><span class="check-label">Introduction de personnes non autorisées dans les espaces du collectif pendant une retransmission</span></label>
+                    <label class="check-item"><input type="checkbox" value="Conflit ouvert ou sabotage délibéré de la réputation d'un membre pendant une production ou session"><span class="check-label">Conflit ouvert ou sabotage délibéré de la réputation d'un membre pendant une production ou session</span></label>
+                    <label class="check-item"><input type="checkbox" value="Refus persistant de coopérer avec un autre membre dans le cadre d'une production"><span class="check-label">Refus persistant de coopérer avec un autre membre dans le cadre d'une production</span></label>
+                  </div>
+                </div>
 
-              <!-- Témoins -->
-              <div class="field-group">
-                <label class="field-label" for="temoins">Témoins éventuels</label>
-                <input class="field-input" type="text" id="temoins" placeholder="Prénom(s) et nom(s) des personnes pouvant témoigner">
-              </div>
+                <div class="acc-section">
+                  <div class="acc-header" onclick="toggleAcc(this)">
+                    <span class="acc-title">🏛️ Responsabilités &amp; gouvernance interne</span>
+                    <span class="acc-arrow">▼</span>
+                  </div>
+                  <div class="acc-body">
+                    <label class="check-item"><input type="checkbox" value="Prise de décision engageant le collectif sans mandat, ou non-respect d'une décision collective"><span class="check-label">Prise de décision engageant le collectif sans mandat, ou non-respect d'une décision collective</span></label>
+                    <label class="check-item"><input type="checkbox" value="Conflit d'intérêts non déclaré dans une décision engageant le collectif"><span class="check-label">Conflit d'intérêts non déclaré dans une décision engageant le collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Abus de position hiérarchique ou inactivité caractérisée d'un responsable"><span class="check-label">Abus de position hiérarchique ou inactivité caractérisée d'un responsable</span></label>
+                    <label class="check-item"><input type="checkbox" value="Opacité, refus de rendre compte ou dépense non validée au nom du collectif"><span class="check-label">Opacité, refus de rendre compte ou dépense non validée au nom du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Détournement à profit personnel de ressources ou équipements du collectif"><span class="check-label">Détournement à profit personnel de ressources ou équipements du collectif</span></label>
+                    <label class="check-item"><input type="checkbox" value="Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire (ICR)"><span class="check-label">Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire (ICR)</span></label>
+                  </div>
+                </div>
 
-              <!-- Preuves -->
-              <div class="field-group">
-                <label class="field-label" for="preuves">Éléments de preuve disponibles</label>
-                <input class="field-input" type="text" id="preuves" placeholder="Ex : captures d'écran, messages, vidéos… (à transmettre séparément si besoin)">
-              </div>
+              </div><!-- /accordions -->
+            </div><!-- /field-group motifs -->
 
-              <!-- Submit -->
-              <div class="submit-row">
-                <p class="submit-note">Les champs marqués d'un <span style="color:var(--red);">*</span> sont obligatoires.</p>
-                <button class="btn-submit" onclick="submitForm()">Envoyer le signalement →</button>
-              </div>
+            <!-- Description des faits -->
+            <div class="field-group">
+              <label class="field-label" for="description">
+                Description des faits <span class="req">*</span>
+              </label>
+              <textarea class="field-textarea" id="description" rows="6"
+                placeholder="Décrivez les faits de manière précise et factuelle : contexte, lieu, date, personnes présentes, éléments constatés, chronologie des événements…"></textarea>
+              <div class="field-hint">Soyez factuel·le. Évitez les jugements de valeur — décrivez uniquement ce que vous avez constaté.</div>
+            </div>
 
-            </div><!-- /form-card-body -->
-          </div><!-- /form-card -->
+            <!-- Témoins -->
+            <div class="field-group">
+              <label class="field-label" for="temoins">Témoins éventuels</label>
+              <input class="field-input" type="text" id="temoins"
+                placeholder="Prénom(s) et nom(s) des personnes pouvant témoigner">
+            </div>
 
-          <!-- Success screen (inside same container) -->
-          <div class="form-card" id="successCard" style="display:none;">
-            <div class="success-screen" style="display:block;">
-              <div class="success-icon">✓</div>
-              <h2>Signalement transmis</h2>
-              <p>Votre rapport a bien été enregistré. La commission disciplinaire (ICR) en prendra connaissance dans les meilleurs délais. Merci pour votre vigilance au sein du collectif.</p>
-              <div style="margin-top:2rem;">
-                <a href="index.html" class="btn btn-outline">← Retour à l'accueil</a>
-              </div>
+            <!-- Preuves -->
+            <div class="field-group">
+              <label class="field-label" for="preuves">Éléments de preuve disponibles</label>
+              <input class="field-input" type="text" id="preuves"
+                placeholder="Ex : captures d'écran, messages écrits, vidéos… (à transmettre séparément si besoin)">
+            </div>
+
+            <!-- Message de statut (succès / erreur inline) -->
+            <div class="status-msg" id="statusMsg">
+              <span class="status-msg-icon" id="statusIcon"></span>
+              <div class="status-msg-body" id="statusBody"></div>
+            </div>
+
+            <!-- Submit -->
+            <div class="submit-row">
+              <p class="submit-note">
+                Les champs marqués d'un <span style="color:var(--red);">*</span> sont obligatoires.
+              </p>
+              <button class="btn-submit" id="submitBtn" onclick="submitForm()">
+                <span class="btn-spinner" id="btnSpinner"></span>
+                <span class="btn-text"></span>
+              </button>
+            </div>
+
+          </div><!-- /form-card-body -->
+        </div><!-- /form-card -->
+
+        <!-- ÉCRAN SUCCÈS -->
+        <div class="form-card" id="successCard">
+          <div class="success-screen">
+            <div class="success-icon-big">✓</div>
+            <h2>Signalement transmis</h2>
+            <p>
+              Votre rapport a bien été enregistré et transmis à la commission disciplinaire (ICR).
+              Conformément à l'article 22 du RARC, un accusé de réception vous sera adressé dans les meilleurs délais.
+              Merci pour votre vigilance au sein du collectif.
+            </p>
+            <div class="success-ref">
+              Référence : <strong id="refNum"></strong> · Transmis le <strong id="refDate"></strong>
+            </div>
+            <div style="margin-top:2rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;">
+              <a href="index.html" class="btn btn-outline">← Retour à l'accueil</a>
+              <a href="icr.html" class="btn btn-outline">ℹ️ En savoir plus sur l'ICR</a>
             </div>
           </div>
         </div>
 
-        <!-- SIDEBAR -->
-        <div class="sidebar">
-          <div class="info-card">
-            <h3>ℹ️ À qui s'adresse ce formulaire ?</h3>
-            <p>Ce formulaire est réservé aux membres de Meylan Handball TV souhaitant signaler un comportement contraire au règlement de l'association ou aux valeurs du collectif.</p>
-          </div>
+      </div><!-- /form col -->
 
-          <div class="info-card">
-            <h3>🔄 Traitement du signalement</h3>
-            <ul>
-              <li>Le signalement est transmis à la commission disciplinaire (ICR)</li>
-              <li>Un accusé de réception vous sera adressé</li>
-              <li>La commission instruit le dossier en toute confidentialité</li>
-              <li>Les parties concernées sont entendues avant toute décision</li>
-            </ul>
-          </div>
+      <!-- SIDEBAR -->
+      <aside class="form-sidebar">
 
-          <div class="warning-card">
-            <strong>⚠️ Rappel important</strong>
-            Tout signalement doit être fondé sur des faits réels et vérifiables. Un signalement de mauvaise foi ou malveillant est lui-même un manquement au règlement et peut faire l'objet d'une procédure disciplinaire.
-          </div>
-
-          <div class="info-card" style="margin-top:1.25rem;">
-            <h3>📄 Règlement disciplinaire</h3>
-            <p style="margin-bottom:0.75rem;">Consultez le règlement pour en savoir plus sur les procédures et sanctions applicables.</p>
-            <a href="Reglement_disciplinaire_MHBTV.pdf" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.78rem;padding:0.6rem 1rem;">Voir le règlement →</a>
-          </div>
+        <div class="sb-card">
+          <h3>ℹ️ À qui s'adresse ce formulaire ?</h3>
+          <p>Ce formulaire est réservé aux membres de Meylan Handball TV souhaitant signaler un comportement contraire au règlement ou aux valeurs du collectif.</p>
+          <p style="margin-top:.6rem;">Il constitue le <strong style="color:var(--white);">point d'entrée unique et obligatoire</strong> défini par l'article 22 du Règlement des Retransmissions (RARC).</p>
         </div>
 
-      </div>
-    </section>
+        <div class="sb-card">
+          <h3>🔄 Traitement du signalement</h3>
+          <ol class="sb-steps">
+            <li>Le Bureau enregistre le signalement et vous accuse réception</li>
+            <li>Le dossier est transmis sans délai à l'ICR pour examen de recevabilité</li>
+            <li>L'ICR instruit le dossier en toute confidentialité (Art. 4 RARC)</li>
+            <li>Les parties concernées sont entendues avant toute décision</li>
+            <li>La décision est notifiée dans les 7 jours après la commission</li>
+          </ol>
+        </div>
+
+        <div class="warning-card">
+          <strong>⚠️ Rappel important — Art. 23 RARC</strong>
+          Tout signalement doit être fondé sur des faits réels et vérifiables. Un signalement anonyme, manifestement infondé, abusif ou malveillant sera déclaré irrecevable et peut lui-même faire l'objet d'une procédure disciplinaire.
+        </div>
+
+      </aside>
+
+    </div><!-- /form-wrapper -->
   </main>
 
   <footer>
@@ -602,10 +776,9 @@
     <div>
       <h4>Ressources</h4>
       <ul>
-        <li><a href="statuts.html">Statuts</a></li>
-        <li><a href="documentation.html">Documentation</a></li>
-        <li><a href="audiences.html">Audiences</a></li>
-        <li><a href="charte.html">Charte graphique</a></li>
+        <li><a href="icr.html">ICR</a></li>
+        <li><a href="accreditations.html">Accréditations</a></li>
+        <li><a href="guides.html">Guides &amp; formations</a></li>
       </ul>
     </div>
   </footer>
@@ -615,14 +788,30 @@
   </div>
 
   <script>
-    // Accordion toggle
-    function toggleAcc(header) {
-      header.classList.toggle('open');
-      const body = header.nextElementSibling;
-      body.classList.toggle('open');
+    /* ══════════════════════════════════════════════════════════════
+       DÉTECTION CONFIG EMAILJS
+    ══════════════════════════════════════════════════════════════ */
+    const isConfigured =
+      EMAILJS_SERVICE_ID  !== 'service_kn7s3y7'  &&
+      EMAILJS_TEMPLATE_ID !== 'template_k1axl8m' &&
+      EMAILJS_PUBLIC_KEY  !== 'ZT2Ysq9JC1K2Z3ZJK';
+
+    // Masquer la bannière si tout est configuré
+    if (isConfigured) {
+      document.getElementById('configBanner').style.display = 'none';
     }
 
-    // Checkbox → selected tags summary
+    /* ══════════════════════════════════════════════════════════════
+       ACCORDÉONS
+    ══════════════════════════════════════════════════════════════ */
+    function toggleAcc(header) {
+      header.classList.toggle('open');
+      header.nextElementSibling.classList.toggle('open');
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       MISE À JOUR DU RÉSUMÉ DE SÉLECTION
+    ══════════════════════════════════════════════════════════════ */
     document.querySelectorAll('#accordions input[type="checkbox"]').forEach(cb => {
       cb.addEventListener('change', updateSummary);
     });
@@ -630,23 +819,29 @@
     function updateSummary() {
       const checked = [...document.querySelectorAll('#accordions input[type="checkbox"]:checked')];
       const container = document.getElementById('selectedTags');
+      const summary   = document.getElementById('selectedSummary');
+
       if (checked.length === 0) {
         container.innerHTML = '<span class="selected-empty">Aucun motif sélectionné</span>';
+        summary.classList.remove('has-items');
       } else {
-        container.innerHTML = checked.map(cb =>
-          `<span class="selected-tag">${cb.value.length > 60 ? cb.value.substring(0, 58) + '…' : cb.value}</span>`
-        ).join('');
+        container.innerHTML = checked.map(cb => {
+          const label = cb.value.length > 65 ? cb.value.substring(0, 63) + '…' : cb.value;
+          return `<span class="selected-tag">${label}</span>`;
+        }).join('');
+        summary.classList.add('has-items');
       }
-      // update acc-count badges
+
+      // Badges compteurs sur chaque accordéon
       document.querySelectorAll('.acc-section').forEach(section => {
-        const count = section.querySelectorAll('input[type="checkbox"]:checked').length;
-        const header = section.querySelector('.acc-header');
-        let badge = header.querySelector('.acc-count');
+        const count  = section.querySelectorAll('input[type="checkbox"]:checked').length;
+        const title  = section.querySelector('.acc-title');
+        let badge    = title.querySelector('.acc-badge');
         if (count > 0) {
           if (!badge) {
             badge = document.createElement('span');
-            badge.className = 'acc-count';
-            header.querySelector('.acc-title').appendChild(badge);
+            badge.className = 'acc-badge';
+            title.appendChild(badge);
           }
           badge.textContent = count + ' sélectionné' + (count > 1 ? 's' : '');
         } else if (badge) {
@@ -655,22 +850,177 @@
       });
     }
 
-    // Form submit (front-end only — no backend)
-    function submitForm() {
-      const plaignant = document.getElementById('plaignant').value.trim();
-      const contre = document.getElementById('contre').value.trim();
-      const description = document.getElementById('description').value.trim();
-      const checked = document.querySelectorAll('#accordions input[type="checkbox"]:checked');
+    /* ══════════════════════════════════════════════════════════════
+       VALIDATION
+    ══════════════════════════════════════════════════════════════ */
+    function validate() {
+      let ok = true;
 
-      if (!plaignant || !contre || !description || checked.length === 0) {
-        alert('Merci de remplir tous les champs obligatoires et de sélectionner au moins un motif.');
+      ['plaignant','contre','description'].forEach(id => {
+        const el = document.getElementById(id);
+        if (!el.value.trim()) {
+          el.classList.add('error');
+          ok = false;
+        } else {
+          el.classList.remove('error');
+        }
+      });
+
+      const checked = document.querySelectorAll('#accordions input[type="checkbox"]:checked');
+      if (checked.length === 0) {
+        document.getElementById('selectedSummary').style.borderColor = 'var(--red)';
+        ok = false;
+      } else {
+        document.getElementById('selectedSummary').style.borderColor = '';
+      }
+
+      const jour   = document.getElementById('date-jour').value;
+      const mois   = document.getElementById('date-mois').value;
+      const annee  = document.getElementById('date-annee').value;
+      if (!jour || !mois || !annee) {
+        ['date-jour','date-mois','date-annee'].forEach(id => {
+          const el = document.getElementById(id);
+          if (!el.value) el.classList.add('error');
+        });
+        ok = false;
+      } else {
+        ['date-jour','date-mois','date-annee'].forEach(id =>
+          document.getElementById(id).classList.remove('error'));
+      }
+
+      return ok;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       AFFICHAGE STATUT
+    ══════════════════════════════════════════════════════════════ */
+    function showStatus(type, title, msg) {
+      const el   = document.getElementById('statusMsg');
+      const icon = document.getElementById('statusIcon');
+      const body = document.getElementById('statusBody');
+
+      el.className   = 'status-msg show ' + type;
+      icon.textContent = type === 'success' ? '✅' : '❌';
+      body.innerHTML = `<strong>${title}</strong>${msg}`;
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function hideStatus() {
+      document.getElementById('statusMsg').className = 'status-msg';
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       GÉNÉRATION RÉFÉRENCE
+    ══════════════════════════════════════════════════════════════ */
+    function genRef() {
+      const ts   = Date.now().toString(36).toUpperCase();
+      const rand = Math.random().toString(36).substring(2, 5).toUpperCase();
+      return 'MHBTV-' + ts + '-' + rand;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       ENVOI FORMULAIRE
+    ══════════════════════════════════════════════════════════════ */
+    async function submitForm() {
+      hideStatus();
+
+      if (!validate()) {
+        showStatus('error',
+          'Formulaire incomplet',
+          ' Merci de remplir tous les champs obligatoires (*) et de sélectionner au moins un motif.');
         return;
       }
 
-      document.getElementById('formCard').style.display = 'none';
+      // Récupération des valeurs
+      const plaignant   = document.getElementById('plaignant').value.trim();
+      const contre      = document.getElementById('contre').value.trim();
+      const jour        = document.getElementById('date-jour').value;
+      const mois        = document.getElementById('date-mois').value;
+      const annee       = document.getElementById('date-annee').value;
+      const date_faits  = `${jour} ${mois} ${annee}`;
+      const description = document.getElementById('description').value.trim();
+      const temoins     = document.getElementById('temoins').value.trim() || 'Aucun témoin mentionné';
+      const preuves     = document.getElementById('preuves').value.trim()  || 'Aucun élément de preuve mentionné';
+
+      // Motifs sélectionnés → liste numérotée
+      const checkedBoxes = [...document.querySelectorAll('#accordions input[type="checkbox"]:checked')];
+      const motifs = checkedBoxes
+        .map((cb, i) => `${i + 1}. ${cb.value}`)
+        .join('\n');
+
+      // Date et heure d'envoi
+      const now        = new Date();
+      const date_envoi = now.toLocaleDateString('fr-FR', {
+        weekday:'long', day:'numeric', month:'long', year:'numeric',
+        hour:'2-digit', minute:'2-digit'
+      });
+
+      const reference = genRef();
+
+      // Paramètres du template EmailJS
+      const templateParams = {
+        plaignant,
+        contre,
+        date_faits,
+        motifs,
+        description,
+        temoins,
+        preuves,
+        date_envoi,
+        reference,
+        nb_motifs: checkedBoxes.length.toString()
+      };
+
+      // État chargement
+      const btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.disabled = true;
+
+      /* ── MODE SIMULATION (EmailJS non configuré) ── */
+      if (!isConfigured) {
+        await new Promise(r => setTimeout(r, 1200)); // Simule le délai réseau
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        showSuccessScreen(reference, date_envoi);
+        console.log('📋 [MODE SIMULATION] Données qui seraient envoyées :', templateParams);
+        return;
+      }
+
+      /* ── ENVOI RÉEL VIA EMAILJS ── */
+      try {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        showSuccessScreen(reference, date_envoi);
+      } catch (err) {
+        btn.classList.remove('loading');
+        btn.disabled = false;
+        console.error('EmailJS error:', err);
+        showStatus('error',
+          'Erreur d\'envoi',
+          ' Une erreur est survenue lors de la transmission du signalement. Vérifiez votre connexion et réessayez. ' +
+          'Si le problème persiste, contactez directement la Coordination générale. ' +
+          '(Erreur : ' + (err.text || err.message || JSON.stringify(err)) + ')');
+      }
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       AFFICHAGE ÉCRAN SUCCÈS
+    ══════════════════════════════════════════════════════════════ */
+    function showSuccessScreen(reference, dateEnvoi) {
+      document.getElementById('formCard').style.display   = 'none';
       document.getElementById('successCard').style.display = 'block';
+      document.getElementById('refNum').textContent   = reference;
+      document.getElementById('refDate').textContent  = dateEnvoi;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    /* ══════════════════════════════════════════════════════════════
+       NETTOYAGE ERREUR AU FOCUS
+    ══════════════════════════════════════════════════════════════ */
+    document.querySelectorAll('.field-input, .field-textarea, .field-select').forEach(el => {
+      el.addEventListener('focus', () => el.classList.remove('error'));
+    });
   </script>
 </body>
 </html>

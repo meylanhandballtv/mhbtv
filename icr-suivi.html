@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suivi disciplinaire ICR | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+    /* ══════════════════════════════════════
+       ACCÈS RESTREINT BANNER
+    ══════════════════════════════════════ */
+    .restricted-banner {
+      background: rgba(232,0,29,.07);
+      border-bottom: 1px solid rgba(232,0,29,.2);
+      padding: .65rem 4rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .restricted-banner span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .restricted-badge {
+      background: rgba(232,0,29,.12); border: 1px solid rgba(232,0,29,.3);
+      border-radius: 3px; padding: .18rem .55rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--red);
+    }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    .suivi-hero {
+      position: relative;
+      padding: 4rem 4rem 3rem;
+      background: var(--black); overflow: hidden;
+    }
+    .suivi-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 50% 70% at 88% 30%, rgba(99,179,237,.07) 0%, transparent 65%),
+        repeating-linear-gradient(0deg, transparent, transparent 70px,
+          rgba(255,255,255,.012) 70px, rgba(255,255,255,.012) 71px);
+    }
+    .suivi-hero-wm {
+      position: absolute; right: -1rem; bottom: -1.5rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(18vw, 240px);
+      color: rgba(99,179,237,.04); line-height: 1;
+      pointer-events: none; user-select: none;
+    }
+    .suivi-hero-content { position: relative; z-index: 1; }
+    .suivi-hero-top {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+    }
+    .suivi-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: .9; letter-spacing: .02em; color: var(--white);
+      margin-bottom: .75rem;
+    }
+    .suivi-hero h1 span { color: #63b3ed; }
+    .suivi-hero p { color: var(--muted); font-size: .92rem; line-height: 1.65; max-width: 520px; }
+    .hero-actions { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
+
+    /* KPI row */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .kpi-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.1rem 1.25rem;
+      transition: border-color .2s;
+    }
+    .kpi-card:hover { border-color: #63b3ed44; }
+    .kpi-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem; line-height: 1; color: var(--white); display: block;
+    }
+    .kpi-lab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); margin-top: .2rem; display: block;
+    }
+    .kpi-card.urgent .kpi-val { color: var(--red); }
+    .kpi-card.blue   .kpi-val { color: #63b3ed; }
+    .kpi-card.gold   .kpi-val { color: var(--gold); }
+    .kpi-card.green  .kpi-val { color: #4ade80; }
+
+    /* ══════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════ */
+    .suivi-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2rem;
+      padding: 2.5rem 4rem;
+      align-items: start;
+    }
+
+    /* ══════════════════════════════════════
+       TABS
+    ══════════════════════════════════════ */
+    .suivi-tabs {
+      display: flex; gap: 0;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 0 4rem;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .suivi-tabs::-webkit-scrollbar { display: none; }
+    .stab {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .78rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      padding: .95rem 1.4rem; border: none; background: none;
+      cursor: pointer; border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s; white-space: nowrap;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .stab:hover { color: var(--white); }
+    .stab.active { color: #63b3ed; border-bottom-color: #63b3ed; }
+    .stab-count {
+      background: rgba(232,0,29,.15); color: var(--red);
+      border: 1px solid rgba(232,0,29,.25);
+      font-size: .62rem; font-weight: 700;
+      padding: .12rem .45rem; border-radius: 3px; line-height: 1.4;
+    }
+    .stab-count.blue { background: rgba(99,179,237,.12); color: #63b3ed; border-color: rgba(99,179,237,.25); }
+    .stab-count.muted { background: rgba(255,255,255,.06); color: var(--muted); border-color: var(--border); }
+
+    .spanel { display: none; }
+    .spanel.active { display: block; }
+
+    /* ══════════════════════════════════════
+       FILTRES
+    ══════════════════════════════════════ */
+    .filter-bar {
+      display: flex; align-items: center; gap: .6rem;
+      flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .filter-bar-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--muted); margin-right: .25rem;
+    }
+    .fchip {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .32rem .85rem;
+      border-radius: 3px; border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      cursor: pointer; transition: all .15s;
+    }
+    .fchip:hover { color: var(--white); border-color: #555; }
+    .fchip.active { background: rgba(99,179,237,.1); border-color: rgba(99,179,237,.35); color: #63b3ed; }
+    .search-wrap { margin-left: auto; position: relative; }
+    .search-wrap input {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 5px; color: var(--text);
+      font-family: 'Barlow', sans-serif; font-size: .82rem;
+      padding: .4rem .85rem .4rem 2rem;
+      outline: none; transition: border-color .2s; width: 200px;
+    }
+    .search-wrap input:focus { border-color: #63b3ed; }
+    .search-wrap input::placeholder { color: var(--muted); }
+    .search-wrap::before {
+      content: '🔍'; position: absolute; left: .6rem; top: 50%;
+      transform: translateY(-50%); font-size: .78rem; pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════
+       DOSSIER CARD
+    ══════════════════════════════════════ */
+    .dossiers-list { display: flex; flex-direction: column; gap: .75rem; }
+    .dossier-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+      transition: border-color .2s, transform .15s;
+      cursor: pointer;
+    }
+    .dossier-card:hover { border-color: rgba(99,179,237,.35); transform: translateX(3px); }
+
+    .dossier-head {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 1rem; align-items: center;
+      padding: 1rem 1.5rem;
+    }
+    .dossier-ref {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: .08em; line-height: 1;
+    }
+    .dossier-ref .ref-num { color: #63b3ed; }
+    .dossier-ref .ref-year { color: var(--muted); font-size: .75rem; display: block; }
+    .dossier-main {}
+    .dossier-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem; color: var(--white);
+      margin-bottom: .2rem; line-height: 1.3;
+    }
+    .dossier-meta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      font-size: .78rem; color: var(--muted);
+    }
+    .dossier-meta span { display: flex; align-items: center; gap: .3rem; }
+    .dossier-right {
+      display: flex; flex-direction: column;
+      align-items: flex-end; gap: .4rem;
+    }
+
+    /* Statut badge */
+    .statut {
+      display: inline-flex; align-items: center; gap: .4rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .22rem .65rem;
+      border-radius: 3px; white-space: nowrap;
+    }
+    .statut-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    .s-nouveau    { background: rgba(232,0,29,.12); color: var(--red); border: 1px solid rgba(232,0,29,.3); }
+    .s-nouveau    .statut-dot { background: var(--red); animation: blink 1.8s infinite; }
+    .s-instruct   { background: rgba(251,191,36,.1); color: #fbbf24; border: 1px solid rgba(251,191,36,.25); }
+    .s-instruct   .statut-dot { background: #fbbf24; animation: blink 2.5s infinite; }
+    .s-commission { background: rgba(99,179,237,.1); color: #63b3ed; border: 1px solid rgba(99,179,237,.25); }
+    .s-commission .statut-dot { background: #63b3ed; }
+    .s-clos       { background: rgba(74,222,128,.08); color: #4ade80; border: 1px solid rgba(74,222,128,.2); }
+    .s-clos       .statut-dot { background: #4ade80; }
+    .s-irrecev    { background: rgba(255,255,255,.06); color: var(--muted); border: 1px solid var(--border); }
+    .s-irrecev    .statut-dot { background: var(--muted); }
+    .s-avert      { background: rgba(240,180,41,.1); color: var(--gold); border: 1px solid rgba(240,180,41,.25); }
+    .s-avert      .statut-dot { background: var(--gold); }
+
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* Gravité */
+    .gravite {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: .15rem .45rem; border-radius: 3px;
+    }
+    .g-std  { background: rgba(255,255,255,.06); color: var(--muted); border: 1px solid var(--border); }
+    .g-agg  { background: rgba(251,191,36,.1); color: #fbbf24; border: 1px solid rgba(251,191,36,.2); }
+    .g-tres { background: rgba(232,0,29,.12); color: var(--red); border: 1px solid rgba(232,0,29,.25); }
+
+    /* Accordion body */
+    .dossier-body {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      background: rgba(255,255,255,.015);
+    }
+    .dossier-body.open { display: block; }
+    .dossier-body-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    }
+    .db-section {}
+    .db-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .62rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: .4rem; display: block;
+    }
+    .db-val { font-size: .85rem; color: var(--text); line-height: 1.6; }
+    .db-val.motif {
+      background: rgba(232,0,29,.06); border: 1px solid rgba(232,0,29,.15);
+      border-left: 3px solid var(--red); border-radius: 4px;
+      padding: .65rem .9rem; font-size: .83rem; color: var(--muted);
+    }
+
+    /* Timeline dans dossier */
+    .dossier-timeline {
+      display: flex; flex-direction: column; gap: 0;
+      margin-top: .35rem;
+    }
+    .dt-step {
+      display: grid; grid-template-columns: 28px 1fr;
+      gap: .7rem; position: relative;
+    }
+    .dt-step::before {
+      content: '';
+      position: absolute; left: 13px; top: 28px; bottom: 0;
+      width: 2px; background: var(--border);
+    }
+    .dt-step:last-child::before { display: none; }
+    .dt-dot {
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px; font-size: .6rem; z-index: 1;
+    }
+    .dt-dot.done { background: rgba(74,222,128,.15); border: 1px solid rgba(74,222,128,.3); color: #4ade80; }
+    .dt-dot.current { background: rgba(99,179,237,.15); border: 2px solid rgba(99,179,237,.5); color: #63b3ed; animation: pulse-border 2s infinite; }
+    .dt-dot.pending { background: rgba(255,255,255,.05); border: 1px solid var(--border); color: var(--muted); }
+    @keyframes pulse-border { 0%,100%{box-shadow:0 0 0 0 rgba(99,179,237,.3)} 50%{box-shadow:0 0 0 4px rgba(99,179,237,.08)} }
+    .dt-body { padding-bottom: 1rem; }
+    .dt-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: .85rem; color: var(--white); line-height: 1.2;
+    }
+    .dt-date { font-size: .74rem; color: var(--muted); margin-top: .1rem; }
+
+    /* Actions dossier */
+    .dossier-actions {
+      display: flex; gap: .6rem; flex-wrap: wrap;
+      padding-top: 1rem; margin-top: .5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ══════════════════════════════════════
+       NOUVEAU SIGNALEMENT (vue rapide)
+    ══════════════════════════════════════ */
+    .nouveau-card {
+      background: rgba(232,0,29,.05); border: 1px solid rgba(232,0,29,.25);
+      border-left: 4px solid var(--red); border-radius: 8px;
+      padding: 1.1rem 1.4rem; margin-bottom: .75rem;
+      display: flex; align-items: flex-start; gap: 1.25rem;
+    }
+    .nouveau-urgence {
+      font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+      color: var(--red); line-height: 1; flex-shrink: 0;
+    }
+    .nouveau-body {}
+    .nouveau-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: .25rem;
+    }
+    .nouveau-meta { font-size: .8rem; color: var(--muted); margin-bottom: .6rem; }
+    .nouveau-motif {
+      font-size: .82rem; color: var(--muted);
+      background: rgba(232,0,29,.07); border: 1px solid rgba(232,0,29,.15);
+      border-radius: 4px; padding: .5rem .75rem; line-height: 1.5;
+    }
+    .nouveau-actions { margin-top: .85rem; display: flex; gap: .6rem; flex-wrap: wrap; }
+
+    /* ══════════════════════════════════════
+       SECTION SANCTIONS
+    ══════════════════════════════════════ */
+    .sanctions-table {
+      width: 100%; border-collapse: collapse; font-size: .86rem;
+    }
+    .sanctions-table thead tr {
+      background: rgba(255,255,255,.025); border-bottom: 1px solid var(--border);
+    }
+    .sanctions-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .62rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); padding: .65rem 1.25rem; text-align: left;
+    }
+    .sanctions-table td {
+      padding: .7rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,.04);
+      color: var(--text); vertical-align: middle; line-height: 1.4;
+    }
+    .sanctions-table tbody tr:last-child td { border-bottom: none; }
+    .sanctions-table tbody tr:hover td { background: rgba(255,255,255,.02); }
+
+    /* Sanction level bar */
+    .sanction-level {
+      display: flex; gap: 3px; align-items: center;
+    }
+    .sl-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .sl-dot.filled { background: var(--red); }
+    .sl-dot.empty { background: rgba(255,255,255,.1); }
+
+    /* Avatar membre */
+    .m-av {
+      width: 28px; height: 28px; border-radius: 50%;
+      font-family: 'Bebas Neue', sans-serif; font-size: .72rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--white); vertical-align: middle; margin-right: .5rem;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════
+       STATS PANEL
+    ══════════════════════════════════════ */
+    .stats-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .stats-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.5rem;
+    }
+    .stats-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .bar-row {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: .6rem;
+    }
+    .bar-label {
+      font-size: .8rem; color: var(--muted);
+      min-width: 140px; flex-shrink: 0;
+    }
+    .bar-track {
+      flex: 1; height: 6px; background: rgba(255,255,255,.07);
+      border-radius: 3px; overflow: hidden;
+    }
+    .bar-fill { height: 100%; border-radius: 3px; transition: width .8s ease; }
+    .bar-count { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: var(--white); min-width: 20px; text-align: right; }
+
+    /* ══════════════════════════════════════
+       SIDEBAR
+    ══════════════════════════════════════ */
+    .suivi-sidebar { position: sticky; top: 80px; }
+    .sb-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.35rem; margin-bottom: 1.25rem;
+    }
+    .sb-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; letter-spacing: .2em; text-transform: uppercase;
+      color: #63b3ed; margin-bottom: 1rem;
+    }
+    .sb-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .45rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: .82rem;
+    }
+    .sb-row:last-child { border-bottom: none; }
+    .sb-row .lbl { color: var(--muted); }
+    .sb-row .val { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: var(--white); }
+    .sb-row .val.red   { color: var(--red); }
+    .sb-row .val.gold  { color: var(--gold); }
+    .sb-row .val.green { color: #4ade80; }
+    .sb-row .val.blue  { color: #63b3ed; }
+
+    .delai-row {
+      display: flex; align-items: flex-start; gap: .65rem;
+      padding: .5rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .delai-row:last-child { border-bottom: none; }
+    .delai-num {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+      color: #63b3ed; line-height: 1; min-width: 36px;
+    }
+    .delai-info {}
+    .delai-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: .85rem; color: var(--white); }
+    .delai-art   { font-size: .74rem; color: var(--muted); }
+
+    /* Quick links */
+    .qlink {
+      display: flex; align-items: center; gap: .65rem;
+      padding: .52rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      text-decoration: none; transition: color .15s;
+    }
+    .qlink:last-child { border-bottom: none; }
+    .qlink:hover .ql-label { color: var(--white); }
+    .ql-icon { font-size: .95rem; flex-shrink: 0; }
+    .ql-label {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: .88rem; color: var(--muted); flex: 1; transition: color .15s;
+    }
+
+    /* ══════════════════════════════════════
+       MODAL DÉTAIL DOSSIER
+    ══════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.75); z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+      opacity: 0; pointer-events: none; transition: opacity .25s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--dark); border: 1px solid var(--border);
+      border-radius: 12px; width: 100%; max-width: 700px;
+      max-height: 88vh; overflow-y: auto;
+      transform: translateY(24px); transition: transform .25s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      padding: 1.5rem 1.75rem 1.25rem; border-bottom: 1px solid var(--border); gap: 1rem;
+    }
+    .modal-ref {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+      color: #63b3ed; letter-spacing: .08em; margin-bottom: .2rem;
+    }
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem;
+      letter-spacing: .04em; color: var(--white); line-height: 1.05;
+    }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 6px;
+      background: rgba(255,255,255,.06); border: 1px solid var(--border);
+      color: var(--muted); font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all .15s;
+    }
+    .modal-close:hover { color: var(--white); }
+    .modal-body { padding: 1.5rem 1.75rem; }
+
+    /* Sections dans modal */
+    .msec-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .68rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: #63b3ed;
+      padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+      margin-bottom: .9rem;
+    }
+    .msec { margin-bottom: 1.75rem; }
+    .minfo-row {
+      display: flex; gap: .5rem; align-items: flex-start;
+      font-size: .86rem; margin-bottom: .5rem;
+    }
+    .minfo-label { color: var(--muted); min-width: 130px; flex-shrink: 0; }
+    .minfo-val { color: var(--text); line-height: 1.5; }
+
+    /* Décision box */
+    .decision-box {
+      background: rgba(74,222,128,.06); border: 1px solid rgba(74,222,128,.2);
+      border-radius: 8px; padding: 1.1rem 1.25rem;
+    }
+    .decision-box.pending { background: rgba(99,179,237,.06); border-color: rgba(99,179,237,.2); }
+    .decision-box.red { background: rgba(232,0,29,.06); border-color: rgba(232,0,29,.2); }
+    .decision-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: #4ade80; margin-bottom: .4rem;
+    }
+    .decision-box.pending .decision-label { color: #63b3ed; }
+    .decision-box.red     .decision-label { color: var(--red); }
+    .decision-text { font-size: .88rem; color: var(--text); line-height: 1.65; }
+
+    .modal-footer {
+      padding: 1.1rem 1.75rem; border-top: 1px solid var(--border);
+      display: flex; gap: .75rem; justify-content: flex-end; flex-wrap: wrap;
+    }
+
+    /* ══════════════════════════════════════
+       EMPTY STATE
+    ══════════════════════════════════════ */
+    .empty-state {
+      text-align: center; padding: 4rem 2rem;
+      color: var(--muted);
+    }
+    .empty-state-icon { font-size: 3rem; margin-bottom: 1rem; opacity: .4; }
+    .empty-state h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem; color: var(--white); margin-bottom: .5rem;
+    }
+    .empty-state p { font-size: .85rem; }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media (max-width: 1050px) {
+      .suivi-layout { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .suivi-sidebar { position: static; }
+      .kpi-row { grid-template-columns: repeat(3, 1fr); }
+      .restricted-banner { padding: .65rem 1.5rem; }
+      .suivi-tabs { padding: 0 1.5rem; }
+    }
+    @media (max-width: 900px) {
+      .suivi-hero { padding: 5rem 1.5rem 2rem; }
+      .dossier-head { grid-template-columns: 80px 1fr; }
+      .dossier-right { display: none; }
+      .dossier-body-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .kpi-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <!-- MODAL -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="detailModal">
+      <div class="modal-head">
+        <div>
+          <div class="modal-ref" id="modalRef">—</div>
+          <div class="modal-title" id="modalTitle">—</div>
+          <div style="margin-top:.4rem;display:flex;gap:.5rem;flex-wrap:wrap;" id="modalBadges"></div>
+        </div>
+        <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModalDirect()">Fermer</button>
+        <button class="btn btn-red" style="font-size:.78rem;padding:.6rem 1.2rem;" onclick="closeModalDirect()">💾 Enregistrer les modifications</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="page">
+
+    <!-- BANNER ACCÈS RESTREINT -->
+    <div class="restricted-banner">
+      <span>🔒</span>
+      <span>Accès restreint —</span>
+      <span class="restricted-badge">ICR &amp; Bureau uniquement</span>
+      <span style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.08em;">Ce tableau de bord est confidentiel. Toute divulgation est un manquement au RARC (Art. 21.6).</span>
+    </div>
+
+    <!-- HERO -->
+    <div class="suivi-hero">
+      <div class="suivi-hero-wm">ICR</div>
+      <div class="suivi-hero-content">
+        <div class="suivi-hero-top">
+          <div>
+            <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(99,179,237,.1);border:1px solid rgba(99,179,237,.25);border-radius:4px;padding:.3rem .8rem;margin-bottom:1.1rem;">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#63b3ed;">Tableau de bord · Saison 2025-2026</span>
+            </div>
+            <h1>Suivi <span>Disciplinaire</span></h1>
+            <p>Signalements reçus, procédures en cours, décisions rendues et historique des sanctions — espace de travail interne de l'ICR.</p>
+          </div>
+          <div style="text-align:right;padding-top:.5rem;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem;">Dernière mise à jour</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--white);">08 JUIN 2026</div>
+            <div style="font-size:.78rem;color:var(--muted);">par Nicolas MARIN · Président ICR</div>
+          </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="kpi-row">
+          <div class="kpi-card urgent">
+            <span class="kpi-val">2</span>
+            <span class="kpi-lab">Nouveaux signalements</span>
+          </div>
+          <div class="kpi-card blue">
+            <span class="kpi-val">1</span>
+            <span class="kpi-lab">Procédures en cours</span>
+          </div>
+          <div class="kpi-card gold">
+            <span class="kpi-val">1</span>
+            <span class="kpi-lab">Commission à planifier</span>
+          </div>
+          <div class="kpi-card green">
+            <span class="kpi-val">3</span>
+            <span class="kpi-lab">Dossiers clos (saison)</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-val">6</span>
+            <span class="kpi-lab">Total signalements 25/26</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="suivi-tabs">
+      <button class="stab active" onclick="showTab('signalements',this)">
+        📬 Signalements <span class="stab-count">2</span>
+      </button>
+      <button class="stab" onclick="showTab('procedures',this)">
+        ⚖️ Procédures en cours <span class="stab-count blue">1</span>
+      </button>
+      <button class="stab" onclick="showTab('sanctions',this)">
+        📋 Sanctions prononcées
+      </button>
+      <button class="stab" onclick="showTab('historique',this)">
+        🗃️ Historique complet <span class="stab-count muted">6</span>
+      </button>
+      <button class="stab" onclick="showTab('stats',this)">
+        📊 Statistiques
+      </button>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="suivi-layout">
+      <div>
+
+        <!-- ════ PANEL : SIGNALEMENTS NOUVEAUX ════ -->
+        <div class="spanel active" id="panel-signalements">
+
+          <div style="margin-bottom:1.5rem;">
+            <h2 class="section-title" style="margin-bottom:.2rem;">Signalements <span>à traiter</span></h2>
+            <div class="section-line" style="margin-bottom:0;"></div>
+          </div>
+
+          <!-- Signalement 1 — urgent -->
+          <div class="nouveau-card" onclick="openDossier('D-2026-006')">
+            <div class="nouveau-urgence">!</div>
+            <div class="nouveau-body" style="flex:1;">
+              <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span>
+                <span class="gravite g-agg">Circonstance aggravante</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. D-2026-006 · Reçu le 05 juin 2026</span>
+              </div>
+              <div class="nouveau-title">Propos discriminatoires en direct lors de la retransmission du 22 mai 2026</div>
+              <div class="nouveau-meta">📅 Faits du 22 mai 2026 · 📍 Gymnase de Meylan · 👤 Signalé par : Enzo ACHOUR</div>
+              <div class="nouveau-motif">
+                <strong style="color:var(--red);">Motif :</strong> Art. 21.3 RARC — Propos discriminatoires en direct (Art. 21.3.3). Commentaire à caractère sexiste proféré en direct lors de la retransmission des finales Scol'Hand 2026. Constaté par 2 témoins.
+              </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('D-2026-006')">Examiner le dossier →</button>
+                <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Marquer irrecevable</button>
+                <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Avertissement direct</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Signalement 2 -->
+          <div class="nouveau-card" style="border-left-color:var(--gold);" onclick="openDossier('D-2026-005')">
+            <div class="nouveau-urgence" style="color:var(--gold);">!</div>
+            <div class="nouveau-body" style="flex:1;">
+              <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span>
+                <span class="gravite g-std">Sans aggravante</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. D-2026-005 · Reçu le 02 juin 2026</span>
+              </div>
+              <div class="nouveau-title">Abandon de poste avant la fin du bilan post-retransmission — 10 mai 2026</div>
+              <div class="nouveau-meta">📅 Faits du 10 mai 2026 · 👤 Signalé par : Xavier FINI</div>
+              <div class="nouveau-motif">
+                <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Départ anticipé non autorisé avant la fin du bilan post-retransmission (Art. 21.1.4). Première occurrence.
+              </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('D-2026-005')">Examiner le dossier →</button>
+                <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Avertissement oral direct</button>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;gap:.75rem;">
+            <span style="font-size:1.1rem;">📋</span>
+            <div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:var(--white);font-size:.9rem;margin-bottom:.2rem;">Rappel procédural — Art. 22-23 RARC</div>
+              <div style="font-size:.8rem;color:var(--muted);">Tout signalement doit être examiné en recevabilité. Décision possible : ouverture de procédure, avertissement direct, ou irrecevabilité. La décision est notifiée aux parties.</div>
+            </div>
+          </div>
+        </div><!-- /panel-signalements -->
+
+
+        <!-- ════ PANEL : PROCÉDURES EN COURS ════ -->
+        <div class="spanel" id="panel-procedures">
+
+          <div style="margin-bottom:1.5rem;">
+            <h2 class="section-title" style="margin-bottom:.2rem;">Procédures <span>en cours</span></h2>
+            <div class="section-line" style="margin-bottom:0;"></div>
+          </div>
+
+          <div class="dossiers-list">
+
+            <!-- Dossier D-2026-004 — en instruction -->
+            <div class="dossier-card" onclick="toggleDossier(this)">
+              <div class="dossier-head">
+                <div class="dossier-ref">
+                  <span class="ref-num">D-2026-004</span>
+                  <span class="ref-year">Saison 2025-26</span>
+                </div>
+                <div class="dossier-main">
+                  <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.25rem;flex-wrap:wrap;">
+                    <span class="statut s-instruct"><span class="statut-dot"></span>En instruction</span>
+                    <span class="gravite g-agg">Aggravante</span>
+                    <span style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;color:var(--muted);">Art. 24 RARC · Commission le 20 juin 2026</span>
+                  </div>
+                  <div class="dossier-title">Utilisation non autorisée du logo MHBTV à des fins personnelles</div>
+                  <div class="dossier-meta">
+                    <span>👤 <strong style="color:var(--text);">Membre anonymisé</strong></span>
+                    <span>📅 Faits : 15 mars 2026</span>
+                    <span>📬 Reçu le 2 avr. 2026</span>
+                    <span>👨‍⚖️ RG : Nicolas MARIN</span>
+                  </div>
+                </div>
+                <div class="dossier-right">
+                  <span class="statut s-instruct"><span class="statut-dot"></span>En instruction</span>
+                  <span style="font-size:.75rem;color:var(--muted);">Délai restant : <strong style="color:#fbbf24;">10 j</strong></span>
+                  <button class="btn btn-outline" style="font-size:.7rem;padding:.3rem .7rem;" onclick="event.stopPropagation();openDossier('D-2026-004')">Détail →</button>
+                </div>
+              </div>
+              <div class="dossier-body">
+                <div class="dossier-body-grid">
+                  <div class="db-section">
+                    <span class="db-label">Motif principal</span>
+                    <div class="db-val motif">Art. 21.5 RARC — Utilisation du nom, du logo ou de l'identité visuelle MHBTV à des fins personnelles (CV, portfolio, réseaux) sans autorisation préalable.</div>
+                  </div>
+                  <div class="db-section">
+                    <span class="db-label">Progression de l'instruction</span>
+                    <div class="dossier-timeline">
+                      <div class="dt-step">
+                        <div class="dt-num-wrap"><div class="dt-dot done">✓</div></div>
+                        <div class="dt-body"><div class="dt-title">Signalement reçu &amp; transmis</div><div class="dt-date">02 avr. 2026</div></div>
+                      </div>
+                      <div class="dt-step">
+                        <div class="dt-num-wrap"><div class="dt-dot done">✓</div></div>
+                        <div class="dt-body"><div class="dt-title">Recevabilité — procédure ouverte</div><div class="dt-date">05 avr. 2026</div></div>
+                      </div>
+                      <div class="dt-step">
+                        <div class="dt-num-wrap"><div class="dt-dot done">✓</div></div>
+                        <div class="dt-body"><div class="dt-title">Jury de rapporteurs désigné</div><div class="dt-date">06 avr. 2026</div></div>
+                      </div>
+                      <div class="dt-step">
+                        <div class="dt-num-wrap"><div class="dt-dot current">●</div></div>
+                        <div class="dt-body"><div class="dt-title">Instruction en cours</div><div class="dt-date">Depuis le 08 avr. 2026</div></div>
+                      </div>
+                      <div class="dt-step">
+                        <div class="dt-num-wrap"><div class="dt-dot pending">○</div></div>
+                        <div class="dt-body"><div class="dt-title">Commission disciplinaire</div><div class="dt-date">Prévue le 20 juin 2026</div></div>
+                      </div>
+                      <div class="dt-step">
+                        <div class="dt-num-wrap"><div class="dt-dot pending">○</div></div>
+                        <div class="dt-body"><div class="dt-title">Délibéré &amp; notification</div><div class="dt-date">À planifier</div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="dossier-actions">
+                  <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="openDossier('D-2026-004')">Ouvrir le dossier complet</button>
+                  <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;">📄 Rapport d'instruction</button>
+                  <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;">📅 Confirmer la commission</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /panel-procedures -->
+
+
+        <!-- ════ PANEL : SANCTIONS ════ -->
+        <div class="spanel" id="panel-sanctions">
+
+          <div style="margin-bottom:1.5rem;">
+            <h2 class="section-title" style="margin-bottom:.2rem;">Sanctions <span>prononcées</span></h2>
+            <div class="section-line" style="margin-bottom:0;"></div>
+          </div>
+
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+            <div style="padding:.8rem 1.25rem;background:rgba(255,255,255,.025);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+              <span style="font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);">Filtrer :</span>
+              <button class="fchip active" onclick="filterSanctions('all',this)">Toutes</button>
+              <button class="fchip" onclick="filterSanctions('avert',this)">Avertissements</button>
+              <button class="fchip" onclick="filterSanctions('suspension',this)">Suspensions</button>
+              <button class="fchip" onclick="filterSanctions('exclusion',this)">Exclusions</button>
+            </div>
+            <table class="sanctions-table" id="sanctionsTable">
+              <thead>
+                <tr>
+                  <th>Réf.</th>
+                  <th>Membre</th>
+                  <th>Faute</th>
+                  <th>Sanction</th>
+                  <th>Niveau</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-type="avert">
+                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">D-2026-001</td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.5rem;">
+                      <div class="m-av" style="background:#9b59b633;color:#9b59b6;">DH</div>
+                      <div>
+                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Dorina H.-J.</div>
+                        <div style="font-size:.72rem;color:var(--muted);">Membre ICR</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Non-port du gilet MHBTV obligatoire</td>
+                  <td><span class="statut s-clos" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
+                  <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
+                  <td style="font-size:.78rem;color:var(--muted);">14 oct. 2025</td>
+                  <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
+                </tr>
+                <tr data-type="avert">
+                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">D-2026-002</td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.5rem;">
+                      <div class="m-av" style="background:#34495e33;color:#7f8c8d;">GF</div>
+                      <div>
+                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Gaetan FERRE</div>
+                        <div style="font-size:.72rem;color:var(--muted);">Membre MHBTV</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence non justifiée à une retransmission (1ère occurrence)</td>
+                  <td><span class="statut s-avert" style="font-size:.7rem;padding:.18rem .55rem;">Avert. écrit</span></td>
+                  <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
+                  <td style="font-size:.78rem;color:var(--muted);">08 déc. 2025</td>
+                  <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
+                </tr>
+                <tr data-type="suspension">
+                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">D-2026-003</td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.5rem;">
+                      <div class="m-av" style="background:#3498db33;color:#3498db;">KH</div>
+                      <div>
+                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Kyliann H.</div>
+                        <div style="font-size:.72rem;color:var(--muted);">Membre MHBTV</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Utilisation du matériel à des fins personnelles + prêt non autorisé</td>
+                  <td><span class="statut s-instruct" style="font-size:.7rem;padding:.18rem .55rem;">Susp. 3 retr.</span></td>
+                  <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
+                  <td style="font-size:.78rem;color:var(--muted);">22 fév. 2026</td>
+                  <td>
+                    <span class="statut s-instruct" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#fbbf24;width:5px;height:5px;animation:blink 2s infinite;"></span>En cours (1/3)</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!-- /panel-sanctions -->
+
+
+        <!-- ════ PANEL : HISTORIQUE ════ -->
+        <div class="spanel" id="panel-historique">
+
+          <div style="margin-bottom:1.5rem;">
+            <h2 class="section-title" style="margin-bottom:.2rem;">Historique <span>complet 2025-2026</span></h2>
+            <div class="section-line" style="margin-bottom:0;"></div>
+          </div>
+
+          <div class="filter-bar">
+            <span class="filter-bar-label">Statut :</span>
+            <button class="fchip active" onclick="filterHistorique('all',this)">Tous</button>
+            <button class="fchip" onclick="filterHistorique('nouveau',this)">Nouveaux</button>
+            <button class="fchip" onclick="filterHistorique('instruct',this)">En cours</button>
+            <button class="fchip" onclick="filterHistorique('clos',this)">Clos</button>
+            <button class="fchip" onclick="filterHistorique('irrecev',this)">Irrecevables</button>
+            <div class="search-wrap">
+              <input type="text" placeholder="Rechercher…" id="searchHisto" oninput="searchHistorique(this.value)">
+            </div>
+          </div>
+
+          <div class="dossiers-list" id="histoList">
+
+            <div class="dossier-card" data-statut="nouveau" data-text="propos discriminatoires direct signalement d-2026-006" onclick="openDossier('D-2026-006')">
+              <div class="dossier-head">
+                <div class="dossier-ref"><span class="ref-num">D-2026-006</span><span class="ref-year">05 juin 2026</span></div>
+                <div class="dossier-main">
+                  <div class="dossier-title">Propos discriminatoires en direct — 22 mai 2026</div>
+                  <div class="dossier-meta"><span>👤 Anonymisé</span><span>📋 Art. 21.3</span><span class="gravite g-tres" style="font-size:.65rem;">Très aggravante</span></div>
+                </div>
+                <div class="dossier-right"><span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span></div>
+              </div>
+            </div>
+
+            <div class="dossier-card" data-statut="nouveau" data-text="abandon poste bilan retransmission d-2026-005" onclick="openDossier('D-2026-005')">
+              <div class="dossier-head">
+                <div class="dossier-ref"><span class="ref-num">D-2026-005</span><span class="ref-year">02 juin 2026</span></div>
+                <div class="dossier-main">
+                  <div class="dossier-title">Départ anticipé avant bilan post-retransmission — 10 mai 2026</div>
+                  <div class="dossier-meta"><span>👤 Anonymisé</span><span>📋 Art. 21.1</span></div>
+                </div>
+                <div class="dossier-right"><span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span></div>
+              </div>
+            </div>
+
+            <div class="dossier-card" data-statut="instruct" data-text="logo identite visuelle utilisation personnelle d-2026-004" onclick="openDossier('D-2026-004')">
+              <div class="dossier-head">
+                <div class="dossier-ref"><span class="ref-num">D-2026-004</span><span class="ref-year">02 avr. 2026</span></div>
+                <div class="dossier-main">
+                  <div class="dossier-title">Utilisation non autorisée du logo MHBTV à des fins personnelles</div>
+                  <div class="dossier-meta"><span>👤 Anonymisé</span><span>📋 Art. 21.5</span><span>📅 Commission : 20 juin</span></div>
+                </div>
+                <div class="dossier-right"><span class="statut s-instruct"><span class="statut-dot"></span>En instruction</span></div>
+              </div>
+            </div>
+
+            <div class="dossier-card" data-statut="clos" data-text="materiel pret non autorise kyliann suspension d-2026-003">
+              <div class="dossier-head" style="opacity:.8;">
+                <div class="dossier-ref"><span class="ref-num">D-2026-003</span><span class="ref-year">10 fév. 2026</span></div>
+                <div class="dossier-main">
+                  <div class="dossier-title">Utilisation du matériel à des fins personnelles + prêt non autorisé</div>
+                  <div class="dossier-meta"><span>👤 Kyliann H.</span><span>📋 Art. 21.4</span><span>⚖️ Susp. 3 retr. (en cours)</span></div>
+                </div>
+                <div class="dossier-right"><span class="statut s-clos"><span class="statut-dot"></span>Clos — Sanction en cours</span></div>
+              </div>
+            </div>
+
+            <div class="dossier-card" data-statut="clos" data-text="absence retransmission gaetan avertissement ecrit d-2026-002">
+              <div class="dossier-head" style="opacity:.7;">
+                <div class="dossier-ref"><span class="ref-num">D-2026-002</span><span class="ref-year">01 déc. 2025</span></div>
+                <div class="dossier-main">
+                  <div class="dossier-title">Absence non justifiée à une retransmission</div>
+                  <div class="dossier-meta"><span>👤 Gaetan F.</span><span>📋 Art. 21.1</span><span>⚖️ Avert. écrit — Purgée</span></div>
+                </div>
+                <div class="dossier-right"><span class="statut s-clos"><span class="statut-dot"></span>Clos</span></div>
+              </div>
+            </div>
+
+            <div class="dossier-card" data-statut="clos" data-text="gilet non port dorina avertissement oral d-2026-001">
+              <div class="dossier-head" style="opacity:.7;">
+                <div class="dossier-ref"><span class="ref-num">D-2026-001</span><span class="ref-year">10 oct. 2025</span></div>
+                <div class="dossier-main">
+                  <div class="dossier-title">Non-port du gilet MHBTV obligatoire</div>
+                  <div class="dossier-meta"><span>👤 Dorina H.-J.</span><span>📋 Art. 21.2</span><span>⚖️ Avert. oral — Purgée</span></div>
+                </div>
+                <div class="dossier-right"><span class="statut s-clos"><span class="statut-dot"></span>Clos</span></div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /panel-historique -->
+
+
+        <!-- ════ PANEL : STATS ════ -->
+        <div class="spanel" id="panel-stats">
+
+          <div style="margin-bottom:1.5rem;">
+            <h2 class="section-title" style="margin-bottom:.2rem;">Statistiques <span>Saison 2025-2026</span></h2>
+            <div class="section-line" style="margin-bottom:0;"></div>
+          </div>
+
+          <div class="stats-grid">
+
+            <div class="stats-card">
+              <h4>Signalements par catégorie</h4>
+              <div class="bar-row"><span class="bar-label">Présence &amp; ponctualité</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#63b3ed;"></div></div><span class="bar-count">2</span></div>
+              <div class="bar-row"><span class="bar-label">Production &amp; éditorial</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--red);"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Matériel &amp; ressources</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:var(--gold);"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Image &amp; représentation</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#4ade80;"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Accréditation &amp; rôles</span><div class="bar-track"><div class="bar-fill" style="width:17%;background:#9b59b6;"></div></div><span class="bar-count">1</span></div>
+            </div>
+
+            <div class="stats-card">
+              <h4>Répartition des décisions</h4>
+              <div class="bar-row"><span class="bar-label">Avertissement oral</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:#4ade80;"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Avertissement écrit</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--gold);"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Suspension retr.</span><div class="bar-track"><div class="bar-fill" style="width:50%;background:var(--red);"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">En cours / nouveaux</span><div class="bar-track"><div class="bar-fill" style="width:75%;background:#63b3ed;"></div></div><span class="bar-count">3</span></div>
+            </div>
+
+            <div class="stats-card">
+              <h4>Délais de traitement</h4>
+              <div class="bar-row"><span class="bar-label">Délai moyen recevabilité</span><div class="bar-track"><div class="bar-fill" style="width:40%;background:#63b3ed;"></div></div><span class="bar-count">3 j</span></div>
+              <div class="bar-row"><span class="bar-label">Délai moyen instruction</span><div class="bar-track"><div class="bar-fill" style="width:70%;background:var(--gold);"></div></div><span class="bar-count">12 j</span></div>
+              <div class="bar-row"><span class="bar-label">Délai moyen notification</span><div class="bar-track"><div class="bar-fill" style="width:30%;background:#4ade80;"></div></div><span class="bar-count">5 j</span></div>
+            </div>
+
+            <div class="stats-card">
+              <h4>Activité mensuelle</h4>
+              <div class="bar-row"><span class="bar-label">Sept. – Oct. 2025</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#63b3ed;"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Nov. – Déc. 2025</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#63b3ed;"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Janv. – Fév. 2026</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#63b3ed;"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Mars – Avr. 2026</span><div class="bar-track"><div class="bar-fill" style="width:33%;background:#63b3ed;"></div></div><span class="bar-count">1</span></div>
+              <div class="bar-row"><span class="bar-label">Mai – Juin 2026</span><div class="bar-track"><div class="bar-fill" style="width:66%;background:var(--red);"></div></div><span class="bar-count">2</span></div>
+            </div>
+
+          </div>
+
+          <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;margin-top:.5rem;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;">Bilan saison — résumé ICR</div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;">
+              <div><div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#4ade80;line-height:1;">0</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Exclusion prononcée</div></div>
+              <div><div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1;">100%</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Signalements traités (hors nouveaux)</div></div>
+              <div><div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#63b3ed;line-height:1;">6</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Membres ICR actifs</div></div>
+              <div><div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--white);line-height:1;">0</div><div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);">Procédure en déport</div></div>
+            </div>
+          </div>
+        </div><!-- /panel-stats -->
+
+      </div><!-- /main col -->
+
+      <!-- ══════ SIDEBAR ══════ -->
+      <aside class="suivi-sidebar">
+
+        <!-- Délais réglementaires -->
+        <div class="sb-card" style="border-color:rgba(232,0,29,.2);">
+          <h4 style="color:var(--red);">⚠️ Délais à surveiller</h4>
+          <div class="delai-row">
+            <div class="delai-num">10j</div>
+            <div class="delai-info">
+              <div class="delai-title">Commission D-2026-004</div>
+              <div class="delai-art">Prévue le 20 juin 2026 · Art. 24 RARC</div>
+            </div>
+          </div>
+          <div class="delai-row">
+            <div class="delai-num" style="color:#fbbf24;">—</div>
+            <div class="delai-info">
+              <div class="delai-title">D-2026-006 : décision recevabilité</div>
+              <div class="delai-art">Signalement reçu le 05 juin · À traiter</div>
+            </div>
+          </div>
+          <div class="delai-row">
+            <div class="delai-num" style="color:#fbbf24;">—</div>
+            <div class="delai-info">
+              <div class="delai-title">D-2026-005 : décision recevabilité</div>
+              <div class="delai-art">Signalement reçu le 02 juin · À traiter</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rappel délais RARC -->
+        <div class="sb-card">
+          <h4>Délais RARC — rappel</h4>
+          <div class="delai-row">
+            <div class="delai-num">72h</div>
+            <div class="delai-info"><div class="delai-title">Contestation électorale</div><div class="delai-art">Art. 31 RARC</div></div>
+          </div>
+          <div class="delai-row">
+            <div class="delai-num">2 sem.</div>
+            <div class="delai-info"><div class="delai-title">Délai max. commission</div><div class="delai-art">Art. 24 RARC</div></div>
+          </div>
+          <div class="delai-row">
+            <div class="delai-num">7 j</div>
+            <div class="delai-info"><div class="delai-title">Convocation avant séance</div><div class="delai-art">Art. 26 RARC</div></div>
+          </div>
+          <div class="delai-row">
+            <div class="delai-num">3 j</div>
+            <div class="delai-info"><div class="delai-title">Notif. Bureau après délib.</div><div class="delai-art">Art. 29 RARC</div></div>
+          </div>
+          <div class="delai-row">
+            <div class="delai-num">7 j</div>
+            <div class="delai-info"><div class="delai-title">Notif. parties concernées</div><div class="delai-art">Art. 29 RARC</div></div>
+          </div>
+        </div>
+
+        <!-- Stats rapides -->
+        <div class="sb-card">
+          <h4>Vue d'ensemble saison</h4>
+          <div class="sb-row"><span class="lbl">Signalements reçus</span><span class="val">6</span></div>
+          <div class="sb-row"><span class="lbl">Procédures ouvertes</span><span class="val blue">1</span></div>
+          <div class="sb-row"><span class="lbl">Avertissements prononcés</span><span class="val gold">2</span></div>
+          <div class="sb-row"><span class="lbl">Suspensions en cours</span><span class="val red">1</span></div>
+          <div class="sb-row"><span class="lbl">Exclusions prononcées</span><span class="val green">0</span></div>
+          <div class="sb-row"><span class="lbl">Dossiers irrecevables</span><span class="val">0</span></div>
+        </div>
+
+        <!-- Liens utiles -->
+        <div class="sb-card">
+          <h4>Liens utiles</h4>
+          <a class="qlink" href="icr.html">
+            <span class="ql-icon">⚖️</span>
+            <span class="ql-label">Règlement ICR complet</span>
+            <span style="font-size:.7rem;color:var(--muted);">→</span>
+          </a>
+          <a class="qlink" href="signalement.html">
+            <span class="ql-icon">📬</span>
+            <span class="ql-label">Formulaire de signalement</span>
+            <span style="font-size:.7rem;color:var(--muted);">→</span>
+          </a>
+          <a class="qlink" href="accreditations.html">
+            <span class="ql-icon">🎖️</span>
+            <span class="ql-label">Accréditations membres</span>
+            <span style="font-size:.7rem;color:var(--muted);">→</span>
+          </a>
+          <a class="qlink" href="planning.html">
+            <span class="ql-icon">📅</span>
+            <span class="ql-label">Planning retransmissions</span>
+            <span style="font-size:.7rem;color:var(--muted);">→</span>
+          </a>
+        </div>
+
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="planning.html">Planning</a></li>
+        <li><a href="accreditations.html">Accréditations</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>ICR</h4>
+      <ul>
+        <li><a href="icr.html">Instance Compétente</a></li>
+        <li><a href="icr-suivi.html">Suivi disciplinaire</a></li>
+        <li><a href="signalement.html">Signalement</a></li>
+        <li><a href="reglement-retransmissions.html">Règlement RARC</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Accès ICR confidentiel</p>
+    <p>Document interne — Usage exclusif ICR &amp; Bureau</p>
+  </div>
+
+  <script>
+    /* ══ TABS ══ */
+    function showTab(id, btn) {
+      document.querySelectorAll('.spanel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+      document.getElementById('panel-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    /* ══ ACCORDION DOSSIER ══ */
+    function toggleDossier(card) {
+      const body = card.querySelector('.dossier-body');
+      if (!body) return;
+      const isOpen = body.classList.contains('open');
+      document.querySelectorAll('.dossier-body.open').forEach(b => b.classList.remove('open'));
+      if (!isOpen) body.classList.add('open');
+    }
+
+    /* ══ FILTRE SANCTIONS ══ */
+    function filterSanctions(type, btn) {
+      document.querySelectorAll('#sanctionsTable .fchip, .fchip').forEach(b => {
+        if (b.onclick && b.onclick.toString().includes('filterSanctions')) b.classList.remove('active');
+      });
+      btn.classList.add('active');
+      document.querySelectorAll('#sanctionsTable tbody tr').forEach(row => {
+        row.style.display = (type === 'all' || row.dataset.type === type) ? '' : 'none';
+      });
+    }
+
+    /* ══ FILTRE HISTORIQUE ══ */
+    function filterHistorique(statut, btn) {
+      document.querySelectorAll('#histoList').forEach(() => {});
+      btn.parentElement.querySelectorAll('.fchip').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyHistoFilters();
+    }
+
+    function searchHistorique(val) { applyHistoFilters(); }
+
+    function applyHistoFilters() {
+      const activeChip = document.querySelector('.filter-bar .fchip.active');
+      const statut = activeChip ? (activeChip.getAttribute('onclick').match(/'([^']+)'/)||[])[1] || 'all' : 'all';
+      const search  = (document.getElementById('searchHisto')?.value || '').toLowerCase();
+      document.querySelectorAll('#histoList .dossier-card').forEach(card => {
+        const matchStat   = statut === 'all' || card.dataset.statut === statut;
+        const matchSearch = !search || (card.dataset.text || '').includes(search);
+        card.style.display = (matchStat && matchSearch) ? '' : 'none';
+      });
+    }
+
+    /* ══ MODAL DOSSIER DÉTAIL ══ */
+    const DOSSIERS = {
+      'D-2026-006': {
+        titre: 'Propos discriminatoires en direct — 22 mai 2026',
+        statut: 'nouveau',
+        gravite: 'tres',
+        art: 'Art. 21.3.3 RARC',
+        date_faits: '22 mai 2026',
+        date_signal: '05 juin 2026',
+        signal_par: 'Enzo ACHOUR',
+        temoins: 'Tim TOUR, Marie DAL ZOTTO',
+        preuves: 'Enregistrement du direct disponible (archive YouTube)',
+        description: 'Lors de la retransmission des finales Scol\'Hand 2026, un commentaire à caractère sexiste a été proféré en direct par le commentateur désigné. Le propos a été capté sur l\'enregistrement. Deux membres présents en régie ont confirmé avoir entendu le commentaire.',
+        motifs: ['Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.)'],
+        sanction_sans: 'Suspension saison + retrait accréditation + inéligibilité CG 1 an',
+        sanction_agg: 'Exclusion temporaire + inéligibilité CG 2 ans',
+        sanction_tres: 'Exclusion définitive',
+        decision: null,
+        next: 'Examen de recevabilité obligatoire — commission à ouvrir'
+      },
+      'D-2026-005': {
+        titre: 'Départ anticipé avant bilan post-retransmission — 10 mai 2026',
+        statut: 'nouveau',
+        gravite: 'std',
+        art: 'Art. 21.1.4 RARC',
+        date_faits: '10 mai 2026',
+        date_signal: '02 juin 2026',
+        signal_par: 'Xavier FINI (Coordinateur général)',
+        temoins: 'Nicolas MARIN',
+        preuves: 'Aucun',
+        description: 'Le membre concerné a quitté la salle avant la fin du bilan post-retransmission du match SF1 Meylan/Evian, sans autorisation du Responsable de Retransmission. Il s\'agit d\'une première occurrence.',
+        motifs: ['Départ anticipé non autorisé avant la fin du bilan post-retransmission'],
+        sanction_sans: 'Avertissement écrit',
+        sanction_agg: 'Suspension 1 retransmission',
+        sanction_tres: 'Suspension 3 retransmissions',
+        decision: null,
+        next: 'Avertissement oral direct envisageable (Art. 23 RARC — sans procédure formelle)'
+      },
+      'D-2026-004': {
+        titre: 'Utilisation non autorisée du logo MHBTV à des fins personnelles',
+        statut: 'instruct',
+        gravite: 'agg',
+        art: 'Art. 21.5 RARC',
+        date_faits: '15 mars 2026',
+        date_signal: '02 avril 2026',
+        signal_par: 'Marie DAL ZOTTO',
+        temoins: 'Aucun',
+        preuves: 'Capture d\'écran LinkedIn (profil personnel avec logo MHBTV)',
+        description: 'Le membre concerné a utilisé le logo officiel MHBTV sur son profil LinkedIn personnel dans la section "expériences", sans autorisation préalable de la Coordination générale, en faisant mention d\'un rôle de "Responsable de production" non officiel.',
+        motifs: ['Utilisation du nom, du logo ou de l\'identité visuelle MHBTV à des fins personnelles (CV, portfolio, réseaux personnels) sans autorisation préalable'],
+        sanction_sans: 'Avertissement écrit + retrait des usages',
+        sanction_agg: 'Suspension 3 retransmissions + interdiction de représentation externe',
+        sanction_tres: 'Exclusion temporaire + inéligibilité CG 1 an',
+        decision: 'Procédure disciplinaire ouverte le 05 avr. 2026. Commission prévue le 20 juin 2026. Rapporteur général : Nicolas MARIN.',
+        next: 'Commission disciplinaire prévue le 20 juin 2026 à 18h00 en visioconférence.'
+      }
+    };
+
+    function openDossier(ref) {
+      const d = DOSSIERS[ref];
+      if (!d) return;
+      document.getElementById('modalRef').textContent = ref;
+      document.getElementById('modalTitle').textContent = d.titre;
+
+      const statusMap = {
+        nouveau: { cls:'s-nouveau', label:'Nouveau signalement' },
+        instruct: { cls:'s-instruct', label:'En instruction' },
+        clos: { cls:'s-clos', label:'Clos' }
+      };
+      const gravMap = {
+        std:  { cls:'g-std',  label:'Sans aggravante' },
+        agg:  { cls:'g-agg',  label:'Circonstance aggravante' },
+        tres: { cls:'g-tres', label:'Très aggravante' }
+      };
+      const s = statusMap[d.statut] || statusMap.nouveau;
+      const g = gravMap[d.gravite] || gravMap.std;
+      document.getElementById('modalBadges').innerHTML =
+        `<span class="statut ${s.cls}"><span class="statut-dot"></span>${s.label}</span>
+         <span class="gravite ${g.cls}">${g.label}</span>
+         <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);letter-spacing:.06em;">${d.art}</span>`;
+
+      document.getElementById('modalBody').innerHTML = `
+        <div class="msec">
+          <div class="msec-title">Informations générales</div>
+          <div class="minfo-row"><span class="minfo-label">Date des faits</span><span class="minfo-val">${d.date_faits}</span></div>
+          <div class="minfo-row"><span class="minfo-label">Reçu le</span><span class="minfo-val">${d.date_signal}</span></div>
+          <div class="minfo-row"><span class="minfo-label">Signalé par</span><span class="minfo-val">${d.signal_par}</span></div>
+          <div class="minfo-row"><span class="minfo-label">Témoins</span><span class="minfo-val">${d.temoins}</span></div>
+          <div class="minfo-row"><span class="minfo-label">Preuves</span><span class="minfo-val">${d.preuves}</span></div>
+        </div>
+        <div class="msec">
+          <div class="msec-title">Description des faits</div>
+          <p style="font-size:.88rem;color:var(--muted);line-height:1.7;background:rgba(255,255,255,.02);border:1px solid var(--border);border-left:3px solid #63b3ed;border-radius:5px;padding:.9rem 1.1rem;">${d.description}</p>
+        </div>
+        <div class="msec">
+          <div class="msec-title">Motif(s) RARC</div>
+          ${d.motifs.map(m => `<div style="background:rgba(232,0,29,.06);border:1px solid rgba(232,0,29,.15);border-left:3px solid var(--red);border-radius:5px;padding:.7rem .9rem;font-size:.85rem;color:var(--muted);margin-bottom:.4rem;">▸ ${m}</div>`).join('')}
+        </div>
+        <div class="msec">
+          <div class="msec-title">Barème applicable — ${d.art}</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;">
+            <div style="background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:7px;padding:.85rem;text-align:center;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">Sans aggravante</div>
+              <div style="font-size:.82rem;color:var(--text);line-height:1.4;">${d.sanction_sans}</div>
+            </div>
+            <div style="background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.2);border-radius:7px;padding:.85rem;text-align:center;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fbbf24;margin-bottom:.4rem;">Avec aggravante</div>
+              <div style="font-size:.82rem;color:var(--text);line-height:1.4;">${d.sanction_agg}</div>
+            </div>
+            <div style="background:rgba(232,0,29,.06);border:1px solid rgba(232,0,29,.2);border-radius:7px;padding:.85rem;text-align:center;">
+              <div style="font-family:'Barlow Condensed',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem;">Très aggravante</div>
+              <div style="font-size:.82rem;color:var(--text);line-height:1.4;">${d.sanction_tres}</div>
+            </div>
+          </div>
+        </div>
+        ${d.decision ? `
+        <div class="msec">
+          <div class="msec-title">Décision &amp; état de la procédure</div>
+          <div class="decision-box ${d.statut === 'instruct' ? 'pending' : ''}">
+            <div class="decision-label">${d.statut === 'instruct' ? 'Procédure en cours' : 'Décision rendue'}</div>
+            <div class="decision-text">${d.decision}</div>
+          </div>
+        </div>` : ''}
+        <div class="msec">
+          <div class="msec-title">Prochaine étape</div>
+          <div style="background:rgba(99,179,237,.06);border:1px solid rgba(99,179,237,.2);border-radius:7px;padding:.9rem 1.1rem;font-size:.88rem;color:var(--muted);line-height:1.65;">
+            📌 ${d.next}
+          </div>
+        </div>
+      `;
+
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+    }
+    function closeModalDirect() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+</html>

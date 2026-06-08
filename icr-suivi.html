@@ -893,19 +893,18 @@
             <table class="sanctions-table" id="sanctionsTable">
               <thead>
                 <tr>
-                  <th>Réf.</th>
                   <th>Membre</th>
                   <th>Faute</th>
                   <th>Sanction</th>
                   <th>Niveau</th>
                   <th>Date</th>
                   <th>Statut</th>
+                  <th>Dossier</th>
                 </tr>
               </thead>
               <tbody>
 
                 <tr data-type="suspension">
-                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-MQ478TAZ-ODL</td>
                   <td>
                     <div style="display:flex;align-items:center;gap:.5rem;">
                       <div class="m-av" style="background:#9b59b633;color:#9b59b6;">YC</div>
@@ -920,10 +919,14 @@
                   <td><div class="sanction-level"><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
                   <td style="font-size:.78rem;color:var(--muted);">12 juin 2026</td>
                   <td><span class="statut s-commission" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#63b3ed;width:5px;height:5px;animation:blink 2s infinite;"></span>En attente</span></td>
+                  <td>
+                    <div class="nouveau-actions">
+                      <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-MQ478TAZ-ODL')">Voir le dossier →</button>
+                    </div>
+                  </td>
                 </tr>
 
                 <tr data-type="avert">
-                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-CH456USG-MSV</td>
                   <td>
                     <div style="display:flex;align-items:center;gap:.5rem;">
                       <div class="m-av" style="background:#34495e33;color:#7f8c8d;">EA</div>
@@ -938,10 +941,14 @@
                   <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
                   <td style="font-size:.78rem;color:var(--muted);">07 mai 2025</td>
                   <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
+                  <td> 
+                    <div class="nouveau-actions">
+                      <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-DF874GER-LDO')">Voir le dossier →</button>
+                    </div>
+                  </td>
                 </tr>
 
                 <tr data-type="avert">
-                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-RD125FDH-MPO</td>
                   <td>
                     <div style="display:flex;align-items:center;gap:.5rem;">
                       <div class="m-av" style="background:#34495e33;color:#7f8c8d;">GF</div>
@@ -956,10 +963,14 @@
                   <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
                   <td style="font-size:.78rem;color:var(--muted);">07 mai 2025</td>
                   <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
+                  <td> 
+                    <div class="nouveau-actions">
+                      <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-RD125FDH-MPO')">Voir le dossier →</button>
+                    </div>
+                  </td>
                 </tr>
                 
                 <tr data-type="suspension">
-                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-DF874GER-LDO</td>
                   <td>
                     <div style="display:flex;align-items:center;gap:.5rem;">
                       <div class="m-av" style="background:#9b59b633;color:#9b59b6;">YC</div>
@@ -974,105 +985,17 @@
                   <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
                   <td style="font-size:.78rem;color:var(--muted);">07 mai 2026</td>
                   <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
+                  <td> 
+                    <div class="nouveau-actions">
+                      <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-DF874GER-LDO')">Voir le dossier →</button>
+                    </div>
+                  </td>
                 </tr>
                 
               </tbody>
             </table>
           </div>
         </div><!-- /panel-sanctions -->
-
-
-        <!-- ════ PANEL : HISTORIQUE ════ -->
-        <div class="spanel" id="panel-historique">
-
-          <div style="margin-bottom:1.5rem;">
-            <h2 class="section-title" style="margin-bottom:.2rem;">Historique <span>complet 2025-2026</span></h2>
-            <div class="section-line" style="margin-bottom:0;"></div>
-          </div>
-
-          <div class="filter-bar">
-            <span class="filter-bar-label">Statut :</span>
-            <button class="fchip active" onclick="filterHistorique('all',this)">Tous</button>
-            <button class="fchip" onclick="filterHistorique('nouveau',this)">Nouveaux</button>
-            <button class="fchip" onclick="filterHistorique('instruct',this)">En cours</button>
-            <button class="fchip" onclick="filterHistorique('clos',this)">Clos</button>
-            <button class="fchip" onclick="filterHistorique('irrecev',this)">Irrecevables</button>
-            <div class="search-wrap">
-              <input type="text" placeholder="Rechercher…" id="searchHisto" oninput="searchHistorique(this.value)">
-            </div>
-          </div>
-
-          <div class="dossiers-list" id="histoList">
-
-            <div class="dossier-card" data-statut="nouveau" data-text="propos discriminatoires direct signalement d-2026-006" onclick="openDossier('D-2026-006')">
-              <div class="dossier-head">
-                <div class="dossier-ref"><span class="ref-num">MHBTV-DF874GER-LDO</span><span class="ref-year">07 mai 2026</span></div>
-                <div class="dossier-main">
-                  <div class="dossier-title">Propos discriminatoires en direct — 22 mai 2026</div>
-                  <div class="dossier-meta"><span>👤 Anonymisé</span><span>📋 Art. 21.3</span><span class="gravite g-tres" style="font-size:.65rem;">Très aggravante</span></div>
-                </div>
-                <div class="dossier-right"><span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span></div>
-              </div>
-            </div>
-
-            <div class="dossier-card" data-statut="nouveau" data-text="abandon poste bilan retransmission d-2026-005" onclick="openDossier('D-2026-005')">
-              <div class="dossier-head">
-                <div class="dossier-ref"><span class="ref-num">D-2026-005</span><span class="ref-year">02 juin 2026</span></div>
-                <div class="dossier-main">
-                  <div class="dossier-title">Départ anticipé avant bilan post-retransmission — 10 mai 2026</div>
-                  <div class="dossier-meta"><span>👤 Anonymisé</span><span>📋 Art. 21.1</span></div>
-                </div>
-                <div class="dossier-right"><span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span></div>
-              </div>
-            </div>
-
-            <div class="dossier-card" data-statut="instruct" data-text="logo identite visuelle utilisation personnelle d-2026-004" onclick="openDossier('D-2026-004')">
-              <div class="dossier-head">
-                <div class="dossier-ref"><span class="ref-num">D-2026-004</span><span class="ref-year">02 avr. 2026</span></div>
-                <div class="dossier-main">
-                  <div class="dossier-title">Utilisation non autorisée du logo MHBTV à des fins personnelles</div>
-                  <div class="dossier-meta"><span>👤 Anonymisé</span><span>📋 Art. 21.5</span><span>📅 Commission : 20 juin</span></div>
-                </div>
-                <div class="dossier-right"><span class="statut s-instruct"><span class="statut-dot"></span>En instruction</span></div>
-              </div>
-            </div>
-
-            <div class="dossier-card" data-statut="clos" data-text="materiel pret non autorise kyliann suspension d-2026-003">
-              <div class="dossier-head" style="opacity:.8;">
-                <div class="dossier-ref"><span class="ref-num">D-2026-003</span><span class="ref-year">10 fév. 2026</span></div>
-                <div class="dossier-main">
-                  <div class="dossier-title">Utilisation du matériel à des fins personnelles + prêt non autorisé</div>
-                  <div class="dossier-meta"><span>👤 Kyliann H.</span><span>📋 Art. 21.4</span><span>⚖️ Susp. 3 retr. (en cours)</span></div>
-                </div>
-                <div class="dossier-right"><span class="statut s-clos"><span class="statut-dot"></span>Clos — Sanction en cours</span></div>
-              </div>
-            </div>
-
-            <div class="dossier-card" data-statut="clos" data-text="absence retransmission gaetan avertissement ecrit d-2026-002">
-              <div class="dossier-head" style="opacity:.7;">
-                <div class="dossier-ref"><span class="ref-num">D-2026-002</span><span class="ref-year">01 déc. 2025</span></div>
-                <div class="dossier-main">
-                  <div class="dossier-title">Absence non justifiée à une retransmission</div>
-                  <div class="dossier-meta"><span>👤 Gaetan F.</span><span>📋 Art. 21.1</span><span>⚖️ Avert. écrit — Purgée</span></div>
-                </div>
-                <div class="dossier-right"><span class="statut s-clos"><span class="statut-dot"></span>Clos</span></div>
-              </div>
-            </div>
-
-            <div class="dossier-card" data-statut="clos" data-text="gilet non port dorina avertissement oral d-2026-001">
-              <div class="dossier-head" style="opacity:.7;">
-                <div class="dossier-ref"><span class="ref-num">D-2026-001</span><span class="ref-year">10 oct. 2025</span></div>
-                <div class="dossier-main">
-                  <div class="dossier-title">Non-port du gilet MHBTV obligatoire</div>
-                  <div class="dossier-meta"><span>👤 Dorina H.-J.</span><span>📋 Art. 21.2</span><span>⚖️ Avert. oral — Purgée</span></div>
-                </div>
-                <div class="dossier-right"><span class="statut s-clos"><span class="statut-dot"></span>Clos</span></div>
-              </div>
-            </div>
-
-          </div>
-        </div><!-- /panel-historique -->
-
 
         <!-- ════ PANEL : STATS ════ -->
         <div class="spanel" id="panel-stats">

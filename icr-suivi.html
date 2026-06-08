@@ -610,7 +610,6 @@
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-footer">
         <button class="btn btn-outline" onclick="closeModalDirect()">Fermer</button>
-        <button class="btn btn-red" style="font-size:.78rem;padding:.6rem 1.2rem;" onclick="closeModalDirect()">💾 Enregistrer les modifications</button>
       </div>
     </div>
   </div>
@@ -657,23 +656,19 @@
         <!-- KPIs -->
         <div class="kpi-row">
           <div class="kpi-card urgent">
-            <span class="kpi-val">2</span>
+            <span class="kpi-val">1</span>
             <span class="kpi-lab">Nouveaux signalements</span>
           </div>
           <div class="kpi-card blue">
             <span class="kpi-val">1</span>
             <span class="kpi-lab">Procédures en cours</span>
           </div>
-          <div class="kpi-card gold">
-            <span class="kpi-val">1</span>
-            <span class="kpi-lab">Commission à planifier</span>
-          </div>
           <div class="kpi-card green">
             <span class="kpi-val">3</span>
             <span class="kpi-lab">Dossiers clos (saison)</span>
           </div>
           <div class="kpi-card">
-            <span class="kpi-val">6</span>
+            <span class="kpi-val">4</span>
             <span class="kpi-lab">Total signalements 25/26</span>
           </div>
         </div>
@@ -683,16 +678,13 @@
     <!-- TABS -->
     <div class="suivi-tabs">
       <button class="stab active" onclick="showTab('signalements',this)">
-        📬 Signalements <span class="stab-count">2</span>
+        📬 Signalements <span class="stab-count">1</span>
       </button>
       <button class="stab" onclick="showTab('procedures',this)">
         ⚖️ Procédures en cours <span class="stab-count blue">1</span>
       </button>
       <button class="stab" onclick="showTab('sanctions',this)">
-        📋 Sanctions prononcées
-      </button>
-      <button class="stab" onclick="showTab('historique',this)">
-        🗃️ Historique complet <span class="stab-count muted">6</span>
+        📋 Sanctions prononcées <span class="stab-count muted">3</span>
       </button>
       <button class="stab" onclick="showTab('stats',this)">
         📊 Statistiques
@@ -869,6 +861,24 @@
               </thead>
               <tbody>
 
+                <tr data-type="suspension">
+                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-MQ478TAZ-ODL</td>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.5rem;">
+                      <div class="m-av" style="background:#9b59b633;color:#9b59b6;">YC</div>
+                      <div>
+                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Younes C</div>
+                        <div style="font-size:.72rem;color:var(--muted);">Membre MHBTV</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence non justifié à une retransmission</td>
+                  <td><span class="statut s-commission" style="font-size:.7rem;padding:.18rem .55rem;">En attente</span></td>
+                  <td><div class="sanction-level"><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
+                  <td style="font-size:.78rem;color:var(--muted);">12 juin 2026</td>
+                  <td><span class="statut s-commission" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#fbbf24;width:5px;height:5px;animation:blink 2s infinite;"></span>En attente</span></td>
+                </tr>
+
                 <tr data-type="avert">
                   <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-CH456USG-MSV</td>
                   <td>
@@ -881,7 +891,7 @@
                     </div>
                   </td>
                   <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence justifiée sans prévenir dans un délai raisonnable</td>
-                  <td><span class="statut s-avert" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
+                  <td><span class="statut s-clos" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
                   <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
                   <td style="font-size:.78rem;color:var(--muted);">07 mai 2025</td>
                   <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
@@ -899,7 +909,7 @@
                     </div>
                   </td>
                   <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence justifiée sans prévenir dans un délai raisonnable</td>
-                  <td><span class="statut s-avert" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
+                  <td><span class="statut s-clos" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
                   <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
                   <td style="font-size:.78rem;color:var(--muted);">07 mai 2025</td>
                   <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>

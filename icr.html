@@ -8,6 +8,21 @@
   <style>
 
     /* ══════════════════════════════════════
+       BANNER ONGLETS ICR
+    ══════════════════════════════════════ */
+    .banner {
+      background: rgba(13, 14, 15, .07);
+      border-bottom: 1px solid rgba(13, 14, 15, 0.54);
+      padding: .65rem 4rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .banner span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--red);
+    }
+
+    /* ══════════════════════════════════════
        ACCÈS RESTREINT BANNER
     ══════════════════════════════════════ */
     .restricted-banner {
@@ -562,14 +577,16 @@
     </div>
 
     <!-- BANNER ONGLETS ICR -->
-    <div class="restricted-banner">
+    <div class="banner">
       <span>
         <ul class="topbar-nav" id="mainNav" style="justify-content: left;">
           <li><a href="icr.html">Instance compétente</a></li>
-          <li><a href="accreditations.html">Suivis des dossiers</a></li>
+          <li><a href="icr-suivi.html">Suivis des dossiers</a></li>
         </ul>
       </span>
     </div>
+
+    
     <!-- ══════════════════ HERO ══════════════════ -->
     <div class="icr-hero">
       <div class="icr-hero-wm">ICR</div>

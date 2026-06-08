@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion | Meylan Handball TV</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c0f;
+    --surface: #111418;
+    --surface2: #181c22;
+    --border: #252a32;
+    --accent: #e8302a;
+    --text: #f0f2f5;
+    --text-muted: #6b7280;
+    --text-dim: #9ca3af;
+    --selected-border: #3b5bdb;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    height: 64px;
+    background: var(--surface);
+    flex-shrink: 0;
+  }
+  .logo-bar { display: flex; align-items: center; gap: 0.75rem; }
+  .logo-icon {
+    width: 36px; height: 36px; background: var(--accent); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: #fff; flex-shrink: 0;
+  }
+  .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 2px; }
+  .header-badge {
+    margin-left: auto; font-size: 0.7rem; font-weight: 500; color: var(--text-muted);
+    border: 1px solid var(--border); border-radius: 20px; padding: 3px 12px;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* MAIN */
+  main {
+    flex: 1; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem;
+  }
+
+  .login-card {
+    width: 100%; max-width: 420px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    animation: fadeSlide 0.4s ease;
+  }
+
+  .card-tag {
+    display: inline-block; font-size: 0.7rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent);
+    background: rgba(232,48,42,0.1); border: 1px solid rgba(232,48,42,0.25);
+    border-radius: 20px; padding: 4px 14px; margin-bottom: 1.5rem;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.4rem; letter-spacing: 3px; line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .card-title em { color: var(--accent); font-style: normal; }
+
+  .card-subtitle {
+    font-size: 0.85rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 2rem;
+  }
+
+  /* FORM */
+  .field { margin-bottom: 1.25rem; }
+  .field label {
+    display: block; font-size: 0.72rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 0.5rem;
+  }
+  .input-wrap { position: relative; }
+  .field input {
+    width: 100%; padding: 0.8rem 1rem; padding-right: 2.8rem;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
+  }
+  .field input:focus { border-color: var(--selected-border); }
+  .field input::placeholder { color: var(--text-muted); }
+
+  /* Toggle password */
+  .toggle-pwd {
+    position: absolute; right: 0.85rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: var(--text-muted);
+    display: flex; align-items: center; padding: 0;
+    transition: color 0.2s;
+  }
+  .toggle-pwd:hover { color: var(--text-dim); }
+  .toggle-pwd svg { width: 18px; height: 18px; }
+
+  /* Error */
+  .error-box {
+    display: none; align-items: center; gap: 0.6rem;
+    background: rgba(232,48,42,0.08); border: 1px solid rgba(232,48,42,0.25);
+    border-radius: 8px; padding: 0.75rem 1rem;
+    font-size: 0.83rem; color: #f87171; margin-bottom: 1.25rem;
+  }
+  .error-box.visible { display: flex; }
+  .error-box svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* Attempts warning */
+  .attempts-warn {
+    display: none; font-size: 0.75rem; color: var(--text-muted);
+    text-align: center; margin-bottom: 1rem;
+  }
+  .attempts-warn.visible { display: block; }
+  .attempts-warn span { color: var(--accent); font-weight: 600; }
+
+  /* Submit */
+  .btn-login {
+    width: 100%; padding: 0.9rem;
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 2px;
+    cursor: pointer; transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+  }
+  .btn-login:hover:not(:disabled) { background: #c9281f; transform: translateY(-1px); }
+  .btn-login:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .btn-login svg { width: 18px; height: 18px; }
+
+  /* Lockout */
+  .lockout-screen {
+    display: none; text-align: center; padding: 1rem 0;
+  }
+  .lockout-icon {
+    font-size: 2.5rem; margin-bottom: 1rem;
+  }
+  .lockout-title {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+    letter-spacing: 2px; color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .lockout-msg { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+  .lockout-timer {
+    font-family: 'Bebas Neue', sans-serif; font-size: 2rem;
+    color: var(--text); letter-spacing: 3px; margin: 1.25rem 0;
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .login-card { padding: 2rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <div class="login-card">
+
+    <!-- Formulaire -->
+    <div id="formView">
+      <div class="card-tag">Accès restreint</div>
+      <h1 class="card-title">Connexion<br><em>Coordination générale</em></h1>
+      <p class="card-subtitle">Réservé aux membres du Bureau de la Coordination générale et de l'Instance Compétente des Retransmissions.</p>
+
+      <div class="error-box" id="errorBox">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="errorMsg">Identifiant ou mot de passe incorrect.</span>
+      </div>
+
+      <div class="attempts-warn" id="attemptsWarn">
+        Tentative <span id="attemptCount">0</span> / <span id="maxAttempts">5</span> — trop d'erreurs bloqueront l'accès.
+      </div>
+
+      <div class="field">
+        <label for="identifiant">Identifiant</label>
+        <div class="input-wrap">
+          <input type="text" id="identifiant" placeholder="Votre identifiant…" autocomplete="username" onkeydown="handleKey(event)" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="motdepasse">Mot de passe</label>
+        <div class="input-wrap">
+          <input type="password" id="motdepasse" placeholder="Votre mot de passe…" autocomplete="current-password" onkeydown="handleKey(event)" />
+          <button class="toggle-pwd" type="button" onclick="togglePwd()" title="Afficher / masquer">
+            <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-login" id="btnLogin" onclick="tryLogin()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        Se connecter
+      </button>
+    </div>
+
+    <!-- Écran de blocage -->
+    <div class="lockout-screen" id="lockoutScreen">
+      <div class="lockout-icon">🔒</div>
+      <div class="lockout-title">Accès bloqué</div>
+      <p class="lockout-msg">Trop de tentatives incorrectes.<br>Réessayez dans :</p>
+      <div class="lockout-timer" id="lockoutTimer">05:00</div>
+      <p class="lockout-msg" style="font-size:0.78rem;">Si vous avez oublié vos identifiants,<br>contactez la Coordination générale.</p>
+    </div>
+
+  </div>
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════
+   ⚙️  COMPTES AUTORISÉS  — Modifier ici
+   Chaque entrée : { identifiant: '...', motDePasse: '...' }
+   Vous pouvez en ajouter autant que nécessaire.
+   ═══════════════════════════════════════════════════════ */
+const COMPTES = [
+  { identifiant: 'icr.admin',   motDePasse: 'MhbtvICR2025!'  },
+  { identifiant: 'xavier.fini ',   motDePasse: 'mhbTV2026!'  },
+  { identifiant: 'coordinateur', motDePasse: 'Coord@MHBTV26' },
+  // { identifiant: 'autre',     motDePasse: 'AutreMotDePasse' },
+];
+
+/* ── Paramètres de sécurité ── */
+const MAX_TENTATIVES   = 5;         // Nombre de tentatives avant blocage
+const LOCKOUT_SECONDES = 5 * 60;    // Durée du blocage en secondes (5 min)
+const PAGE_CIBLE       = 'icr-suivi.html'; // Page de redirection après connexion
+/* ═══════════════════════════════════════════════════════ */
+
+let tentatives = 0;
+let lockoutTimer = null;
+let lockoutRemaining = 0;
+
+function handleKey(e) {
+  if (e.key === 'Enter') tryLogin();
+}
+
+function togglePwd() {
+  const input = document.getElementById('motdepasse');
+  const icon  = document.getElementById('eyeIcon');
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  icon.innerHTML = isHidden
+    ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+       <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+       <line x1="1" y1="1" x2="23" y2="23"/>`
+    : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+}
+
+function tryLogin() {
+  const id  = document.getElementById('identifiant').value.trim();
+  const mdp = document.getElementById('motdepasse').value;
+  const btn = document.getElementById('btnLogin');
+
+  if (!id || !mdp) {
+    showError('Veuillez remplir les deux champs.');
+    return;
+  }
+
+  const ok = COMPTES.some(c => c.identifiant === id && c.motDePasse === mdp);
+
+  if (ok) {
+    btn.disabled = true;
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin .7s linear infinite">
+        <circle cx="12" cy="12" r="10" stroke-opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/>
+      </svg>
+      Connexion…`;
+    setTimeout(() => { window.location.href = PAGE_CIBLE; }, 700);
+  } else {
+    tentatives++;
+    document.getElementById('attemptsWarn').classList.add('visible');
+    document.getElementById('attemptCount').textContent = tentatives;
+    document.getElementById('maxAttempts').textContent  = MAX_TENTATIVES;
+
+    if (tentatives >= MAX_TENTATIVES) {
+      startLockout();
+    } else {
+      const restantes = MAX_TENTATIVES - tentatives;
+      showError(`Identifiant ou mot de passe incorrect. ${restantes} tentative${restantes > 1 ? 's' : ''} restante${restantes > 1 ? 's' : ''}.`);
+      // Secouer le champ mot de passe
+      const mdpInput = document.getElementById('motdepasse');
+      mdpInput.style.borderColor = '#e8302a';
+      mdpInput.value = '';
+      setTimeout(() => { mdpInput.style.borderColor = ''; }, 1500);
+    }
+  }
+}
+
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  document.getElementById('errorMsg').textContent = msg;
+  box.classList.remove('visible');
+  void box.offsetWidth; // force reflow pour relancer l'animation
+  box.classList.add('visible');
+}
+
+function startLockout() {
+  lockoutRemaining = LOCKOUT_SECONDES;
+  document.getElementById('formView').style.display = 'none';
+  document.getElementById('lockoutScreen').style.display = 'block';
+  updateLockoutTimer();
+  lockoutTimer = setInterval(() => {
+    lockoutRemaining--;
+    updateLockoutTimer();
+    if (lockoutRemaining <= 0) {
+      clearInterval(lockoutTimer);
+      tentatives = 0;
+      document.getElementById('lockoutScreen').style.display = 'none';
+      document.getElementById('formView').style.display = 'block';
+      document.getElementById('attemptsWarn').classList.remove('visible');
+      document.getElementById('errorBox').classList.remove('visible');
+      document.getElementById('identifiant').value = '';
+      document.getElementById('motdepasse').value  = '';
+      document.getElementById('btnLogin').disabled = false;
+      document.getElementById('btnLogin').innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+          <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+        </svg>
+        Se connecter`;
+    }
+  }, 1000);
+}
+
+function updateLockoutTimer() {
+  const m = String(Math.floor(lockoutRemaining / 60)).padStart(2, '0');
+  const s = String(lockoutRemaining % 60).padStart(2, '0');
+  document.getElementById('lockoutTimer').textContent = `${m}:${s}`;
+}
+</script>
+
+<style>
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</body>
+</html>

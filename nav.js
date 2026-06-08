@@ -20,7 +20,7 @@
           </div>
         </li>
         <li><a href="gratification.html" ${currentPage==='gratification.html'?'class="active"':''}>Gratification</a></li>
-        <li><a href="connexion.html" ${currentPage==='connexion.html'?'class="active"':''}>Se connecter</a></li>
+        <li><a href="connexion.html">Se connecter</a></li>
       </ul>
       <div class="hamburger" id="hamburger" onclick="document.getElementById('mainNav').classList.toggle('open')">
         <span></span><span></span><span></span>

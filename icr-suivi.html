@@ -664,10 +664,7 @@
         ⚖️ Procédures en cours <span class="stab-count blue">1</span>
       </button>
       <button class="stab" onclick="showTab('sanctions',this)">
-        📋 Sanctions prononcées
-      </button>
-      <button class="stab" onclick="showTab('historique',this)">
-        🗃️ Historique complet <span class="stab-count muted">6</span>
+        📋 Sanctions prononcées <span class="stab-count muted">3</span>
       </button>
       <button class="stab" onclick="showTab('stats',this)">
         📊 Statistiques
@@ -687,28 +684,23 @@
           </div>
 
           <!-- Signalement 1 — urgent -->
-          <div class="nouveau-card" onclick="openDossier('D-2026-006')">
+          <div class="nouveau-card" onclick="openDossier('MHBTV-MQ478TAZ-ODL')">
             <div class="nouveau-urgence">!</div>
             <div class="nouveau-body" style="flex:1;">
               <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
                 <span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span>
-                <span class="gravite g-agg">Circonstance aggravante</span>
-                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. D-2026-006 · Reçu le 05 juin 2026</span>
+                <span class="gravite g-tres">Circonstance très aggravante</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-MQ478TAZ-ODL · Reçu le 07 juin 2026</span>
               </div>
-              <div class="nouveau-title">Propos discriminatoires en direct lors de la retransmission du 22 mai 2026</div>
-              <div class="nouveau-meta">📅 Faits du 22 mai 2026 · 📍 Gymnase de Meylan · 👤 Signalé par : Enzo ACHOUR</div>
+              <div class="nouveau-title">Abandon de poste injustifié à une retransmission - 7 juin 2026</div>
+              <div class="nouveau-meta">📅 Faits du 07 mai 2026 · 📍 Gymnase Jean Balestas · 👤 Signalé par : Xavier FINI</div>
               <div class="nouveau-motif">
-                <strong style="color:var(--red);">Motif :</strong> Art. 21.3 RARC — Propos discriminatoires en direct (Art. 21.3.3). Commentaire à caractère sexiste proféré en direct lors de la retransmission des finales Scol'Hand 2026. Constaté par 2 témoins.
-              </div>
-              <div class="nouveau-actions">
-                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('D-2026-006')">Examiner le dossier →</button>
-                <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Marquer irrecevable</button>
-                <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Avertissement direct</button>
+                <strong style="color:var(--red);">Motif :</strong> Art. 21.1 RARC — Absence non justifié à une retransmission (Art. 21.1.1). Confirmation de présence aux finales de la Coupe Jacques Battu Excellence, mais abandon de poste sans motif le jour des finales. Constaté par 4 témoins.
               </div>
             </div>
           </div>
 
-          <!-- Signalement 2 -->
+          <!-- Signalement 2 
           <div class="nouveau-card" style="border-left-color:var(--gold);" onclick="openDossier('D-2026-005')">
             <div class="nouveau-urgence" style="color:var(--gold);">!</div>
             <div class="nouveau-body" style="flex:1;">
@@ -722,12 +714,8 @@
               <div class="nouveau-motif">
                 <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Départ anticipé non autorisé avant la fin du bilan post-retransmission (Art. 21.1.4). Première occurrence.
               </div>
-              <div class="nouveau-actions">
-                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('D-2026-005')">Examiner le dossier →</button>
-                <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;" onclick="event.stopPropagation();">Avertissement oral direct</button>
-              </div>
             </div>
-          </div>
+          </div> -->
 
           <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;gap:.75rem;">
             <span style="font-size:1.1rem;">📋</span>
@@ -749,30 +737,29 @@
 
           <div class="dossiers-list">
 
-            <!-- Dossier D-2026-004 — en instruction -->
+            <!-- Dossier MHBTV-MQ478TAZ-ODL — en instruction -->
             <div class="dossier-card" onclick="toggleDossier(this)">
               <div class="dossier-head">
                 <div class="dossier-ref">
-                  <span class="ref-num">D-2026-004</span>
+                  <span class="ref-num">MHBTV-MQ478TAZ-ODL</span>
                   <span class="ref-year">Saison 2025-26</span>
                 </div>
                 <div class="dossier-main">
                   <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.25rem;flex-wrap:wrap;">
                     <span class="statut s-instruct"><span class="statut-dot"></span>En instruction</span>
-                    <span class="gravite g-agg">Aggravante</span>
+                    <span class="gravite g-tres">Très aggravante</span>
                     <span style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;color:var(--muted);">Art. 24 RARC · Commission le 20 juin 2026</span>
                   </div>
-                  <div class="dossier-title">Utilisation non autorisée du logo MHBTV à des fins personnelles</div>
+                  <div class="dossier-title">Absence non justifié à une retransmission</div>
                   <div class="dossier-meta">
                     <span>👤 <strong style="color:var(--text);">Membre anonymisé</strong></span>
-                    <span>📅 Faits : 15 mars 2026</span>
-                    <span>📬 Reçu le 2 avr. 2026</span>
+                    <span>📅 Faits : 07 juin 2026</span>
+                    <span>📬 Reçu le 7 juin 2026</span>
                     <span>👨‍⚖️ RG : Nicolas MARIN</span>
                   </div>
                 </div>
                 <div class="dossier-right">
                   <span class="statut s-instruct"><span class="statut-dot"></span>En instruction</span>
-                  <span style="font-size:.75rem;color:var(--muted);">Délai restant : <strong style="color:#fbbf24;">10 j</strong></span>
                   <button class="btn btn-outline" style="font-size:.7rem;padding:.3rem .7rem;" onclick="event.stopPropagation();openDossier('D-2026-004')">Détail →</button>
                 </div>
               </div>
@@ -787,23 +774,23 @@
                     <div class="dossier-timeline">
                       <div class="dt-step">
                         <div class="dt-num-wrap"><div class="dt-dot done">✓</div></div>
-                        <div class="dt-body"><div class="dt-title">Signalement reçu &amp; transmis</div><div class="dt-date">02 avr. 2026</div></div>
+                        <div class="dt-body"><div class="dt-title">Signalement reçu &amp; transmis</div><div class="dt-date">07 juin 2026</div></div>
                       </div>
                       <div class="dt-step">
                         <div class="dt-num-wrap"><div class="dt-dot done">✓</div></div>
-                        <div class="dt-body"><div class="dt-title">Recevabilité — procédure ouverte</div><div class="dt-date">05 avr. 2026</div></div>
+                        <div class="dt-body"><div class="dt-title">Recevabilité — procédure ouverte</div><div class="dt-date">08 juin 2026</div></div>
                       </div>
                       <div class="dt-step">
                         <div class="dt-num-wrap"><div class="dt-dot done">✓</div></div>
-                        <div class="dt-body"><div class="dt-title">Jury de rapporteurs désigné</div><div class="dt-date">06 avr. 2026</div></div>
+                        <div class="dt-body"><div class="dt-title">Jury de rapporteurs désigné</div><div class="dt-date">08 juin 2026</div></div>
                       </div>
                       <div class="dt-step">
                         <div class="dt-num-wrap"><div class="dt-dot current">●</div></div>
-                        <div class="dt-body"><div class="dt-title">Instruction en cours</div><div class="dt-date">Depuis le 08 avr. 2026</div></div>
+                        <div class="dt-body"><div class="dt-title">Instruction en cours</div><div class="dt-date">Depuis le 08 juin 2026</div></div>
                       </div>
                       <div class="dt-step">
                         <div class="dt-num-wrap"><div class="dt-dot pending">○</div></div>
-                        <div class="dt-body"><div class="dt-title">Commission disciplinaire</div><div class="dt-date">Prévue le 20 juin 2026</div></div>
+                        <div class="dt-body"><div class="dt-title">Commission disciplinaire</div><div class="dt-date">Prévue le 12 juin 2026</div></div>
                       </div>
                       <div class="dt-step">
                         <div class="dt-num-wrap"><div class="dt-dot pending">○</div></div>
@@ -814,8 +801,6 @@
                 </div>
                 <div class="dossier-actions">
                   <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="openDossier('D-2026-004')">Ouvrir le dossier complet</button>
-                  <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;">📄 Rapport d'instruction</button>
-                  <button class="btn btn-outline" style="font-size:.75rem;padding:.5rem 1rem;">📅 Confirmer la commission</button>
                 </div>
               </div>
             </div>
@@ -853,25 +838,27 @@
                 </tr>
               </thead>
               <tbody>
+
                 <tr data-type="avert">
-                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">D-2026-001</td>
+                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-CH456USG-MSV</td>
                   <td>
                     <div style="display:flex;align-items:center;gap:.5rem;">
-                      <div class="m-av" style="background:#9b59b633;color:#9b59b6;">DH</div>
+                      <div class="m-av" style="background:#34495e33;color:#7f8c8d;">EA</div>
                       <div>
-                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Dorina H.-J.</div>
-                        <div style="font-size:.72rem;color:var(--muted);">Membre ICR</div>
+                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Ennio ARIZZI</div>
+                        <div style="font-size:.72rem;color:var(--muted);">Membre MHBTV</div>
                       </div>
                     </div>
                   </td>
-                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Non-port du gilet MHBTV obligatoire</td>
-                  <td><span class="statut s-clos" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence justifiée sans prévenir dans un délai raisonnable</td>
+                  <td><span class="statut s-avert" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
                   <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
-                  <td style="font-size:.78rem;color:var(--muted);">14 oct. 2025</td>
+                  <td style="font-size:.78rem;color:var(--muted);">07 mai 2025</td>
                   <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
                 </tr>
+
                 <tr data-type="avert">
-                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">D-2026-002</td>
+                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-RD125FDH-MPO</td>
                   <td>
                     <div style="display:flex;align-items:center;gap:.5rem;">
                       <div class="m-av" style="background:#34495e33;color:#7f8c8d;">GF</div>
@@ -881,31 +868,31 @@
                       </div>
                     </div>
                   </td>
-                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence non justifiée à une retransmission (1ère occurrence)</td>
-                  <td><span class="statut s-avert" style="font-size:.7rem;padding:.18rem .55rem;">Avert. écrit</span></td>
-                  <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
-                  <td style="font-size:.78rem;color:var(--muted);">08 déc. 2025</td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence justifiée sans prévenir dans un délai raisonnable</td>
+                  <td><span class="statut s-avert" style="font-size:.7rem;padding:.18rem .55rem;">Avert. oral</span></td>
+                  <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
+                  <td style="font-size:.78rem;color:var(--muted);">07 mai 2025</td>
                   <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
                 </tr>
+                
                 <tr data-type="suspension">
-                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">D-2026-003</td>
+                  <td style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#63b3ed;font-size:.85rem;">MHBTV-DF874GER-LDO</td>
                   <td>
                     <div style="display:flex;align-items:center;gap:.5rem;">
-                      <div class="m-av" style="background:#3498db33;color:#3498db;">KH</div>
+                      <div class="m-av" style="background:#9b59b633;color:#9b59b6;">YC</div>
                       <div>
-                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Kyliann H.</div>
+                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Younes C</div>
                         <div style="font-size:.72rem;color:var(--muted);">Membre MHBTV</div>
                       </div>
                     </div>
                   </td>
-                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Utilisation du matériel à des fins personnelles + prêt non autorisé</td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Absence non justifié à une retransmission</td>
                   <td><span class="statut s-instruct" style="font-size:.7rem;padding:.18rem .55rem;">Susp. 3 retr.</span></td>
                   <td><div class="sanction-level"><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot filled"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
-                  <td style="font-size:.78rem;color:var(--muted);">22 fév. 2026</td>
-                  <td>
-                    <span class="statut s-instruct" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#fbbf24;width:5px;height:5px;animation:blink 2s infinite;"></span>En cours (1/3)</span>
-                  </td>
-                </tr>
+                  <td style="font-size:.78rem;color:var(--muted);">07 mai 2026</td>
+                  <span class="statut s-instruct" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#fbbf24;width:5px;height:5px;animation:blink 2s infinite;"></span>En cours (2/3)</span>                </tr>
+                
+                
               </tbody>
             </table>
           </div>
@@ -936,7 +923,7 @@
 
             <div class="dossier-card" data-statut="nouveau" data-text="propos discriminatoires direct signalement d-2026-006" onclick="openDossier('D-2026-006')">
               <div class="dossier-head">
-                <div class="dossier-ref"><span class="ref-num">D-2026-006</span><span class="ref-year">05 juin 2026</span></div>
+                <div class="dossier-ref"><span class="ref-num">MHBTV-DF874GER-LDO</span><span class="ref-year">07 mai 2026</span></div>
                 <div class="dossier-main">
                   <div class="dossier-title">Propos discriminatoires en direct — 22 mai 2026</div>
                   <div class="dossier-meta"><span>👤 Anonymisé</span><span>📋 Art. 21.3</span><span class="gravite g-tres" style="font-size:.65rem;">Très aggravante</span></div>
@@ -1065,32 +1052,6 @@
       <!-- ══════ SIDEBAR ══════ -->
       <aside class="suivi-sidebar">
 
-        <!-- Délais réglementaires -->
-        <div class="sb-card" style="border-color:rgba(232,0,29,.2);">
-          <h4 style="color:var(--red);">⚠️ Délais à surveiller</h4>
-          <div class="delai-row">
-            <div class="delai-num">10j</div>
-            <div class="delai-info">
-              <div class="delai-title">Commission D-2026-004</div>
-              <div class="delai-art">Prévue le 20 juin 2026 · Art. 24 RARC</div>
-            </div>
-          </div>
-          <div class="delai-row">
-            <div class="delai-num" style="color:#fbbf24;">—</div>
-            <div class="delai-info">
-              <div class="delai-title">D-2026-006 : décision recevabilité</div>
-              <div class="delai-art">Signalement reçu le 05 juin · À traiter</div>
-            </div>
-          </div>
-          <div class="delai-row">
-            <div class="delai-num" style="color:#fbbf24;">—</div>
-            <div class="delai-info">
-              <div class="delai-title">D-2026-005 : décision recevabilité</div>
-              <div class="delai-art">Signalement reçu le 02 juin · À traiter</div>
-            </div>
-          </div>
-        </div>
-
         <!-- Rappel délais RARC -->
         <div class="sb-card">
           <h4>Délais RARC — rappel</h4>
@@ -1130,12 +1091,12 @@
         <!-- Liens utiles -->
         <div class="sb-card">
           <h4>Liens utiles</h4>
-          <a class="qlink" href="icr.html">
+          <a class="qlink" href="Reglement_disciplinaire_MHBTV.pdf">
             <span class="ql-icon">⚖️</span>
             <span class="ql-label">Règlement ICR complet</span>
             <span style="font-size:.7rem;color:var(--muted);">→</span>
           </a>
-          <a class="qlink" href="signalement.html">
+          <a class="qlink" href="signalement-comportement.html">
             <span class="ql-icon">📬</span>
             <span class="ql-label">Formulaire de signalement</span>
             <span style="font-size:.7rem;color:var(--muted);">→</span>
@@ -1143,11 +1104,6 @@
           <a class="qlink" href="accreditations.html">
             <span class="ql-icon">🎖️</span>
             <span class="ql-label">Accréditations membres</span>
-            <span style="font-size:.7rem;color:var(--muted);">→</span>
-          </a>
-          <a class="qlink" href="planning.html">
-            <span class="ql-icon">📅</span>
-            <span class="ql-label">Planning retransmissions</span>
             <span style="font-size:.7rem;color:var(--muted);">→</span>
           </a>
         </div>
@@ -1175,8 +1131,8 @@
       <ul>
         <li><a href="icr.html">Instance Compétente</a></li>
         <li><a href="icr-suivi.html">Suivi disciplinaire</a></li>
-        <li><a href="signalement.html">Signalement</a></li>
-        <li><a href="reglement-retransmissions.html">Règlement RARC</a></li>
+        <li><a href="signalement-comportement.html">Signalement</a></li>
+        <li><a href="Reglement_disciplinaire_MHBTV.pdf">Règlement RARC</a></li>
       </ul>
     </div>
   </footer>
@@ -1237,59 +1193,41 @@
 
     /* ══ MODAL DOSSIER DÉTAIL ══ */
     const DOSSIERS = {
-      'D-2026-006': {
-        titre: 'Propos discriminatoires en direct — 22 mai 2026',
-        statut: 'nouveau',
-        gravite: 'tres',
-        art: 'Art. 21.3.3 RARC',
-        date_faits: '22 mai 2026',
-        date_signal: '05 juin 2026',
-        signal_par: 'Enzo ACHOUR',
-        temoins: 'Tim TOUR, Marie DAL ZOTTO',
-        preuves: 'Enregistrement du direct disponible (archive YouTube)',
-        description: 'Lors de la retransmission des finales Scol\'Hand 2026, un commentaire à caractère sexiste a été proféré en direct par le commentateur désigné. Le propos a été capté sur l\'enregistrement. Deux membres présents en régie ont confirmé avoir entendu le commentaire.',
-        motifs: ['Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.)'],
-        sanction_sans: 'Suspension saison + retrait accréditation + inéligibilité CG 1 an',
-        sanction_agg: 'Exclusion temporaire + inéligibilité CG 2 ans',
-        sanction_tres: 'Exclusion définitive',
-        decision: null,
-        next: 'Examen de recevabilité obligatoire — commission à ouvrir'
-      },
-      'D-2026-005': {
-        titre: 'Départ anticipé avant bilan post-retransmission — 10 mai 2026',
-        statut: 'nouveau',
-        gravite: 'std',
-        art: 'Art. 21.1.4 RARC',
-        date_faits: '10 mai 2026',
-        date_signal: '02 juin 2026',
-        signal_par: 'Xavier FINI (Coordinateur général)',
-        temoins: 'Nicolas MARIN',
-        preuves: 'Aucun',
-        description: 'Le membre concerné a quitté la salle avant la fin du bilan post-retransmission du match SF1 Meylan/Evian, sans autorisation du Responsable de Retransmission. Il s\'agit d\'une première occurrence.',
-        motifs: ['Départ anticipé non autorisé avant la fin du bilan post-retransmission'],
-        sanction_sans: 'Avertissement écrit',
-        sanction_agg: 'Suspension 1 retransmission',
-        sanction_tres: 'Suspension 3 retransmissions',
-        decision: null,
-        next: 'Avertissement oral direct envisageable (Art. 23 RARC — sans procédure formelle)'
-      },
-      'D-2026-004': {
-        titre: 'Utilisation non autorisée du logo MHBTV à des fins personnelles',
+   // 'D-2026-005': {
+   //     titre: 'Départ anticipé avant bilan post-retransmission — 10 mai 2026',
+   //     statut: 'nouveau',
+   //     gravite: 'std',
+   //     art: 'Art. 21.1.4 RARC',
+   //     date_faits: '10 mai 2026',
+   //     date_signal: '02 juin 2026',
+   //     signal_par: 'Xavier FINI (Coordinateur général)',
+   //     temoins: 'Nicolas MARIN',
+   //     preuves: 'Aucun',
+   //    description: 'Le membre concerné a quitté la salle avant la fin du bilan post-retransmission du match SF1 Meylan/Evian, sans autorisation du Responsable de Retransmission. Il s\'agit d\'une première occurrence.',
+   //     motifs: ['Départ anticipé non autorisé avant la fin du bilan post-retransmission'],
+   //     sanction_sans: 'Avertissement écrit',
+   //     sanction_agg: 'Suspension 1 retransmission',
+   //     sanction_tres: 'Suspension 3 retransmissions',
+   //     decision: null,
+   //     next: 'Avertissement oral direct envisageable (Art. 23 RARC — sans procédure formelle)'
+   //   }, 
+      'MHBTV-MQ478TAZ-ODL': {
+        titre: 'Abandon de poste à une retransmission',
         statut: 'instruct',
-        gravite: 'agg',
-        art: 'Art. 21.5 RARC',
-        date_faits: '15 mars 2026',
-        date_signal: '02 avril 2026',
-        signal_par: 'Marie DAL ZOTTO',
-        temoins: 'Aucun',
-        preuves: 'Capture d\'écran LinkedIn (profil personnel avec logo MHBTV)',
-        description: 'Le membre concerné a utilisé le logo officiel MHBTV sur son profil LinkedIn personnel dans la section "expériences", sans autorisation préalable de la Coordination générale, en faisant mention d\'un rôle de "Responsable de production" non officiel.',
-        motifs: ['Utilisation du nom, du logo ou de l\'identité visuelle MHBTV à des fins personnelles (CV, portfolio, réseaux personnels) sans autorisation préalable'],
-        sanction_sans: 'Avertissement écrit + retrait des usages',
-        sanction_agg: 'Suspension 3 retransmissions + interdiction de représentation externe',
+        gravite: 'tres',
+        art: 'Art. 21.1 RARC',
+        date_faits: '07 juin 2026',
+        date_signal: '07 juin 2026',
+        signal_par: 'Xavier FINI',
+        temoins: '5 témoins',
+        preuves: '',
+        description: 'Le membre concerné n'est pas venu à une retransmission de grande envergure après avoir confirmé sa présence, et sans avertissement préalable de son empêchement',
+        motifs: ['Absence non justifiée à une retransmission (tout poste) ou à une réunion interne obligatoire'];['Abandon de poste en cours de retransmission ou d'une mission bénévole sans motif valable'];['Non-participation injustifiée à une journée de travail collectif ou de préparation technique'],
+        sanction_sans: 'Suspension 2 retransmissions',
+        sanction_agg: 'Suspension 4 retransmission + retrait accréditation 1 mois',
         sanction_tres: 'Exclusion temporaire + inéligibilité CG 1 an',
-        decision: 'Procédure disciplinaire ouverte le 05 avr. 2026. Commission prévue le 20 juin 2026. Rapporteur général : Nicolas MARIN.',
-        next: 'Commission disciplinaire prévue le 20 juin 2026 à 18h00 en visioconférence.'
+        decision: 'Procédure disciplinaire ouverte le 08 juin 2026. Commission prévue le 12 juin 2026. Rapporteur général : Nicolas MARIN.',
+        next: 'Commission disciplinaire prévue le 12 juin 2026 à 18h00 en visioconférence.'
       }
     };
 

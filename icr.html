@@ -8,6 +8,28 @@
   <style>
 
     /* ══════════════════════════════════════
+       ACCÈS RESTREINT BANNER
+    ══════════════════════════════════════ */
+    .restricted-banner {
+      background: rgba(232,0,29,.07);
+      border-bottom: 1px solid rgba(232,0,29,.2);
+      padding: .65rem 4rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .restricted-banner span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .restricted-badge {
+      background: rgba(232,0,29,.12); border: 1px solid rgba(232,0,29,.3);
+      border-radius: 3px; padding: .18rem .55rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--red);
+    }
+
+    /* ══════════════════════════════════════
        HERO
     ══════════════════════════════════════ */
     .icr-hero {
@@ -531,6 +553,14 @@
 
   <main class="page">
 
+    <!-- BANNER ACCÈS RESTREINT -->
+    <div class="restricted-banner">
+      <span>🔒</span>
+      <span>Accès restreint —</span>
+      <span class="restricted-badge">ICR &amp; Bureau uniquement</span>
+      <span style="color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:.08em;">Ce tableau de bord est confidentiel. Toute divulgation est un manquement au RARC (Art. 21.6).</span>
+    </div>
+
     <!-- ══════════════════ HERO ══════════════════ -->
     <div class="icr-hero">
       <div class="icr-hero-wm">ICR</div>
@@ -545,10 +575,6 @@
           <div class="hkpi">
             <span class="hkpi-val blue">6</span>
             <span class="hkpi-lab">Membres ICR</span>
-          </div>
-          <div class="hkpi">
-            <span class="hkpi-val">2 ans</span>
-            <span class="hkpi-lab">Durée mandat</span>
           </div>
           <div class="hkpi">
             <span class="hkpi-val">9</span>
@@ -1349,12 +1375,12 @@
         <!-- Règlements source -->
         <div class="sb-card">
           <h4>Documents de référence</h4>
-          <a class="quick-link" href="reglement-general.html">
+          <a class="quick-link" href="Reglement_General_Meylan_Handball_TV.pdf">
             <span class="ql-icon">📋</span>
             <span class="ql-label">Règlement Général MHBTV</span>
             <span class="ql-arr">→</span>
           </a>
-          <a class="quick-link" href="reglement-retransmissions.html">
+          <a class="quick-link" href="Reglement_disciplinaire_MHBTV.pdf">
             <span class="ql-icon">📺</span>
             <span class="ql-label">Règlement des Retransmissions</span>
             <span class="ql-arr">→</span>
@@ -1375,7 +1401,7 @@
         <div class="sb-card" style="background:rgba(232,0,29,.04);border-color:rgba(232,0,29,.2);">
           <h4>Signaler un comportement</h4>
           <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Tout signalement est adressé au Bureau de la Coordination générale — point d'entrée unique et obligatoire (Art. 22 RARC).</p>
-          <a href="https://meylanhandballtv.wixsite.com/meylan-handball-tv/signaler-un-comportement" target="_blank" class="btn btn-red" style="width:100%;justify-content:center;font-size:.75rem;">Accéder au formulaire →</a>
+          <a href="signalement-comportement.html" target="_blank" class="btn btn-red" style="width:100%;justify-content:center;font-size:.75rem;">Accéder au formulaire →</a>
         </div>
 
       </aside>
@@ -1402,13 +1428,13 @@
       <ul>
         <li><a href="accreditations.html">Accréditations</a></li>
         <li><a href="guides.html">Guides &amp; formations</a></li>
-        <li><a href="reglement-general.html">Règlement général</a></li>
-        <li><a href="reglement-retransmissions.html">Règlement retransmissions</a></li>
+        <li><a href="Reglement_General_Meylan_Handball_TV.pdf">Règlement général</a></li>
+        <li><a href="Reglement_disciplinaire_MHBTV.pdf">Règlement retransmissions</a></li>
       </ul>
     </div>
   </footer>
   <div class="footer-bottom">
-    <p>© 2025-2026 Meylan Handball TV · RG &amp; RARC version du 23 avril 2026</p>
+    <p>© 2025-2026 Meylan Handball TV · Accès ICR confidentiel</p>
     <p>Site interne — Usage réservé aux membres</p>
   </div>
 

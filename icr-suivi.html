@@ -331,7 +331,7 @@
     /* ══════════════════════════════════════
        NOUVEAU SIGNALEMENT (vue rapide)
     ══════════════════════════════════════ */
-    .nouveau-card {
+    . {
       background: rgba(232,0,29,.05); border: 1px solid rgba(232,0,29,.25);
       border-left: 4px solid var(--red); border-radius: 8px;
       padding: 1.1rem 1.4rem; margin-bottom: .75rem;
@@ -704,7 +704,7 @@
           </div>
 
           <!-- Signalement 1 — urgent -->
-          <div class="nouveau-card" onclick="openDossier('MHBTV-MQ478TAZ-ODL')">
+          <div class="" onclick="openDossier('MHBTV-MQ478TAZ-ODL')">
             <div class="nouveau-urgence">!</div>
             <div class="nouveau-body" style="flex:1;">
               <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
@@ -717,25 +717,68 @@
               <div class="nouveau-motif">
                 <strong style="color:var(--red);">Motif :</strong> Art. 21.1 RARC — Absence non justifié à une retransmission (Art. 21.1.1). Confirmation de présence aux finales de la Coupe Jacques Battu Excellence, mais abandon de poste sans motif le jour des finales. Constaté par 4 témoins.
               </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-MQ478TAZ-ODL')">Voir le dossier →</button>
+              </div>
             </div>
           </div>
 
-          <!-- Signalement 2 
-          <div class="nouveau-card" style="border-left-color:var(--gold);" onclick="openDossier('D-2026-005')">
+          <!-- Signalement 2 -->
+          <div class="" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-CH456USG-MSV')">
             <div class="nouveau-urgence" style="color:var(--gold);">!</div>
             <div class="nouveau-body" style="flex:1;">
               <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
-                <span class="statut s-nouveau"><span class="statut-dot"></span>Nouveau</span>
                 <span class="gravite g-std">Sans aggravante</span>
-                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. D-2026-005 · Reçu le 02 juin 2026</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-CH456USG-MSV · Reçu le 18 avril 2026</span>
               </div>
-              <div class="nouveau-title">Abandon de poste avant la fin du bilan post-retransmission — 10 mai 2026</div>
-              <div class="nouveau-meta">📅 Faits du 10 mai 2026 · 👤 Signalé par : Xavier FINI</div>
+              <div class="nouveau-title">Absence justifiée sans prévenir dans un délai raisonnable — 18 avril 2026</div>
+              <div class="nouveau-meta">📅 Faits du 18 avril 2026 · 👤 Signalé par : Enzo ACHOUR</div>
               <div class="nouveau-motif">
-                <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Départ anticipé non autorisé avant la fin du bilan post-retransmission (Art. 21.1.4). Première occurrence.
+                <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Absence justifiée sans prévenir dans un délai raisonnable, au minimum 24 heures avant, et sans proposer de remplacement. (Art. 21.1.2)
+              </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-CH456USG-MSV')">Voir le dossier →</button>
               </div>
             </div>
-          </div> -->
+          </div> 
+
+          <!-- Signalement 3 -->
+          <div class="" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-RD125FDH-MPO')">
+            <div class="nouveau-urgence" style="color:var(--gold);">!</div>
+            <div class="nouveau-body" style="flex:1;">
+              <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="gravite g-std">Sans aggravante</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-RD125FDH-MPO · Reçu le 18 avril 2026</span>
+              </div>
+              <div class="nouveau-title">Absence justifiée sans prévenir dans un délai raisonnable — 18 avril 2026</div>
+              <div class="nouveau-meta">📅 Faits du 18 avril 2026 · 👤 Signalé par : Marie DAL ZOTTO</div>
+              <div class="nouveau-motif">
+                <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Absence justifiée sans prévenir dans un délai raisonnable, au minimum 24 heures avant, et sans proposer de remplacement. (Art. 21.1.2)
+              </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-RD125FDH-MPO')">Voir le dossier →</button>
+              </div>
+            </div>
+          </div> 
+
+          <!-- Signalement 3 -->
+          <div class="" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-DF874GER-LDO')">
+            <div class="nouveau-urgence" style="color:var(--gold);">!</div>
+            <div class="nouveau-body" style="flex:1;">
+              <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="gravite g-agg">Aggravante</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-DF874GER-LDO · Reçu le 19 avril 2026</span>
+              </div>
+              <div class="nouveau-title">Absence non justifiée à une retransmission — 19 avril 2026</div>
+              <div class="nouveau-meta">📅 Faits du 18 avril 2026 · 👤 Signalé par : Enzo ACHOUR</div>
+              <div class="nouveau-motif">
+                <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Absence non justifiée à une retransmission (tout poste) ou à une réunion interne obligatoire. (Art. 21.1.1)
+              </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-DF874GER-LDO')">Voir le dossier →</button>
+              </div>
+            </div>
+          </div> 
 
           <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;gap:.75rem;">
             <span style="font-size:1.1rem;">📋</span>

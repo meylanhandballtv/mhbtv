@@ -704,7 +704,7 @@
           </div>
 
           <!-- Signalement 1 — urgent -->
-          <div class="" onclick="openDossier('MHBTV-MQ478TAZ-ODL')">
+          <div class="nouveau-card" onclick="openDossier('MHBTV-MQ478TAZ-ODL')">
             <div class="nouveau-urgence">!</div>
             <div class="nouveau-body" style="flex:1;">
               <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
@@ -724,10 +724,31 @@
           </div>
 
           <!-- Signalement 2 -->
-          <div class="" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-CH456USG-MSV')">
+          <div class="nouveau-card" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-DF874GER-LDO')">
             <div class="nouveau-urgence" style="color:var(--gold);">!</div>
             <div class="nouveau-body" style="flex:1;">
               <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="statut s-nouveau"><span class="statut-dot"></span></span>
+                <span class="gravite g-agg">Aggravante</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-DF874GER-LDO · Reçu le 19 avril 2026</span>
+              </div>
+              <div class="nouveau-title">Absence non justifiée à une retransmission — 19 avril 2026</div>
+              <div class="nouveau-meta">📅 Faits du 18 avril 2026 · 👤 Signalé par : Enzo ACHOUR</div>
+              <div class="nouveau-motif">
+                <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Absence non justifiée à une retransmission (tout poste) ou à une réunion interne obligatoire. (Art. 21.1.1)
+              </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-DF874GER-LDO')">Voir le dossier →</button>
+              </div>
+            </div>
+          </div> 
+
+          <!-- Signalement 3 -->
+          <div class="nouveau-card" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-CH456USG-MSV')">
+            <div class="nouveau-urgence" style="color:var(--gold);">!</div>
+            <div class="nouveau-body" style="flex:1;">
+              <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="statut s-nouveau"><span class="statut-dot"></span></span>
                 <span class="gravite g-std">Sans aggravante</span>
                 <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-CH456USG-MSV · Reçu le 18 avril 2026</span>
               </div>
@@ -742,11 +763,12 @@
             </div>
           </div> 
 
-          <!-- Signalement 3 -->
-          <div class="" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-RD125FDH-MPO')">
+          <!-- Signalement 4 -->
+          <div class="nouveau-card" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-RD125FDH-MPO')">
             <div class="nouveau-urgence" style="color:var(--gold);">!</div>
             <div class="nouveau-body" style="flex:1;">
               <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="statut s-nouveau"><span class="statut-dot"></span></span>
                 <span class="gravite g-std">Sans aggravante</span>
                 <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-RD125FDH-MPO · Reçu le 18 avril 2026</span>
               </div>
@@ -757,25 +779,6 @@
               </div>
               <div class="nouveau-actions">
                 <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-RD125FDH-MPO')">Voir le dossier →</button>
-              </div>
-            </div>
-          </div> 
-
-          <!-- Signalement 3 -->
-          <div class="" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-DF874GER-LDO')">
-            <div class="nouveau-urgence" style="color:var(--gold);">!</div>
-            <div class="nouveau-body" style="flex:1;">
-              <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
-                <span class="gravite g-agg">Aggravante</span>
-                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-DF874GER-LDO · Reçu le 19 avril 2026</span>
-              </div>
-              <div class="nouveau-title">Absence non justifiée à une retransmission — 19 avril 2026</div>
-              <div class="nouveau-meta">📅 Faits du 18 avril 2026 · 👤 Signalé par : Enzo ACHOUR</div>
-              <div class="nouveau-motif">
-                <strong style="color:var(--gold);">Motif :</strong> Art. 21.1 RARC — Absence non justifiée à une retransmission (tout poste) ou à une réunion interne obligatoire. (Art. 21.1.1)
-              </div>
-              <div class="nouveau-actions">
-                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-DF874GER-LDO')">Voir le dossier →</button>
               </div>
             </div>
           </div> 
@@ -1311,6 +1314,63 @@
         sanction_tres: 'Exclusion temporaire + inéligibilité CG 1 an',
         decision: 'Procédure disciplinaire ouverte le 08 juin 2026. Commission prévue le 12 juin 2026. Rapporteur général : Nicolas MARIN.',
         next: 'Commission disciplinaire prévue le 12 juin 2026 à 18h00 en visioconférence.'
+      }
+
+      'MHBTV-CH456USG-MSV': {
+        titre: 'Absence justifiée sans prévenir dans un délai raisonnable',
+        statut: 'clos',
+        gravite: 'std',
+        art: 'Art. 21.1 RARC',
+        date_faits: '18 avril 2026',
+        date_signal: '18 avril 2026',
+        signal_par: 'Enzo ACHOUR',
+        temoins: '',
+        preuves: '',
+        description: '',
+        motifs: ['Absence justifiée sans prévenir dans un délai raisonnable (minimum 24 heures) et sans proposer de remplacement'],
+        sanction_sans: 'Avertissement oral',
+        sanction_agg: 'Suspension 1 retransmission',
+        sanction_tres: 'Suspension 3 retransmission',
+        decision: 'Avertissement oral',
+        next: ''
+      }
+
+      'MHBTV-RD125FDH-MPO': {
+        titre: 'Absence justifiée sans prévenir dans un délai raisonnable',
+        statut: 'clos',
+        gravite: 'std',
+        art: 'Art. 21.1 RARC',
+        date_faits: '18 avril 2026',
+        date_signal: '18 avril 2026',
+        signal_par: 'Marie DAL ZOTTO',
+        temoins: '',
+        preuves: '',
+        description: '',
+        motifs: ['Absence justifiée sans prévenir dans un délai raisonnable (minimum 24 heures) et sans proposer de remplacement'],
+        sanction_sans: 'Avertissement oral',
+        sanction_agg: 'Suspension 1 retransmission',
+        sanction_tres: 'Suspension 3 retransmission',
+        decision: 'Avertissement oral',
+        next: ''
+      }
+
+      'MHBTV-DF874GER-LDO': {
+        titre: 'Absence non justifiée à une retransmission',
+        statut: 'clos',
+        gravite: 'agg',
+        art: 'Art. 21.1 RARC',
+        date_faits: '19 avril 2026',
+        date_signal: '19 avril 2026',
+        signal_par: 'Enzo ACHOUR',
+        temoins: '',
+        preuves: '',
+        description: '',
+        motifs: ['Absence non justifiée à une retransmission (tout poste) ou à une réunion interne obligatoire'],
+        sanction_sans: 'Avertissement écrit',
+        sanction_agg: 'Suspension 3 retransmission',
+        sanction_tres: 'Suspension 6 retransmission + retrait accréditation 3 mois',
+        decision: 'Suspension 3 retransmissions',
+        next: 'Commission disciplinaire le 7 mai 2026.'
       }
     };
 

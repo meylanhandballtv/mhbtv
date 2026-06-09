@@ -10,6 +10,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ══════════════════════════════════════
+       BANNER ONGLETS ICR
+    ══════════════════════════════════════ */
+    .banner {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: .65rem 4rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .banner span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--red);
+    }
+
+    /* ══════════════════════════════════════
+       ACCÈS RESTREINT BANNER
+    ══════════════════════════════════════ */
+    .restricted-banner {
+      background: rgba(232,0,29,.07);
+      border-bottom: 1px solid rgba(232,0,29,.2);
+      padding: .65rem 4rem;
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .restricted-banner span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .restricted-badge {
+      background: rgba(232,0,29,.12); border: 1px solid rgba(232,0,29,.3);
+      border-radius: 3px; padding: .18rem .55rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .65rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--red);
+    }
+    
+    /* ══════════════════════════════════════
        BASE / TOKENS
     ══════════════════════════════════════ */
     :root {
@@ -44,21 +81,6 @@
     .btn-red:hover { background: #c8001a; }
     .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
     .btn-outline:hover { border-color: #555; color: var(--white); }
-
-    /* ══════════════════════════════════════
-       BANNER ONGLETS ICR
-    ══════════════════════════════════════ */
-    .banner {
-      background: var(--card);
-      border-bottom: 1px solid var(--border);
-      padding: .65rem 4rem;
-      display: flex; align-items: center; gap: .75rem;
-    }
-    .banner span {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
-      text-transform: uppercase; color: var(--red);
-    }
 
     /* ══════════════════════════════════════
        HERO
@@ -588,6 +610,7 @@
         <ul class="topbar-nav" id="mainNav" style="justify-content: left;">
           <li><a href="icr.html">Instance compétente</a></li>
           <li><a href="icr-suivi.html">Suivis des dossiers</a></li>
+          <li><a href="icr-inscriptions.html">Inscriptions</a></li>
         </ul>
       </span>
     </div>
@@ -642,19 +665,108 @@
 
           <div class="dossiers-grid" id="dossiersGrid">
 
-            <!-- Dossier Lucas DUPONT -->
             <div class="dossier-card" onclick="openModal('INS-478TAZ')">
               <div class="d-header">
                 <div>
                   <span class="d-badge d-badge-nouveau"><span class="d-badge-dot"></span> Nouveau</span>
                   <span class="d-ref">Réf. INS-478TAZ</span>
                 </div>
-                <span class="d-date">07 juin 2026</span>
+                <span class="d-date">05 juin 2026</span>
               </div>
               <h3 class="d-name">Xavier FINI</h3>
               <div class="d-role">Rôle : <strong>Coordinateur général</strong></div>
               <div class="d-actions">
                 <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-478TAZ')">Ouvrir le dossier →</button>
+              </div>
+            </div>
+
+            <div class="dossier-card" onclick="openModal('INS-412YAB')">
+              <div class="d-header">
+                <div>
+                  <span class="d-badge d-badge-nouveau"><span class="d-badge-dot"></span> Nouveau</span>
+                  <span class="d-ref">Réf. INS-412YAB</span>
+                </div>
+                <span class="d-date">05 juin 2026</span>
+              </div>
+              <h3 class="d-name">Emmanuel ALVES DE MOURA</h3>
+              <div class="d-role">Rôle : <strong>Secrétaire général</strong></div>
+              <div class="d-actions">
+                <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-412YAB')">Ouvrir le dossier →</button>
+              </div>
+            </div>
+
+            <div class="dossier-card" onclick="openModal('INS-390MEY')">
+              <div class="d-header">
+                <div>
+                  <span class="d-badge d-badge-nouveau"><span class="d-badge-dot"></span> Nouveau</span>
+                  <span class="d-ref">Réf. INS-390MEY</span>
+                </div>
+                <span class="d-date">05 juin 2026</span>
+              </div>
+              <h3 class="d-name">Enzo ACHOUR</h3>
+              <div class="d-role">Rôle : <strong>Coordinateur délégué</strong></div>
+              <div class="d-actions">
+                <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-390MEY')">Ouvrir le dossier →</button>
+              </div>
+            </div>
+
+            <div class="dossier-card" onclick="openModal('INS-381FIN')">
+              <div class="d-header">
+                <div>
+                  <span class="d-badge d-badge-nouveau"><span class="d-badge-dot"></span> Nouveau</span>
+                  <span class="d-ref">Réf. INS-381FIN</span>
+                </div>
+                <span class="d-date">05 juin 2026</span>
+              </div>
+              <h3 class="d-name">Gaetan FERRE</h3>
+              <div class="d-role">Rôle : <strong>Membre MHBTV</strong></div>
+              <div class="d-actions">
+                <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-381FIN')">Ouvrir le dossier →</button>
+              </div>
+            </div>
+
+            <div class="dossier-card" onclick="openModal('INS-344DON')">
+              <div class="d-header">
+                <div>
+                  <span class="d-badge d-badge-nouveau"><span class="d-badge-dot"></span> Nouveau</span>
+                  <span class="d-ref">Réf. INS-344DON</span>
+                </div>
+                <span class="d-date">06 juin 2026</span>
+              </div>
+              <h3 class="d-name">Younes CHIKER</h3>
+              <div class="d-role">Rôle : <strong>Membre MHBTV</strong></div>
+              <div class="d-actions">
+                <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-344DON')">Ouvrir le dossier →</button>
+              </div>
+            </div>
+
+            <div class="dossier-card" onclick="openModal('INS-754MLK')">
+              <div class="d-header">
+                <div>
+                  <span class="d-badge d-badge-nouveau"><span class="d-badge-dot"></span> Nouveau</span>
+                  <span class="d-ref">Réf. INS-754MLK</span>
+                </div>
+                <span class="d-date">06 juin 2026</span>
+              </div>
+              <h3 class="d-name">Marie DAL ZOTTO</h3>
+              <div class="d-role">Rôle : <strong>Coordinatrice adjointe</strong></div>
+              <div class="d-actions">
+                <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-754MLK')">Ouvrir le dossier →</button>
+              </div>
+            </div>
+
+            <div class="dossier-card" onclick="openModal('INS-188GIN')">
+              <div class="d-header">
+                <div>
+                  <span class="d-badge d-badge-nouveau"><span class="d-badge-dot"></span> Nouveau</span>
+                  <span class="d-ref">Réf. INS-188GIN</span>
+                </div>
+                <span class="d-date">06 juin 2026</span>
+              </div>
+              <h3 class="d-name">Nicolas MARIN</h3>
+              <div class="d-role">Rôle : <strong>Coordinateur délégué</strong></div>
+              <div class="d-actions">
+                <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-188GIN')">Ouvrir le dossier →</button>
               </div>
             </div>
 
@@ -668,62 +780,7 @@
             </div>
           </div>
         </div>
-
-      <!-- SIDEBAR -->
-      <aside class="ins-sidebar">
-        <div class="sb-card" style="border-color:rgba(99,179,237,.2);">
-          <h4>Saison 2026-2027</h4>
-          <div class="sb-row"><span class="lbl">Clôture adhésions</span><span class="val">30 sept. 2026</span></div>
-          <div class="sb-row"><span class="lbl">Période intégration</span><span class="val">1 mois (Art. 11.2 RG)</span></div>
-          <div class="sb-row"><span class="lbl">Validation auto</span><span class="val red">Désactivée</span></div>
-          <div class="sb-row"><span class="lbl">Membres actifs</span><span class="val blue">17</span></div>
-          <div class="sb-row"><span class="lbl">Membres occasionnels</span><span class="val">4</span></div>
-          <div class="sb-row"><span class="lbl">Membres d'honneur</span><span class="val">0</span></div>
-        </div>
-
-        <div class="sb-card">
-          <h4>Accréditations</h4>
-          <div class="sb-row"><span class="lbl">Resp. retr. accrédités</span><span class="val green">7</span></div>
-          <div class="sb-row"><span class="lbl">Commentateurs accréd.</span><span class="val green">4</span></div>
-          <div class="sb-row"><span class="lbl">En attente (formulaire)</span><span class="val gold">3</span></div>
-          <div class="sb-row"><span class="lbl">Non accrédités</span><span class="val">8</span></div>
-          <a href="accreditations.html" class="btn btn-outline" style="display:flex;align-items:center;justify-content:center;font-size:.75rem;padding:.55rem 1rem;margin-top:.85rem;text-decoration:none;">Gérer les accréditations →</a>
-        </div>
-
-        <div class="sb-card">
-          <h4>Procédure d'admission</h4>
-          <ol style="list-style:none;padding:0;margin:0;">
-            <li style="display:flex;align-items:flex-start;gap:.7rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--muted);">
-              <span style="width:22px;height:22px;background:rgba(99,179,237,.12);color:#63b3ed;border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">1</span>
-              Dossier reçu via le site
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:.7rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--muted);">
-              <span style="width:22px;height:22px;background:rgba(99,179,237,.12);color:#63b3ed;border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</span>
-              Échange avec un membre Bureau
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:.7rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--muted);">
-              <span style="width:22px;height:22px;background:rgba(99,179,237,.12);color:#63b3ed;border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">3</span>
-              Validation Coordinateur général
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:.7rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem;color:var(--muted);">
-              <span style="width:22px;height:22px;background:rgba(99,179,237,.12);color:#63b3ed;border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">4</span>
-              Période d'intégration (1 mois)
-            </li>
-            <li style="display:flex;align-items:flex-start;gap:.7rem;padding:.45rem 0;font-size:.82rem;color:var(--muted);">
-              <span style="width:22px;height:22px;background:rgba(99,179,237,.12);color:#63b3ed;border-radius:50%;font-family:'Bebas Neue',sans-serif;font-size:.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">5</span>
-              Intégration officielle au registre
-            </li>
-          </ol>
-        </div>
-
-        <div class="sb-card">
-          <h4>Liens utiles</h4>
-          <a class="qlink" href="accreditations.html"><span class="ql-icon">🎖️</span><span class="ql-label">Accréditations membres</span><span style="font-size:.7rem;color:var(--muted);">→</span></a>
-          <a class="qlink" href="coordinationgenerale.html"><span class="ql-icon">🏛️</span><span class="ql-label">Coordination générale</span><span style="font-size:.7rem;color:var(--muted);">→</span></a>
-          <a class="qlink" href="icr-suivi.html"><span class="ql-icon">⚖️</span><span class="ql-label">Suivi disciplinaire ICR</span><span style="font-size:.7rem;color:var(--muted);">→</span></a>
-          <a class="qlink" href="reglement-general.html"><span class="ql-icon">📋</span><span class="ql-label">Règlement général (Art. 11)</span><span style="font-size:.7rem;color:var(--muted);">→</span></a>
-        </div>
-      </aside>
+      </div>
     </div>
   </main>
 
@@ -814,7 +871,7 @@
         },
         vehicule:      'Oui',
         deplacements:  'Systématique',           // systématique | si possible | difficilement
-        reunions_icr:  'Oui, selon disponibilités',
+        reunions_icr:  'Oui',
         formations:    'Oui, intéressé',
         motivations: '',
         materiel:    '',
@@ -824,119 +881,175 @@
       },
 
       'INS-412YAB': {
-        nom:        'HEQUETTE',
-        prenom:     'Kyliann',
-        naissance:  '2003 (22 ans)',
-        tel:        '—',
-        email:      '—',
+        nom:        'ALVES DE MOURA',
+        prenom:     'Emmanuel',
+        naissance:  '28 mai ----',
+        tel:        '06 81 90 72 46',
+        email:      'emmanuelalves184@gmail.com',
         statut:     'valide',
-        date_depot: '10 nov. 2025',
-        date_decision: '15 nov. 2025',
+        date_depot: '5 juin 2026',
         type_membre: 'Membre actif',
-        equipe:      'Meylan HB — Équipe jeunes',
-        postes:      ['Cadreur terrain'],
+        equipe:      'Meylan HB — Hand\'Adapté',
+        postes:      ['Tout poste'],
+        experience: {
+          'Captation vidéo':     'inter',
+          'Gestion de diffusion (OBS / régie)': 'deb',
+          'Commentaire sportif': 'inter',
+          'Connaissance handball': 'inter'
+        },
+        vehicule:      'Oui',
+        deplacements:  'Systématique',
+        reunions_icr:  'Oui',
+        formations:    'Non',
+        motivations:   '—',
+        materiel:      '-',
+        accept_reglement: true,
+        accept_image:     true,
+        note_bureau: ''
+      },
+
+      'INS-390MEY': {
+        nom:        'ACHOUR',
+        prenom:     'Enzo',
+        naissance:  '06 octobre 1998',
+        tel:        '06 04 13 73 19',
+        email:      'achour87 enza@gmail.com',
+        statut:     'valide',
+        date_depot: '5 juin 2026',
+        type_membre: 'Membre actif',
+        equipe:      'Meylan HB — Hand\'Adapté',
+        postes:      ['Tout poste'],
+        experience: {
+          'Captation vidéo':     'exp',
+          'Gestion de diffusion (OBS / régie)': 'exp',
+          'Commentaire sportif': 'exp',
+          'Connaissance handball': 'exp'
+        },
+        vehicule:      'Non',
+        deplacements:  'Systématique',
+        reunions_icr:  'Oui',
+        formations:    'Oui, intéressé',
+        motivations:   '',
+        materiel:      '',
+        accept_reglement: true,
+        accept_image:     true,
+        note_bureau: ''
+      },
+
+      'INS-381FIN': {
+        nom:        'FERRE',
+        prenom:     'Gaetan',
+        naissance:  '16 décembre ----',
+        tel:        '06 49 58 71 39',
+        email:      'ferregaetan8@gmail.com',
+        statut:     'valide',
+        date_depot: '5 juin 2026',
+        date_decision: '6 juin 2026',
+        type_membre: 'Membre honneur',
+        equipe:      'Meylan HB — Hand\'Adapté',
+        postes:      ['Tout poste'],
         experience: {
           'Captation vidéo':     'deb',
-          'Gestion de diffusion (OBS / régie)': 'aucun',
-          'Commentaire sportif': 'aucun',
+          'Gestion de diffusion (OBS / régie)': 'aucune',
+          'Commentaire sportif': 'deb',
+          'Connaissance handball': 'deb'
+        },
+        vehicule:      '',
+        deplacements:  'Si possible',
+        reunions_icr:  'Oui',
+        formations:    'Oui, intéressé',
+        motivations:   '',
+        materiel:      '',
+        accept_reglement: true,
+        accept_image:     true,
+        note_bureau: ''
+      },
+
+      'INS-344DON': {
+        nom:        'CHIKER',
+        prenom:     'Younes',
+        naissance:  '25 mars 2004',
+        tel:        '06 58 95 99 57',
+        email:      'youneschiker25032004@gmail.com',
+        statut:     'valide',
+        date_depot: '6 juin 2026',
+        date_decision: '7 juin 2026',
+        type_membre: '-',
+        equipe:      '-',
+        postes:      ['Cadreur, Commentateur, Reporter'],
+        experience: {
+          'Captation vidéo':     'inter',
+          'Gestion de diffusion (OBS / régie)': 'inter',
+          'Commentaire sportif': 'inter',
+          'Connaissance handball': 'inter'
+        },
+        vehicule:      'Non',
+        deplacements:  'Systématique',
+        reunions_icr:  'Oui',
+        formations:    'Oui, intéressé',
+        motivations:   '',
+        materiel:      '',
+        accept_reglement: true,
+        accept_image:     true,
+        note_bureau: ''
+      }
+
+      'INS-754MLK': {
+        nom:        'DAL ZOTTO',
+        prenom:     'Marie',
+        naissance:  '18 aout 1988',
+        tel:        '06 74 14 11 69',
+        email:      'mariedalzottomeylanhandtv@gmail.com',
+        statut:     'valide',
+        date_depot: '6 juin 2026',
+        date_decision: '7 juin 2026',
+        type_membre: 'Membre actif',
+        equipe:      'Meylan HB - Hand\'Adapté',
+        postes:      ['Tout poste'],
+        experience: {
+          'Captation vidéo':     'inter',
+          'Gestion de diffusion (OBS / régie)': 'deb',
+          'Commentaire sportif': 'inter',
           'Connaissance handball': 'inter'
         },
         vehicule:      'Non',
         deplacements:  'Si possible',
-        reunions_icr:  'Non',
+        reunions_icr:  'Selon disponibilités',
         formations:    'Oui, intéressé',
-        motivations:   '—',
-        materiel:      'Aucun matériel personnel.',
+        motivations:   '',
+        materiel:      '',
         accept_reglement: true,
         accept_image:     true,
-        note_bureau: 'Admis après échange avec Xavier FINI. Période d\'intégration validée le 15 déc. 2025.'
-      },
+        note_bureau: ''
+      }
 
-      'INS-390MEY': {
-        nom:        'CHIKER',
-        prenom:     'Younes',
-        naissance:  '2001 (24 ans)',
-        tel:        '—',
-        email:      '—',
+      'INS-188GIN': {
+        nom:        'MARIN',
+        prenom:     'Nicolas',
+        naissance:  '13 juin 1982',
+        tel:        '06 38 58 99 30',
+        email:      'nikkodu38@outlook.fr',
         statut:     'valide',
-        date_depot: '28 sept. 2025',
-        date_decision: '03 oct. 2025',
+        date_depot: '6 juin 2026',
+        date_decision: '7 juin 2026',
         type_membre: 'Membre actif',
-        equipe:      'Meylan HB — Bénévole club',
-        postes:      ['Cadreur large', 'OTS (Officiel Technique Score)'],
+        equipe:      'Meylan HB - Hand\'Adapté',
+        postes:      ['Cadreur'],
         experience: {
           'Captation vidéo':     'inter',
-          'Gestion de diffusion (OBS / régie)': 'deb',
-          'Commentaire sportif': 'aucun',
-          'Connaissance handball': 'exp'
-        },
-        vehicule:      'Oui',
-        deplacements:  'Systématique',
-        reunions_icr:  'Non',
-        formations:    'Oui, intéressé',
-        motivations:   'Souhaite s\'impliquer dans la vie du club au-delà du terrain.',
-        materiel:      'Aucun.',
-        accept_reglement: true,
-        accept_image:     true,
-        note_bureau: 'Profil solide pour l\'OTS. Admis après un échange avec Marie DAL ZOTTO.'
-      },
-
-      'INS-381FIN': {
-        nom:        'ARIZZI',
-        prenom:     'Ennio',
-        naissance:  '2000 (25 ans)',
-        tel:        '—',
-        email:      '—',
-        statut:     'valide',
-        date_depot: '25 sept. 2025',
-        date_decision: '28 sept. 2025',
-        type_membre: 'Membre actif',
-        equipe:      'Meylan HB — Seniors',
-        postes:      ['Cadreur plan large', 'Réalisateur (en formation)'],
-        experience: {
-          'Captation vidéo':     'exp',
           'Gestion de diffusion (OBS / régie)': 'inter',
-          'Commentaire sportif': 'deb',
+          'Commentaire sportif': 'aucune',
           'Connaissance handball': 'inter'
         },
-        vehicule:      'Oui',
-        deplacements:  'Si possible',
-        reunions_icr:  'Oui, selon disponibilités',
+        vehicule:      'Non',
+        deplacements:  'Systématique',
+        reunions_icr:  'Oui',
         formations:    'Oui, intéressé',
-        motivations:   'Intérêt pour la production audiovisuelle sportive.',
-        materiel:      'Caméra GoPro, stabilisateur.',
+        motivations:   '',
+        materiel:      '',
         accept_reglement: true,
         accept_image:     true,
-        note_bureau: 'Très bon profil polyvalent. A obtenu l\'accréditation Resp. retr. en janv. 2026.'
-      },
-
-      'INS-344DON': {
-        nom:        'HELIE-JOLY',
-        prenom:     'Dorina',
-        naissance:  '—',
-        tel:        '—',
-        email:      '—',
-        statut:     'valide',
-        date_depot: 'Août 2025',
-        date_decision: 'Août 2025',
-        type_membre: 'Membre ICR',
-        equipe:      'Entourage club',
-        postes:      ['Membre ICR', 'Cadreur terrain occasionnel'],
-        experience: {
-          'Captation vidéo':     'deb',
-          'Gestion de diffusion (OBS / régie)': 'deb',
-          'Commentaire sportif': 'aucun',
-          'Connaissance handball': 'inter'
-        },
-        vehicule:      '—',
-        deplacements:  'Si possible',
-        reunions_icr:  'Oui, selon disponibilités',
-        formations:    'Non',
-        motivations:   'Engagement associatif et sportif.',
-        materiel:      'Aucun.',
-        accept_reglement: true,
-        accept_image:     true,
-        note_bureau: 'Membre fondatrice de l\'ICR depuis la saison 2025-2026.'
+        note_bureau: ''
       }
     };
 

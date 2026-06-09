@@ -355,7 +355,7 @@
     .modal-overlay.open { opacity: 1; pointer-events: all; }
     .modal {
       background: var(--dark); border: 1px solid var(--border);
-      border-radius: 12px; width: 100%; max-width: 860px;
+      border-radius: 12px; width: 100%; max-width: 1860px;
       max-height: 90vh; overflow-y: auto;
       transform: translateY(24px) scale(.97);
       transition: transform .28s cubic-bezier(.16,1,.3,1);
@@ -405,12 +405,12 @@
     .modal-grid-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 1.5rem;
+      gap: 3rem;
     }
     .modal-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 3rem;
     }
 
     /* Niveau badges */
@@ -627,8 +627,6 @@
 
     <!-- TABS -->
     <div class="ins-tabs">
-      <button class="stab active" onclick="showTab('attente',this)">📬 En attente <span class="stab-count" id="badge-attente">1</span></button>
-      <button class="stab" onclick="showTab('historique',this)">🗃️ Historique <span class="stab-count muted">12</span></button>
     </div>
 
     <div class="ins-layout">
@@ -653,13 +651,8 @@
                 </div>
                 <span class="d-date">07 juin 2026</span>
               </div>
-              <h3 class="d-name">Lucas DUPONT</h3>
-              <div class="d-role">Rôle souhaité : <strong>Cadreur / Monteur vidéo</strong></div>
-              <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
-                <span style="font-size:.78rem;color:var(--muted);">📅 28 ans</span>
-                <span style="font-size:.78rem;color:var(--muted);">🎓 Expérience captation</span>
-                <span style="font-size:.78rem;color:var(--muted);">📍 Meylan</span>
-              </div>
+              <h3 class="d-name">Xavier FINI</h3>
+              <div class="d-role">Rôle : <strong>Coordinateur général</strong></div>
               <div class="d-actions">
                 <button class="btn btn-outline" style="flex:1;font-size:.76rem;padding:.5rem .9rem;" onclick="event.stopPropagation();openModal('INS-478TAZ')">Ouvrir le dossier →</button>
               </div>
@@ -675,96 +668,6 @@
             </div>
           </div>
         </div>
-
-        <!-- ════ PANEL : MEMBRES ACTIFS ════ -->
-        <div class="spanel" id="panel-membres">
-          <div class="members-table-wrap">
-            <div class="table-bar">
-              <span style="font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);">Filtrer :</span>
-              <button class="fchip active" onclick="filterMembers('all',this)">Tous</button>
-              <button class="fchip" onclick="filterMembers('bureau',this)">Bureau</button>
-              <button class="fchip" onclick="filterMembers('icr',this)">ICR</button>
-              <button class="fchip" onclick="filterMembers('membre',this)">Membres</button>
-              <div class="search-wrap">
-                <input type="text" placeholder="Rechercher…" id="searchMembers" oninput="searchMembres(this.value)">
-              </div>
-            </div>
-            <table class="members-table" id="membresTable">
-              <thead>
-                <tr>
-                  <th style="width:220px;">Membre</th>
-                  <th>Rôle MHBTV</th>
-                  <th>Équipe / Section</th>
-                  <th>Resp. retr.</th>
-                  <th>Commentateur</th>
-                  <th>Saison</th>
-                </tr>
-              </thead>
-              <tbody id="membresBody">
-                <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:2rem;">— Données membres à intégrer —</td></tr>
-              </tbody>
-            </table>
-            <div class="table-footer">
-              <span>Saison 2026-2027 · Mis à jour le 08 juin 2026</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- ════ PANEL : HISTORIQUE ════ -->
-        <div class="spanel" id="panel-historique">
-          <div style="margin-bottom:1.5rem;">
-            <h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.05em;color:var(--white);margin:0;">
-              Historique <span style="color:#63b3ed;">des décisions</span>
-            </h2>
-          </div>
-
-          <div class="histo-list">
-            <div class="histo-row valide" onclick="openModal('INS-412YAB')">
-              <span class="histo-ref">INS-412YAB</span>
-              <div><div class="histo-name">Kyliann HEQUETTE</div><div class="histo-meta">Cadreur terrain · Admis le 15 nov. 2025</div></div>
-              <span class="d-badge d-badge-valide">✓ Admis</span>
-              <span class="histo-date">15 nov. 2025</span>
-            </div>
-            <div class="histo-row valide" onclick="openModal('INS-390MEY')">
-              <span class="histo-ref">INS-390MEY</span>
-              <div><div class="histo-name">Younes CHIKER</div><div class="histo-meta">Cadreur / OTS · Admis le 03 oct. 2025</div></div>
-              <span class="d-badge d-badge-valide">✓ Admis</span>
-              <span class="histo-date">03 oct. 2025</span>
-            </div>
-            <div class="histo-row valide" onclick="openModal('INS-381FIN')">
-              <span class="histo-ref">INS-381FIN</span>
-              <div><div class="histo-name">Ennio ARIZZI</div><div class="histo-meta">Cadreur / Réalisateur · Admis le 28 sept. 2025</div></div>
-              <span class="d-badge d-badge-valide">✓ Admis</span>
-              <span class="histo-date">28 sept. 2025</span>
-            </div>
-            <div class="histo-row valide" onclick="openModal('INS-344DON')">
-              <span class="histo-ref">INS-344DON</span>
-              <div><div class="histo-name">Dorina HELIE-JOLY</div><div class="histo-meta">Membre ICR · Admise en août 2025</div></div>
-              <span class="d-badge d-badge-valide">✓ Admis</span>
-              <span class="histo-date">Août 2025</span>
-            </div>
-            <div class="histo-row refuse">
-              <span class="histo-ref">INS-321XXX</span>
-              <div><div class="histo-name">Candidat anonymisé</div><div class="histo-meta">Poste cadreur · Refusé — profil insuffisant</div></div>
-              <span class="d-badge d-badge-refus">✗ Refusé</span>
-              <span class="histo-date">Juil. 2025</span>
-            </div>
-            <div class="histo-row valide">
-              <span class="histo-ref">INS-310MAR</span>
-              <div><div class="histo-name">Nicolas MARIN</div><div class="histo-meta">Président ICR · Fondateur saison 2023</div></div>
-              <span class="d-badge d-badge-valide">✓ Fondateur</span>
-              <span class="histo-date">2023</span>
-            </div>
-            <div class="histo-row valide">
-              <span class="histo-ref">INS-301XAV</span>
-              <div><div class="histo-name">Xavier FINI</div><div class="histo-meta">Coordinateur général · Fondateur saison 2023</div></div>
-              <span class="d-badge d-badge-valide">✓ Fondateur</span>
-              <span class="histo-date">2023</span>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /main col -->
 
       <!-- SIDEBAR -->
       <aside class="ins-sidebar">
@@ -893,28 +796,28 @@
     const DOSSIERS = {
 
       'INS-478TAZ': {
-        nom:        'DUPONT',
-        prenom:     'Lucas',
-        naissance:  '14 fév. 1998 (28 ans)',
-        tel:        '06 12 34 56 78',
-        email:      'lucas.dupont@email.com',
-        statut:     'nouveau',
-        date_depot: '07 juin 2026',
+        nom:        'FINI',
+        prenom:     'Xavier',
+        naissance:  '14 mai 2006',
+        tel:        '06 22 10 37 49',
+        email:      'finixavier@gmail.com',
+        statut:     'valide',
+        date_depot: '05 juin 2026',
         type_membre: 'Membre actif',
-        equipe:      'Meylan HB — Seniors Masculins 1 (SM1)',
-        postes: ['Cadreur terrain / bord de terrain', 'Monteur vidéo (clips, replays)'],
+        equipe:      'Meylan HB — Seniors Garçons 2 (SG2)',
+        postes: [''],
         experience: {
           'Captation vidéo':     'exp',
-          'Gestion de diffusion (OBS / régie)': 'inter',
-          'Commentaire sportif': 'aucun',
+          'Gestion de diffusion (OBS / régie)': 'exp',
+          'Commentaire sportif': 'exp',
           'Connaissance handball': 'exp'
         },
         vehicule:      'Oui',
-        deplacements:  'Si possible',           // systématique | si possible | difficilement
+        deplacements:  'Systématique',           // systématique | si possible | difficilement
         reunions_icr:  'Oui, selon disponibilités',
         formations:    'Oui, intéressé',
-        motivations: 'Passionné de sport et de vidéo depuis plusieurs années. Je cherche à mettre mes compétences techniques au service du club que je pratique.',
-        materiel:    'Possède sa propre caméra Sony ZV-E10, trépied et micro cravate.',
+        motivations: '',
+        materiel:    '',
         accept_reglement: true,
         accept_image:     true,
         note_bureau: ''
@@ -1156,7 +1059,7 @@
                 <span class="minfo-val">${boolChip(d.vehicule)}</span>
               </div>
               <div class="minfo-row">
-                <span class="minfo-label">Déplacements ext.</span>
+                <span class="minfo-label">Assemblées générales</span>
                 <span class="minfo-val">${boolChip(d.deplacements)}</span>
               </div>
               <div class="minfo-row">

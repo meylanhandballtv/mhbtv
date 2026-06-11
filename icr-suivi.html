@@ -780,6 +780,25 @@
             </div>
           </div> 
 
+          <!-- Signalement 5 -->
+          <div class="nouveau-card" style="border-left-color:var(--gold);" onclick="openDossier('MHBTV-YA397GBW-QSA')">
+            <div class="nouveau-urgence" style="color:var(--gold);">!</div>
+            <div class="nouveau-body" style="flex:1;">
+              <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:.4rem;">
+                <span class="gravite g-std">Sans aggravante</span>
+                <span style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;color:var(--muted);">Réf. MHBTV-YA397GBW-QSA · Reçu le 2 février 2026</span>
+              </div>
+              <div class="nouveau-title">Absence justifiée sans prévenir dans un délai raisonnable — 31 janvier 2026</div>
+              <div class="nouveau-meta">📅 Faits du 2 février 2026 · 👤 Signalé par : Enzo ACHOUR</div>
+              <div class="nouveau-motif">
+                <strong style="color:var(--gold);">Motif :</strong> Art. 21.7 RARC — Comportement perturbateur lors d'une retransmission ou nuisant à la concentration de l'équipe (Art. 21.7.7)
+              </div>
+              <div class="nouveau-actions">
+                <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-YA397GBW-QSA')">Voir le dossier →</button>
+              </div>
+            </div>
+          </div> 
+
           <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:7px;display:flex;align-items:center;gap:.75rem;">
             <span style="font-size:1.1rem;">📋</span>
             <div>
@@ -1061,6 +1080,28 @@
                     </div>
                   </td>
                 </tr>
+
+                <tr data-type="avert">
+                  <td>
+                    <div style="display:flex;align-items:center;gap:.5rem;">
+                      <div class="m-av" style="background:#34495e33;color:#7f8c8d;">DHJ</div>
+                      <div>
+                        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--white);font-size:.88rem;">Dorina HELIE-JOLY</div>
+                        <div style="font-size:.72rem;color:var(--muted);">Coordinatrice déléguée</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td style="font-size:.8rem;color:var(--muted);max-width:180px;">Mauvaise manipulation du matériel ayant causé une perturbation de la retransmission</td>
+                  <td><span class="statut s-clos" style="font-size:.7rem;padding:.18rem .55rem;">Accompagnement</span></td>
+                  <td><div class="sanction-level"><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span><span class="sl-dot empty"></span></div></td>
+                  <td style="font-size:.78rem;color:var(--muted);">14 février 2025</td>
+                  <td><span class="statut s-clos" style="font-size:.65rem;padding:.15rem .5rem;"><span class="statut-dot" style="background:#4ade80;width:5px;height:5px;"></span>Purgée</span></td>
+                  <td> 
+                    <div class="nouveau-actions">
+                      <button class="btn btn-red" style="font-size:.75rem;padding:.5rem 1.1rem;" onclick="event.stopPropagation();openDossier('MHBTV-YA397GBW-QSA')">Voir le dossier →</button>
+                    </div>
+                  </td>
+                </tr>
                 
               </tbody>
             </table>
@@ -1287,6 +1328,26 @@
    //     decision: null,
    //     next: 'Avertissement oral direct envisageable (Art. 23 RARC — sans procédure formelle)'
    //   }, 
+
+    'MHBTV-YA397GBW-QSA': {
+        titre: 'Mauvaise manipulation du matériel ayant causé une perturbation',
+        statut: 'clos',
+        gravite: 'std',
+        art: 'Art. 21.7 RARC',
+        date_faits: '31 janvier 2026',
+        date_signal: '02 février 2026',
+        signal_par: 'Enzo ACHOUR',
+        temoins: '',
+        preuves: '',
+        description: '',
+        motifs: ['Mauvaise manipulation du matériel ayant causé une perturbation'],
+        sanction_sans: 'Avertissement oral',
+        sanction_agg: 'Suspension 2 retransmissions',
+        sanction_tres: 'Suspension 3 retransmissions',
+        decision: 'Accompagnement spécifique sur le poste d\'Officiel Technique Score',
+        next: ''
+      },
+      
       'MHBTV-MQ478TAZ-ODL': {
         titre: 'Abandon de poste à une retransmission',
         statut: 'instruct',

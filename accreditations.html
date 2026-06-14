@@ -1484,8 +1484,8 @@
         const sg = statutGlobal(m);
         const nc = nomComplet(m);
         const accreds = [];
-        if (m.resp !== 'non-accredite' && m.resp !== 'suspendu') accreds.push(`<span class="poste-pill pill-resp">Resp. retr.</span>`);
-        if (m.comm !== 'non-accredite' && m.comm !== 'suspendu') accreds.push(`<span class="poste-pill pill-comm">Commentateur</span>`);
+        if (m.resp !== 'non-accredite' && m.resp !== 'suspendu' && m.resp !== 'en-attente') accreds.push(`<span class="poste-pill pill-resp">Resp. retr.</span>`);
+        if (m.comm !== 'non-accredite' && m.comm !== 'suspendu' && m.comm !== 'en-attente') accreds.push(`<span class="poste-pill pill-comm">Commentateur</span>`);
   
         const tr = document.createElement('tr');
         tr.className = 'member-row';

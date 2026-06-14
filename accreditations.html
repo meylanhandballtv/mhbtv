@@ -1377,7 +1377,7 @@
         prenom: "Nabil", nom: "SABAH",
         initiales: "NS", couleur: "#d35400",
         role: "Coordinateur délégué ICR", isBureau: false, 
-        resp: "en-attente", comm: "non-accredite",
+        resp: "non-accredite", comm: "non-accredite",
         superviseur: "non", cam_large: "oui", cam_serre: "non",
         cam_terrain: "non", realisateur: "non", ots: "formation"
       },
@@ -1512,8 +1512,8 @@
         const sg = statutGlobal(m);
         const nc = nomComplet(m);
         const accreds = [];
-        if (m.resp !== 'non-accredite') accreds.push(`<span class="poste-pill pill-resp">Resp. retr.</span>`);
-        if (m.comm !== 'non-accredite') accreds.push(`<span class="poste-pill pill-comm">Commentateur</span>`);
+        if (m.resp !== 'accredite') accreds.push(`<span class="poste-pill pill-resp">Resp. retr.</span>`);
+        if (m.comm !== 'accredite') accreds.push(`<span class="poste-pill pill-comm">Commentateur</span>`);
   
         const tr = document.createElement('tr');
         tr.className = 'member-row';

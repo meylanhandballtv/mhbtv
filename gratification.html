@@ -746,12 +746,11 @@
             <div class="section-line"></div>
           </div>
           <div class="period-sel">
-            <button class="period-btn active" onclick="showPeriod('avr', this)">Avril 2026 (en cours)</button>
-            <button class="period-btn" onclick="showPeriod('jan', this)">Janv. – Mars 2026</button>
-            <button class="period-btn" onclick="showPeriod('sep', this)">Sept. – Déc. 2025</button>
+            <button class="period-btn active" onclick="showPeriod('avr', this)">2025-2026 (en cours)</button>
+            <button class="period-btn" onclick="showPeriod('jan', this)">2026-2027</button>
           </div>
 
-          <!-- ─── PÉRIODE : AVRIL 2026 ─── -->
+          <!-- ─── PÉRIODE : 2025-2026 ─── -->
           <div id="period-avr">
             <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1.25rem;padding:0.8rem 1.25rem;background:rgba(240,180,41,0.06);border:1px solid rgba(240,180,41,0.2);border-radius:6px;">
               <span>📅</span>
@@ -761,116 +760,47 @@
               <div class="lb-header">
                 <span>#</span><span>Membre</span><span style="text-align:center;">Grade</span><span style="text-align:right;">Points</span>
               </div>
-              <div class="lb-row rank-1"><span class="lb-rank">1</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(240,180,41,0.2);color:var(--gold);">T</div>Tim</div><span class="lb-grade" style="color:var(--gold);">🥉 Bronze</span><div class="lb-pts">135 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row rank-2"><span class="lb-rank">2</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(176,190,197,0.18);color:var(--silver);">X</div>Xavier</div><span class="lb-grade" style="color:var(--silver);">🥉 Bronze</span><div class="lb-pts">120 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row rank-3"><span class="lb-rank">3</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(205,127,50,0.18);color:var(--bronze);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--bronze);">🥉 Bronze</span><div class="lb-pts">110 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">4</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">M</div>Marie</div><span class="lb-grade" style="color:var(--muted);">🥉 Bronze</span><div class="lb-pts">100 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">5</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">K</div>Kylian</div><span class="lb-grade" style="color:var(--muted);">🥉 Bronze</span><div class="lb-pts">100 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">6</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">M</div>Manu</div><span class="lb-grade" style="color:var(--muted);">🥉 Bronze</span><div class="lb-pts">80 <span class="pts-label">pts</span></div></div>            
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">7</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--muted);">🥉 Bronze</span><div class="lb-pts">50 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">8</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts">35 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">9</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Yo</div>Younes</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts">25 <span class="pts-label">pts</span></div></div>            
+              <div class="lb-row rank-1"><span class="lb-rank">1</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(240,180,41,0.2);color:var(--gold);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--gold);"></span><div class="lb-pts">3 430 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row rank-2"><span class="lb-rank">2</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(176,190,197,0.18);color:var(--silver);">M</div>Marie</div><span class="lb-grade" style="color:var(--silver);"></span><div class="lb-pts">3 345 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row rank-3"><span class="lb-rank">3</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(205,127,50,0.18);color:var(--bronze);">E</div>Ennio</div><span class="lb-grade" style="color:var(--bronze);"></span><div class="lb-pts">3 340 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">4</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">3 120 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">*</span><div class="lb-name" style="opacity:0.6;"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">X</div>Xavier</div><span class="lb-grade" style="color:var(--gold);opacity:0.6;"></span><div class="lb-pts" style="color:var(--muted);">2 530 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">5</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">M</div>Manu</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">2 040 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">6</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">T</div>Tim</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">1 225 <span class="pts-label">pts</span></div></div>            
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">7</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Na</div>Nabil</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">1 200 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">8</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">1 015 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">9</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">800 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">10</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">D</div>Dorina</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">470 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">11</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Yo</div>Younes</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">415 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">12</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">K</div>Kylian T</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts">100 <span class="pts-label">pts</span></div></div>
               <!-- tous à 0 pour cette période -->
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">E</div>Ennio</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Nb</div>Nabil</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">D</div>Dorina</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Ky</div>Kyliann H</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
             </div>
-            <p style="font-size:0.8rem;color:var(--muted);margin-top:1rem;text-align:center;">La saison d'avril 2026 vient de démarrer. Les points seront mis à jour après chaque événement.</p>
+            <p style="font-size:0.8rem;color:var(--muted);margin-top:1rem;text-align:center;">Les points seront mis à jour après chaque événement.</p>
           </div>
 
-          <!-- ─── PÉRIODE : JANV–MARS 2026 ─── -->
+          <!-- ─── PÉRIODE : 2026-2027 ─── -->
           <div id="period-jan" style="display:none;">
-            <!-- Podium -->
-            <div class="podium-wrap">
-              <div class="podium-title">🏆 Podium — Janvier à Mars 2026</div>
-              <div class="podium">
-                <div class="podium-slot p2">
-                  <div class="podium-rank">2e</div>
-                  <div class="podium-name">Ennio</div>
-                  <div class="podium-pts">2 510 pts</div>
-                </div>
-                <div class="podium-slot p1">
-                  <div class="podium-rank">1er</div>
-                  <div class="podium-name">Marie</div>
-                  <div class="podium-pts">2 710 pts</div>
-                </div>
-                <div class="podium-slot p3">
-                  <div class="podium-rank">3e</div>
-                  <div class="podium-name">Nicolas</div>
-                  <div class="podium-pts">1 990 pts</div>
-                </div>
-              </div>
             </div>
             <div class="leaderboard">
               <div class="lb-header">
                 <span>#</span><span>Membre</span><span style="text-align:center;">Grade</span><span style="text-align:right;">Points</span>
               </div>
-              <div class="lb-row rank-1"><span class="lb-rank">1</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(240,180,41,0.2);color:var(--gold);">M</div>Marie</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">2 710 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row rank-2"><span class="lb-rank">2</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(176,190,197,0.18);color:var(--silver);">E</div>Ennio</div><span class="lb-grade" style="color:var(--silver);">🥇 Or</span><div class="lb-pts">2 510 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row rank-3"><span class="lb-rank">3</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(205,127,50,0.18);color:var(--bronze);">X</div>Xavier</div><span class="lb-grade" style="color:var(--bronze);">🥇 Or</span><div class="lb-pts">2 430 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">4</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">1 990 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">5</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">1 460 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">6</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ma</div>Manu</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">1 490 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">7</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Nb</div>Nabil</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">800 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">8</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">T</div>Tim</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">480 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">9</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">420 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">10</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--bronze);">🥉 Bronze</span><div class="lb-pts" style="color:var(--muted);">240 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">11</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">D</div>Dorina</div><span class="lb-grade" style="color:var(--bronze);">🥉 Bronze</span><div class="lb-pts" style="color:var(--muted);">160 <span class="pts-label">pts</span></div></div>
-              <!-- membres à 0 -->
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">A</div>Aymeric</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">K</div>Khalil</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">Yo</div>Younes</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">R</div>Rémi</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
-              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">J</div>Johanne</div><span class="lb-grade" style="color:var(--muted);">—</span><div class="lb-pts" style="color:var(--muted);font-size:1rem;">0</div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">M</div>Marie</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">E</div>Ennio</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">X</div>Xavier</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">M</div>Manu</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">T</div>Tim</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Na</div>Nabil</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">D</div>Dorina</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Yo</div>Younes</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">K</div>Kylian T</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
+              <div class="lb-row no-data"><span class="lb-rank" style="color:var(--muted);">—</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.08);">Ky</div>Kyliann H</div><span class="lb-grade" style="color:var(--muted);"></span><div class="lb-pts" style="color:var(--muted);font-size:1.1rem;">0 <span class="pts-label">pts</span></div></div>
             </div>
-          </div>
-
-          <!-- ─── PÉRIODE : SEPT–DÉC 2025 ─── -->
-          <div id="period-sep" style="display:none;">
-            <!-- Podium -->
-            <div class="podium-wrap">
-              <div class="podium-title">🏆 Podium — Septembre à Décembre 2025</div>
-              <div class="podium">
-                <div class="podium-slot p2">
-                  <div class="podium-rank">2e</div>
-                  <div class="podium-name">Enzo</div>
-                  <div class="podium-pts">1 550 pts</div>
-                </div>
-                <div class="podium-slot p1">
-                  <div class="podium-rank">1er</div>
-                  <div class="podium-name">Nicolas</div>
-                  <div class="podium-pts">1 390 pts</div>
-                </div>
-                <div class="podium-slot p3">
-                  <div class="podium-rank">3e</div>
-                  <div class="podium-name">Ennio</div>
-                  <div class="podium-pts">835 pts</div>
-                </div>
-              </div>
-            </div>
-            <div class="leaderboard">
-              <div class="lb-header">
-                <span>#</span><span>Membre</span><span style="text-align:center;">Grade</span><span style="text-align:right;">Points</span>
-              </div>
-              <div class="lb-row rank-1"><span class="lb-rank">1</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(240,180,41,0.2);color:var(--gold);">N</div>Nicolas</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">1 390 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row rank-2"><span class="lb-rank">2</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(176,190,197,0.18);color:var(--silver);">Ez</div>Enzo</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">1 550 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">*</span><div class="lb-name" style="opacity:0.6;"><div class="lb-avatar" style="background:rgba(255,255,255,0.04);">X</div>Xavier</div><span class="lb-grade" style="color:var(--gold);opacity:0.6;">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">2 440 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row rank-3"><span class="lb-rank">3</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(205,127,50,0.18);color:var(--bronze);">E</div>Ennio</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts">835 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">4</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">M</div>Marie</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">800 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">5</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">T</div>Tim</div><span class="lb-grade" style="color:var(--gold);">🥇 Or</span><div class="lb-pts" style="color:var(--muted);">610 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">6</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">G</div>Gaetan</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">560 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">7</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Y</div>Yoan</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">560 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">8</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ma</div>Manu</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">470 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">9</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Ay</div>Aymeric</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">460 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">10</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">K</div>Khalil</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">450 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">11</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Nb</div>Nabil</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">400 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">12</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">Yo</div>Younes</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">390 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">13</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">R</div>Rémi</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">380 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">14</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">J</div>Johanne</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">355 <span class="pts-label">pts</span></div></div>
-              <div class="lb-row"><span class="lb-rank" style="color:var(--muted);">15</span><div class="lb-name"><div class="lb-avatar" style="background:rgba(255,255,255,0.06);">D</div>Dorina</div><span class="lb-grade" style="color:var(--silver);">🥈 Argent</span><div class="lb-pts" style="color:var(--muted);">310 <span class="pts-label">pts</span></div></div>
-            </div>
-            <p style="font-size:0.78rem;color:var(--muted);margin-top:0.75rem;">* Xavier (2 440 pts) n'est pas classé sur cette période selon les données officielles.</p>
           </div>
 
         </div><!-- /main col -->

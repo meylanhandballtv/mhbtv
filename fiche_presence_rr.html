@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiche de Présence | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    /* ── PAGE HERO ── */
+    .hero-presence {
+      position: relative;
+      height: 320px;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 4rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 50%, #0a0a0a 100%);
+    }
+    .hero-presence::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px);
+    }
+    .hero-presence::after {
+      content: 'PRESENCE';
+      position: absolute;
+      right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18vw;
+      color: rgba(232,0,29,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-accent-rad {
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(232,0,29,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-presence .hero-content { position: relative; z-index: 1; }
+    .hero-presence h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      line-height: 0.9;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+    .hero-presence h1 em { color: var(--red); font-style: normal; display: block; }
+
+    /* ── FORM LAYOUT ── */
+    .form-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .form-card-head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(232,0,29,0.05);
+    }
+    .head-bar {
+      width: 3px; height: 20px;
+      background: var(--red);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .form-card-head h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      flex: 1;
+    }
+    .form-card-head h2 span { color: var(--red); }
+    .badge-opt {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      background: rgba(255,255,255,0.05);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .form-card-body { padding: 1.5rem; }
+
+    /* ── FORM ELEMENTS ── */
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .form-row.single  { grid-template-columns: 1fr; }
+    .form-row.triple  { grid-template-columns: 1fr 1fr 1fr; }
+    .form-row:last-child { margin-bottom: 0; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    label .req { color: var(--red); margin-left: 2px; }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+      background: var(--darker);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      padding: 0.6rem 0.85rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(232,0,29,0.12);
+    }
+    input[readonly] { color: var(--muted); cursor: default; }
+    textarea { resize: vertical; min-height: 90px; }
+    select option { background: var(--dark); }
+
+    /* ── POSTES GRID ── */
+    .postes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .poste-block {
+      background: var(--darker);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .poste-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1rem;
+      background: rgba(232,0,29,0.08);
+      border-bottom: 1px solid var(--border);
+    }
+    .poste-dot {
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .poste-head span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .poste-fields {
+      padding: 0.85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .poste-fields .form-group label { font-size: 0.62rem; letter-spacing: 0.15em; }
+
+    /* ── ABSENCES TABLE ── */
+    .abs-table-wrap { overflow-x: auto; }
+    .abs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .abs-table thead th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      background: var(--darker);
+      white-space: nowrap;
+    }
+    .abs-table tbody tr { border-bottom: 1px solid rgba(42,42,42,0.6); }
+    .abs-table tbody tr:last-child { border-bottom: none; }
+    .abs-table td { padding: 0.5rem 0.85rem; vertical-align: middle; }
+    .abs-table input[type="text"],
+    .abs-table select { padding: 0.4rem 0.65rem; font-size: 0.82rem; }
+
+    .btn-add-row {
+      margin-top: 0.85rem;
+      width: 100%;
+      background: transparent;
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+    .btn-add-row:hover { border-color: var(--red); color: var(--red); }
+
+    .btn-remove {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 3px;
+      font-size: 1rem;
+      line-height: 1;
+      transition: color 0.2s, background 0.2s;
+    }
+    .btn-remove:hover { color: var(--red); background: rgba(232,0,29,0.1); }
+
+    /* ── BILAN ── */
+    .bilan-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* ── NOTE PILLS ── */
+    .note-pills {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .note-pill {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--darker);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .note-pill:hover { border-color: var(--red); color: var(--text); }
+    .note-pill.selected { background: var(--red); border-color: var(--red); color: var(--white); }
+
+    /* ── SUB-DIVIDER ── */
+    .sub-divider {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.25rem 0 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .sub-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── SUBMIT ZONE ── */
+    .submit-zone {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+    }
+    .submit-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      max-width: 460px;
+      line-height: 1.6;
+    }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 1.5rem; left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 9999;
+      white-space: nowrap;
+    }
+    #toast.show    { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #toast.success { background: #0d2b1a; border-color: #1a7a4a; color: #5effa1; }
+    #toast.error   { background: #2b0d0d; border-color: var(--red); color: #ff7070; }
+
+    /* ── SPINNER ── */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      flex-shrink: 0;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-presence { padding: 2rem 1.5rem; height: 260px; }
+      .form-wrap { padding: 2rem 1.5rem; }
+      .form-row.triple { grid-template-columns: 1fr 1fr; }
+      .postes-grid, .bilan-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .form-row, .form-row.triple { grid-template-columns: 1fr; }
+      .note-pill { width: 34px; height: 34px; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero-presence">
+      <div class="hero-accent-rad"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Espace interne &mdash; Production</div>
+        <h1>Fiche de <em>Pr&eacute;sence</em></h1>
+        <p class="hero-sub">&#192; compl&eacute;ter par le Responsable de Retransmission avant ou apr&egrave;s chaque production.</p>
+      </div>
+    </section>
+
+    <div class="form-wrap">
+
+      <!-- 1. INFOS MATCH -->
+      <div class="form-card">
+        <div class="form-card-head">
+          <div class="head-bar"></div>
+          <h2>Informations du <span>Match</span></h2>
+        </div>
+        <div class="form-card-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="match_date">Date du match <span class="req">*</span></label>
+              <input type="date" id="match_date" required>
+            </div>
+            <div class="form-group">
+              <label for="match_heure">Heure de d&eacute;but <span class="req">*</span></label>
+              <input type="time" id="match_heure" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="equipe_domicile">&Eacute;quipe domicile <span class="req">*</span></label>
+              <input type="text" id="equipe_domicile" placeholder="ex. Meylan HB" required>
+            </div>
+            <div class="form-group">
+              <label for="equipe_visiteur">&Eacute;quipe visiteur <span class="req">*</span></label>
+              <input type="text" id="equipe_visiteur" placeholder="ex. Grenoble M&eacute;tropole HB" required>
+            </div>
+          </div>
+          <div class="form-row triple">
+            <div class="form-group">
+              <label for="competition">Comp&eacute;tition <span class="req">*</span></label>
+              <select id="competition" required>
+                <option value="">&mdash; Choisir &mdash;</option>
+                <option>Nationale 2</option>
+                <option>Nationale 3</option>
+                <option>R&eacute;gionale 1</option>
+                <option>R&eacute;gionale 2</option>
+                <option>Coupe de France</option>
+                <option>Coupe R&eacute;gionale</option>
+                <option>Match amical</option>
+                <option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="categorie">Cat&eacute;gorie</label>
+              <select id="categorie">
+                <option value="">&mdash; Choisir &mdash;</option>
+                <option>Seniors M</option><option>Seniors F</option>
+                <option>-18 M</option><option>-18 F</option>
+                <option>-16 M</option><option>-16 F</option>
+                <option>-14 M</option><option>-14 F</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="lieu">Lieu / Gymnase <span class="req">*</span></label>
+              <input type="text" id="lieu" placeholder="ex. Salle de l'Is&egrave;re" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="responsable_nom">Responsable de retransmission <span class="req">*</span></label>
+              <input type="text" id="responsable_nom" placeholder="Pr&eacute;nom Nom" required>
+            </div>
+            <div class="form-group">
+              <label for="heure_envoi">Heure de soumission</label>
+              <input type="time" id="heure_envoi" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. PRESENCES -->
+      <div class="form-card">
+        <div class="form-card-head">
+          <div class="head-bar"></div>
+          <h2>Pr&eacute;sences <span>R&eacute;elles</span></h2>
+        </div>
+        <div class="form-card-body">
+          <div class="postes-grid">
+            <div class="poste-block">
+              <div class="poste-head"><div class="poste-dot"></div><span>R&eacute;alisateur / R&eacute;gisseur</span></div>
+              <div class="poste-fields">
+                <div class="form-group"><label for="realisateur_1">Membre 1</label><input type="text" id="realisateur_1" placeholder="Pr&eacute;nom Nom"></div>
+                <div class="form-group"><label for="realisateur_2">Membre 2</label><input type="text" id="realisateur_2" placeholder="Pr&eacute;nom Nom"></div>
+              </div>
+            </div>
+            <div class="poste-block">
+              <div class="poste-head"><div class="poste-dot"></div><span>Cam&eacute;raman(s)</span></div>
+              <div class="poste-fields">
+                <div class="form-group"><label for="cameraman_1">Cam&eacute;ra 1</label><input type="text" id="cameraman_1" placeholder="Pr&eacute;nom Nom"></div>
+                <div class="form-group"><label for="cameraman_2">Cam&eacute;ra 2</label><input type="text" id="cameraman_2" placeholder="Pr&eacute;nom Nom"></div>
+                <div class="form-group"><label for="cameraman_3">Cam&eacute;ra 3</label><input type="text" id="cameraman_3" placeholder="Pr&eacute;nom Nom"></div>
+              </div>
+            </div>
+            <div class="poste-block">
+              <div class="poste-head"><div class="poste-dot"></div><span>Commentateur(s)</span></div>
+              <div class="poste-fields">
+                <div class="form-group"><label for="commentateur_1">Principal</label><input type="text" id="commentateur_1" placeholder="Pr&eacute;nom Nom"></div>
+                <div class="form-group"><label for="commentateur_2">Consultant / Analyste</label><input type="text" id="commentateur_2" placeholder="Pr&eacute;nom Nom"></div>
+              </div>
+            </div>
+            <div class="poste-block">
+              <div class="poste-head"><div class="poste-dot"></div><span>Graphiste / Score</span></div>
+              <div class="poste-fields">
+                <div class="form-group"><label for="graphiste_1">Membre 1</label><input type="text" id="graphiste_1" placeholder="Pr&eacute;nom Nom"></div>
+                <div class="form-group"><label for="graphiste_2">Membre 2</label><input type="text" id="graphiste_2" placeholder="Pr&eacute;nom Nom"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sub-divider">Horaires de production</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="heure_installation">D&eacute;but installation / arriv&eacute;e &eacute;quipe</label>
+              <input type="time" id="heure_installation">
+            </div>
+            <div class="form-group">
+              <label for="heure_fin_diffusion">Fin de diffusion</label>
+              <input type="time" id="heure_fin_diffusion">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. ABSENCES -->
+      <div class="form-card">
+        <div class="form-card-head">
+          <div class="head-bar"></div>
+          <h2>Absences / <span>Indisponibilit&eacute;s</span></h2>
+          <span class="badge-opt">Facultatif</span>
+        </div>
+        <div class="form-card-body">
+          <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Membres pr&eacute;vus mais absents. Ces donn&eacute;es alimentent le suivi de fiabilit&eacute;.</p>
+          <div class="abs-table-wrap">
+            <table class="abs-table">
+              <thead>
+                <tr>
+                  <th style="width:28%">Membre</th>
+                  <th style="width:22%">Poste pr&eacute;vu</th>
+                  <th style="width:28%">Motif</th>
+                  <th style="width:14%">Pr&eacute;venu ?</th>
+                  <th style="width:8%"></th>
+                </tr>
+              </thead>
+              <tbody id="absences-body">
+                <tr>
+                  <td><input type="text" placeholder="Pr&eacute;nom Nom" class="abs-nom"></td>
+                  <td><select class="abs-poste"><option value="">&mdash;</option><option>R&eacute;alisateur / R&eacute;gisseur</option><option>Cam&eacute;raman</option><option>Commentateur</option><option>Graphiste / Score</option></select></td>
+                  <td><select class="abs-motif"><option value="">&mdash;</option><option>Emp&ecirc;chement personnel</option><option>Probl&egrave;me de sant&eacute;</option><option>Obligation professionnelle</option><option>Non-pr&eacute;sent&eacute;</option><option>Autre</option></select></td>
+                  <td style="text-align:center"><select class="abs-prevenu" style="width:auto"><option value="">&mdash;</option><option>Oui</option><option>Non</option></select></td>
+                  <td style="text-align:center"><button type="button" class="btn-remove" onclick="removeRow(this)" title="Supprimer">&#10005;</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <button type="button" class="btn-add-row" onclick="addAbsenceRow()">+ Ajouter une absence</button>
+        </div>
+      </div>
+
+      <!-- 4. BILAN -->
+      <div class="form-card">
+        <div class="form-card-head">
+          <div class="head-bar"></div>
+          <h2>Bilan &amp; <span>Observations</span></h2>
+          <span class="badge-opt">Facultatif</span>
+        </div>
+        <div class="form-card-body">
+          <div class="bilan-grid">
+            <div class="form-group">
+              <label for="bilan_technique">Bilan technique</label>
+              <textarea id="bilan_technique" placeholder="Incidents mat&eacute;riels, qualit&eacute; de diffusion, r&eacute;seau&hellip;"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="bilan_humain">Bilan humain</label>
+              <textarea id="bilan_humain" placeholder="Dynamique d'&eacute;quipe, points forts, axes d'am&eacute;lioration&hellip;"></textarea>
+            </div>
+          </div>
+          <div class="form-row single" style="margin-top:1rem;">
+            <div class="form-group">
+              <label for="observations">Observations g&eacute;n&eacute;rales</label>
+              <textarea id="observations" placeholder="Tout autre &eacute;l&eacute;ment utile &agrave; remonter&hellip;" style="min-height:60px;"></textarea>
+            </div>
+          </div>
+          <div class="sub-divider" style="margin-top:1.25rem;">Note globale de la production</div>
+          <div class="note-pills" id="note-pills"></div>
+          <input type="hidden" id="note_globale">
+          <div class="form-row single" style="margin-top:1.25rem;">
+            <div class="form-group">
+              <label for="lien_stream">Lien stream / VOD</label>
+              <input type="text" id="lien_stream" placeholder="https://youtube.com/watch?v=&hellip;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-zone">
+        <button type="button" class="btn btn-red" id="btn-submit" onclick="submitForm()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Envoyer la fiche de pr&eacute;sence
+        </button>
+        <p class="submit-note">La fiche sera transmise par e-mail au Coordinateur G&eacute;n&eacute;ral de MHBTV. Les champs marqu&eacute;s <span style="color:var(--red)">*</span> sont obligatoires.</p>
+      </div>
+
+    </div><!-- /form-wrap -->
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association b&eacute;n&eacute;vole de retransmission sportive du handball is&eacute;rois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / &Eacute;v&eacute;nements</a></li>
+        <li><a href="equipe.html">L'&eacute;quipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>&copy; 2025-2026 Meylan Handball TV &middot; Tous droits r&eacute;serv&eacute;s</p>
+    <p>Site interne &mdash; Usage r&eacute;serv&eacute; aux membres</p>
+  </div>
+
+  <div id="toast"></div>
+
+  <script>
+    /* ── EmailJS ── */
+    const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';
+    const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';
+    const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+
+    /* ── Heure auto ── */
+    function padT(n) { return String(n).padStart(2,'0'); }
+    function setNow() {
+      const d = new Date();
+      document.getElementById('heure_envoi').value = padT(d.getHours())+':'+padT(d.getMinutes());
+    }
+    setNow();
+
+    /* ── Note pills ── */
+    const pillsWrap = document.getElementById('note-pills');
+    for (let i = 1; i <= 10; i++) {
+      const p = document.createElement('div');
+      p.className = 'note-pill';
+      p.textContent = i;
+      p.dataset.val = i;
+      p.addEventListener('click', () => {
+        document.querySelectorAll('.note-pill').forEach(x => x.classList.remove('selected'));
+        p.classList.add('selected');
+        document.getElementById('note_globale').value = i;
+      });
+      pillsWrap.appendChild(p);
+    }
+
+    /* ── Toast ── */
+    function showToast(msg, type, ms) {
+      ms = ms || 4500;
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'show ' + (type||'');
+      setTimeout(() => { t.className = ''; }, ms);
+    }
+
+    /* ── Absence rows ── */
+    function absRowHTML() {
+      return '<td><input type="text" placeholder="Pr\u00e9nom Nom" class="abs-nom"></td>'
+        + '<td><select class="abs-poste"><option value="">\u2014</option><option>R\u00e9alisateur / R\u00e9gisseur</option><option>Cam\u00e9raman</option><option>Commentateur</option><option>Graphiste / Score</option></select></td>'
+        + '<td><select class="abs-motif"><option value="">\u2014</option><option>Emp\u00eachement personnel</option><option>Probl\u00e8me de sant\u00e9</option><option>Obligation professionnelle</option><option>Non-pr\u00e9sent\u00e9</option><option>Autre</option></select></td>'
+        + '<td style="text-align:center"><select class="abs-prevenu" style="width:auto"><option value="">\u2014</option><option>Oui</option><option>Non</option></select></td>'
+        + '<td style="text-align:center"><button type="button" class="btn-remove" onclick="removeRow(this)" title="Supprimer">\u2715</button></td>';
+    }
+
+    function addAbsenceRow() {
+      const tr = document.createElement('tr');
+      tr.innerHTML = absRowHTML();
+      document.getElementById('absences-body').appendChild(tr);
+    }
+
+    function removeRow(btn) {
+      const tbody = document.getElementById('absences-body');
+      const row = btn.closest('tr');
+      if (tbody.rows.length > 1) row.remove();
+      else row.querySelectorAll('input,select').forEach(function(el){ el.value=''; });
+    }
+
+    /* ── Helpers ── */
+    function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+
+    function collectPresences() {
+      var postes = [
+        { l:'R\u00e9alisateur / R\u00e9gisseur', ids:['realisateur_1','realisateur_2'] },
+        { l:'Cam\u00e9raman(s)',                  ids:['cameraman_1','cameraman_2','cameraman_3'] },
+        { l:'Commentateur(s)',                    ids:['commentateur_1','commentateur_2'] },
+        { l:'Graphiste / Score',                  ids:['graphiste_1','graphiste_2'] },
+      ];
+      return postes.map(function(p){
+        var members = p.ids.map(function(id){ return val(id); }).filter(Boolean);
+        return p.l + ' : ' + (members.length ? members.join(', ') : '\u2014');
+      }).join('\n');
+    }
+
+    function collectAbsences() {
+      var rows = document.querySelectorAll('#absences-body tr');
+      var lines = [];
+      rows.forEach(function(r){
+        var nom = r.querySelector('.abs-nom') ? r.querySelector('.abs-nom').value.trim() : '';
+        if (!nom) return;
+        var poste   = (r.querySelector('.abs-poste')   ? r.querySelector('.abs-poste').value   : '') || '\u2014';
+        var motif   = (r.querySelector('.abs-motif')   ? r.querySelector('.abs-motif').value   : '') || '\u2014';
+        var prevenu = (r.querySelector('.abs-prevenu') ? r.querySelector('.abs-prevenu').value : '') || '\u2014';
+        lines.push('\u2022 ' + nom + ' | ' + poste + ' | ' + motif + ' | Pr\u00e9venu : ' + prevenu);
+      });
+      return lines.length ? lines.join('\n') : 'Aucune absence d\u00e9clar\u00e9e';
+    }
+
+    /* ── Validation ── */
+    function validate() {
+      var fields = [
+        { id:'match_date',      label:'Date du match' },
+        { id:'match_heure',     label:'Heure de d\u00e9but' },
+        { id:'equipe_domicile', label:'\u00c9quipe domicile' },
+        { id:'equipe_visiteur', label:'\u00c9quipe visiteur' },
+        { id:'competition',     label:'Comp\u00e9tition' },
+        { id:'lieu',            label:'Lieu / Gymnase' },
+        { id:'responsable_nom', label:'Responsable de retransmission' },
+      ];
+      for (var i = 0; i < fields.length; i++) {
+        var f = fields[i];
+        var el = document.getElementById(f.id);
+        if (!el || !el.value.trim()) {
+          if (el) el.focus();
+          showToast('Champ requis manquant : ' + f.label, 'error');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    /* ── Submit ── */
+    function submitForm() {
+      if (!validate()) return;
+      setNow();
+      var btn = document.getElementById('btn-submit');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner"></div> Envoi en cours\u2026';
+
+      var dateRaw = val('match_date');
+      var dateObj = new Date(dateRaw);
+      var dateFr = isNaN(dateObj.getTime()) ? dateRaw
+        : dateObj.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+
+      var params = {
+        match_date:          dateFr,
+        match_heure:         val('match_heure'),
+        equipe_domicile:     val('equipe_domicile'),
+        equipe_visiteur:     val('equipe_visiteur'),
+        competition:         val('competition'),
+        categorie:           val('categorie') || '\u2014',
+        lieu:                val('lieu'),
+        responsable_nom:     val('responsable_nom'),
+        heure_envoi:         val('heure_envoi'),
+        presences:           collectPresences(),
+        heure_installation:  val('heure_installation') || '\u2014',
+        heure_fin_diffusion: val('heure_fin_diffusion') || '\u2014',
+        absences:            collectAbsences(),
+        bilan_technique:     val('bilan_technique') || '\u2014',
+        bilan_humain:        val('bilan_humain') || '\u2014',
+        observations:        val('observations') || '\u2014',
+        note_globale:        val('note_globale') ? val('note_globale') + ' / 10' : '\u2014',
+        lien_stream:         val('lien_stream') || '\u2014',
+      };
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, params).then(function(){
+        showToast('\u2713 Fiche envoy\u00e9e avec succ\u00e8s', 'success', 6000);
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Fiche envoy\u00e9e';
+        btn.style.background = '#1a7a4a';
+      }, function(err){
+        console.error(err);
+        showToast('Erreur lors de l\'envoi \u2014 v\u00e9rifiez les cl\u00e9s EmailJS', 'error', 7000);
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer la fiche de pr\u00e9sence';
+      });
+    }
+  </script>
+</body>
+</html>

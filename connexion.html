@@ -234,22 +234,21 @@
 <script>
 /* ═══════════════════════════════════════════════════════
    ⚙️  COMPTES AUTORISÉS  — Modifier ici
-   Chaque entrée : { identifiant: '...', motDePasse: '...' }
+   Chaque entrée : { identifiant: '...', motDePasse: '...',   page: '...' },
    Vous pouvez en ajouter autant que nécessaire.
    ═══════════════════════════════════════════════════════ */
 const COMPTES = [
-  { identifiant: 'icr.admin',   motDePasse: 'MhbtvICR2025!'  },
-  { identifiant: 'xavierfini',   motDePasse: 'MHBTV2026@'  },
-  { identifiant: 'mariedalzotto',   motDePasse: 'MHBTV2026@'  },
-  { identifiant: 'emmanuelalvesdemoura',   motDePasse: 'MHBTV2026@'  },
-  { identifiant: 'coordinateur', motDePasse: 'Coord@MHBTV26' },
-  // { identifiant: 'autre',     motDePasse: 'AutreMotDePasse' },
+  { identifiant: 'icr.admin',              motDePasse: 'MhbtvICR2025!',  page: 'icr-suivi.html'     },
+  { identifiant: 'xavierfini',             motDePasse: 'MHBTV2026@',    page: 'icr-suivi.html' },
+  { identifiant: 'mariedalzotto',          motDePasse: 'MHBTV2026@',    page: 'icr-suivi.html'  },
+  { identifiant: 'emmanuelalvesdemoura',   motDePasse: 'MHBTV2026@',    page: 'icr-suivi.html'  },
+  { identifiant: 'coordinateur',           motDePasse: 'Coord@MHBTV26', page: 'icr-suivi.html' },
+  { identifiant: 'responsable',           motDePasse: 'Coord@MHBTV26', page: 'fiche_presence_rr.html' },
 ];
 
 /* ── Paramètres de sécurité ── */
 const MAX_TENTATIVES   = 5;         // Nombre de tentatives avant blocage
 const LOCKOUT_SECONDES = 5 * 60;    // Durée du blocage en secondes (5 min)
-const PAGE_CIBLE       = 'icr-suivi.html'; // Page de redirection après connexion
 /* ═══════════════════════════════════════════════════════ */
 
 let tentatives = 0;
@@ -282,7 +281,8 @@ function tryLogin() {
     return;
   }
 
-  const ok = COMPTES.some(c => c.identifiant === id && c.motDePasse === mdp);
+  const compte = COMPTES.find(c => c.identifiant === id && c.motDePasse === mdp);
+  const ok = !!compte;
 
   if (ok) {
     btn.disabled = true;
@@ -291,7 +291,7 @@ function tryLogin() {
         <circle cx="12" cy="12" r="10" stroke-opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/>
       </svg>
       Connexion…`;
-    setTimeout(() => { window.location.href = PAGE_CIBLE; }, 700);
+    setTimeout(() => { window.location.href = compte.page; }, 700);
   } else {
     tentatives++;
     document.getElementById('attemptsWarn').classList.add('visible');

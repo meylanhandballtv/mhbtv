@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="fr">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compositions d'Équipe | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-compo {
+      position: relative;
+      height: 420px;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 4rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 50%, #0a0a0a 100%);
+    }
+    .hero-compo::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px);
+    }
+    .hero-compo::after {
+      content: 'CREW';
+      position: absolute;
+      right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20vw;
+      color: rgba(232,0,29,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .hero-accent { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(232,0,29,0.15) 0%, transparent 70%); pointer-events: none; }
+
+    /* Légende */
+    .role-legend {
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: 0.55rem; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .dot-red { background: var(--red); }
+    .dot-gold { background: var(--gold); }
+    .dot-muted { background: var(--border); }
+
+    /* Liste compacte des matchs */
+    .match-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.75rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .match-row:hover { transform: translateY(-3px); border-color: var(--red); }
+    .match-row-left { display: flex; flex-direction: column; gap: 0.35rem; }
+    .match-row-date {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .match-row-teams {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .match-row-teams .vs { color: var(--muted); font-size: 0.65em; margin: 0 0.4em; }
+    .match-row-meta { font-size: 0.8rem; color: var(--muted); }
+    .match-row-right { display: flex; align-items: center; gap: 1.25rem; flex-shrink: 0; }
+    .match-row-arrow {
+      color: var(--muted);
+      font-size: 1.3rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .match-row:hover .match-row-arrow { color: var(--red); transform: translateX(4px); }
+
+    .match-status {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .match-status.complete { color: var(--white); }
+    .match-status.incomplete { color: var(--red); }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Modale composition */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      padding: 1.5rem;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      max-width: 760px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 2.25rem;
+      position: relative;
+      transform: translateY(12px);
+      transition: transform 0.2s ease;
+    }
+    .modal-overlay.active .modal-panel { transform: translateY(0); }
+    .modal-close {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--red); }
+
+    .modal-header { margin-bottom: 1.75rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-right: 2rem; }
+    .modal-date-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.4rem;
+    }
+    .modal-teams {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      color: var(--white);
+      line-height: 1.05;
+    }
+    .modal-teams .vs { color: var(--muted); font-size: 0.6em; margin: 0 0.4em; }
+    .modal-meta { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; display: flex; gap: 1.3rem; flex-wrap: wrap; align-items: center; }
+
+    /* Crew grid (dans la modale) */
+    .crew-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .crew-slot {
+      background: var(--darker);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      transition: border-color 0.2s;
+    }
+    .crew-slot.lead { border-left-color: var(--red); }
+    .crew-slot.supervision { border-left-color: var(--gold); }
+    .crew-slot.crew-empty { border-style: dashed; opacity: 0.65; }
+    .crew-icon { font-size: 1.3rem; }
+    .crew-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .crew-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--white);
+    }
+    .crew-empty .crew-name { color: var(--muted); font-style: italic; font-weight: 400; }
+
+    @media (max-width: 900px) {
+      .hero-compo { padding: 2rem 1.5rem; }
+      .crew-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .match-row { flex-direction: column; align-items: flex-start; }
+      .match-row-right { width: 100%; justify-content: space-between; }
+      .crew-grid { grid-template-columns: 1fr; }
+      .modal-panel { padding: 1.5rem; }
+    }
+  </style>
+ </head>
+ <body>
+  <script src="nav.js"></script>
+  <main class="page">
+   <!-- HERO -->
+   <section class="hero-compo">
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="position:relative;z-index:1;">
+     <div class="hero-eyebrow">Saison 2025-2026</div>
+     <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6rem);line-height:0.9;color:var(--white);">Compositions <em style="color:var(--red);font-style:normal;">d'Équipe</em></h1>
+     <p class="hero-sub">Organisation des équipes de tournage pour les prochaines retransmissions MHBTV. Cliquez sur un match pour voir la composition.</p>
+    </div>
+   </section>
+
+   <!-- LISTE DES MATCHS -->
+   <section class="section">
+    <h2 class="section-title">Prochaines <span>Retransmissions</span></h2>
+    <div class="section-line"></div>
+
+    <div class="role-legend">
+     <span class="legend-item"><span class="legend-dot dot-red"></span> Encadrement (Responsable / Réalisateur)</span>
+     <span class="legend-item"><span class="legend-dot dot-gold"></span> Superviseur (en formation)</span>
+     <span class="legend-item"><span class="legend-dot dot-muted"></span> Postes techniques & commentaire</span>
+    </div>
+
+    <div id="compositions-list"></div>
+   </section>
+  </main>
+
+  <!-- MODALE COMPOSITION -->
+  <div class="modal-overlay" id="modal-overlay">
+   <div class="modal-panel" id="modal-panel">
+    <button class="modal-close" id="modal-close" aria-label="Fermer">&times;</button>
+    <div id="modal-content"></div>
+   </div>
+  </div>
+
+  <footer>
+   <div class="footer-brand">
+    <div class="logo-text">
+     MEYLAN <span>HANDBALL</span> TV
+    </div>
+    <p>Association bénévole de retransmission sportive du handball isérois.
+     <br>
+     Saison 2025-2026.</p>
+   </div>
+   <div>
+    <h4>Navigation</h4>
+    <ul>
+     <li><a href="index.html">Accueil</a></li>
+     <li><a href="diffusions.html">Diffusions / Événements</a></li>
+     <li><a href="equipe.html">L'équipe MHBTV</a></li>
+     <li><a href="compositions.html">Compositions d'équipe</a></li>
+     <li><a href="gratification.html">Gratification</a></li>
+    </ul>
+   </div>
+   <div>
+    <h4>Ressources</h4>
+    <ul>
+     <li><a href="statuts.html">Statuts</a></li>
+     <li><a href="documentation.html">Documentation</a></li>
+     <li><a href="audiences.html">Audiences</a></li>
+     <li><a href="charte.html">Charte graphique</a></li>
+    </ul>
+   </div>
+  </footer>
+  <div class="footer-bottom">
+   <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+   <p>Site interne — Usage réservé aux membres</p>
+  </div>
+
+  <script>
+   /* ==========================================================
+      DONNÉES DES COMPOSITIONS
+      ----------------------------------------------------------
+      Ajoute un objet par retransmission dans le tableau ci-dessous.
+      Laisse un champ à "null" si le poste n'est pas encore pourvu
+      (il s'affichera en "À pourvoir" dans la modale).
+      Le champ "superviseur" est optionnel : laisse-le à null si
+      aucun superviseur n'accompagne l'équipe ce jour-là — le poste
+      n'apparaîtra simplement pas dans la composition.
+      Les exemples ci-dessous sont à remplacer par tes prochaines
+      retransmissions réelles.
+      ========================================================== */
+   const retransmissions = [
+    {
+     date: "Samedi 27 Juin 2026 — 18h00",
+     competition: "Nationale 2 Masculine",
+     domicile: "Meylan Handball",
+     exterieur: "À déterminer",
+     lieu: "Gymnase du Pré de l'Horme, Meylan",
+     crew: {
+      responsable: "Xavier FINI",
+      realisateur: "Marie DAL ZOTTO",
+      superviseur: null,
+      cadreurLarge: "Tim TOUR",
+      cadreurSerre: "Enzo ACHOUR",
+      cadreurTerrain: null,
+      ots: "Gaetan FERRE",
+      commentateurs: ["Nicolas MARIN"]
+     }
+    },
+    {
+     date: "Dimanche 5 Juillet 2026 — 16h00",
+     competition: "Coupe — Tour préliminaire",
+     domicile: "Meylan Handball",
+     exterieur: "À déterminer",
+     lieu: "Gymnase du Pré de l'Horme, Meylan",
+     crew: {
+      responsable: "Emmanuel ALVES DE MOURA",
+      realisateur: null,
+      superviseur: "Marie DAL ZOTTO",
+      cadreurLarge: "Yoan DUSSERT",
+      cadreurSerre: null,
+      cadreurTerrain: "Younes CHIKER",
+      ots: null,
+      commentateurs: []
+     }
+    }
+   ];
+
+   /* ========================================================== */
+
+   const ROLES = [
+    { key: "responsable",    label: "Responsable de retransmission", icon: "📋", category: "lead" },
+    { key: "realisateur",    label: "Réalisateur",                   icon: "🎬", category: "lead" },
+    { key: "superviseur",    label: "Superviseur (formation)",       icon: "🎓", category: "supervision", optional: true },
+    { key: "cadreurLarge",   label: "Cadreur plan large",            icon: "🎥", category: "image" },
+    { key: "cadreurSerre",   label: "Cadreur plan serré",            icon: "🔎", category: "image" },
+    { key: "cadreurTerrain", label: "Cadreur plan terrain",          icon: "🤾", category: "image" },
+    { key: "ots",            label: "Officiel Technique Score",      icon: "🖥️", category: "technique" },
+    { key: "commentateurs",  label: "Commentateur(s) sportif(s)",     icon: "🎙️", category: "commentaire", isList: true }
+   ];
+
+   function getMatchProgress(match) {
+    const activeRoles = ROLES.filter(r => !r.optional || match.crew[r.key]);
+    const total = activeRoles.length;
+    const filled = activeRoles.filter(r => {
+     const v = match.crew[r.key];
+     return r.isList ? (Array.isArray(v) && v.length > 0) : !!v;
+    }).length;
+    return { filled, total, complete: filled === total };
+   }
+
+   function buildSlot(roleDef, value) {
+    const filled = roleDef.isList ? (Array.isArray(value) && value.length > 0) : !!value;
+    const displayValue = filled
+     ? (roleDef.isList ? value.join(" & ") : value)
+     : "À pourvoir";
+    return `
+     <div class="crew-slot ${roleDef.category}${filled ? "" : " crew-empty"}">
+      <div class="crew-icon">${roleDef.icon}</div>
+      <div class="crew-role">${roleDef.label}</div>
+      <div class="crew-name">${displayValue}</div>
+     </div>`;
+   }
+
+   // Liste compacte des matchs
+   function buildMatchRow(match, index) {
+    const progress = getMatchProgress(match);
+    return `
+     <div class="match-row" data-index="${index}">
+      <div class="match-row-left">
+       <div class="match-row-date">${match.date} · ${match.competition}</div>
+       <div class="match-row-teams">${match.domicile}<span class="vs">vs</span>${match.exterieur}</div>
+       <div class="match-row-meta">📍 ${match.lieu}</div>
+      </div>
+      <div class="match-row-right">
+       <span class="match-status ${progress.complete ? "complete" : "incomplete"}">${progress.filled}/${progress.total} postes pourvus</span>
+       <span class="match-row-arrow">→</span>
+      </div>
+     </div>`;
+   }
+
+   // Contenu détaillé pour la modale
+   function buildModalContent(match) {
+    const activeRoles = ROLES.filter(r => !r.optional || match.crew[r.key]);
+    const slotsHtml = activeRoles.map(r => buildSlot(r, match.crew[r.key])).join("");
+
+    return `
+     <div class="modal-header">
+      <div class="modal-date-tag">${match.date} · ${match.competition}</div>
+      <div class="modal-teams">${match.domicile}<span class="vs">vs</span>${match.exterieur}</div>
+      <div class="modal-meta"><span>📍 ${match.lieu}</span></div>
+     </div>
+     <div class="crew-grid">
+      ${slotsHtml}
+     </div>`;
+   }
+
+   function renderList() {
+    const container = document.getElementById("compositions-list");
+    if (!retransmissions.length) {
+     container.innerHTML = `<div class="empty-state">Aucune retransmission programmée pour le moment.</div>`;
+     return;
+    }
+    container.innerHTML = retransmissions.map(buildMatchRow).join("");
+    container.querySelectorAll(".match-row").forEach(row => {
+     row.addEventListener("click", () => openModal(parseInt(row.dataset.index, 10)));
+    });
+   }
+
+   const overlay = document.getElementById("modal-overlay");
+   const modalContent = document.getElementById("modal-content");
+   const modalClose = document.getElementById("modal-close");
+   const modalPanel = document.getElementById("modal-panel");
+
+   function openModal(index) {
+    const match = retransmissions[index];
+    if (!match) return;
+    modalContent.innerHTML = buildModalContent(match);
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+   }
+
+   function closeModal() {
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+   }
+
+   modalClose.addEventListener("click", closeModal);
+   overlay.addEventListener("click", (e) => { if (e.target === overlay) closeModal(); });
+   document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+   renderList();
+  </script>
+ </body>
+</html>

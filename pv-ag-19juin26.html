@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PV — Assemblée Générale du 19 juin 2026 | Meylan Handball TV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── TOKENS ─────────────────────────────────────── */
+    :root {
+      --bg:      #09090f;
+      --darker:  #05050a;
+      --card:    #111118;
+      --border:  #1e1e2a;
+      --red:     #e8001d;
+      --red-dim: rgba(232,0,29,0.12);
+      --gold:    #f5b800;
+      --gold-dim:rgba(245,184,0,0.12);
+      --white:   #f0f0f5;
+      --muted:   #6b6b80;
+      --light:   #a0a0b8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── PRINT ─────────────────────────────────────── */
+    @media print {
+      body { background: #fff; color: #111; }
+      .hero { background: #111 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .no-print { display: none !important; }
+      .section { break-inside: avoid; }
+      .vote-block { break-inside: avoid; }
+    }
+
+    /* ── HERO ───────────────────────────────────────── */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #09090f 0%, #1a000a 55%, #09090f 100%);
+      padding: 4rem 4rem 3rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(232,0,29,0.025) 60px, rgba(232,0,29,0.025) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(232,0,29,0.025) 60px, rgba(232,0,29,0.025) 61px);
+    }
+    .hero::after {
+      content: 'AG';
+      position: absolute; right: -1rem; bottom: -3rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22vw;
+      color: rgba(232,0,29,0.035);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute; top: -120px; right: -80px;
+      width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(232,0,29,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 820px; }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--red-dim);
+      border: 1px solid rgba(232,0,29,0.25);
+      border-radius: 4px;
+      padding: 0.3rem 0.8rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.4rem;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+
+    .hero-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 0.92;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .hero-title em { color: var(--red); font-style: normal; }
+
+    .hero-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--light);
+      margin-top: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .meta-item {
+      display: flex; flex-direction: column; gap: 0.15rem;
+    }
+    .meta-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .meta-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    /* ── LAYOUT ─────────────────────────────────────── */
+    .doc-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── PRÉSENCE BLOCK ─────────────────────────────── */
+    .presence-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .presence-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.3rem;
+    }
+    .presence-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .presence-card-title.present { color: var(--gold); }
+    .presence-card-title.proxy   { color: var(--light); }
+    .presence-card-title.absent  { color: var(--muted); }
+
+    .presence-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .presence-list li {
+      font-size: 0.85rem;
+      color: var(--light);
+      padding-left: 0.9rem;
+      position: relative;
+    }
+    .presence-list li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--muted);
+      font-size: 0.7rem;
+    }
+    .presence-list li strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+    .presence-list li span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .quorum-bar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 1rem 1.4rem;
+      margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .quorum-pct {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .quorum-text {
+      font-size: 0.88rem;
+      color: var(--light);
+      line-height: 1.5;
+    }
+    .quorum-text strong { color: var(--white); }
+
+    /* ── SECTIONS ───────────────────────────────────── */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .section-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      background: var(--red-dim);
+      border: 1px solid rgba(232,0,29,0.2);
+      border-radius: 4px;
+      padding: 0.2rem 0.6rem;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      letter-spacing: 0.04em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+    .section-line {
+      height: 1px;
+      background: linear-gradient(90deg, var(--border) 0%, transparent 100%);
+      margin-bottom: 1.25rem;
+    }
+
+    .prose {
+      font-size: 0.92rem;
+      color: var(--light);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .prose + .prose { margin-top: -0.2rem; }
+
+    /* ── VOTE BLOCK ─────────────────────────────────── */
+    .vote-block {
+      margin: 1.5rem 0;
+    }
+    .vote-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .vote-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .vote-table th, .vote-table td {
+      padding: 0.8rem 1.2rem;
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+    }
+    .vote-table thead tr {
+      background: #16161f;
+    }
+    .vote-table th {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-size: 0.72rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .vote-table td.subject {
+      text-align: left;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+    .vote-table td.pour  { color: #4ade80; font-weight: 700; font-size: 1.1rem; }
+    .vote-table td.contre { color: var(--red); font-weight: 700; font-size: 1.1rem; }
+    .vote-table td.abstention { color: var(--muted); font-weight: 600; font-size: 1.1rem; }
+
+    .vote-result {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      margin-top: 0.6rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #4ade80;
+    }
+    .vote-result::before { content: '→'; }
+
+    /* ── ELECTION TABLE ─────────────────────────────── */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+    }
+    .data-table th {
+      padding: 0.75rem 1rem;
+      background: #16161f;
+      text-align: left;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .data-table td {
+      padding: 0.7rem 1rem;
+      border-bottom: 1px solid rgba(30,30,42,0.6);
+      color: var(--light);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.92rem;
+    }
+    .data-table tbody tr:last-child td { border-bottom: none; }
+    .data-table td.name { color: var(--white); font-weight: 600; }
+    .data-table td.votes { font-weight: 700; color: var(--white); text-align: center; }
+    .data-table td.result-elu {
+      color: #4ade80; font-weight: 700;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+    .data-table td.result-pres {
+      color: var(--gold); font-weight: 700;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+    }
+    .data-table td.result-non {
+      color: var(--muted);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+    }
+    .data-table tr.row-elected { background: rgba(74,222,128,0.04); }
+    .data-table tr.row-president { background: rgba(245,184,0,0.06); }
+
+    /* ── STATS GRID ─────────────────────────────────── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+    }
+    .stat-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .stat-delta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+    .delta-up   { color: #4ade80; }
+    .delta-down { color: var(--red); }
+    .delta-neu  { color: var(--muted); }
+
+    /* ── AUDIENCES PERIOD ───────────────────────────── */
+    .period-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 1.5rem 0 0.6rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .period-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(245,184,0,0.2), transparent);
+    }
+
+    /* ── RANKING TABLE ──────────────────────────────── */
+    .rank-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+    .rank-table th {
+      padding: 0.7rem 1rem;
+      background: #16161f;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    .rank-table td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid rgba(30,30,42,0.6);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.9rem;
+      color: var(--light);
+    }
+    .rank-table tbody tr:last-child td { border-bottom: none; }
+    .rank-table td.rank { color: var(--muted); font-size: 0.8rem; width: 3rem; text-align: center; }
+    .rank-table td.rank-name { color: var(--white); font-weight: 600; }
+    .rank-table td.pts { color: var(--white); font-weight: 700; text-align: right; }
+    .rank-table tr.top3 { background: rgba(245,184,0,0.05); }
+    .rank-table tr.top3 td.pts { color: var(--gold); }
+    .rank-table tr.coord { background: rgba(232,0,29,0.04); }
+    .rank-table td.rank-star {
+      color: var(--red);
+      font-size: 0.9rem;
+      width: 3rem;
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+    }
+
+    /* ── CARTOGRAPHY ────────────────────────────────── */
+    .carto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    .carto-type {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+    .carto-type-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.4rem;
+    }
+    .carto-type-crew {
+      font-size: 0.85rem;
+      color: var(--light);
+    }
+    .carto-assign {
+      margin: 1rem 0;
+    }
+    .carto-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+    .carto-row:last-child { border-bottom: none; }
+    .carto-comp { font-size: 0.88rem; color: var(--light); }
+    .carto-prod {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--gold);
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── PROCEDURES ─────────────────────────────────── */
+    .proc-list {
+      margin: 0.75rem 0;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .proc-item {
+      display: flex; gap: 0.9rem; align-items: flex-start;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+    }
+    .proc-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem; }
+    .proc-text { font-size: 0.88rem; color: var(--light); line-height: 1.5; }
+    .proc-item.auto { border-left: 3px solid #4ade80; }
+    .proc-item.conditional { border-left: 3px solid var(--gold); }
+
+    /* ── CALLOUT ────────────────────────────────────── */
+    .callout {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 8px;
+      padding: 1rem 1.3rem;
+      margin: 1rem 0;
+      font-size: 0.88rem;
+      color: var(--light);
+      line-height: 1.6;
+    }
+    .callout.info  { border-left-color: var(--gold); }
+    .callout.green { border-left-color: #4ade80; }
+
+    /* ── DIVIDER ────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 2.5rem 0;
+    }
+
+    /* ── SIGNATURE ──────────────────────────────────── */
+    .signature-block {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .sig-item {}
+    .sig-role {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+    .sig-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.8rem;
+    }
+    .sig-line {
+      width: 180px;
+      height: 1px;
+      background: var(--border);
+      margin-top: 2rem;
+    }
+
+    /* ── FOOTER ─────────────────────────────────────── */
+    .doc-footer {
+      background: var(--darker);
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .doc-footer strong { color: var(--white); }
+
+    /* ── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 700px) {
+      .hero { padding: 2.5rem 1.5rem 2rem; }
+      .presence-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .carto-grid { grid-template-columns: 1fr; }
+      .doc-body { padding: 2rem 1.25rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════════════ -->
+  <header class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">Meylan Handball TV</div>
+      <div class="hero-label">Procès-Verbal · Assemblée Générale Ordinaire & Élective Anticipée</div>
+      <h1 class="hero-title">Assemblée<br><em>Générale</em></h1>
+      <p class="hero-sub">Réunion du vendredi 19 juin 2026 · Gymnase des Buclos, Meylan</p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Président de séance</span>
+          <span class="meta-value">Xavier FINI</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Secrétaire de séance</span>
+          <span class="meta-value">Emmanuel ALVES DE MOURA</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Ouverture</span>
+          <span class="meta-value">19h00</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Clôture</span>
+          <span class="meta-value">20h12</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="doc-body">
+
+    <!-- ── PRÉSENCES ───────────────────────────────── -->
+    <div class="presence-grid">
+      <div class="presence-card">
+        <div class="presence-card-title present">Membres présents</div>
+        <ul class="presence-list">
+          <li><strong>Xavier FINI</strong><span>Coordinateur général</span></li>
+          <li><strong>Marie DAL ZOTTO</strong><span>Coordinatrice adjointe</span></li>
+          <li><strong>Emmanuel ALVES DE MOURA</strong><span>Secrétaire général</span></li>
+          <li><strong>Enzo ACHOUR</strong></li>
+          <li><strong>Gaëtan FERRE</strong></li>
+        </ul>
+      </div>
+      <div class="presence-card">
+        <div class="presence-card-title proxy">Représentés par procuration</div>
+        <ul class="presence-list">
+          <li><strong>Nicolas MARIN</strong><span>Président de l'ICR</span></li>
+          <li><strong>Yoan DUSSERT</strong><span>Vice-président de l'ICR</span></li>
+          <li><strong>Dorina HELIE-JOLY</strong></li>
+          <li><strong>Ennio ARIZZI</strong></li>
+        </ul>
+      </div>
+      <div class="presence-card">
+        <div class="presence-card-title absent">Membres non présents</div>
+        <ul class="presence-list">
+          <li><strong>Younes CHIKER</strong></li>
+          <li><strong>Tim TOUR</strong></li>
+          <li><strong>Kylian TOUR</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="quorum-bar">
+      <div class="quorum-pct">75%</div>
+      <div class="quorum-text">
+        <strong>9 membres sur 12</strong> ont participé au vote.<br>
+        Le quorum prévu à l'article 13.2.2 des statuts étant atteint, l'Assemblée générale peut valablement délibérer.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         01 — ORDRE DU JOUR
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Approbation de l'ordre du jour</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">Le président de séance soumet l'ordre du jour au vote de l'assemblée.</p>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation de l'ordre du jour</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">L'ordre du jour est approuvé.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         02 — RAPPORT MORAL
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Rapport moral du Coordinateur général</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">Le Coordinateur général de Meylan Handball TV présente à l'ensemble des membres du collectif, présents ou représentés à cette Assemblée générale de clôture de saison, son rapport moral pour l'année sportive 2025–2026.</p>
+      <p class="prose">Cette saison a confirmé le rôle de Meylan Handball TV comme outil d'accompagnement, de valorisation et de mise en lumière de la vie du club. Tout au long de l'année, notre objectif est resté le même : faire vivre le handball au-delà du terrain. Nous avons poursuivi nos actions autour de plusieurs axes : couvrir les rencontres et événements du club et du Comité Isère de Handball afin de permettre au plus grand nombre de suivre les rencontres, valoriser les équipes, des plus jeunes aux collectifs séniors, mettre en avant les bénévoles, éducateurs, dirigeants et partenaires, développer des contenus accessibles, réguliers et fidèles aux valeurs associatives du club.</p>
+      <p class="prose">Cette saison a également démontré l'importance du collectif. Derrière chaque captation, chaque diffusion en direct se trouve des heures d'engagement souvent discrètes mais essentielles. Le Coordinateur général tient à remercier les bénévoles du collectif pour leur disponibilité et leur implication, les entraîneurs pour leur confiance, les familles pour leur soutien permanent, et le club qui nous accompagne dans ce projet. M. Xavier FINI remercie à toutes celles et tous ceux qui contribuent, de près ou de loin, à faire vivre cette aventure qui va fêter ses 2 ans d'ici peu de temps.</p>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation du rapport moral</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Le rapport moral est approuvé.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         03 — ELECTION ICR
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Élection de l'Instance Compétente des Retransmissions (ICR)</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">À la suite d'une adoption en Bureau puis approuvée par le Président de l'ICR, la motion propose de créer pour les élus de l'instance des mandats plus courts (en termes de phases sportives : juin à décembre / janvier à mai) et avec moins de membres (passer de 6 à 4 membres), afin de permettre à l'instance de renouveler régulièrement ses membres, d'avoir différents points de vue, ainsi que de laisser de la responsabilité et de la liberté d'expression à ceux qui le veulent. Dans le cas où cette motion est adoptée par l'Assemblée générale, le Bureau supervisera l'élection anticipée.</p>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation de la motion de modification</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">La motion est adoptée.</div>
+      </div>
+      <p class="prose" style="margin-top:1.2rem;">
+        <strong style="color:var(--white)">Procédure :</strong> chaque membre dispose de 4 voix. Les candidat(e)s ayant obtenu le plus de voix sont élu(e)s dans la limite des 4 postes à pourvoir. Le vote se déroule en un tour unique. La présidence de l'ICR est attribuée de plein droit au membre élu ayant obtenu le plus grand nombre de suffrages exprimés lors du scrutin pour un mandat d'une saison sportive.
+      </p>
+      <table class="data-table">
+        <thead><tr>
+          <th>Candidat(e)</th>
+          <th style="text-align:center">Voix obtenues</th>
+          <th>Résultat</th>
+        </tr></thead>
+        <tbody>
+          <tr class="row-president">
+            <td class="name">Nicolas MARIN</td>
+            <td class="votes">10</td>
+            <td class="result-pres">Élu Président</td>
+          </tr>
+          <tr class="row-elected">
+            <td class="name">Enzo ACHOUR</td>
+            <td class="votes">8</td>
+            <td class="result-elu">Élu</td>
+          </tr>
+          <tr class="row-elected">
+            <td class="name">Gaetan FERRE</td>
+            <td class="votes">6</td>
+            <td class="result-elu">Élu</td>
+          </tr>
+          <tr class="row-elected">
+            <td class="name">Tim TOUR</td>
+            <td class="votes">6</td>
+            <td class="result-elu">Élu</td>
+          </tr>
+          <tr>
+            <td class="name">Dorina HELIE-JOLY</td>
+            <td class="votes">2</td>
+            <td class="result-non">Non élue</td>
+          </tr>
+          <tr>
+            <td class="name">Yoan DUSSERT</td>
+            <td class="votes">2</td>
+            <td class="result-non">Non élu</td>
+          </tr>
+          <tr>
+            <td class="name">Nabil SABAH</td>
+            <td class="votes">2</td>
+            <td class="result-non">Non élu</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout info">
+        M. Nicolas MARIN est élu président de l'Instance Compétente des Retransmissions pour la saison 2026–2027. M. Enzo ACHOUR, M. Gaetan FERRE et M. Tim TOUR sont élus Coordinateurs délégués de l'ICR avec un mandat de 6 mois (leurs mandats prendront fin à l'Assemblée générale de décembre 2026). Ils assisteront le président de l'ICR dans ses fonctions sur les volets disciplinaire et de planification des retransmissions.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         04 — BILAN TRIMESTRIEL
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Bilan trimestriel — Janvier / Mars 2026</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">Le bilan trimestriel de la saison 2025–2026 est présenté à l'assemblée.</p>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Téléspectateurs cumulés</div>
+          <div class="stat-value">1 180</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Heures de direct</div>
+          <div class="stat-value">16 h</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Heures de visionnage</div>
+          <div class="stat-value">335,2 h</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Vues des vidéos</div>
+          <div class="stat-value">2 746</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Clics sur les vidéos</div>
+          <div class="stat-value">1 118</div>
+        </div>
+      </div>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation du bilan trimestriel</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Le bilan trimestriel est approuvé.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         05 — AUDIENCES AVRIL/MAI/JUIN
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="section-title">Approbation des audiences — Avril, Mai, Juin 2026</h2>
+      </div>
+      <div class="section-line"></div>
+
+      <div class="period-title">Avril 2026</div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-label">Téléspectateurs</div><div class="stat-value">194</div><div class="stat-delta delta-down">−70,47 %</div></div>
+        <div class="stat-card"><div class="stat-label">Vues cumulées</div><div class="stat-value">459</div><div class="stat-delta delta-down">−66,35 %</div></div>
+        <div class="stat-card"><div class="stat-label">Heures de visionnage</div><div class="stat-value">47,8 h</div><div class="stat-delta delta-down">−66,41 %</div></div>
+        <div class="stat-card"><div class="stat-label">Heures de retransmission</div><div class="stat-value">1,4 h</div><div class="stat-delta delta-down">−88,71 %</div></div>
+      </div>
+
+      <div class="period-title">Mai 2026</div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-label">Téléspectateurs</div><div class="stat-value">244</div><div class="stat-delta delta-up">+25,77 %</div></div>
+        <div class="stat-card"><div class="stat-label">Vues cumulées</div><div class="stat-value">583</div><div class="stat-delta delta-up">+26,44 %</div></div>
+        <div class="stat-card"><div class="stat-label">Heures de visionnage</div><div class="stat-value">72,6 h</div><div class="stat-delta delta-up">+51,88 %</div></div>
+        <div class="stat-card"><div class="stat-label">Heures de retransmission</div><div class="stat-value">4,9 h</div><div class="stat-delta delta-up">+250,0 %</div></div>
+      </div>
+
+      <div class="period-title">Juin 2026</div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-label">Téléspectateurs</div><div class="stat-value">848</div><div class="stat-delta delta-up">+247,54 %</div></div>
+        <div class="stat-card"><div class="stat-label">Vues cumulées</div><div class="stat-value">1 890</div><div class="stat-delta delta-up">+224,19 %</div></div>
+        <div class="stat-card"><div class="stat-label">Heures de visionnage</div><div class="stat-value">242,7 h</div><div class="stat-delta delta-up">+234,30 %</div></div>
+        <div class="stat-card"><div class="stat-label">Heures de retransmission</div><div class="stat-value">10,0 h</div><div class="stat-delta delta-up">+104,08 %</div></div>
+      </div>
+
+      <div class="vote-block" style="margin-top:1.5rem;">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation des audiences (Avr./Mai/Jun.)</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Les audiences sont approuvées.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         06 — AUDIENCES SAISON
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2 class="section-title">Approbation des audiences de la saison 2025–2026</h2>
+      </div>
+      <div class="section-line"></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-label">Abonnés</div><div class="stat-value">286</div><div class="stat-delta delta-up">+129 sur la saison</div></div>
+        <div class="stat-card"><div class="stat-label">Bénévoles actifs</div><div class="stat-value">13</div></div>
+        <div class="stat-card"><div class="stat-label">Téléspectateurs cumulés</div><div class="stat-value">4 807</div></div>
+        <div class="stat-card"><div class="stat-label">Vues cumulées</div><div class="stat-value">11 424</div></div>
+        <div class="stat-card"><div class="stat-label">Heures de visionnage</div><div class="stat-value">1 403</div></div>
+        <div class="stat-card"><div class="stat-label">Clics sur nos vidéos</div><div class="stat-value">5 911</div></div>
+      </div>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation des audiences de la saison</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Les audiences sont approuvées.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         07 — COMMISSION DISCIPLINAIRE
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2 class="section-title">Rapport de la Commission Disciplinaire de l'ICR</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">Le Coordinateur délégué M. Enzo ACHOUR, représentant l'Instance Compétente des Retransmissions à cette Assemblée générale, présente le rapport de la Commission Disciplinaire sur la saison 2025–2026.</p>
+      <p class="prose">Au cours de la saison 2025–2026, la Commission disciplinaire de l'ICR de Meylan Handball TV a poursuivi sa mission de garantir le respect des règles de fonctionnement du collectif, des valeurs et du cadre collectif nécessaire au bon déroulement de l'activité.</p>
+
+      <div class="stats-grid" style="grid-template-columns: repeat(3,1fr);">
+        <div class="stat-card"><div class="stat-label">Signalements reçus</div><div class="stat-value">10</div></div>
+        <div class="stat-card"><div class="stat-label">Irrecevables</div><div class="stat-value">5</div></div>
+        <div class="stat-card"><div class="stat-label">Procédures ouvertes</div><div class="stat-value">5</div></div>
+        <div class="stat-card"><div class="stat-label">Procédures clôturées</div><div class="stat-value">4</div></div>
+        <div class="stat-card"><div class="stat-label">Avertissements</div><div class="stat-value">2</div></div>
+        <div class="stat-card"><div class="stat-label">Suspensions</div><div class="stat-value">1</div></div>
+      </div>
+
+      <div class="callout" style="margin-top:1rem;">
+        Une procédure demeure actuellement en cours dans le cadre d'un recours en appel et fera l'objet d'un suivi sur la saison suivante.
+      </div>
+      <p class="prose">La commission souhaite rappeler un principe essentiel de fonctionnement : tout comportement, fait ou événement constaté dans le cadre d'une retransmission et relevant potentiellement d'un manquement disciplinaire doit faire l'objet d'un signalement. L'absence volontaire ou non de signalement d'un fait connu constitue en elle-même un manquement aux obligations de vigilance et de contribution au bon fonctionnement des dispositifs disciplinaires du collectif.</p>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation du rapport de la Commission Disciplinaire</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Le rapport de la Commission Disciplinaire de l'ICR est approuvé.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         08 — CLASSEMENT GRATIFICATION
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2 class="section-title">Classement interne de gratification</h2>
+      </div>
+      <div class="section-line"></div>
+      <table class="rank-table">
+        <thead><tr>
+          <th style="text-align:center">Rang</th>
+          <th>Membre</th>
+          <th style="text-align:right">Points</th>
+        </tr></thead>
+        <tbody>
+          <tr class="top3"><td class="rank">1er</td><td class="rank-name">Nicolas MARIN</td><td class="pts">3 430 pts</td></tr>
+          <tr class="top3"><td class="rank">2e</td><td class="rank-name">Marie DAL ZOTTO</td><td class="pts">3 345 pts</td></tr>
+          <tr class="top3"><td class="rank">3e</td><td class="rank-name">Ennio ARIZZI</td><td class="pts">3 340 pts</td></tr>
+          <tr><td class="rank">4e</td><td class="rank-name">Enzo ACHOUR</td><td class="pts">3 120 pts</td></tr>
+          <tr class="coord"><td class="rank-star">★</td><td class="rank-name">Xavier FINI</td><td class="pts" style="color:var(--red)">2 530 pts</td></tr>
+          <tr><td class="rank">5e</td><td class="rank-name">Emmanuel ALVES DE MOURA</td><td class="pts">2 040 pts</td></tr>
+          <tr><td class="rank">6e</td><td class="rank-name">Tim TOUR</td><td class="pts">1 225 pts</td></tr>
+          <tr><td class="rank">7e</td><td class="rank-name">Nabil SABAH</td><td class="pts">1 200 pts</td></tr>
+          <tr><td class="rank">8e</td><td class="rank-name">Yoan DUSSERT</td><td class="pts">1 015 pts</td></tr>
+          <tr><td class="rank">9e</td><td class="rank-name">Gaetan FERRE</td><td class="pts">800 pts</td></tr>
+          <tr><td class="rank">10e</td><td class="rank-name">Dorina HELIE-JOLY</td><td class="pts">470 pts</td></tr>
+          <tr><td class="rank">11e</td><td class="rank-name">Younes CHIKER</td><td class="pts">415 pts</td></tr>
+          <tr><td class="rank">12e</td><td class="rank-name">Kylian TOUR</td><td class="pts">100 pts</td></tr>
+          <tr><td class="rank" style="color:var(--border)">—</td><td class="rank-name" style="color:var(--muted)">Kyliann HEQUETTE</td><td class="pts" style="color:var(--muted)">0 pts</td></tr>
+        </tbody>
+      </table>
+      <p class="prose" style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem;">★ Xavier FINI (Coordinateur général) — classement hors compétition.</p>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation du classement interne</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Le classement interne est approuvé.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         09 — PROCÉDURES D'INTERRUPTION
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2 class="section-title">Nouvelles procédures d'interruption de direct</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">Le Bureau de la Coordination générale veut donner aux Responsables de Retransmission un peu plus de pouvoir fonctionnel. Les cas d'interruption autonome sont désormais définis comme suit :</p>
+      <div class="proc-list">
+        <div class="proc-item auto">
+          <div class="proc-icon">⚡</div>
+          <div class="proc-text"><strong style="color:var(--white)">Interruption autonome autorisée</strong> — Panne majeure empêchant la poursuite de la diffusion dans des conditions acceptables.</div>
+        </div>
+        <div class="proc-item auto">
+          <div class="proc-icon">🛑</div>
+          <div class="proc-text"><strong style="color:var(--white)">Interruption autonome autorisée</strong> — Demande d'arrêt émanant du corps arbitral, d'un délégué ou d'un représentant du club.</div>
+        </div>
+        <div class="proc-item conditional">
+          <div class="proc-icon">✅</div>
+          <div class="proc-text"><strong style="color:var(--white)">Interruption soumise à validation</strong> — Dans toutes les autres raisons nécessitant une interruption de direct, le Responsable de Retransmission peut suspendre le direct mais doit attendre la validation d'interruption par la Coordinatrice adjointe ou par tout autre personne de la Coordination générale.</div>
+        </div>
+      </div>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation des nouvelles procédures d'interruption</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Les procédures d'interruption sont approuvées.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         10 — PLAN DE FORMATION
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <h2 class="section-title">Plan de formation interne</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">À la suite de la montée en Nationale 3 de nos SF, le Bureau souhaite mettre en place auprès de tous les membres intéressés 3 différents webinaires de formation. Les dates ne sont pas encore communiquées mais celles-ci devraient se dérouler durant les grandes vacances en visioconférence.</p>
+      <div class="stats-grid" style="grid-template-columns: repeat(3,1fr);">
+        <div class="stat-card">
+          <div class="stat-label">Webinaire 1</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-top:0.4rem;">Gestion de direct</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Webinaire 2</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-top:0.4rem;">Commentaires sportifs</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Webinaire 3</div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-top:0.4rem;">Score &amp; temps</div>
+        </div>
+      </div>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation des webinaires de formation</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">Les webinaires sont approuvés.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         11 — CARTOGRAPHIE
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">11</span>
+        <h2 class="section-title">Cartographie des productions 2026–2027</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">Le Bureau veut pour la saison 2026–2027 mettre en place 4 types de retransmissions :</p>
+      <div class="carto-grid">
+        <div class="carto-type">
+          <div class="carto-type-name">Simple Différé</div>
+          <div class="carto-type-crew">Cadreur large · Réal</div>
+        </div>
+        <div class="carto-type">
+          <div class="carto-type-name">Simple Live</div>
+          <div class="carto-type-crew">Cadreur large · OTS · Réal · Commentateurs</div>
+        </div>
+        <div class="carto-type">
+          <div class="carto-type-name">Production Semi-Complète (PSC)</div>
+          <div class="carto-type-crew">Cadreur large &amp; terrain · OTS · Réal · Commentateurs</div>
+        </div>
+        <div class="carto-type">
+          <div class="carto-type-name">Production Complète (PC)</div>
+          <div class="carto-type-crew">Cadreur large, serré &amp; terrain · OTS · Réal · Commentateurs</div>
+        </div>
+      </div>
+      <p class="prose" style="margin-top:1.2rem;">Proposition de cartographie pour la saison prochaine :</p>
+      <div class="carto-assign">
+        <div class="carto-row"><span class="carto-comp">Nationale 3</span><span class="carto-prod">PSC</span></div>
+        <div class="carto-row"><span class="carto-comp">Coupe de France régionale</span><span class="carto-prod">PC</span></div>
+        <div class="carto-row"><span class="carto-comp">Coupe Jacques Battu — Tours de qualification</span><span class="carto-prod">Simple live ou PSC (selon enjeux)</span></div>
+        <div class="carto-row"><span class="carto-comp">Coupe Jacques Battu — Demi-finales &amp; Finales</span><span class="carto-prod">PSC ou PC (selon effectif)</span></div>
+        <div class="carto-row"><span class="carto-comp">Championnats régionaux</span><span class="carto-prod">Simple différé, Simple live ou PSC</span></div>
+        <div class="carto-row"><span class="carto-comp">Championnats départementaux</span><span class="carto-prod">Simple différé ou Simple live</span></div>
+      </div>
+      <div class="callout info">
+        Avec ces différentes cartographies, le Bureau propose à l'Assemblée générale 3 différents génériques pour les matchs normaux, les matchs N3, et les matchs CJB ou Évènements.
+      </div>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation de la cartographie des productions</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">La cartographie est approuvée.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         12 — AFFICHAGE GRAPHIQUE N3
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">12</span>
+        <h2 class="section-title">Affichage graphique Nationale 3</h2>
+      </div>
+      <div class="section-line"></div>
+      <p class="prose">La Coordination générale présente à l'ensemble des membres présents l'affichage graphique pour les matchs de Nationale 3.</p>
+      <div class="vote-block">
+        <table class="vote-table">
+          <thead><tr>
+            <th style="text-align:left">Résolution</th>
+            <th>Pour</th><th>Contre</th><th>Abstentions</th>
+          </tr></thead>
+          <tbody><tr>
+            <td class="subject">Approbation de l'affichage graphique N3</td>
+            <td class="pour">9</td><td class="contre">0</td><td class="abstention">0</td>
+          </tr></tbody>
+        </table>
+        <div class="vote-result">L'affichage graphique est approuvé.</div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         13 — QUESTIONS & ÉCHANGES
+    ════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-num">13</span>
+        <h2 class="section-title">Questions, idées &amp; échanges ouverts</h2>
+      </div>
+      <div class="section-line"></div>
+      <div class="callout green">
+        Mme Marie DAL ZOTTO a fait part à M. Xavier FINI de présenter le nouveau site interne du collectif en vigueur pour la saison 2026–2027.
+      </div>
+      <p class="prose" style="margin-top:1rem;">L'ordre du jour ayant été épuisé, le président de séance clôture l'assemblée générale.</p>
+      <div class="callout info" style="margin-top:1rem;">
+        <strong style="color:var(--gold)">Séance levée à 20h12</strong>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ── SIGNATURES ───────────────────────────────── -->
+    <div class="signature-block">
+      <div class="sig-item">
+        <div class="sig-role">Le Coordinateur général</div>
+        <div class="sig-name">Xavier FINI</div>
+        <div class="sig-line"></div>
+      </div>
+      <div class="sig-item">
+        <div class="sig-role">La Coordinatrice adjointe</div>
+        <div class="sig-name">Marie DAL ZOTTO</div>
+        <div class="sig-line"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="doc-footer">
+    <strong>Meylan Handball TV</strong> · Procès-Verbal — Assemblée Générale du 19 juin 2026 · Document interne — Usage réservé aux membres
+  </footer>
+
+</body>
+</html>

@@ -378,6 +378,44 @@
     .data-table tr.row-president { background: rgba(245,184,0,0.06); }
     .data-table tr.row-vp { background: rgba(96,165,250,0.05); }
 
+    /* ── COMPOSITION FINALE ─────────────────────────── */
+    .compo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .compo-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .compo-block-header {
+      background: #16161f;
+      padding: 0.6rem 1rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .compo-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid rgba(30,30,42,0.5);
+      gap: 1rem;
+    }
+    .compo-row:last-child { border-bottom: none; }
+    .compo-name { font-family: 'Barlow Condensed', sans-serif; font-size: 0.9rem; font-weight: 600; color: var(--white); }
+    .compo-role { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; color: var(--muted); text-align: right; }
+    .compo-role.gold { color: var(--gold); }
+    .compo-role.blue { color: #60a5fa; }
+    .compo-role.green { color: #4ade80; }
+    .compo-role.red { color: var(--red); }
+
     /* ── STATS GRID ─────────────────────────────────── */
     .stats-grid {
       display: grid;

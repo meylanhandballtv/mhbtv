@@ -363,6 +363,12 @@
       font-size: 0.8rem;
       letter-spacing: 0.08em;
     }
+    .data-table td.result-vp { 
+      color: #60a5fa; 
+      font-weight: 700; 
+      font-size: 0.8rem; 
+      letter-spacing: 0.08em; 
+    }
     .data-table td.result-non {
       color: var(--muted);
       font-family: 'Barlow Condensed', sans-serif;
@@ -370,6 +376,7 @@
     }
     .data-table tr.row-elected { background: rgba(74,222,128,0.04); }
     .data-table tr.row-president { background: rgba(245,184,0,0.06); }
+    .data-table tr.row-vp { background: rgba(96,165,250,0.05); }
 
     /* ── STATS GRID ─────────────────────────────────── */
     .stats-grid {
@@ -778,7 +785,7 @@
           <tr class="row-elected">
             <td class="name">Enzo ACHOUR</td>
             <td class="votes">8</td>
-            <td class="result-elu">Élu</td>
+            <td class="result-vp">Élu Vice-président</td>
           </tr>
           <tr class="row-elected">
             <td class="name">Gaetan FERRE</td>
@@ -1198,9 +1205,50 @@
       <div class="callout green">
         Mme Marie DAL ZOTTO a fait part à M. Xavier FINI de présenter le nouveau site interne du collectif en vigueur pour la saison 2026–2027.
       </div>
-      <p class="prose" style="margin-top:1rem;">L'ordre du jour ayant été épuisé, le président de séance clôture l'assemblée générale.</p>
-      <div class="callout info" style="margin-top:1rem;">
-        <strong style="color:var(--gold)">Séance levée à 20h12</strong>
+    </div>
+
+    <!-- Compositions finales -->
+      <p class="prose" style="margin-top:1.5rem;">Composition des instances à l'issue de l'Assemblée générale :</p>
+      <div class="compo-grid">
+        <div class="compo-block">
+          <div class="compo-block-header">Instance Compétente des Retransmissions</div>
+          <div class="compo-row">
+            <span class="compo-name">Nicolas MARIN</span>
+            <span class="compo-role gold">Président de l'ICR</span>
+          </div>
+          <div class="compo-row">
+            <span class="compo-name">Enzo ACHOUR</span>
+            <span class="compo-role blue">Vice-président de l'ICR</span>
+          </div>
+          <div class="compo-row">
+            <span class="compo-name">Gaetan FERRE</span>
+            <span class="compo-role green">Membre de l'ICR</span>
+          </div>
+          <div class="compo-row">
+            <span class="compo-name">Tim TOUR</span>
+            <span class="compo-role green">Membre de l'ICR</span>
+          </div>
+          <div class="compo-row">
+        </div>
+        <div class="compo-block">
+          <div class="compo-block-header">Bureau de la Coordination générale</div>
+          <div class="compo-row">
+            <span class="compo-name">Xavier FINI</span>
+            <span class="compo-role gold">Coordinateur général</span>
+          </div>
+          <div class="compo-row">
+            <span class="compo-name">Marie DAL ZOTTO</span>
+            <span class="compo-role blue">Coordinatrice adjointe</span>
+          </div>
+          <div class="compo-row">
+            <span class="compo-name">Emmanuel ALVES DE MOURA</span>
+            <span class="compo-role green">Secrétaire général</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout green" style="margin-top:1rem;">
+        <strong style="color:#4ade80">Séance levée à 19h11</strong>
       </div>
     </div>
 

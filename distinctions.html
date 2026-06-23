@@ -310,6 +310,46 @@
     .decheance-text ul { margin: 0.5rem 0 0; padding-left: 1.1rem; }
     .decheance-text li { margin-bottom: 0.25rem; }
 
+    /* ===== RÉCAPITULATIF ===== */
+    .recap-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+    .recap-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 640px; }
+    .recap-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      color: var(--red);
+      text-align: left;
+      padding: 0.9rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(232,0,29,0.04);
+      white-space: nowrap;
+    }
+    .recap-table td {
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      vertical-align: top;
+    }
+    .recap-table tr:last-child td { border-bottom: none; }
+    .recap-table td:first-child { color: var(--white); font-weight: 600; white-space: nowrap; }
+    .niv-pill {
+      display: inline-block;
+      min-width: 1.7rem;
+      text-align: center;
+      padding: 0.1rem 0.45rem;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      color: var(--white);
+    }
+
     @media (max-width: 1100px) {
       .grades-row { grid-template-columns: repeat(3, 1fr); }
       .medals-grid { grid-template-columns: repeat(2, 1fr); }
@@ -347,15 +387,15 @@
     <section class="section">
       <div class="stats-bar">
         <div class="stat-card">
-          <div class="stat-number">2</div>
+          <div class="stat-number">4</div>
           <div class="stat-label">Ordres hiérarchiques</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">10</div>
+          <div class="stat-number">20</div>
           <div class="stat-label">Niveaux de grade</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">7</div>
+          <div class="stat-number">8</div>
           <div class="stat-label">Distinctions à niveau unique</div>
         </div>
         <div class="stat-card">
@@ -459,7 +499,7 @@
           </div>
           <div class="grade-niveau">Niveau III</div>
           <div class="grade-name">Commandeur</div>
-          <p class="grade-condition">Rôle d'interlocuteur reconnu de MHBTV.</p>
+          <p class="grade-condition">Rôle d'interlocuteur reconnu auprès d'au moins 2 institutions externes.</p>
           <span class="anciennete-pill">1 an d'ancienneté</span>
         </div>
 
@@ -469,7 +509,7 @@
           </div>
           <div class="grade-niveau">Niveau IV</div>
           <div class="grade-name">Grand Officier</div>
-          <p class="grade-condition">Extention significative de la schère d'influence de MHBTV.</p>
+          <p class="grade-condition">Extension significative de la sphère d'influence institutionnelle de MHBTV ; rôle de référent.</p>
           <span class="anciennete-pill">2 ans d'ancienneté</span>
         </div>
 
@@ -479,11 +519,12 @@
           </div>
           <div class="grade-niveau">Niveau V</div>
           <div class="grade-name">Grand-Croix</div>
-          <p class="grade-condition">Figure historique de la représentation institutionnelle de MHBTV.</p>
+          <p class="grade-condition">Figure historique de la représentation institutionnelle ; legs durable et reconnu.</p>
           <span class="anciennete-pill">2 ans d'ancienneté</span>
         </div>
 
       </div>
+      <p class="refus-note" style="margin-top:1.5rem;"><strong>Rang protocolaire —</strong> avec l'Ordre du Mérite de MHBTV, cet Ordre constitue la plus haute distinction décernée par MHBTV. En cérémonie officielle, les Grand-Croix de cet Ordre sont placés immédiatement après les Grand-Croix de l'Ordre du Mérite.</p>
     </section>
 
     <!-- ORDRE DES RESPONSABLES DE RETRANSMISSION -->
@@ -546,11 +587,72 @@
       </div>
     </section>
 
+    <!-- ORDRE DE LA RÉSILIENCE -->
+    <section class="section ordre-block">
+      <h2 class="section-title">Ordre de la <span>Résilience</span></h2>
+      <div class="section-line"></div>
+      <p class="ordre-intro">Cet ordre honore non pas la facilité, mais la constance dans l'adversité : le membre qui assure malgré une défaillance technique majeure en direct, qui compense l'absence imprévue d'un coéquipier, ou qui maintient l'exigence de MHBTV dans des conditions logistiques dégradées. Une vertu opérationnelle et humaine, constitutive de l'identité de MHBTV.</p>
+      <div class="grades-row">
+
+        <div class="grade-card" style="--rb-1:#2b1d12; --rb-2:#c97f4f; --rb-3:#c97f4f; --rb-edge:#120c07;">
+          <div class="ruban type-ordre lvl-1">
+            <img src="distinction/Ordre de la Résilience_ Niveau Chevalier.png" width="60%"/>
+          </div>
+          <div class="grade-niveau">Niveau I</div>
+          <div class="grade-name">Chevalier</div>
+          <p class="grade-condition">Avoir surmonté au moins 2 situations adverses documentées.</p>
+          <span class="anciennete-pill">4 mois d'ancienneté</span>
+        </div>
+
+        <div class="grade-card" style="--rb-1:#2b1d12; --rb-2:#c97f4f; --rb-3:#c97f4f; --rb-edge:#120c07;">
+          <div class="ruban type-ordre lvl-2">
+            <img src="distinction/Ordre de la Résilience_ Niveau Officier.png" width="60%"/>
+          </div>
+          <div class="grade-niveau">Niveau II</div>
+          <div class="grade-name">Officier</div>
+          <p class="grade-condition">Avoir géré au moins 5 situations adverses avec une issue positive reconnue par le Bureau.</p>
+          <span class="anciennete-pill">8 mois d'ancienneté</span>
+        </div>
+
+        <div class="grade-card" style="--rb-1:#2b1d12; --rb-2:#c97f4f; --rb-3:#c97f4f; --rb-edge:#120c07;">
+          <div class="ruban type-ordre lvl-3">
+            <img src="distinction/Ordre de la Résilience_ Niveau Commandeur.png" width="60%"/>
+          </div>
+          <div class="grade-niveau">Niveau III</div>
+          <div class="grade-name">Commandeur</div>
+          <p class="grade-condition">Avoir géré au moins 10 situations adverses avec une issue positive reconnue par le Bureau.</p>
+          <span class="anciennete-pill">1 an d'ancienneté</span>
+        </div>
+
+        <div class="grade-card" style="--rb-1:#2b1d12; --rb-2:#c97f4f; --rb-3:#c97f4f; --rb-edge:#120c07;">
+          <div class="ruban type-ordre lvl-4">
+            <img src="distinction/Ordre de la Résilience_ Niveau Grand Officier.png" width="60%"/>
+          </div>
+          <div class="grade-niveau">Niveau IV</div>
+          <div class="grade-name">Grand Officier</div>
+          <p class="grade-condition">Profil de référence en gestion de crise ; avoir formé ou guidé d'autres membres dans ces situations.</p>
+          <span class="anciennete-pill">1 an 6 mois d'ancienneté</span>
+        </div>
+
+        <div class="grade-card" style="--rb-1:#2b1d12; --rb-2:#c97f4f; --rb-3:#c97f4f; --rb-edge:#120c07;">
+          <div class="ruban type-ordre lvl-5">
+            <img src="distinction/Ordre de la Résilience_ Niveau Grand Croix.png" width="60%"/>
+          </div>
+          <div class="grade-niveau">Niveau V</div>
+          <div class="grade-name">Grand-Croix</div>
+          <p class="grade-condition">Résilience historique et exemplaire ; figure incontestée de l'endurance opérationnelle de MHBTV.</p>
+          <span class="anciennete-pill">2 ans d'ancienneté</span>
+        </div>
+
+      </div>
+      <p class="refus-note" style="margin-top:1.5rem;"><strong>Situations exclues —</strong> ne sont pas prises en compte les situations résultant d'une négligence du membre lui-même, les incidents mineurs sans perturbation réelle, ni celles dont le caractère exceptionnel n'est pas corroboré par un autre membre ou par une trace documentée. Pour les grades IV et V, un rapport circonstancié co-signé par un témoin des faits est exigé.</p>
+    </section>
+
     <!-- DISTINCTIONS À NIVEAU UNIQUE -->
     <section class="section">
       <h2 class="section-title">Distinctions à <span>niveau unique</span></h2>
       <div class="section-line"></div>
-      <p class="ordre-intro">Sept distinctions, chacune attribuée en une seule fois, récompensant un mérite particulier : fidélité opérationnelle, longévité, talent à l'antenne, rayonnement, bénévolat de l'ombre, comportement exemplaire ou mission exceptionnelle.</p>
+      <p class="ordre-intro">Huit distinctions, chacune attribuée en une seule fois (certaines renouvelables), récompensant un mérite particulier : fidélité opérationnelle, longévité, talent à l'antenne, rayonnement, bénévolat de l'ombre, comportement exemplaire, mission exceptionnelle ou transmission du savoir.</p>
 
       <div class="medals-grid">
 
@@ -676,6 +778,25 @@
           <p class="medal-note">Cumulable : un même membre peut la recevoir plusieurs fois, une attribution par mission distincte.</p>
         </div>
 
+        <!-- Croix du Formateur -->
+        <div class="medal-card" style="--rb-1:#0d3d3a; --rb-2:#5fd9c4; --rb-3:#5fd9c4; --rb-edge:#031715;">
+          <div class="medal-card-head">
+            <div>
+              <span class="dist-badge">Croix</span>
+              <h3 class="medal-name">Croix du Formateur</h3>
+            </div>
+          </div>
+          <p class="medal-desc">Honore les membres qui consacrent une part significative de leur engagement à la transmission des savoirs, savoir-faire et valeurs du collectif aux membres moins expérimentés.</p>
+          <ul class="medal-conditions">
+            <li>Membre actif depuis au moins 1 an et 6 mois</li>
+            <li>Avoir encadré, formé ou accompagné au moins 2 membres du collectif, de façon documentée</li>
+            <li>Avoir participé à l'élaboration ou à l'animation d'au moins une session de formation interne</li>
+            <li>Appréciation positive des bénéficiaires, attestée par au moins un membre du Bureau</li>
+            <li>Aucune sanction disciplinaire dans les 18 mois précédents</li>
+          </ul>
+          <p class="medal-note">Renouvelable tous les 2 ans. Sa détention est un critère favorable pour les grades de Commandeur et plus de l'Ordre du Mérite et de l'Ordre des Responsables de Retransmission.</p>
+        </div>
+
       </div>
     </section>
 
@@ -725,6 +846,7 @@
         </div>
       </div>
     </section>
+
   </main>
 
   <footer>

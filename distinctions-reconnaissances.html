@@ -514,7 +514,7 @@
 
     /* ── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .hero { padding: 2rem 1.5rem; height: auto; padding-top: 4rem; }
+      .hero { padding: 2rem 1.5rem; }
       .page-wrap { padding: 0 1.25rem; }
       .stats-bar { flex-wrap: wrap; }
       .stat-item { flex: 1 1 50%; border-right: none; border-bottom: 1px solid var(--border); }
@@ -533,9 +533,9 @@
   <!-- ── HERO ── -->
   <section class="hero">
     <div class="hero-accent"></div>
-    <div class="hero-content">
+    <div class="hero-content" style="position:relative;z-index:1;">
       <div class="hero-eyebrow">Meylan Handball TV · Saison 2025-2026</div>
-      <h1>Distinctions &amp; <em>Reconnaissances</em></h1>
+      <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6rem);line-height:0.9;color:var(--white);">Distinctions &amp; <em style="color:var(--red);font-style:normal;">Reconnaissances</em></h1>
       <p class="hero-sub">Le système honorifique de MHBTV récompense l'engagement, l'excellence et le dévouement de ses membres bénévoles.</p>
     </div>
     <div class="hero-ribbons">

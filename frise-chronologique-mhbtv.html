@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frise Chronologique | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══ HERO — watermark "DEPUIS 2023" ═══ */
+    .hero-bg-text {
+      position: absolute;
+      right: -1rem; bottom: -2.2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(16vw, 220px);
+      color: rgba(232,0,29,0.05);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    /* ═══ KPI ROW (sous le hero) ═══ */
+    .frise-kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 2.5rem 4rem 0;
+    }
+    .frise-kpis .card {
+      padding: 1.4rem 1.25rem;
+      border-top: 3px solid var(--red);
+    }
+    .frise-kpis .card:nth-child(2),
+    .frise-kpis .card:nth-child(4) { border-top-color: var(--gold); }
+    .frise-kpi-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.1rem;
+      line-height: 1;
+      color: var(--white);
+      display: block;
+    }
+    .frise-kpi-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 0.35rem;
+    }
+
+    /* ═══ TAG — variante or, pour les moments clés ═══ */
+    .tag-gold {
+      background: rgba(240,180,41,0.15);
+      color: var(--gold);
+      border: 1px solid rgba(240,180,41,0.3);
+    }
+
+    /* ═══ FRISE / TIMELINE ═══ */
+    .frise-season { margin-bottom: 3rem; }
+    .frise-season:last-child { margin-bottom: 0; }
+
+    .frise-season-head {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+      padding: 0.85rem 1.1rem;
+      background: rgba(232,0,29,0.06);
+      border-left: 3px solid var(--red);
+      border-radius: 4px;
+    }
+    .frise-season--current .frise-season-head {
+      background: rgba(240,180,41,0.08);
+      border-left-color: var(--gold);
+    }
+    .frise-season-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      white-space: nowrap;
+    }
+    .frise-season-theme {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .frise-season--current .frise-season-theme { color: var(--gold); }
+
+    ol.frise-timeline {
+      list-style: none;
+      margin-left: 9px;
+      padding-left: 32px;
+      border-left: 2px solid var(--border);
+    }
+
+    .frise-item { position: relative; margin-bottom: 1.4rem; }
+    .frise-item:last-child { margin-bottom: 0; }
+
+    .frise-dot {
+      position: absolute;
+      left: -41px; top: 1.4rem;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--black);
+      border: 2px solid var(--red);
+    }
+    .frise-item--key .frise-dot {
+      background: var(--gold);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(240,180,41,0.18);
+    }
+
+    .frise-card { padding: 1.25rem 1.5rem; }
+    .frise-item--key .frise-card { border-color: rgba(240,180,41,0.35); }
+
+    .frise-date {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .frise-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin: 0.4rem 0 0.35rem;
+    }
+    .frise-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+
+    /* "saison en cours" pill */
+    .frise-now { text-align: center; margin: 3rem 0 0.5rem; }
+    .frise-pulse {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--red);
+      display: inline-block;
+      animation: frise-pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes frise-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.65); }
+    }
+
+    /* ═══ CTA CARDS ═══ */
+    .frise-cta-card {
+      display: block;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .frise-cta-icon { font-size: 1.4rem; display: block; margin-bottom: 0.6rem; }
+    .frise-cta-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .frise-cta-card p { font-size: 0.85rem; color: var(--muted); }
+
+    /* ═══ REVEAL ON SCROLL (dégrade en "tout visible" sans JS) ═══ */
+    html.js .frise-item, html.js .frise-season-head {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    html.js .frise-item.in-view, html.js .frise-season-head.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html.js .frise-item, html.js .frise-season-head {
+        opacity: 1 !important; transform: none !important; transition: none !important;
+      }
+      .frise-pulse { animation: none; }
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 900px) {
+      .frise-kpis { grid-template-columns: repeat(2, 1fr); margin: 1.75rem 1.5rem 0; }
+    }
+    @media (max-width: 600px) {
+      .frise-kpis { grid-template-columns: 1fr 1fr; }
+      ol.frise-timeline { padding-left: 24px; }
+      .frise-dot { left: -33px; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-bg-text">DEPUIS 2023</div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">🏛️ Histoire du collectif</p>
+        <h1>La frise chronologique<br><em>de MHBTV</em></h1>
+        <p class="hero-sub">Depuis 2023, Meylan Handball TV retransmet le handball isérois grâce à une équipe de bénévoles. Retour sur les temps forts qui ont construit le collectif, saison après saison.</p>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="frise-kpis">
+      <div class="card">
+        <span class="frise-kpi-num">40+</span>
+        <span class="frise-kpi-label">Matchs retransmis</span>
+      </div>
+      <div class="card">
+        <span class="frise-kpi-num">12</span>
+        <span class="frise-kpi-label">Membres actifs</span>
+      </div>
+      <div class="card">
+        <span class="frise-kpi-num">3</span>
+        <span class="frise-kpi-label">Saisons d'activité</span>
+      </div>
+      <div class="card">
+        <span class="frise-kpi-num">∞</span>
+        <span class="frise-kpi-label">Passion du handball</span>
+      </div>
+    </div>
+
+    <!-- FRISE -->
+    <div class="section">
+      <h2 class="section-title">Saison après <span>saison</span></h2>
+      <div class="section-line"></div>
+
+      <!-- 2023-2024 -->
+      <div class="frise-season" data-season="2023-2024">
+        <div class="frise-season-head">
+          <span class="frise-season-year">2023–2024</span>
+          <span class="frise-season-theme">Naissance du collectif</span>
+        </div>
+        <ol class="frise-timeline">
+          <li class="frise-item frise-item--key">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">2023</span>
+              <span class="tag tag-gold">🎬 Fondation</span>
+              <h3>Création de Meylan Handball TV</h3>
+              <p>Une poignée de bénévoles passionnés décide de filmer et diffuser les matchs du club. Premiers réglages techniques, première équipe, première communauté de spectateurs.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- 2024-2025 -->
+      <div class="frise-season" data-season="2024-2025">
+        <div class="frise-season-head">
+          <span class="frise-season-year">2024–2025</span>
+          <span class="frise-season-theme">Structuration</span>
+        </div>
+        <ol class="frise-timeline">
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">Octobre 2024</span>
+              <span class="tag">📊 Suivi</span>
+              <h3>Premiers rapports d'audience mensuels</h3>
+              <p>Le suivi mensuel des audiences YouTube est mis en place pour mesurer la portée des diffusions et orienter les choix de programmation.</p>
+            </div>
+          </li>
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">Saison 2024–2025</span>
+              <span class="tag">📈 Croissance</span>
+              <h3>Montée en régularité des diffusions</h3>
+              <p>L'équipe se stabilise, les retransmissions s'enchaînent à un rythme plus soutenu et le collectif gagne en expérience sur le terrain.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- 2025-2026 (en cours) -->
+      <div class="frise-season frise-season--current" data-season="2025-2026">
+        <div class="frise-season-head">
+          <span class="frise-season-year">2025–2026</span>
+          <span class="frise-season-theme">Professionnalisation — saison en cours</span>
+        </div>
+        <ol class="frise-timeline">
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">26 juin 2025</span>
+              <span class="tag">🗳️ Assemblée générale</span>
+              <h3>AG Ordinaire</h3>
+              <p>Bilan de saison et orientations devant les membres réunis en assemblée générale.</p>
+            </div>
+          </li>
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">13 juillet 2025</span>
+              <span class="tag">🗳️ Assemblée générale</span>
+              <h3>AG Extraordinaire</h3>
+              <p>Réunion exceptionnelle des membres pour traiter des sujets nécessitant une décision rapide du collectif.</p>
+            </div>
+          </li>
+          <li class="frise-item frise-item--key">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">22 août 2025</span>
+              <span class="tag tag-gold">🏆 Gratification</span>
+              <h3>AG Élective — lancement du système de gratification</h3>
+              <p>Un système de points et de grades est mis en place pour valoriser la participation des bénévoles, encourager la polyvalence et garder une trace des réalisations de chaque membre.</p>
+            </div>
+          </li>
+          <li class="frise-item frise-item--key">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">25 octobre 2025</span>
+              <span class="tag tag-gold">🚀 Ouverture de saison</span>
+              <h3>AG Extraordinaire et élective anticipée</h3>
+              <p>Ouverture officielle de la saison 2025–2026, avec ajustements au sein des instances dirigeantes du collectif.</p>
+            </div>
+          </li>
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">6 janvier 2026</span>
+              <span class="tag">🎥 Diffusion</span>
+              <h3>Événement MHBTV du 6 janvier</h3>
+              <p>Une nouvelle diffusion menée de bout en bout par l'équipe de bénévoles.</p>
+            </div>
+          </li>
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">20 décembre 2025</span>
+              <span class="tag">🗳️ Assemblée générale</span>
+              <h3>AG Ordinaire et élective partielle</h3>
+              <p>Assemblée générale trimestrielle, avec une élection partielle au sein des instances du collectif.</p>
+            </div>
+          </li>
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">3 avril 2026</span>
+              <span class="tag">🗳️ Assemblée générale</span>
+              <h3>AG Élective — renouvellement du Bureau</h3>
+              <p>Élection annuelle du Bureau de la Coordination générale et passation de responsabilités au sein de l'équipe dirigeante.</p>
+            </div>
+          </li>
+          <li class="frise-item frise-item--key">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">23 avril 2026</span>
+              <span class="tag tag-gold">⚖️ Règlement</span>
+              <h3>Adoption du Règlement applicable aux retransmissions des compétitions</h3>
+              <p>Le collectif se dote d'un cadre juridique complet encadrant les postes, les procédures et la discipline liés à l'activité de retransmission.</p>
+            </div>
+          </li>
+          <li class="frise-item frise-item--key">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">30 mai 2026</span>
+              <span class="tag tag-gold">▶ Match phare</span>
+              <h3>Demi-finale MEYLAN / EVIAN</h3>
+              <p>Une retransmission de plus de deux heures, suivie en direct puis disponible en replay — l'un des temps forts techniques et sportifs de la saison.</p>
+            </div>
+          </li>
+          <li class="frise-item">
+            <span class="frise-dot"></span>
+            <div class="card frise-card">
+              <span class="frise-date">6 juin 2026</span>
+              <span class="tag">🏆 Compétition</span>
+              <h3>Finales de la Coupe Jacques Battu Excellence</h3>
+              <p>Le collectif couvre l'un des rendez-vous majeurs de la saison handball iséroise.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="frise-now">
+        <span class="tag tag-gold" style="padding:0.5rem 1.1rem;display:inline-flex;align-items:center;gap:0.5rem;">
+          <span class="frise-pulse"></span> Saison 2025–2026 en cours
+        </span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="section" style="padding-top:0;">
+      <div class="grid-3">
+        <a class="card frise-cta-card" href="equipe.html">
+          <span class="frise-cta-icon">👥</span>
+          <h4>L'équipe aujourd'hui</h4>
+          <p>Découvrir les bénévoles qui font vivre le collectif cette saison.</p>
+        </a>
+        <a class="card frise-cta-card" href="diffusions.html">
+          <span class="frise-cta-icon">▶</span>
+          <h4>Toutes les diffusions</h4>
+          <p>Revoir les matchs et événements retransmis par MHBTV.</p>
+        </a>
+        <a class="card frise-cta-card" href="statuts.html">
+          <span class="frise-cta-icon">📜</span>
+          <h4>Statuts &amp; règlements</h4>
+          <p>Consulter les textes qui encadrent aujourd'hui le collectif.</p>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+
+  <script>
+    (function () {
+      var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var targets = document.querySelectorAll('.frise-item, .frise-season-head');
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        targets.forEach(function (el) { el.classList.add('in-view'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      targets.forEach(function (el) { observer.observe(el); });
+    })();
+  </script>
+</body>
+</html>

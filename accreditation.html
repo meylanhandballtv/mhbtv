@@ -1179,30 +1179,16 @@
               </div>
               <div class="poste-card-body">
                 <div class="poste-info-row">
-                  <span class="pi-label">Périmètre</span>
-                  <span class="pi-val">Régie, flux vidéo/audio, coordination équipe, gestion des imprévus techniques</span>
-                </div>
-                <div class="poste-info-row">
                   <span class="pi-label">Prérequis</span>
                   <span class="pi-val">Avoir participé à au moins une retransmission en observation, maîtriser le matériel MHBTV</span>
-                </div>
-                <div class="poste-info-row">
-                  <span class="pi-label">Grades</span>
-                  <span class="pi-val">Stagiaire → Adjoint chargé de retransmission → Responsable → Commandeur <span style="color:var(--muted);">(Art. 14 ter)</span></span>
                 </div>
                 <div class="poste-info-row">
                   <span class="pi-label">Validité</span>
                   <span class="pi-val">Saison en cours — renouvelable à chaque AG</span>
                 </div>
-                <div class="poste-info-row">
-                  <span class="pi-label">Art. 12</span>
-                  <span class="pi-val">Obligatoire · Non-respect → saisine ICR</span>
-                </div>
               </div>
               <div class="poste-card-footer">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScF034R6E8LM4GSUzNs_N9pmBcnOS699qhX60Gqc1QmZLZLYA/viewform"
-                  target="_blank" class="btn btn-red" style="font-size:0.75rem;padding:0.55rem 1.1rem;">Passer le
-                  questionnaire →</a>
+                <a href="#" class="btn btn-red" style="font-size:0.75rem;padding:0.55rem 1.1rem;">Passer le questionnaire →</a>
                 <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;color:var(--muted);align-self:center;letter-spacing:0.05em;">via Google Forms</span>
               </div>
             </div>
@@ -1219,10 +1205,6 @@
               </div>
               <div class="poste-card-body">
                 <div class="poste-info-row">
-                  <span class="pi-label">Périmètre</span>
-                  <span class="pi-val">Commentaire match complet, avant-match, interviews bord terrain, duo commentateur</span>
-                </div>
-                <div class="poste-info-row">
                   <span class="pi-label">Prérequis</span>
                   <span class="pi-val">Bonne connaissance du handball, aisance à l'oral, respecter le principe de neutralité (art. 15)</span>
                 </div>
@@ -1230,15 +1212,9 @@
                   <span class="pi-label">Validité</span>
                   <span class="pi-val">Saison en cours — renouvelable à chaque AG</span>
                 </div>
-                <div class="poste-info-row">
-                  <span class="pi-label">Art. 12</span>
-                  <span class="pi-val">Obligatoire · Non-respect → saisine ICR</span>
-                </div>
               </div>
               <div class="poste-card-footer">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLScR_t2WWO_lhg6oX4ls4FpdoUZnzQgNkkbcVTauhexTP3mxuw/viewform"
-                  target="_blank" class="btn btn-red" style="font-size:0.75rem;padding:0.55rem 1.1rem;">Passer le
-                  questionnaire →</a>
+                <a href="#" class="btn btn-red" style="font-size:0.75rem;padding:0.55rem 1.1rem;">Passer le questionnaire →</a>
                 <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;color:var(--muted);align-self:center;letter-spacing:0.05em;">via Google Forms</span>
               </div>
             </div>
@@ -1249,11 +1225,11 @@
           <div class="grade-info-box">
             <span style="font-size:1.2rem;flex-shrink:0;">🏅</span>
             <div>
-              <span class="grade-article-tag">📜 Article 14 ter · Règlement intérieur — Commission Audiovisuelle</span>
+              <span class="grade-article-tag">📜 Article 14 ter · Règlement général</span>
               <div><strong>Grades de Responsable de retransmission :</strong> une fois accrédité, le membre progresse
                 à travers quatre grades qui distinguent son niveau de compétence, d'autonomie et de responsabilité.
                 L'attribution, la confirmation et le retrait d'un grade relèvent de la Coordination générale, le cas
-                échéant sur proposition du Commandeur. <span style="color:var(--text);">Applicable à compter de la
+                échéant sur proposition du Commandeur de Retransmission. <span style="color:var(--text);">Applicable à compter de la
                 saison 2026-2027.</span></div>
               <div class="grade-ladder" id="gradeLadder"><!-- injecté par JS --></div>
             </div>
@@ -1490,11 +1466,11 @@
     /* ════════════════════════════════════════════════════════
        GRADES — Responsable de retransmission (Article 14 ter
        du Règlement intérieur — Commission Audiovisuelle)
-       Ordre croissant : stagiaire < adjoint < responsable < commandeur
+       Ordre croissant : stagiaire < chargé < responsable < commandeur
     ════════════════════════════════════════════════════════ */
     const GRADES_RESP = {
       stagiaire: {
-        label: 'Stagiaire', numeral: 'Grade I', cls: 'grade-bronze',
+        label: 'Responsable de Retransmission Stagiaire', numeral: 'Grade I', cls: 'grade-bronze',
         desc: 'Opère sous supervision directe et continue, aucune autorité de décision autonome',
         conditions: [
           'Réussite du questionnaire de certification (QCM) Responsable de Retransmission',
@@ -1510,7 +1486,7 @@
         ],
       },
       adjoint: {
-        label: 'Adjoint chargé de retransmission', numeral: 'Grade II', cls: 'grade-argent',
+        label: 'Chargé de retransmission', numeral: 'Grade II', cls: 'grade-argent',
         desc: 'Autonome sur les productions de niveau 1 et 2, peut encadrer des Stagiaires',
         conditions: [
           'Certification QCM validée',
@@ -1529,7 +1505,7 @@
         ],
       },
       responsable: {
-        label: 'Responsable', numeral: 'Grade III', cls: 'grade-or',
+        label: 'Responsable de Retransmission', numeral: 'Grade III', cls: 'grade-or',
         desc: 'Autorité sur tous les niveaux de production, y compris les multiplex',
         conditions: [
           'Ancienneté minimale d\u2019une saison complète au grade II',
@@ -1549,7 +1525,7 @@
         ],
       },
       commandeur: {
-        label: 'Commandeur', numeral: 'Grade IV', cls: 'grade-coord',
+        label: 'Commandeur de Retransmission', numeral: 'Grade IV', cls: 'grade-coord',
         desc: 'Détermine la doctrine technique de MHBTV, limité à trois titulaires simultanément',
         conditions: [
           'Nomination par le Coordinateur général, sur proposition ou après au moins deux saisons complètes au grade III',
@@ -1567,7 +1543,7 @@
         ],
       },
     };
-    const GRADE_ORDER = ['stagiaire', 'adjoint', 'responsable', 'commandeur'];
+    const GRADE_ORDER = ['stagiaire', 'chargé', 'responsable', 'commandeur'];
 
     /* ════════════════════════════════════════════════════════
        SOURCE UNIQUE — un objet par membre
@@ -1590,7 +1566,7 @@
         prenom: "Marie", nom: "DAL ZOTTO",
         initiales: "MD", couleur: "#8e44ad",
         role: "Coordinatrice adjointe", isBureau: false, 
-        resp: "accredite", resp_grade: "responsable", comm: "accredite",
+        resp: "accredite", resp_grade: "stagiaire", comm: "accredite",
         superviseur: "formation", cam_large: "formation", cam_serre: "non",
         cam_terrain: "oui", realisateur: "oui", ots: "oui"
       },
@@ -1598,7 +1574,7 @@
         prenom: "Emmanuel", nom: "ALVES DE MOURA",
         initiales: "EM", couleur: "#2980b9",
         role: "Secrétaire général", isBureau: false, 
-        resp: "accredite", resp_grade: "adjoint", comm: "accredite",
+        resp: "accredite", resp_grade: "stagiaire", comm: "accredite",
         superviseur: "non", cam_large: "oui", cam_serre: "non",
         cam_terrain: "oui", realisateur: "non", ots: "oui"
       },
@@ -1622,7 +1598,7 @@
         prenom: "Enzo", nom: "ACHOUR",
         initiales: "EA", couleur: "#16a085",
         role: "Coordinateur délégué ICR", isBureau: false,
-        resp: "accredite", resp_grade: "adjoint", comm: "accredite",
+        resp: "accredite", resp_grade: "stagiaire", comm: "accredite",
         superviseur: "oui", cam_large: "oui", cam_serre: "oui",
         cam_terrain: "oui", realisateur: "oui", ots: "oui"
       },
@@ -1662,9 +1638,9 @@
         prenom: "Younes", nom: "CHIKER",
         initiales: "YC", couleur: "#1abc9c",
         role: "Membre MHBTV", isBureau: false, 
-        resp: "suspendu", comm: "suspendu",
-        superviseur: "non", cam_large: "non", cam_serre: "suspendu",
-        cam_terrain: "non", realisateur: "non", ots: "suspendu"
+        resp: "non-accredite", comm: "non-accredite",
+        superviseur: "non", cam_large: "non", cam_serre: "oui",
+        cam_terrain: "non", realisateur: "non", ots: "oui"
       },
       {
         prenom: "Ennio", nom: "ARIZZI",

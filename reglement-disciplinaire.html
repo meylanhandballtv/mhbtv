@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement Disciplinaire | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .doc-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-body {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .doc-body-wide {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .doc-titre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-titre:first-of-type { margin-top: 0; }
+
+    .doc-article {
+      margin-bottom: 2rem;
+    }
+    .doc-article h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .doc-article h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .doc-article h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-top: 1.75rem;
+      margin-bottom: 0.6rem;
+    }
+    .doc-article p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-article ul {
+      margin: 0 0 0.9rem 1.4rem;
+      padding: 0;
+    }
+    .doc-article li {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .doc-article strong { color: var(--white); }
+
+    /* Petits tableaux (rôles, décisions...) */
+    .doc-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .doc-table th {
+      background: rgba(232,0,29,0.08);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table td {
+      padding: 0.75rem 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .doc-table tr:last-child td { border-bottom: none; }
+    .doc-table td strong, .doc-table td.doc-td-label { color: var(--white); font-weight: 600; }
+
+    /* Barème disciplinaire — table dense */
+    .doc-annexe-legend {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0 2.5rem 0;
+    }
+    .doc-annexe-legend-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+    }
+    .doc-annexe-legend-item h5 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.4rem;
+    }
+    .doc-annexe-legend-item p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+
+    .doc-cat-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      margin-top: 2.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .doc-cat-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .bareme-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .bareme-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: 0.78rem;
+    }
+    .bareme-table th {
+      background: rgba(232,0,29,0.08);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-align: left;
+      padding: 0.65rem 0.9rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .bareme-table td {
+      padding: 0.65rem 0.9rem;
+      color: var(--muted);
+      line-height: 1.5;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .bareme-table td:first-child {
+      color: var(--white);
+      font-weight: 500;
+      min-width: 220px;
+    }
+    .bareme-table tr:last-child td { border-bottom: none; }
+    .bareme-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .doc-example {
+      background: rgba(240,180,41,0.07);
+      border: 1px solid rgba(240,180,41,0.2);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .doc-example p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0; }
+    .doc-example p strong { color: var(--gold); }
+
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto 2.5rem auto;
+    }
+
+    .doc-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .doc-back:hover { color: var(--red); }
+
+    .doc-closing {
+      max-width: 1100px;
+      margin: 3rem auto 0 auto;
+      padding: 1.75rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+    }
+    .doc-closing p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .doc-notes { margin-top: 1rem; }
+    .doc-notes li { margin-bottom: 0.9rem; }
+    .doc-notes li strong { color: var(--white); }
+
+    @media (max-width: 700px) {
+      .doc-annexe-legend { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Document officiel</div>
+        <h1>Règlement <em>Disciplinaire</em></h1>
+        <p class="hero-sub">Procédure disciplinaire, compétence de l'ICR et barème des sanctions applicables aux membres de Meylan Handball TV.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="statuts.html" class="doc-back">← Retour aux statuts & règlements</a>
+        <a href="reglement-disciplinaire.pdf" class="btn btn-outline" style="padding:0.5rem 1.25rem;font-size:0.75rem;">Télécharger le PDF</a>
+      </div>
+
+      <div class="doc-meta">
+        <span>Version du <strong>23 avril 2026</strong></span>
+        <span>16 articles</span>
+        <span>Annexe : barème disciplinaire</span>
+      </div>
+
+      <div class="doc-body">
+
+        <div class="doc-titre">Titre I — Dispositions de la procédure disciplinaire</div>
+
+        <div class="doc-article">
+          <h3>Article 1 — Principes généraux de la procédure</h3>
+          <p>Toute procédure engagée devant l'ICR, qu'elle soit réglementaire, électorale ou disciplinaire, respecte impérativement :</p>
+          <ul>
+            <li>Le principe du contradictoire ;</li>
+            <li>Le droit à l'information ;</li>
+            <li>Le droit à la défense ;</li>
+            <li>L'impartialité des membres ;</li>
+            <li>La motivation écrite des décisions.</li>
+          </ul>
+          <p>Aucune décision défavorable ne peut être prise sans que la personne concernée ait été mise en mesure de présenter ses observations.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 2 — Champ d'application disciplinaire</h3>
+          <p>Relèvent de la compétence disciplinaire de l'ICR les manquements :</p>
+          <ul>
+            <li>Aux statuts et règlements du collectif ;</li>
+            <li>Aux décisions des instances ;</li>
+            <li>Aux obligations de loyauté, de respect et d'éthique ;</li>
+            <li>A l'intégrité des processus électoraux ;</li>
+            <li>A l'image et aux intérêts du collectif MHBTV.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 3 — Personnes concernées</h3>
+          <p>Peuvent faire l'objet d'une procédure devant l'ICR :</p>
+          <ul>
+            <li>Tout membre actif ou occasionnel du collectif ;</li>
+            <li>Tout membre d'une instance ;</li>
+            <li>Tout représentant ou responsable agissant au nom de MHBTV.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 4 — Comportements proscrits</h3>
+          <p>Les comportements énumérés ci-après sont proscrits au sein du collectif Meylan Handball TV et sont susceptibles de faire l'objet d'un signalement auprès du Bureau de la Coordination générale, conformément à l'article 22 du présent règlement. Le barème des sanctions applicables à chacun de ces manquements est défini de manière exhaustive à l'annexe disciplinaire jointe au présent règlement.</p>
+
+          <h4>Article 4.1 — Présence, ponctualité et engagement</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Absence non justifiée à une retransmission (tout poste) ou à une réunion interne obligatoire ;</li>
+            <li>Absence justifiée sans prévenir dans un délai raisonnable (minimum 24 heures) et sans proposer de remplacement ;</li>
+            <li>Abandon de poste en cours de retransmission ou d'une mission bénévole sans motif valable ;</li>
+            <li>Départ anticipé non autorisé avant la fin du bilan post-retransmission ;</li>
+            <li>Inactivité injustifiée de plus de 3 mois au sein des activités du collectif ;</li>
+            <li>Retard injustifié entraînant un démarrage tardif de retransmission (supérieur à 5 minutes) ou d'une session interne ;</li>
+            <li>Retard injustifié répété (3 occurrences ou plus sur la saison, toute activité confondue) ;</li>
+            <li>Refus répété de participer aux sessions de formation interne ;</li>
+            <li>Non-participation injustifiée à une journée de travail collectif ou de préparation technique.</li>
+          </ul>
+
+          <h4>Article 4.2 — Accréditation, rôles et identité opérationnelle</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Occupation d'un poste (responsable de retransmission, commentateur) sans accréditation valide ;</li>
+            <li>Falsification d'une accréditation ou d'un questionnaire d'aptitude (fausse réponse, usurpation) ;</li>
+            <li>Usurpation de rôle ou d'identité lors d'une retransmission (se déclarer responsable sans désignation officielle) ;</li>
+            <li>Non-port du gilet identifié MHBTV obligatoire pendant la durée complète de l'événement ;</li>
+            <li>Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement.</li>
+          </ul>
+
+          <h4>Article 4.3 — Production, qualité technique et éditorial</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé, etc.) ;</li>
+            <li>Coupure intempestive du direct causée par une négligence technique évitable ;</li>
+            <li>Non-vérification du matériel avant la retransmission entraînant un dysfonctionnement ;</li>
+            <li>Non-déclaration d'un incident technique, comportemental ou matériel constaté lors d'un événement ;</li>
+            <li>Non-respect du conducteur, du plan de retransmission ou changement de poste sans accord ;</li>
+            <li>Utilisation non autorisée d'effets, filtres, overlays ou incrustations non validés par la Coordination générale ;</li>
+            <li>Modification ou suppression non autorisée du générique, de l'habillage graphique ou du jingle officiel ;</li>
+            <li>Propos inappropriés en direct (insultes, humour déplacé, hors-sujet, irrespectueux) ;</li>
+            <li>Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.) ;</li>
+            <li>Prise de position polémique, partisane ou politique en direct sans lien avec la retransmission ;</li>
+            <li>Dénigrement public d'un membre du collectif, du club ou d'un adversaire en direct ;</li>
+            <li>Révélation d'informations confidentielles en direct (données internes, privées ou réservées) ;</li>
+            <li>Intervention non autorisée d'une personne extérieure pendant une retransmission en direct.</li>
+          </ul>
+
+          <h4>Article 4.4 — Matériel, équipements et ressources du collectif</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Utilisation du matériel à des fins personnelles sans autorisation ou prêt non autorisé à un tiers ;</li>
+            <li>Non-respect des procédures d'utilisation ou de rangement, ou non-retour du matériel dans les délais impartis ;</li>
+            <li>Perte de matériel lors d'un déplacement sans signalement immédiat ;</li>
+            <li>Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie, etc.) ;</li>
+            <li>Dégradation volontaire de matériel ou d'équipements du collectif ;</li>
+            <li>Accès non autorisé ou partage d'identifiants et mots de passe des comptes et outils du collectif ;</li>
+            <li>Suppression non autorisée de fichiers, archives ou projets du collectif ;</li>
+            <li>Partage non autorisé de rushes, archives ou projets internes du collectif à l'extérieur.</li>
+          </ul>
+
+          <h4>Article 4.5 — Image du collectif, représentation externe et partenaires</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Utilisation du nom, du logo ou de l'identité visuelle MHBTV à des fins personnelles (CV, portfolio, réseaux personnels, etc.) sans autorisation préalable ;</li>
+            <li>Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif ;</li>
+            <li>Création d'un compte ou d'une page imitant le collectif ou l'un de ses membres ;</li>
+            <li>Publication, modification ou suppression non autorisée de contenus au nom ou sous l'identité du collectif ;</li>
+            <li>Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux sociaux, espace public) ;</li>
+            <li>Diffusion de fausses informations concernant le collectif ou ses membres ;</li>
+            <li>Cyberharcèlement envers un membre du collectif (messages répétés, intimidation en ligne) ;</li>
+            <li>Prise de parole publique au nom du collectif sans mandat, ou partage de contenus attentatoires à son image ;</li>
+            <li>Commentaires blessants ou moqueries publiques envers un membre du collectif.</li>
+          </ul>
+
+          <h4>Article 4.6 — Droits de diffusion, données personnelles et confidentialité</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Retransmission non autorisée d'un événement privé ou protégé par des droits de diffusion ;</li>
+            <li>Enregistrement non autorisé d'une réunion interne du collectif ;</li>
+            <li>Divulgation d'informations confidentielles internes (décisions, finances, données personnelles) à l'extérieur ;</li>
+            <li>Publication de photos ou vidéos de membres sans consentement explicite des personnes concernées.</li>
+          </ul>
+
+          <h4>Article 4.7 — Vie interne et relations entre membres</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Comportement irrespectueux, moqueries ou propos humiliants et vexatoires envers un membre ;</li>
+            <li>Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.) ;</li>
+            <li>Harcèlement moral répété envers un membre du collectif ;</li>
+            <li>Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis) ;</li>
+            <li>Violence psychologique, manipulation ou intimidation envers un membre ;</li>
+            <li>Mise à l'écart volontaire d'un membre (ostracisme, exclusion sociale au sein du groupe) ;</li>
+            <li>Comportement perturbateur lors d'une réunion, session interne ou nuisant à la concentration de l'équipe ;</li>
+            <li>Consommation d'alcool ou de substances avant ou pendant une retransmission ;</li>
+            <li>Introduction de personnes non autorisées dans les espaces du collectif pendant une retransmission ;</li>
+            <li>Conflit ouvert ou sabotage délibéré de la réputation d'un membre pendant une production ou session ;</li>
+            <li>Refus persistant de coopérer avec un autre membre dans le cadre d'une production.</li>
+          </ul>
+
+          <h4>Article 4.8 — Responsabilités et gouvernance interne</h4>
+          <p>Relèvent de cette catégorie les manquements suivants :</p>
+          <ul>
+            <li>Prise de décision engageant le collectif sans mandat, ou non-respect d'une décision collective ;</li>
+            <li>Conflit d'intérêts non déclaré dans une décision engageant le collectif ;</li>
+            <li>Abus de position hiérarchique ou inactivité caractérisée d'un responsable ;</li>
+            <li>Opacité, refus de rendre compte ou dépense non validée au nom du collectif ;</li>
+            <li>Détournement à profit personnel de ressources ou équipements du collectif ;</li>
+            <li>Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire (ICR).</li>
+          </ul>
+        </div>
+
+        <div class="doc-titre">Titre II — Lancement de la procédure disciplinaire</div>
+
+        <div class="doc-article">
+          <h3>Article 5 — Réception des signalements par le Bureau</h3>
+          <p>Tout signalement relatif à un manquement visé à l'article 21 du présent règlement, ou à toute autre violation des statuts et règlements du collectif, est adressé au Bureau de la Coordination générale de Meylan Handball TV, notamment via le formulaire de signalement disponible sur le site interne du collectif.</p>
+          <p>Le Bureau de la Coordination générale est le point d'entrée unique et obligatoire pour tout signalement. Dès réception d'un signalement, la Coordination générale :</p>
+          <ul>
+            <li>Enregistre le signalement et en accuse réception à son auteur dans les meilleurs délais ;</li>
+            <li>Vérifie que le signalement est formulé par écrit, circonstancié et accompagné de tout élément utile à son examen ;</li>
+            <li>Transmet sans délai l'ensemble des éléments à l'Instance Compétente des Retransmissions (ICR) pour examen de la recevabilité.</li>
+          </ul>
+          <p>Le Bureau de la Coordination générale ne dispose d'aucun pouvoir d'appréciation sur le fond du signalement. Son rôle est strictement celui d'une interface de transmission vers l'ICR.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 6 — Examen de la recevabilité par l'ICR</h3>
+          <p>A réception du signalement transmis par le Bureau de la Coordination générale, l'Instance Compétente des Retransmissions se réunit afin d'examiner sa recevabilité.</p>
+          <p>Peuvent être déclarés irrecevables les signalements :</p>
+          <ul>
+            <li>Anonymes ;</li>
+            <li>Manifestement infondés ;</li>
+            <li>Abusifs ou malveillants ;</li>
+            <li>Hors délai lorsque celui-ci est applicable.</li>
+          </ul>
+          <p>A l'issue de cet examen, l'ICR peut rendre l'une des trois décisions suivantes :</p>
+
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr><th>Décision</th><th>Conséquences</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="doc-td-label">Ouverture d'une procédure disciplinaire</td>
+                  <td>Décision aux conséquences les plus importantes. Mène à des sanctions pouvant être particulièrement significatives en vertu de l'annexe disciplinaire. La procédure suit les articles 24 et suivants du présent règlement.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">Avertissement</td>
+                  <td>L'ICR peut décider d'attribuer directement un avertissement à la personne mise en cause, sans engager de procédure disciplinaire formelle, lorsque les faits sont établis mais ne justifient pas de sanctions plus lourdes.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">Irrecevabilité</td>
+                  <td>Le signalement est déclaré irrecevable. La décision est motivée et notifiée par écrit à l'auteur du signalement ainsi qu'au Bureau de la Coordination générale. Aucune suite n'est donnée.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>La décision de recevabilité ou d'irrecevabilité est notifiée aux parties concernées et au Bureau de la Coordination générale.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 7 — Ouverture de la procédure disciplinaire et désignation du jury</h3>
+          <p>Lorsque l'ICR décide d'ouvrir une procédure disciplinaire, son·sa Président·e procède sans délai aux actes suivants :</p>
+
+          <h4>Article 7.1 — Désignation du jury de rapporteurs</h4>
+          <p>Le·la Président·e de l'ICR nomme un jury composé de trois (3) rapporteurs chargés de l'affaire, en respectant la répartition de rôles suivante :</p>
+
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr><th>Rôle</th><th>Attributions</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="doc-td-label">Rapporteur·trice Général·e</td>
+                  <td>Pilote l'instruction de l'affaire. Coordonne les travaux du jury, dirige les auditions et rédige le rapport final soumis à délibération.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">Rapporteur·trice Subordonné·e</td>
+                  <td>Assiste le·la Rapporteur·trice Général·e dans la collecte des éléments, la conduite des auditions et la rédaction du rapport. Prend en charge la conduite de l'instruction en cas d'empêchement du·de la Rapporteur·trice Général·e.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">Consultant·e</td>
+                  <td>Apporte une expertise complémentaire ou un regard neutre sur l'affaire. Émet un avis consultatif lors des délibérations du jury sans disposer de voix délibérative.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Les membres du jury de rapporteurs sont soumis aux règles de déport prévues à l'article 7 du présent règlement. Tout rapporteur en situation de conflit d'intérêts doit se déporter immédiatement et être remplacé par le·la Président·e de l'ICR.</p>
+
+          <h4>Article 7.2 — Fixation de la date de la commission disciplinaire</h4>
+          <p>Simultanément à la désignation du jury de rapporteurs, le·la Président·e de l'ICR fixe la date de la réunion de la commission disciplinaire. Cette réunion se tient en visioconférence, dans un délai de deux (2) semaines à compter de la date d'adoption de la décision d'ouverture de la procédure disciplinaire.</p>
+          <p>La convocation est adressée à toutes les parties concernées et aux membres de l'ICR dans les meilleurs délais et, en tout état de cause, au moins sept (7) jours avant la tenue de la commission.</p>
+
+          <h4>Article 7.3 — Impossibilité de fixer la date de la commission disciplinaire</h4>
+          <p>Dans le cas où le·la Président·e de l'ICR se trouve dans l'impossibilité de fixer une date de la commission disciplinaire dans le délai de deux (2) semaines prévu à l'article 24, l'ICR procède automatiquement à un réexamen de sa décision initiale d'ouverture de la procédure disciplinaire.</p>
+          <p>Ce réexamen consiste à réévaluer le signalement à la lumière des éléments disponibles, sans audience contradictoire formelle, afin de déterminer si une voie alternative est envisageable. A l'issue de ce réexamen, l'ICR peut :</p>
+          <ul>
+            <li>Maintenir la décision d'ouverture et fixer une nouvelle date de commission disciplinaire, sans délai supplémentaire imposé ;</li>
+            <li>Substituer à la procédure disciplinaire, si le dossier ne présente pas de circonstances très aggravantes de l'annexe disciplinaire, une sanction proportionnée à la gravité des faits ne nécessitant pas la réunion de la commission disciplinaire ;</li>
+            <li>Substituer à la procédure disciplinaire formelle un avertissement écrit directement notifié à la personne mise en cause, si les éléments du dossier le permettent et que la gravité des faits le justifie ;</li>
+            <li>Prononcer un classement sans suite motivé, si les circonstances ont évolué ou si le maintien de la procédure n'apparaît plus proportionné.</li>
+          </ul>
+
+          <h4>Article 7.4 — Jonction de procédures</h4>
+          <p>Lorsque plusieurs signalements sont déposés à l'encontre d'une même personne, simultanément ou dans un délai rapproché, l'ICR apprécie s'il y a lieu de procéder à une jonction des procédures ou de les instruire séparément.</p>
+          <p>La jonction est de droit lorsque les signalements portent sur des faits connexes survenus lors d'un même événement ou dans un contexte commun. Elle est facultative lorsque les signalements portent sur des faits distincts mais impliquant la même personne mise en cause au cours de la même saison sportive.</p>
+          <p>La décision de joindre ou de disjoindre les procédures est prise par le·la Président·e de l'ICR, après consultation des membres, dès l'examen de recevabilité visé à l'article 23. Elle est motivée et notifiée aux parties concernées.</p>
+          <p>En cas de jonction, un jury de rapporteurs unique est constitué pour l'ensemble des affaires jointes. Le rapport d'instruction traite de manière distincte chacun des faits reprochés, afin de garantir une appréciation individualisée. Les sanctions prononcées à l'issue de la procédure jointe tiennent compte de la pluralité des manquements, dans le respect des règles de cumul définies à l'annexe disciplinaire.</p>
+          <p>Si, au cours de l'instruction d'une affaire jointe, le jury de rapporteurs constate que la complexité ou la nature des faits rend la jonction préjudiciable au respect des droits de la défense, il peut proposer à l'ICR de disjoindre les procédures. Cette décision est soumise à l'accord du·de la Président·e de l'ICR et notifiée aux parties.</p>
+          <p>En cas de jonction, les délais de procédure applicables sont ceux afférents au signalement le plus récent ayant motivé la jonction.</p>
+        </div>
+
+        <div class="doc-titre">Titre III — Commission disciplinaire</div>
+
+        <div class="doc-article">
+          <h3>Article 8 — Instruction</h3>
+          <p>L'instruction de l'affaire est conduite par le jury de rapporteurs sous la direction du·de la Rapporteur·trice Général·e, conformément aux attributions définies à l'article 29.</p>
+          <p>Elle comprend notamment :</p>
+          <ul>
+            <li>La collecte et l'analyse de l'ensemble des éléments pertinents du dossier ;</li>
+            <li>L'audition éventuelle de la personne mise en cause, des témoins et de toute personne dont l'audition est jugée utile ;</li>
+            <li>La rédaction d'un rapport écrit exposant les faits, les éléments de preuve, les positions des parties et les propositions de décision.</li>
+          </ul>
+          <p>Le rapport d'instruction est transmis à l'ensemble des membres de l'ICR avant la tenue de la commission disciplinaire.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 9 — Convocation et droits de la défense</h3>
+          <p>La personne mise en cause est convoquée à la commission disciplinaire au moins sept (7) jours avant la date de la séance.</p>
+          <p>La convocation lui notifie par écrit :</p>
+          <ul>
+            <li>Les faits qui lui sont reprochés ;</li>
+            <li>Les textes applicables ;</li>
+            <li>La nature de la procédure engagée ;</li>
+            <li>La date, l'heure et les modalités de connexion à la commission en visioconférence.</li>
+          </ul>
+          <p>La personne concernée peut :</p>
+          <ul>
+            <li>Consulter l'intégralité de son dossier ;</li>
+            <li>Présenter des observations écrites ;</li>
+            <li>Être entendue lors de la commission ;</li>
+            <li>Se faire assister par la personne de son choix.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 10 — Tenue de la commission disciplinaire</h3>
+          <p>La commission disciplinaire se réunit en visioconférence à la date fixée par le·la Président·e de l'ICR conformément à l'article 29.</p>
+          <p>La commission entend successivement le jury de rapporteurs, qui présente son rapport d'instruction, puis la personne mise en cause et, le cas échéant, tout témoin ou partie dont l'audition est jugée nécessaire.</p>
+          <p>Les débats sont conduits par le·la Président·e de l'ICR, ou en cas de déport par le·la Vice-président·e, dans le respect du principe du contradictoire.</p>
+        </div>
+
+        <div class="doc-titre">Titre VI — Décisions de la commission disciplinaire</div>
+
+        <div class="doc-article">
+          <h3>Article 11 — Délibérations du jury de rapporteurs</h3>
+          <p>A l'issue de la commission disciplinaire, le jury de rapporteurs se réunit immédiatement en délibéré, hors la présence des autres parties.</p>
+          <p>Les délibérations sont strictement confidentielles. Aucun élément issu des délibérations ne peut être divulgué avant les délais de communication prévus à l'article 34.</p>
+          <p>Les délibérations se tiennent immédiatement à l'issue de la commission, le jour même, mais leur résultat ne peut en aucun cas être communiqué avant l'expiration des délais prévus à l'article 34.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 12 — Communication des décisions</h3>
+          <p>Les décisions issues des délibérations du jury font l'objet d'une double communication, selon le calendrier suivant :</p>
+
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr><th>Destinataire</th><th>Délai</th><th>Modalités</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="doc-td-label">Bureau de la Coordination générale</td>
+                  <td>3 jours après la commission</td>
+                  <td>Transmission écrite et confidentielle de la décision motivée au Bureau de la Coordination générale.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">Ensemble des membres concernés</td>
+                  <td>7 jours après la commission</td>
+                  <td>Notification écrite de la décision à l'ensemble des membres directement concernés par la procédure (partie mise en cause, auteur du signalement, témoins entendus).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Aucune communication ne peut intervenir avant l'expiration des délais susmentionnés, sauf décision contraire expresse du jury de rapporteurs. Toute violation de cette règle constitue un manquement aux obligations de confidentialité.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 13 — Sanctions disciplinaires</h3>
+          <p>A l'issue de la procédure, l'ICR, éclairée par le rapport et les délibérations du jury de rapporteurs, peut décider :</p>
+          <ul>
+            <li>D'apprécier si la faute est ou non caractérisée au regard des circonstances et de classer sans suite ;</li>
+            <li>D'engager une sanction disciplinaire et de l'ajuster dans le respect du barème défini à l'annexe disciplinaire.</li>
+          </ul>
+          <p>Les sanctions applicables sont, par ordre de gravité croissante :</p>
+          <ul>
+            <li>Avertissement ;</li>
+            <li>Blâme ;</li>
+            <li>Suspension temporaire de retransmission ;</li>
+            <li>Suspension temporaire sur la saison sportive ;</li>
+            <li>Exclusion temporaire ;</li>
+            <li>Exclusion définitive.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 14 — Voies de recours</h3>
+          <p>Toute personne ayant fait l'objet d'une sanction disciplinaire prononcée par l'ICR dispose d'un droit de recours dans les conditions définies au présent article.</p>
+          <p>Le recours doit être formé dans un délai de quinze (15) jours calendaires à compter de la notification écrite de la décision. Passé ce délai, la décision devient définitive et irrévocable.</p>
+          <p>Le recours est porté devant le Bureau de la Coordination générale de Meylan Handball TV, qui constitue l'instance d'appel de droit commun.</p>
+          <p>Le recours est formé par écrit et adressé au Bureau de la Coordination générale. Il expose de manière circonstanciée les motifs pour lesquels la personne conteste la décision : vice de procédure, erreur d'appréciation des faits, disproportion de la sanction ou méconnaissance des textes applicables. Tout recours non motivé est irrecevable.</p>
+          <p>Le recours n'est pas suspensif de plein droit. Toutefois, la personne sanctionnée peut solliciter auprès de l'ICR la suspension provisoire de l'exécution de la sanction dans l'attente de la décision du Bureau de la Coordination générale. Cette demande est examinée par l'ICR dans un délai de sept (7) jours. L'ICR peut accorder la suspension provisoire si elle estime que l'exécution immédiate de la sanction est susceptible de causer un préjudice manifestement disproportionné.</p>
+          <p>La Coordination générale transmet sans délai le recours à l'ICR, qui établit un rapport de synthèse à destination du Bureau. Ce rapport expose la procédure suivie, les faits retenus, la sanction prononcée et les arguments développés par la personne requérante.</p>
+          <p>Le Bureau de la Coordination générale peut confirmer, réduire, aggraver ou annuler la sanction prononcée par l'ICR. Elle peut également annuler la procédure en cas de vice substantiel affectant les droits de la défense. Sa décision est définitive et sans appel. Elle est notifiée par écrit à la personne concernée et à l'ICR dans les sept (7) jours suivant la session.</p>
+          <p>Le droit de recours ne peut être exercé qu'une seule fois par affaire. Il ne constitue pas une voie de recours contre les mesures conservatoires, qui relèvent de la compétence exclusive de l'ICR.</p>
+        </div>
+
+        <div class="doc-titre">Titre V — Dispositions finales</div>
+
+        <div class="doc-article">
+          <h3>Article 15 — Modification du règlement</h3>
+          <p>Le présent règlement ne peut être modifié que par l'Assemblée générale, sur proposition de la Coordination générale ou de l'ICR. Toute modification doit être portée à la connaissance des membres.</p>
+          <p>Toutefois, la Coordination générale peut procéder directement à la modification du règlement général, sans vote de l'Assemblée générale, lorsque les modifications proposées sont purement formelles, rédactionnelles ou ne portent pas atteinte au fonctionnement du collectif, ni aux droits et obligations de ses membres.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 16 — Entrée en vigueur</h3>
+          <p>Le présent règlement entre en vigueur dès son adoption par l'Assemblée générale de MHBTV. Il est opposable à l'ensemble des membres et instances du collectif.</p>
+        </div>
+
+      </div>
+
+      <!-- ANNEXE — BARÈME DISCIPLINAIRE (large) -->
+      <div class="doc-body-wide">
+        <div class="doc-titre" style="margin-top:4rem;">Annexe — Barème disciplinaire</div>
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:0.5rem;">Tableau exhaustif des fautes, manquements et sanctions — Collectif de Meylan Handball TV — Saison en cours 2025-2026.</p>
+        <p style="color:var(--muted);font-size:0.8rem;margin-bottom:2rem;"><strong style="color:var(--white);">CG</strong> = Coordination générale · <strong style="color:var(--white);">ICR</strong> = Instance Compétente des Retransmissions · <strong style="color:var(--white);">AG</strong> = Assemblée générale</p>
+
+        <h4 style="font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:1rem;">Légende des sanctions</h4>
+        <div class="doc-annexe-legend">
+          <div class="doc-annexe-legend-item">
+            <h5>Avertissement</h5>
+            <p>Réprimande formelle notifiée. N'emporte aucune restriction d'activité ni de droit. Prononcé sans procédure formelle. Le cumul de 3 avertissements sur une même saison entraîne automatiquement l'application du niveau supérieur.</p>
+          </div>
+          <div class="doc-annexe-legend-item">
+            <h5>Blâme</h5>
+            <p>Réprimande aggravée prononcée à l'issue d'une procédure disciplinaire. Notifié par écrit. N'emporte aucune restriction d'activité ni de droit, sauf sanction accessoire contraire. Constitue un antécédent aggravant immédiat en cas de récidive dans la même saison.</p>
+          </div>
+          <div class="doc-annexe-legend-item">
+            <h5>Suspension N retransmission(s)</h5>
+            <p>Mise à l'écart opérationnelle pour une durée fixée en nombre de retransmissions ou en semaines. Le membre ne peut occuper aucun poste lors d'une retransmission. Il conserve ses droits associatifs et peut assister aux réunions internes, sauf sanction accessoire contraire.</p>
+          </div>
+          <div class="doc-annexe-legend-item">
+            <h5>Suspension saison</h5>
+            <p>Mise à l'écart opérationnelle couvrant l'intégralité de la saison en cours ou suivante. Emporte en outre l'interdiction de participer aux réunions internes et de se porter candidat à tout mandat. Le membre conserve son droit de vote en Assemblée générale, sauf sanction accessoire contraire.</p>
+          </div>
+          <div class="doc-annexe-legend-item">
+            <h5>Exclusion temporaire</h5>
+            <p>Rupture totale et provisoire du lien associatif pour une durée exprimée en mois. Le membre perd l'ensemble de ses droits et activités au sein du collectif : postes, réunions, droit de vote, éligibilité, accréditations et accès aux outils. A l'issue, le membre recouvre ses droits de plein droit.</p>
+          </div>
+          <div class="doc-annexe-legend-item">
+            <h5>Exclusion définitive</h5>
+            <p>Rupture totale, permanente et irrévocable du lien associatif. Emporte la perte définitive de l'ensemble des droits, accréditations et mandats, sans possibilité de retour.</p>
+          </div>
+        </div>
+
+        <div class="doc-cat-title">I — Présence, ponctualité et engagement</div>
+
+        <div class="doc-cat-sub">I.1 — Absences et désistements</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Absence non justifiée à une retransmission (tout poste)</td><td>Suspension 2 retransmissions</td><td>Suspension 5 retransmissions</td><td>Suspension saison + retrait accréditation 3 mois</td></tr>
+              <tr><td>Absence non justifiée à une réunion interne obligatoire</td><td>Avertissement</td><td>Blâme</td><td>Suspension 3 retransmissions</td></tr>
+              <tr><td>Absence justifiée sans prévenir dans les délais (min. 24h) sans proposer de remplacement</td><td>Avertissement</td><td>Suspension 2 retransmission</td><td>Suspension 4 retransmissions</td></tr>
+              <tr><td>Désistement de dernière minute répété (moins de 24h, 2 occurrences ou plus sur la saison)</td><td>Suspension 5 retransmissions</td><td>Suspension saison</td><td>Exclusion temporaire</td></tr>
+              <tr><td>Abandon de poste en cours de retransmission sans motif valable</td><td>Suspension 3 retransmissions</td><td>Suspension 7 retransmissions + retrait accréditation 1 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Refus de prendre en charge un poste de remplacement en urgence malgré disponibilité confirmée</td><td>Blâme</td><td>Suspension 2 retransmission</td><td>Suspension 4 retransmissions</td></tr>
+              <tr><td>Non-réponse aux convocations ou sollicitations de la Coordination générale dans un délai raisonnable</td><td>Blâme</td><td>Suspension 7 retransmissions</td><td>Exclusion temporaire</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">I.2 — Ponctualité</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Retard injustifié entraînant un démarrage tardif de retransmission (&gt; 5 min)</td><td>Avertissement</td><td>Blâme</td><td>Suspension 3 retransmissions</td></tr>
+              <tr><td>Retard injustifié répété (3 occurrences ou plus sur la saison)</td><td>Blâme</td><td>Suspension 4 retransmissions + période probatoire 2 mois</td><td>Suspension saison + retrait accréditations 2 mois</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">I.3 — Participation à une retransmission</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Participation passive et volontaire lors d'une retransmission (présence sans contribution réelle)</td><td>Blâme</td><td>Suspension 2 retransmissions</td><td>Suspension 4 retransmissions</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">II — Accréditation, rôles et identité opérationnelle</div>
+
+        <div class="doc-cat-sub">II.1 — Accréditation et postes</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Occupation d'un poste sans accréditation valide</td><td>Blâme</td><td>Suspension 3 retransmissions + obligation de formation</td><td>Suspension 5 retransmissions + obligation de formation</td></tr>
+              <tr><td>Falsification d'une accréditation ou d'un questionnaire d'aptitude (fausse réponse, usurpation)</td><td>Suspension 3 retransmissions</td><td>Exclusion temporaire + retrait accréditation + inéligibilité CG 1 an</td><td>Exclusion définitive</td></tr>
+              <tr><td>Délégation non autorisée de son rôle accrédité à un tiers non désigné</td><td>Suspension 1 retransmission</td><td>Suspension 3 retransmissions + retrait accréditation 1 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">II.2 — Usurpation et identité</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Usurpation de rôle ou d'identité lors d'une retransmission</td><td>Suspension 3 retransmissions</td><td>Suspension 5 retransmissions + retrait accréditations 2 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Transmission de son badge ou gilet à une personne non habilitée</td><td>Suspension 2 retransmissions</td><td>Suspension 4 retransmissions + retrait accréditations 1 mois</td><td>Exclusion temporaire + période probatoire 2 mois</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">II.3 — Identification et équipement obligatoire</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Non-port du gilet identifié MHBTV obligatoire pendant la durée complète de l'événement</td><td>Avertissement</td><td>Blâme</td><td>Suspension 2 retransmissions</td></tr>
+              <tr><td>Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement</td><td>Suspension 3 retransmissions</td><td>Suspension 4 retransmissions</td><td>Exclusion temporaire + période probatoire 2 mois</td></tr>
+              <tr><td>Contestation publique de la désignation d'un responsable de retransmission en cours d'événement</td><td>Suspension 2 retransmissions</td><td>Suspension 3 retransmissions</td><td>Suspension 5 retransmissions + inéligibilité CG 6 mois</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">III — Production, qualité technique et éditorial</div>
+
+        <div class="doc-cat-sub">III.1 — Qualité image, son et vérification du matériel</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé…)</td><td>Avertissement</td><td>Blâme</td><td>Suspension 2 retransmissions + retrait accréditation 1 mois</td></tr>
+              <tr><td>Coupure intempestive du direct causée par une négligence technique évitable</td><td>Blâme</td><td>Suspension 4 retransmissions</td><td>Suspension 5 retransmissions + retrait accréditation 1 mois</td></tr>
+              <tr><td>Commentaire en état de fatigue manifeste affectant la qualité éditoriale</td><td>Avertissement</td><td>Suspension 1 retransmission</td><td>Suspension 2 retransmissions + retrait accréditation 1 mois</td></tr>
+              <tr><td>Non-déclaration d'un incident technique, comportemental ou matériel constaté lors d'un événement</td><td>Avertissement</td><td>Suspension 2 retransmissions</td><td>Suspension 2 retransmissions + retrait accréditation 2 mois</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">III.2 — Charte graphique et habillage</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Utilisation non autorisée d'effets, filtres, overlays ou incrustations non validés</td><td>Avertissement</td><td>Blâme</td><td>Suspension 2 retransmissions</td></tr>
+              <tr><td>Modification ou suppression non autorisée du générique, habillage graphique ou jingle officiel</td><td>Avertissement</td><td>Blâme</td><td>Suspension 2 retransmissions</td></tr>
+              <tr><td>Non-intégration des éléments graphiques obligatoires sans motif technique</td><td>Avertissement</td><td>Blâme</td><td>Suspension 2 retransmissions</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">III.3 — Commentaire et prise de parole à l'antenne</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Propos inappropriés en direct (insultes, humour déplacé, hors-sujet, irrespectueux)</td><td>Suspension 3 retransmissions</td><td>Suspension saison + retrait accréditation</td><td>Suspension saison + retrait accréditation définitif</td></tr>
+              <tr><td>Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.)</td><td>Exclusion temporaire + retrait accréditation</td><td>Exclusion définitive</td><td>Exclusion définitive</td></tr>
+              <tr><td>Prise de position polémique, partisane ou politique en direct</td><td>Suspension 3 retransmissions</td><td>Suspension 5 retransmissions + retrait accréditation antenne 2 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Dénigrement public d'un membre du collectif, du club ou d'un adversaire en direct</td><td>Suspension 3 retransmissions</td><td>Suspension 5 retransmissions</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Révélation d'informations confidentielles en direct (données internes, privées ou réservées)</td><td>Suspension 4 retransmissions + inéligibilité CG 6 mois</td><td>Suspension saison + inéligibilité CG 1 an</td><td>Exclusion définitive de l'antenne + inéligibilité CG 2 ans</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">IV — Matériel, équipements et ressources du collectif</div>
+
+        <div class="doc-cat-sub">IV.1 — Utilisation, rangement et prêt du matériel</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Utilisation du matériel à des fins personnelles sans autorisation ou prêt non autorisé à un tiers</td><td>Blâme</td><td>Suspension 3 retransmissions + suspension d'accès matériel 1 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Non-respect des procédures d'utilisation ou de rangement / non-retour dans les délais</td><td>Avertissement</td><td>Suspension 2 retransmissions</td><td>Suspension 5 retransmissions</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">IV.2 — Dégradations et pertes</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Perte de matériel lors d'un déplacement sans signalement immédiat</td><td>Blâme</td><td>Suspension 2 retransmissions</td><td>Suspension 4 retransmissions + remboursement évalué</td></tr>
+              <tr><td>Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie…)</td><td>Blâme</td><td>Suspension 3 retransmissions + remboursement partiel évalué</td><td>Suspension saison + remboursement intégral évalué</td></tr>
+              <tr><td>Dégradation volontaire de matériel ou d'équipements du collectif</td><td>Suspension 5 retransmissions + remboursement intégral</td><td>Exclusion temporaire + remboursement + inéligibilité CG 1 an</td><td>Exclusion définitive + remboursement</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">IV.3 — Accès aux outils numériques et plateformes</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Accès non autorisé ou partage d'identifiants/mots de passe des comptes et outils du collectif</td><td>Suspension 3 retransmissions + retrait accès plateforme</td><td>Exclusion temporaire + inéligibilité CG 1 an</td><td>Exclusion définitive + inéligibilité CG permanente</td></tr>
+              <tr><td>Suppression non autorisée de fichiers, archives ou projets du collectif</td><td>Suspension 4 retransmissions + retrait accès plateforme</td><td>Exclusion temporaire + inéligibilité CG 1 an</td><td>Exclusion définitive</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">V — Image du collectif, représentation externe et partenaires</div>
+
+        <div class="doc-cat-sub">V.1 — Utilisation de l'identité du collectif</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif</td><td>Avertissement écrit + rectification obligatoire</td><td>Suspension 3 retransmissions + interdiction de représentation externe 1 an</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td></tr>
+              <tr><td>Création d'un compte ou d'une page imitant le collectif ou l'un de ses membres</td><td>Suspension 3 retransmissions + suppression obligatoire</td><td>Exclusion temporaire + inéligibilité CG 1 an</td><td>Exclusion définitive</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">V.2 — Prises de parole personnelles touchant le collectif</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux, public)</td><td>Suspension 2 retransmissions + retrait des propos</td><td>Suspension 4 retransmissions + lettre d'excuse formelle</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td></tr>
+              <tr><td>Diffusion de fausses informations concernant le collectif ou ses membres</td><td>Suspension 2 retransmissions + correction publique</td><td>Suspension 4 retransmissions</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Commentaires blessants ou moqueries publiques envers un membre du collectif</td><td>Blâme + retrait</td><td>Suspension 2 retransmissions</td><td>Suspension 4 retransmissions</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">VI — Droits de diffusion, données personnelles et confidentialité</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Retransmission non autorisée d'un événement privé ou protégé</td><td>Blâme</td><td>Suspension 5 retransmissions + retrait accréditation 1 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Enregistrement non autorisé d'une réunion interne du collectif</td><td>Blâme</td><td>Suspension 2 retransmissions</td><td>Exclusion temporaire + retrait droit de vote AG</td></tr>
+              <tr><td>Publication de photos ou vidéos de membres sans consentement explicite</td><td>Suspension 3 retransmissions</td><td>Suspension 5 retransmissions</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">VII — Vie interne et relations entre membres</div>
+
+        <div class="doc-cat-sub">VII.1 — Respect mutuel et comportements</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Comportement irrespectueux, moqueries ou propos humiliants / vexatoires envers un membre</td><td>Avertissement</td><td>Suspension 2 retransmissions</td><td>Suspension 4 retransmissions</td></tr>
+              <tr><td>Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.)</td><td>Suspension 4 retransmissions + inéligibilité CG 1 an</td><td>Suspension saison + retrait droit de vote AG + inéligibilité CG 2 ans</td><td>Exclusion définitive</td></tr>
+              <tr><td>Comportement irrespectueux envers un officiel, arbitre ou délégué lors d'un événement</td><td>Suspension 2 retransmissions</td><td>Suspension 4 retransmissions + inéligibilité CG 6 mois</td><td>Suspension saison + inéligibilité CG 1 an</td></tr>
+              <tr><td>Comportement inapproprié envers le public ou les spectateurs</td><td>Avertissement</td><td>Suspension 2 retransmissions</td><td>Suspension 4 retransmissions</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">VII.2 — Harcèlement et violences</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Harcèlement moral répété envers un membre du collectif</td><td>Suspension 4 retransmissions + période probatoire 3 mois</td><td>Exclusion temporaire + retrait droit de vote AG + inéligibilité CG 2 ans</td><td>Exclusion définitive</td></tr>
+              <tr><td>Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis)</td><td>Exclusion temporaire + retrait droit de vote AG + inéligibilité CG permanente</td><td>Exclusion définitive</td><td>Exclusion définitive</td></tr>
+              <tr><td>Violence psychologique, manipulation ou intimidation envers un membre</td><td>Suspension saison + période probatoire 3 mois + inéligibilité CG 1 an</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td><td>Exclusion définitive</td></tr>
+              <tr><td>Cyberharcèlement envers un membre (messages répétés, intimidation en ligne)</td><td>Suspension saison + retrait droit de vote AG + inéligibilité CG 1 an</td><td>Exclusion temporaire + inéligibilité CG permanente</td><td>Exclusion définitive</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">VII.3 — Conflits internes</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Mise à l'écart volontaire d'un membre (ostracisme)</td><td>Blâme</td><td>Suspension 3 retransmissions</td><td>Suspension 5 retransmissions</td></tr>
+              <tr><td>Favoritisme dans la désignation des postes ou rétention d'information</td><td>Blâme</td><td>Suspension 4 retransmissions + inéligibilité CG 6 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Conflit ouvert ou sabotage délibéré de la réputation d'un membre</td><td>Blâme</td><td>Suspension 3 retransmissions</td><td>Suspension 5 retransmissions</td></tr>
+              <tr><td>Refus persistant de coopérer avec un autre membre dans le cadre d'une production</td><td>Avertissement</td><td>Blâme</td><td>Suspension 4 retransmissions + période probatoire 1 mois</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">VIII — Responsabilités et gouvernance interne</div>
+
+        <div class="doc-cat-sub">VIII.1 — Prise de décision et mandats</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Refus de transmettre les éléments nécessaires à la continuité d'un mandat</td><td>Blâme</td><td>Suspension de fonction + inéligibilité CG 6 mois</td><td>Révocation du mandat + inéligibilité CG 1 an</td></tr>
+              <tr><td>Inaction délibérée face à un incident relevant de sa responsabilité directe</td><td>Blâme</td><td>Révocation du mandat + inéligibilité CG 1 an</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td></tr>
+              <tr><td>Abus de position hiérarchique</td><td>Blâme</td><td>Suspension de fonction + inéligibilité CG 6 mois</td><td>Révocation du mandat + inéligibilité CG 2 ans</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">VIII.2 — Atteinte aux instances</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Tentative d'intimidation ou de pression sur un membre de l'ICR</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td><td>Exclusion temporaire + inéligibilité CG permanente</td><td>Exclusion définitive</td></tr>
+              <tr><td>Tentative de contact avec les membres du jury pendant l'instruction</td><td>Suspension 4 retransmissions + inéligibilité CG 1 an</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td><td>Exclusion définitive</td></tr>
+              <tr><td>Sollicitation de témoins pour influer sur leur déclaration</td><td>Suspension 4 retransmissions + inéligibilité CG 1 an</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td><td>Exclusion définitive</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">IX — Récidive et non-respect de la procédure disciplinaire</div>
+
+        <div class="doc-cat-sub">IX.1 — Récidive et cumul de sanctions</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Récidive d'une faute déjà sanctionnée dans la même saison</td><td>Triplement automatique de la sanction initiale</td><td>Quadruplement de la sanction + période probatoire 3 mois</td><td>Exclusion temporaire minimum + inéligibilité CG 1 an</td></tr>
+              <tr><td>Cumul de 3 avertissements sur une même saison</td><td>Suspension 4 retransmissions</td><td>Suspension 6 retransmissions + période probatoire 2 mois</td><td>Exclusion temporaire</td></tr>
+              <tr><td>Cumul de 2 blâmes sur une même saison</td><td>Suspension 4 retransmissions</td><td>Suspension saison + période probatoire 3 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+              <tr><td>Cumul de 2 suspensions sur une même saison</td><td>Suspension 5 retransmissions</td><td>Suspension saison + période probatoire 3 mois</td><td>Exclusion temporaire + inéligibilité CG 1 an</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-sub">IX.2 — Non-respect de la procédure disciplinaire</div>
+        <div class="bareme-table-wrap">
+          <table class="bareme-table">
+            <thead>
+              <tr><th>Faute / manquement constaté</th><th>Sans circonstance aggravante</th><th>Avec circonstance(s) aggravante(s)</th><th>Circonstance(s) très aggravante(s)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Refus de se présenter à une convocation de la commission (ICR)</td><td>Report unique autorisé</td><td>Suspension préventive jusqu'à comparution + jugement majoré</td><td>Jugement en l'absence + sanction doublée + inéligibilité CG 1 an</td></tr>
+              <tr><td>Fausse déclaration ou mensonge lors d'une procédure disciplinaire interne</td><td>Suspension saison</td><td>Exclusion temporaire</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td></tr>
+              <tr><td>Non-respect d'une sanction prononcée (poursuite d'activité malgré suspension)</td><td>Suspension saison</td><td>Exclusion temporaire</td><td>Exclusion définitive</td></tr>
+              <tr><td>Production de faux témoignages ou documents</td><td>Suspension saison</td><td>Exclusion temporaire</td><td>Exclusion définitive</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">Tableau des circonstances applicables</div>
+        <p style="color:var(--muted);font-size:0.85rem;margin-bottom:1.5rem;">Ces circonstances sont prises en compte par l'ICR pour moduler les sanctions dans les limites du barème. Plusieurs circonstances peuvent se cumuler et conduire à l'application d'un palier supérieur.</p>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr><th>Type</th><th>Circonstance</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="doc-td-label" rowspan="6">Atténuante</td><td>Première faute ou absence totale d'antécédents disciplinaires</td></tr>
+              <tr><td>Reconnaissance immédiate et spontanée des faits</td></tr>
+              <tr><td>Contexte de tension exceptionnel clairement établi et documenté</td></tr>
+              <tr><td>Comportement antérieur irréprochable sur au moins deux saisons consécutives</td></tr>
+              <tr><td>Excuses présentées spontanément et acceptées par la partie lésée avant saisine</td></tr>
+              <tr><td>Coopération active avec l'ICR lors de l'instruction</td></tr>
+              <tr><td class="doc-td-label" rowspan="9">Aggravante</td><td>Victime étant un officiel (arbitre, délégué, OTM, RSEC, encadrant)</td></tr>
+              <tr><td>Faits commis après avertissement préalable de la Coordination générale ou de l'ICR</td></tr>
+              <tr><td>Atteinte avérée à l'image du collectif, du club ou de la compétition</td></tr>
+              <tr><td>Abus d'autorité ou de position hiérarchique</td></tr>
+              <tr><td>Faits commis par une personne investie d'une responsabilité au sein du collectif</td></tr>
+              <tr><td>Faits ayant perturbé ou interrompu une retransmission ou un événement</td></tr>
+              <tr><td>Première récidive ou réitération de faits similaires dans la même saison</td></tr>
+              <tr><td>Mise en danger d'autrui, même sans dommage effectif constaté</td></tr>
+              <tr><td>Faits commis en présence de mineurs ou de personnes en formation</td></tr>
+              <tr><td class="doc-td-label" rowspan="8">Très aggravante</td><td>Récidive multiple ou récidive caractérisée (3 fois ou plus)</td></tr>
+              <tr><td>Victime étant un mineur, une personne en formation ou en situation de vulnérabilité</td></tr>
+              <tr><td>Violences physiques ou menaces caractérisées envers un membre ou un tiers</td></tr>
+              <tr><td>Atteinte grave à la dignité ou à l'intégrité morale d'une personne</td></tr>
+              <tr><td>Faits commis avec préméditation ou de façon organisée et concertée</td></tr>
+              <tr><td>Faits ayant entraîné l'arrêt, l'abandon ou l'exclusion d'un membre de l'activité</td></tr>
+              <tr><td>Refus explicite de se conformer aux décisions disciplinaires de l'ICR</td></tr>
+              <tr><td>Faits impliquant une atteinte directe aux instances du collectif (ICR, Coordination générale)</td></tr>
+              <tr><td>Faits ayant fait l'objet d'une plainte externe ou d'une médiatisation</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-cat-title">Notes et dispositions générales</div>
+        <ul class="doc-notes" style="color:var(--muted);font-size:0.9rem;line-height:1.75;">
+          <li><strong>1. Sévérité dès la première circonstance aggravante :</strong> conformément aux orientations fixées, toute circonstance aggravante avérée entraîne automatiquement l'application du palier médian du barème, soit au minimum une suspension ferme. L'ICR ne peut prononcer une sanction inférieure à ce palier lorsqu'une circonstance aggravante est retenue.</li>
+          <li><strong>2. Cumul de fautes :</strong> en cas de fautes multiples lors d'un même événement, la sanction la plus lourde est appliquée avec majoration possible. Les sanctions issues d'affaires distinctes sont cumulatives.</li>
+          <li><strong>3. Inéligibilité à la Coordination générale (CG) :</strong> cette sanction accessoire interdit à la personne sanctionnée de se porter candidate ou d'exercer tout mandat au sein de la Coordination générale pour la durée précisée. Elle est prononcée par l'ICR et prend effet dès notification. En cas d'exclusion définitive, l'inéligibilité est permanente et automatique.</li>
+          <li><strong>4. Retrait du droit de vote aux Assemblées générales (AG) :</strong> cette sanction accessoire suspend temporairement le droit de vote pour la durée de la sanction principale. Elle peut être prononcée seule ou en complément d'une autre sanction.</li>
+          <li><strong>5. Retrait d'accréditation :</strong> le retrait total ou partiel de l'accréditation qualifiée empêche l'exercice du ou des postes concernés (responsable de retransmission, commentateur) pendant toute la durée du retrait. Une nouvelle demande d'accréditation est possible à l'issue de la période, sous réserve d'un nouveau questionnaire validé.</li>
+          <li><strong>6. Période probatoire :</strong> la période probatoire impose un suivi renforcé du comportement du membre sanctionné. Un rapport d'évaluation est établi par la Coordination générale à l'issue de cette période. Tout nouveau manquement pendant la période probatoire est traité directement au palier « circonstance très aggravante ».</li>
+          <li><strong>7. Formation obligatoire :</strong> la sanction « obligation de formation/stage avant retour » conditionne la reprise d'activité à la validation d'un module de formation interne défini par la Coordination générale. Aucune désignation ne peut être effectuée avant cette validation.</li>
+          <li><strong>8. Remboursements :</strong> toute sanction impliquant un remboursement est fixée par l'ICR en fonction de l'évaluation du préjudice réel subi par le collectif, sur la base d'un inventaire du matériel concerné.</li>
+          <li><strong>9. Mesures conservatoires :</strong> indépendamment de toute sanction, l'ICR ou la Coordination générale peuvent ordonner des mesures provisoires (retrait de poste, suspension d'accès aux outils, retrait d'accréditation à titre conservatoire) dans l'attente de la décision finale.</li>
+          <li><strong>10. Entrée en vigueur :</strong> la présente annexe renforcée entre en vigueur dès son adoption par l'Assemblée générale et se substitue intégralement à toute version antérieure.</li>
+        </ul>
+      </div>
+
+      <div class="doc-closing">
+        <p><strong>Meylan Handball TV — Règlement Disciplinaire.</strong> Version du 23 avril 2026. Pour toute question relative à l'interprétation de ce règlement ou de son annexe, contactez l'Instance Compétente des Retransmissions (ICR) ou le Bureau de la Coordination générale.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement des Retransmissions | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .doc-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-body { max-width: 780px; margin: 0 auto; }
+    .doc-body-wide { max-width: 1100px; margin: 0 auto; }
+
+    .doc-preamble {
+      max-width: 780px;
+      margin: 0 auto 3rem auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+    }
+    .doc-preamble h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p:last-child { margin-bottom: 0; }
+
+    .doc-titre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-titre:first-of-type { margin-top: 0; }
+
+    .doc-article { margin-bottom: 2rem; }
+    .doc-article h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .doc-article h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .doc-article p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-article ul {
+      margin: 0 0 0.9rem 1.4rem;
+      padding: 0;
+    }
+    .doc-article li {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .doc-article strong { color: var(--white); }
+
+    .doc-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .doc-table th {
+      background: rgba(232,0,29,0.08);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table td {
+      padding: 0.75rem 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .doc-table tr:last-child td { border-bottom: none; }
+    .doc-table td.doc-td-label { color: var(--white); font-weight: 600; }
+
+    /* Grades du Responsable de retransmission */
+    .grade-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin: 1rem 0 1.5rem 0;
+    }
+    .grade-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .grade-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      background: linear-gradient(135deg, rgba(232,0,29,0.12), rgba(232,0,29,0.02));
+      border-bottom: 1px solid var(--border);
+    }
+    .grade-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      flex-shrink: 0;
+    }
+    .grade-card-header h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0;
+    }
+    .grade-card-body { padding: 1.25rem 1.5rem; }
+    .grade-card-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.9rem;
+    }
+    .grade-card-body p:last-child { margin-bottom: 0; }
+    .grade-card-body p strong { color: var(--white); }
+
+    /* Grille de priorisation */
+    .priority-level {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .priority-level h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.75rem;
+    }
+    .priority-level ul { margin: 0 0 0 1.4rem; padding: 0; }
+    .priority-level li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Incident cards */
+    .incident-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .incident-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .incident-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+    .incident-card p:last-child { margin-bottom: 0; }
+    .incident-card ul { margin: 0 0 0.75rem 1.4rem; padding: 0; }
+    .incident-card li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.35rem;
+    }
+
+    .doc-example {
+      background: rgba(240,180,41,0.07);
+      border: 1px solid rgba(240,180,41,0.2);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .doc-example p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0; }
+    .doc-example p strong { color: var(--gold); }
+
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1100px;
+      margin: 0 auto 2.5rem auto;
+    }
+    .doc-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .doc-back:hover { color: var(--red); }
+
+    .doc-closing {
+      max-width: 1100px;
+      margin: 3rem auto 0 auto;
+      padding: 1.75rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+    }
+    .doc-closing p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Document officiel</div>
+        <h1>Règlement des <em>Retransmissions</em></h1>
+        <p class="hero-sub">Organisation des retransmissions des compétitions, compétences de l'ICR et procédures applicables en cas d'incident lors d'un direct.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="statuts.html" class="doc-back">← Retour aux statuts & règlements</a>
+        <a href="reglement-retransmissions.pdf" class="btn btn-outline" style="padding:0.5rem 1.25rem;font-size:0.75rem;">Télécharger le PDF</a>
+      </div>
+
+      <div class="doc-meta">
+        <span>Version du <strong>23 avril 2026</strong></span>
+        <span>28 articles</span>
+        <span>7 titres</span>
+      </div>
+
+      <div class="doc-preamble">
+        <h4>Préambule</h4>
+        <p>Le présent règlement a pour objet de définir les conditions dans lesquelles sont réalisées la captation, la diffusion et l'exploitation des images des compétitions retransmises par Meylan Handball TV, ainsi que le cadre disciplinaire et de contrôle applicable à l'ensemble des membres du collectif de Meylan Handball TV.</p>
+        <p>Il s'inscrit dans le respect des règlements fédéraux en vigueur, des dispositions légales relatives au droit à l'image, au droit d'auteur, à la protection des données personnelles, ainsi qu'aux valeurs éthiques et sportives du handball.</p>
+        <p>L'Instance Compétente des Retransmissions (ICR) constitue un organe de garantie démocratique, de régulation opérationnelle et de sécurisation institutionnelle. Elle veille au respect des règles internes, à la qualité des retransmissions, à la loyauté des processus électoraux et, le cas échéant, au traitement disciplinaire des manquements aux obligations statutaires et réglementaires.</p>
+      </div>
+
+      <div class="doc-body">
+
+        <div class="doc-titre">Titre I — Dispositions générales</div>
+
+        <div class="doc-article">
+          <h3>Article 1 — Objet</h3>
+          <p>Le présent règlement fixe les règles applicables à l'organisation, à la réalisation et à la diffusion des retransmissions audiovisuelles des compétitions organisées ou accueillies par le club de Meylan Handball, dans le cadre de Meylan Handball TV.</p>
+          <p>Il définit également de manière exhaustive l'organisation, les compétences, les pouvoirs et les modalités de fonctionnement de l'Instance Compétente des Retransmissions (ICR) en matière disciplinaire et de contrôle de la réglementation.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 2 — Champ d'application</h3>
+          <p>Le présent règlement s'applique à :</p>
+          <ul>
+            <li>L'ensemble des compétitions officielles ou amicales retransmises par Meylan Handball TV ;</li>
+            <li>Toute personne physique ou morale participant à la captation, à la production ou à la diffusion des images ;</li>
+            <li>Aux licenciés, officiels, bénévoles, partenaires et publics apparaissant sur les images diffusées ;</li>
+            <li>Tout membre actif ou occasionnel du collectif Meylan Handball TV.</li>
+          </ul>
+        </div>
+
+        <div class="doc-titre">Titre II — Instance Compétente des Retransmissions</div>
+
+        <div class="doc-article">
+          <h3>Article 3 — Création et nature de l'ICR</h3>
+          <p>Il est créé une instance permanente dénommée Instance Compétente des Retransmissions (ICR). L'ICR est l'organe de référence chargé de l'application, de l'interprétation et du respect du présent règlement dans le cadre des activités de Meylan Handball TV.</p>
+          <p>Elle existe indépendamment des mandats des autres instances et conserve ses compétences en toutes circonstances.</p>
+          <p>L'ICR est une instance indépendante de contrôle, de surveillance, de régulation et, le cas échéant, de discipline interne. Elle n'exerce aucune fonction exécutive globale ou opérationnelle permanente et ne se substitue pas aux organes dirigeants. Elle agit en toute indépendance vis-à-vis de la Coordination générale, dans le respect des statuts du collectif.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 4 — Principes directeurs</h3>
+          <p>L'ICR exerce ses missions dans le respect :</p>
+          <ul>
+            <li>De la légalité interne ;</li>
+            <li>De l'impartialité et de l'objectivité ;</li>
+            <li>Du principe du contradictoire ;</li>
+            <li>De l'égalité de traitement ;</li>
+            <li>De la proportionnalité des décisions ;</li>
+            <li>De la confidentialité des délibérations.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 5 — Composition</h3>
+          <p>L'ICR est composée de 3 à 7 membres titulaires. Les membres élus de la Coordination générale sont éligibles et peuvent faire partie de l'ICR.</p>
+          <p>La présidence de l'Instance Compétente des Retransmissions est attribuée de plein droit au membre élu ayant obtenu le plus grand nombre de suffrages exprimés lors du scrutin. La vice-présidence est attribuée au membre ayant obtenu le deuxième plus grand nombre de suffrages exprimés.</p>
+          <p>Le·la Président·e de l'ICR peut démettre de ses fonctions le·la Vice-président·e si celui·celle-ci n'assure pas correctement les missions attachées à son rôle. Dans ce cas, la vice-présidence est attribuée au membre ayant obtenu le plus grand nombre de suffrages exprimés lors de l'élection initiale parmi les membres restants n'occupant pas déjà la présidence. La décision de démission du·de la Vice-président·e est motivée et notifiée par écrit à l'ensemble des membres de l'ICR.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 6 — Conditions d'éligibilité</h3>
+          <p>Peut être membre de l'ICR tout membre actif ou occasionnel du collectif :</p>
+          <ul>
+            <li>A jour de son accréditation ;</li>
+            <li>Jouissant de ses droits associatifs ;</li>
+            <li>Disposant d'une connaissance suffisante des textes internes ou s'engageant à les maîtriser.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 7 — Incompatibilités, conflits d'intérêts et déport</h3>
+          <p>Tout conflit d'intérêts réel ou potentiel impose une obligation immédiate de déport. Le déport est automatique, obligatoire et mentionné au procès-verbal.</p>
+          <p>En raison du cumul des fonctions de Coordinateur·trice adjoint·e chargé·e de la planification et de Président·e de l'ICR, les règles de déport suivantes s'appliquent de manière spécifique et obligatoire :</p>
+          <ul>
+            <li>Lorsque l'ICR est amenée à examiner, contrôler ou sanctionner une décision de planification des retransmissions prise par le·la Président·e dans le cadre de ses fonctions au sein de la Coordination générale, ce·tte dernier·ère est automatiquement déporté·e pour toute la durée des délibérations et du vote relatifs à cette décision ;</li>
+            <li>En cas de déport du·de la Président·e, la présidence de la séance est assurée de plein droit par le·la Vice-président·e de l'ICR ;</li>
+            <li>Si le·la Vice-président·e est également en situation de déport ou d'empêchement, les membres présents de l'ICR désignent en leur sein un·e président·e de séance ad hoc ;</li>
+            <li>En aucun cas, le·la Président·e déporté·e ne peut participer aux débats, aux délibérations ni au vote portant sur la décision concernée.</li>
+          </ul>
+          <p>Ces dispositions s'appliquent sans préjudice des règles générales de déport applicables à tout membre de l'ICR.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 8 — Durée du mandat</h3>
+          <p>Le mandat des membres de l'ICR est fixé à 2 ans, renouvelable sans limitation.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 9 — Fin anticipée du mandat</h3>
+          <p>Le mandat prend fin par :</p>
+          <ul>
+            <li>Démission ;</li>
+            <li>Empêchement définitif ;</li>
+            <li>Destitution prononcée par l'Assemblée générale.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 10 — Attributions de l'ICR</h3>
+          <p>L'Instance Compétente des Retransmissions est chargée de la planification, de l'organisation, du contrôle des retransmissions et du traitement disciplinaire des manquements. Ses décisions s'imposent à l'ensemble des acteurs du dispositif et des membres du collectif.</p>
+          <p>En matière de retransmissions, elle est notamment compétente pour :</p>
+          <ul>
+            <li>Établir le calendrier prévisionnel des retransmissions des compétitions ;</li>
+            <li>Désigner les rencontres faisant l'objet d'une retransmission ;</li>
+            <li>Prioriser les compétitions en fonction des moyens disponibles ;</li>
+            <li>Valider les équipes de retransmission et leurs rôles ;</li>
+            <li>Définir et faire appliquer les protocoles applicables ;</li>
+            <li>Autoriser, suspendre ou interdire une retransmission.</li>
+          </ul>
+          <p>En matière disciplinaire et de contrôle, elle est notamment compétente pour :</p>
+          <ul>
+            <li>Veiller au respect des règles internes et des statuts ;</li>
+            <li>Traiter les signalements et les manquements aux obligations ;</li>
+            <li>Engager et mener les procédures disciplinaires ;</li>
+            <li>Prononcer les sanctions appropriées ;</li>
+            <li>Contrôler la régularité des processus électoraux ;</li>
+            <li>Statuer sur toute situation non prévue par le présent règlement ;</li>
+            <li>Décider des mesures à prendre en cas d'incident ou de manquement.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 11 — Rapport annuel de l'ICR</h3>
+          <p>L'Instance Compétente des Retransmissions établit, à l'issue de chaque saison sportive, un rapport annuel d'activité qu'elle présente à l'Assemblée générale ordinaire de Meylan Handball TV.</p>
+          <p>Ce rapport est rédigé sous la responsabilité du·de la Président·e de l'ICR et soumis à validation des membres de l'instance avant transmission. Il est communiqué au Bureau de la Coordination générale au moins 7 jours avant la tenue de l'Assemblée générale.</p>
+          <p>Le rapport annuel comprend obligatoirement les éléments suivants :</p>
+          <ul>
+            <li>Le nombre de signalements reçus au cours de la saison, ventilés par catégorie de manquement ;</li>
+            <li>Le nombre de signalements déclarés irrecevables, avec mention des motifs retenus ;</li>
+            <li>Le nombre de procédures disciplinaires ouvertes, closes et en cours ;</li>
+            <li>La nature des sanctions prononcées, présentées de manière anonymisée ;</li>
+            <li>Un bilan des mesures conservatoires ordonnées ;</li>
+            <li>Un état des contestations électorales traitées, le cas échéant ;</li>
+            <li>Les éventuelles recommandations de l'ICR à destination de la Coordination générale ou de l'Assemblée générale concernant l'évolution du règlement ou des pratiques internes.</li>
+          </ul>
+          <p>Les données nominatives ne figurent pas dans la version publique du rapport. Une version complète, incluant les éléments confidentiels, est conservée dans les archives internes de l'ICR et communicable à l'Assemblée générale sur demande motivée, en session à huis clos.</p>
+        </div>
+
+        <div class="doc-titre">Titre III — Organisation des retransmissions</div>
+
+        <div class="doc-article">
+          <h3>Article 12 — Planification des retransmissions</h3>
+          <p>La planification des retransmissions est arrêtée par l'Instance Compétente des Retransmissions.</p>
+          <p>Le calendrier prévisionnel est établi en tenant compte notamment :</p>
+          <ul>
+            <li>Du calendrier sportif officiel ;</li>
+            <li>Des moyens humains et techniques disponibles ;</li>
+            <li>De l'intérêt sportif, associatif ou institutionnel des rencontres ;</li>
+            <li>Des contraintes logistiques et organisationnelles.</li>
+          </ul>
+          <p>L'ICR se réserve le droit de modifier le calendrier de retransmission à tout moment, notamment en cas d'imprévu sportif, technique ou organisationnel.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 13 — Responsable de retransmission</h3>
+
+          <h4>Article 13.1 — Désignation du Responsable de retransmission</h4>
+          <p>Pour chaque rencontre retransmise, l'ICR désigne un responsable de retransmission. Il est l'interlocuteur unique pour toute question relative à la retransmission de la rencontre concernée. Il est identifiable de manière obligatoire grâce à un gilet portant le logo du collectif, qu'il doit porter durant toute la durée de l'événement (installation, retransmission, rangement).</p>
+          <p>Le responsable de retransmission assure les missions suivantes :</p>
+          <ul>
+            <li>Préparation et anticipation, incluant la vérification du matériel et la prise en compte des contraintes du lieu ;</li>
+            <li>Supervision de l'installation, en veillant à la sécurité, au bon positionnement du matériel et au respect des règles des salles ;</li>
+            <li>Répartition des rôles et communication claire avec les membres présents ;</li>
+            <li>Surveillance du bon déroulement de la retransmission, tant sur le plan technique que logistique ;</li>
+            <li>Gestion des imprévus, qu'ils soient techniques, organisationnels ou liés à l'environnement de la salle ;</li>
+            <li>Rangement complet et méthodique du matériel à la fin de l'événement ;</li>
+            <li>Remontée des incidents techniques ou comportementaux à la Coordination générale si nécessaire.</li>
+          </ul>
+          <p>Le responsable ne détient pas d'autorité disciplinaire, mais dispose d'une autorité fonctionnelle lui permettant d'assurer une retransmission fluide, sécurisée et conforme aux standards de Meylan Handball TV.</p>
+
+          <h4>Article 13.2 — Grades du Responsable de retransmission</h4>
+          <p>Au sein de la fonction de Responsable de retransmission est institué un système de grades destiné à distinguer les niveaux de compétences, d'autonomie et de responsabilité des membres exerçant cette fonction.</p>
+          <p>Le système comporte quatre grades, énumérés du niveau le moins élevé au niveau le plus élevé : Responsable de Retransmission Stagiaire (RRS), Responsable de Retransmission (RR), Responsable des Opérations de Retransmission (ROR) et Directeur des Opérations de Retransmission (DOR).</p>
+          <p>Chaque grade confère à son titulaire des pouvoirs déterminés, qui s'exercent dans le respect des dispositions générales du Règlement applicable aux retransmissions des compétitions de Meylan Handball TV et sous l'autorité de la Coordination générale.</p>
+          <p>L'attribution, la confirmation et le retrait d'un grade relèvent de la compétence du Bureau de la Coordination générale, le cas échéant sur proposition de la Coordinatrice adjointe.</p>
+
+          <div class="grade-cards">
+            <div class="grade-card">
+              <div class="grade-card-header">
+                <span class="grade-badge">Grade I</span>
+                <h4>Responsable de Retransmission Stagiaire (RRS)</h4>
+              </div>
+              <div class="grade-card-body">
+                <p>Le Responsable de Retransmission Stagiaire a le pouvoir d'opérer le dispositif de régie sous la supervision directe et continue d'un Responsable de Retransmission titulaire d'un grade supérieur. Il peut assister à la préparation technique d'avant-match (installation, tests de liaison, vérification du matériel), cependant il ne dispose d'aucune autorité de décision sur le dispositif technique et ne peut ni évaluer, ni valider l'accréditation d'un autre membre.</p>
+                <p><strong>Conditions d'accès :</strong> avoir été certifié par le questionnaire d'accréditation de la fonction et attester l'observation d'au moins un match aux côtés d'un titulaire du grade II ou supérieur.</p>
+              </div>
+            </div>
+
+            <div class="grade-card">
+              <div class="grade-card-header">
+                <span class="grade-badge">Grade II</span>
+                <h4>Responsable de Retransmission (RR)</h4>
+              </div>
+              <div class="grade-card-body">
+                <p>Le Responsable de Retransmission a le pouvoir d'encadrer un ou plusieurs Responsables de Retransmission Stagiaires et de leur confier des tâches d'exécution définies. Il peut proposer des ajustements de configuration technique (placement des caméras, routage audio, réglages de diffusion), solliciter directement auprès du Bureau le prêt ou l'affectation de matériel additionnel pour une retransmission donnée, et représenter Meylan Handball TV dans les échanges logistiques et techniques préalables avec le club organisateur ou adverse. Il exerce une autorité autonome sur le dispositif technique pour les productions de niveau 2 et 3 au sens de l'article 14, mais ne dispose d'aucune autorité sur l'affectation des équipes lors des productions multiplex.</p>
+                <p><strong>Conditions d'accès :</strong> avoir été certifié par le questionnaire d'accréditation de la fonction, avoir réalisé au moins trois retransmissions en autonomie dans des conditions satisfaisantes, et justifier de l'absence de sanction disciplinaire active dans le collectif dans les douze derniers mois.</p>
+              </div>
+            </div>
+
+            <div class="grade-card">
+              <div class="grade-card-header">
+                <span class="grade-badge">Grade III</span>
+                <h4>Responsable des Opérations de Retransmission (ROR)</h4>
+              </div>
+              <div class="grade-card-body">
+                <p>Le Responsable des Opérations de Retransmission exerce une autorité autonome sur l'ensemble des niveaux de production, y compris les productions multiplex. Il peut désigner et coordonner la répartition des rôles entre plusieurs Responsables de Retransmission lors d'une production multiplex, suspendre à titre conservatoire une retransmission en cours en cas de risque avéré pour la sécurité des biens ou des personnes (à charge d'en informer sans délai la Coordinatrice adjointe), décider en dernier ressort et en cours de retransmission du basculement vers un dispositif dégradé en cas de contrainte technique ou humaine, et assurer la formation et l'évaluation des Responsables de Retransmission Stagiaires.</p>
+                <p><strong>Conditions d'accès :</strong> avoir été certifié par le questionnaire d'accréditation de la fonction, justifier d'une ancienneté minimale d'une saison complète au grade II, et justifier de l'absence de sanction disciplinaire active dans le collectif dans les douze derniers mois.</p>
+              </div>
+            </div>
+
+            <div class="grade-card">
+              <div class="grade-card-header">
+                <span class="grade-badge">Grade IV</span>
+                <h4>Directeur des Opérations de Retransmission (DOR)</h4>
+              </div>
+              <div class="grade-card-body">
+                <p>Le Directeur des Opérations de Retransmission représente la fonction la plus élevée auprès du Bureau de la Coordination générale dans les décisions structurantes et disciplinaires de Meylan Handball TV. Il représente le collectif dans les relations avec les instances externes, notamment le Comité de l'Isère de Handball ou la Ligue Auvergne-Rhône-Alpes de Handball, sur les sujets relatifs à la retransmission.</p>
+                <p><strong>Conditions d'accès :</strong> avoir été certifié par le questionnaire d'accréditation de la fonction, justifier d'une ancienneté minimale d'une saison complète au grade III, justifier de l'absence de sanction disciplinaire active dans le collectif dans les vingt-quatre derniers mois, et avoir été nommé par l'Instance Compétente des Retransmissions avec approbation du Bureau.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 14 — Critères de priorisation des rencontres</h3>
+          <p>En complément des dispositions de l'article 11, l'Instance Compétente des Retransmissions applique, pour l'établissement du calendrier prévisionnel, la grille de priorisation suivante, par ordre décroissant :</p>
+
+          <div class="priority-level">
+            <h4>Niveau 1 — Retransmissions systématiques, sauf contrainte technique ou humaine constatée</h4>
+            <ul>
+              <li>Matchs à domicile des équipes seniors du club de Meylan Handball engagées en championnat fédéral ou régional de premier niveau ;</li>
+              <li>Finales et demi-finales de compétitions organisées ou accueillies par le club ;</li>
+              <li>Événements officiels impliquant une délégation fédérale ou institutionnelle.</li>
+            </ul>
+          </div>
+
+          <div class="priority-level">
+            <h4>Niveau 2 — Retransmissions souhaitées, sous réserve de disponibilité des ressources</h4>
+            <ul>
+              <li>Matchs à domicile des équipes seniors de second niveau et des équipes espoirs ou jeunes engagées en compétition régionale ;</li>
+              <li>Tournois organisés par le club ;</li>
+              <li>Rencontres à fort enjeu sportif ou associatif identifiées par la Coordination générale.</li>
+            </ul>
+          </div>
+
+          <div class="priority-level">
+            <h4>Niveau 3 — Retransmissions facultatives, réalisées selon les disponibilités résiduelles</h4>
+            <ul>
+              <li>Matchs amicaux ou de préparation ;</li>
+              <li>Compétitions de catégories jeunes hors enjeu de titre ;</li>
+              <li>Événements extérieurs au club pour lesquels MHBTV est sollicité ponctuellement.</li>
+            </ul>
+          </div>
+
+          <p>En cas de conflit de dates entre deux rencontres relevant d'un même niveau de priorité, l'ICR tranche en tenant compte de l'intérêt sportif estimé, de l'audience prévisible et des contraintes logistiques. La décision est actée au procès-verbal de l'ICR et notifiée à la Coordination générale.</p>
+          <p>Aucune rencontre de niveau 3 ne peut être maintenue au calendrier si elle entraîne une réduction des moyens disponibles pour une rencontre de niveau 1 ou 2 programmée le même jour ou dans les 48 heures.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 15 — Conditions minimales de retransmission</h3>
+          <p>Aucune retransmission ne peut être démarrée si les conditions minimales définies au présent article ne sont pas réunies. Il appartient au responsable de retransmission de vérifier le respect de ces conditions avant tout lancement.</p>
+          <p>En matière d'effectif, la retransmission requiert la présence simultanée d'au moins :</p>
+          <ul>
+            <li>Un·e responsable de retransmission désigné·e et accrédité·e ;</li>
+            <li>Un·e opérateur·trice caméra accrédité·e ;</li>
+            <li>Un·e commentateur·trice accrédité·e, ou à défaut, un dispositif de diffusion sans commentaire live expressément validé par la Coordination générale.</li>
+          </ul>
+          <p>Toute retransmission démarrée avec un effectif inférieur au minimum requis engage la responsabilité du responsable de retransmission, sauf autorisation expresse et préalable de la Coordination générale.</p>
+          <p>En matière de matériel, sont obligatoirement opérationnels avant tout lancement :</p>
+          <ul>
+            <li>Le dispositif de captation vidéo principal ;</li>
+            <li>Le système de diffusion en direct et la connexion réseau testée ;</li>
+            <li>Le système de sonorisation ou de captation audio ;</li>
+            <li>L'habillage graphique minimal validé par la Coordination générale.</li>
+          </ul>
+          <p>En matière de conditions techniques, le lancement est suspendu si :</p>
+          <ul>
+            <li>La connexion réseau disponible ne permet pas une diffusion stable dans les standards définis par la Coordination générale ;</li>
+            <li>Le matériel de captation principal est défaillant et aucun matériel de substitution n'est disponible ;</li>
+            <li>Les conditions acoustiques ou lumineuses du lieu rendent la qualité de diffusion manifestement insuffisante sans possibilité de compensation technique.</li>
+          </ul>
+          <p>En cas d'impossibilité de satisfaire aux conditions minimales, le responsable de retransmission en informe sans délai le Coordinateur adjoint à la vie associative, qui décide du maintien, du report ou de l'annulation de la retransmission. Cette décision est consignée et transmise à l'ICR.</p>
+        </div>
+
+        <div class="doc-titre">Titre IV — Procédures en cas d'incident lors d'un direct</div>
+
+        <div class="doc-article">
+          <h3>Article 16 — Procédure d'interruption d'une retransmission en direct</h3>
+          <p>Toute retransmission en direct réalisée sous l'égide de Meylan Handball TV a vocation à être menée à son terme, dans le respect des engagements pris envers le public et le club.</p>
+          <p>Toutefois, une interruption anticipée du direct peut être décidée en cas de nécessité, notamment dans les situations suivantes, sans que cette liste ne soit exhaustive :</p>
+          <ul>
+            <li>Panne technique majeure empêchant la poursuite de la retransmission dans des conditions acceptables ;</li>
+            <li>Incident mettant en cause la sécurité des personnes ou du matériel ;</li>
+            <li>Problème juridique, réglementaire ou d'image pour le club ;</li>
+            <li>Événement exceptionnel rendant impossible la continuité du direct.</li>
+          </ul>
+          <p>Dans ces situations, le responsable de retransmission ne peut décider seul de l'interruption définitive du direct. Il doit impérativement obtenir l'aval préalable du Coordinateur adjoint, ou, en cas d'indisponibilité de ce dernier, de toute personne de la Coordination générale.</p>
+          <p>En cas d'urgence absolue nécessitant une interruption immédiate, le responsable de retransmission peut procéder à une suspension provisoire du direct sans autorisation préalable, mais doit en informer sans délai le Coordinateur adjoint afin de régulariser la décision.</p>
+          <p>Toute interruption devra faire l'objet d'un compte rendu transmis à l'Instance Compétente des Retransmissions.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 17 — Demande d'arrêt de diffusion</h4>
+          <p>Toute demande d'arrêt de diffusion émanant du corps arbitral, d'un délégué officiel ou d'un représentant du club organisateur est immédiatement transmise au responsable de retransmission. La retransmission en direct doit être immédiatement suspendue, sans qu'une autorisation préalable soit requise.</p>
+          <p>Conformément à l'article 16, le responsable de retransmission doit obtenir l'aval du Coordinateur adjoint, ou en cas d'indisponibilité de ce dernier, de toute personne de la Coordination générale, avant de décider de la suite à donner : reprise de la diffusion ou interruption définitive.</p>
+          <p>Toute demande d'arrêt devra faire l'objet d'un compte rendu transmis à l'ICR.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 18 — Incident technique mineur</h4>
+          <p>Tout dysfonctionnement technique n'entraînant pas l'arrêt total de la diffusion, tel qu'une perte audio temporaire, une dégradation de l'image, une latence excessive ou un défaut graphique, est qualifié d'incident technique mineur.</p>
+          <p>Dans une telle situation, la retransmission a vocation à être maintenue, dès lors que la continuité du direct et la compréhension de la rencontre par le public demeurent possibles. L'équipe de retransmission doit adapter les moyens techniques et éditoriaux afin de préserver la qualité globale de la diffusion, sans qu'il soit nécessaire d'en référer au Coordinateur adjoint.</p>
+          <p>Si l'incident technique mineur venait à se prolonger ou à s'aggraver au point de compromettre la qualité globale de la diffusion, il est requalifié en incident technique majeur et les dispositions de l'article 16 s'appliquent.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 19 — Dommages matériels</h4>
+          <p>Tout incident résultant directement ou indirectement du déroulement du jeu, et notamment l'impact d'un ballon ou d'un joueur ayant pour conséquence l'endommagement total ou partiel du matériel de diffusion, est considéré comme un incident accidentel lié à la pratique sportive.</p>
+          <p>La priorité est donnée immédiatement et sans délai à la sécurisation de la zone concernée et à la protection des personnes, sans qu'une autorisation préalable soit requise à cet effet.</p>
+          <p>Toute décision de ne pas reprendre la retransmission à la suite des dommages constatés est soumise à l'aval préalable du Coordinateur adjoint, ou en cas d'indisponibilité de ce dernier, de toute personne de la Coordination générale.</p>
+          <p>Un compte rendu circonstancié de l'incident est établi par le responsable de retransmission et transmis à l'ICR dans les vingt-quatre (24) heures suivant l'événement.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 20 — Urgence médicale</h4>
+          <p>Lorsqu'une situation d'urgence médicale est constatée lors d'un événement retransmis, qu'elle concerne un joueur, un officiel, un spectateur ou un membre du collectif, les priorités suivantes s'appliquent de manière immédiate et impérative :</p>
+          <p>Tout membre du collectif présent sur les lieux ayant connaissance de l'urgence alerte sans délai les secours présents dans l'établissement ou, à défaut, les services d'urgence (15 SAMU, 18 Pompiers, 112). Aucune considération relative à la continuité de la retransmission ne peut retarder cette démarche.</p>
+          <p>Dès qu'une urgence médicale est portée à sa connaissance, le responsable de retransmission suspend immédiatement la captation de la personne concernée. Si la situation l'exige, il procède à une interruption provisoire du direct conformément à l'article 16, sans qu'il soit nécessaire d'obtenir une autorisation préalable dans ce cas précis.</p>
+          <p>Le responsable de retransmission informe sans délai le Coordinateur adjoint de la situation et des mesures prises.</p>
+          <p>Si la retransmission est interrompue ou suspendue, une information sommaire est diffusée à destination du public par tout moyen disponible, sans divulguer d'informations médicales relatives à la personne concernée.</p>
+          <p>Un compte rendu circonstancié est établi par le responsable de retransmission et transmis à l'ICR et à la Coordination générale dans les 24 heures suivant l'événement.</p>
+          <p>Aucune image de la personne en situation de détresse médicale ne peut être diffusée, archivée ou transmise, sauf demande expresse et écrite de la personne concernée ou de ses ayants droit.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 21 — Coupure réseau ou d'alimentation électrique</h4>
+          <p>Une coupure totale de réseau ou d'alimentation électrique affectant l'infrastructure de retransmission constitue un cas de force majeure distinct de l'incident technique mineur visé à l'article 18. Les dispositions suivantes s'appliquent.</p>
+          <p>En cas de coupure de réseau, le responsable de retransmission dispose d'un délai de 5 minutes pour tenter de rétablir la connexion par les moyens de substitution disponibles (partage de connexion mobile, bascule sur un réseau alternatif). Passé ce délai sans rétablissement, la retransmission est considérée comme interrompue et la procédure de l'article 16 s'applique.</p>
+          <p>En cas de coupure d'alimentation électrique, la priorité est donnée à la sécurisation du matériel et des personnes présentes dans l'espace de retransmission. Le responsable de retransmission contacte sans délai le responsable technique de l'établissement hôte pour évaluer le délai de rétablissement. Si ce délai excède 15 minutes ou est indéterminé, la retransmission est officiellement interrompue.</p>
+          <p>Dès la constatation d'une interruption relevant du présent article, la Coordination générale ou le responsable de retransmission publie, sur les canaux officiels du collectif, une information précisant la nature de l'incident et, si possible, un délai estimé de reprise ou la confirmation de l'arrêt définitif. Cette communication intervient dans les 10 minutes suivant le constat d'interruption.</p>
+          <p>Un compte rendu est établi par le responsable de retransmission et transmis à l'ICR dans les 24 heures. Il précise la nature de l'incident, les mesures prises, la durée de l'interruption et les éventuels dommages matériels constatés.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 22 — Incident impliquant le public ou les tribunes</h4>
+          <p>Sont visés par le présent article les incidents survenant dans les tribunes ou espaces publics de l'établissement hôte susceptibles d'affecter le déroulement de la retransmission ou la sécurité des membres du collectif, notamment : envahissement de l'espace de retransmission, altercation entre spectateurs, comportement hostile ou menaçant envers l'équipe de retransmission, ou tout autre trouble à l'ordre public.</p>
+          <p>En cas d'intrusion non autorisée dans l'espace de retransmission, le responsable de retransmission demande fermement à la ou aux personnes concernées de quitter la zone. Si la demande n'est pas respectée, il en informe sans délai le service de sécurité ou les responsables de l'établissement hôte. Aucun membre du collectif ne doit intervenir physiquement.</p>
+          <p>Tout membre du collectif faisant l'objet d'un comportement hostile, menaçant ou harcelant de la part d'un spectateur ou d'un tiers en informe immédiatement le responsable de retransmission. Celui-ci sollicite l'intervention du service de sécurité et peut décider de repositionner l'équipe dans un espace sécurisé. Si la sécurité des membres ne peut être garantie, la retransmission doit être suspendue.</p>
+          <p>En cas d'altercation grave, d'envahissement du terrain ou de tout incident susceptible de menacer la sécurité générale, le responsable de retransmission suspend immédiatement la captation des personnes impliquées et adapte les choix éditoriaux. Il ne lui appartient pas de documenter ou de filmer l'incident à des fins autres que la retransmission sportive.</p>
+          <p>Tout incident relevant du présent article fait l'objet d'un compte rendu transmis à l'ICR et à la Coordination générale dans les 24 heures.</p>
+        </div>
+
+        <div class="doc-titre">Titre V — Contentieux électoral</div>
+
+        <div class="doc-article">
+          <h3>Article 23 — Contestations électorales</h3>
+          <p>Toute contestation électorale doit être déposée dans un délai de 72 heures.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 24 — Pouvoirs de l'ICR en matière électorale</h3>
+          <p>L'ICR peut :</p>
+          <ul>
+            <li>Invalider une candidature ;</li>
+            <li>Annuler tout ou une partie du scrutin ;</li>
+            <li>Ordonner un nouveau vote.</li>
+          </ul>
+          <p>Ses décisions s'imposent à toutes les instances.</p>
+        </div>
+
+        <div class="doc-titre">Titre VI — Responsabilité des membres de l'instance</div>
+
+        <div class="doc-article">
+          <h3>Article 25 — Responsabilité</h3>
+          <p>Tout manquement grave d'un membre de l'ICR peut engager sa responsabilité disciplinaire.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 26 — Destitution</h3>
+          <p>La destitution est prononcée par l'Assemblée générale après procédure contradictoire.</p>
+        </div>
+
+        <div class="doc-titre">Titre VII — Dispositions finales</div>
+
+        <div class="doc-article">
+          <h3>Article 27 — Modification du règlement</h3>
+          <p>Le présent règlement ne peut être modifié que par l'Assemblée générale, sur proposition de la Coordination générale ou de l'ICR. Toute modification doit être portée à la connaissance des membres.</p>
+          <p>Toutefois, la Coordination générale peut procéder directement à la modification du règlement général, sans vote de l'Assemblée générale, lorsque les modifications proposées sont purement formelles, rédactionnelles ou ne portent pas atteinte au fonctionnement du collectif, ni aux droits et obligations de ses membres.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 28 — Entrée en vigueur</h3>
+          <p>Le présent règlement entre en vigueur dès son adoption par l'Assemblée générale de MHBTV. Il est opposable à l'ensemble des membres et instances du collectif.</p>
+        </div>
+
+      </div>
+
+      <div class="doc-closing">
+        <p><strong>Meylan Handball TV — Règlement applicable aux retransmissions des compétitions.</strong> Version du 23 avril 2026. Pour toute question relative à l'interprétation de ce règlement, contactez l'Instance Compétente des Retransmissions (ICR).</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

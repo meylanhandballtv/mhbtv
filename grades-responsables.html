@@ -532,7 +532,7 @@
         </div>
         <h1>Grades des<br><span>Responsables de Retransmission</span></h1>
         <p>La fonction de Responsable de Retransmission suit une progression à cinq grades, du Stagiaire au Directeur
-          des Opérations de Retransmission, selon les articles 14 ter à 14 octies du Règlement général. Chaque grade
+          des Opérations de Retransmission, selon les articles du Règlement général. Chaque grade
           fixe le niveau d'autonomie accordé et les diffusions sur lesquelles le membre peut être désigné.</p>
         <div class="hero-meta">
           <div class="hero-meta-item">
@@ -557,7 +557,7 @@
     <div class="rule-alert" style="margin-top:2rem;">
       <span class="rule-alert-icon">⚖️</span>
       <div class="rule-alert-body">
-        <div class="rule-alert-title">Articles 14 ter à 14 octies — Règlement général MHBTV</div>
+        <div class="rule-alert-title">Règlement général MHBTV</div>
         <div class="rule-alert-text">
           Le grade détermine le niveau d'autonomie d'un Responsable de Retransmission. Les grades de
           <strong>Sous-Directeur des Opérations de Retransmission</strong> et de <strong>Directeur des Opérations de
@@ -790,7 +790,7 @@
     function renderLegend() {
       const legend = document.getElementById('gradeLegend');
       legend.innerHTML = GRADES.map(g => `
-        <div class="legend-row">${gradePillHTML(g)}<span>Art. ${g.article}</span></div>
+        <div class="legend-row">${gradePillHTML(g)}</div>
       `).join('');
     }
 

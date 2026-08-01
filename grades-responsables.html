@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grades | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══ HERO ═══ */
+    .grades-hero {
+      position: relative;
+      padding: 5.5rem 4rem 3.5rem;
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    .grades-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 85% 40%, rgba(232, 0, 29, 0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 50% at 5% 90%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 72px, rgba(255, 255, 255, 0.012) 72px, rgba(255, 255, 255, 0.012) 73px);
+    }
+
+    .hero-watermark {
+      position: absolute;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(20vw, 260px);
+      color: rgba(232, 0, 29, 0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+
+    .grades-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .grades-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .grades-hero h1 span {
+      color: var(--red);
+    }
+
+    .grades-hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .hero-meta-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .hero-meta-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-sep {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+      margin: 0.2rem 0;
+    }
+
+    /* ═══ ALERT ARTICLE 14 ═══ */
+    .rule-alert {
+      margin: 0 4rem;
+      padding: 1.2rem 1.75rem;
+      background: rgba(232, 0, 29, 0.06);
+      border: 1px solid rgba(232, 0, 29, 0.25);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .rule-alert-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .rule-alert-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.35rem;
+    }
+
+    .rule-alert-text {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .rule-alert-text strong {
+      color: var(--text);
+    }
+
+    /* ═══ LAYOUT PRINCIPAL ═══ */
+    .grades-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2.5rem;
+      padding: 3rem 4rem;
+      align-items: start;
+    }
+
+    /* ═══ PROGRESSION — LIGNE DE GRADES ═══ */
+    .grade-track {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 2.5rem;
+    }
+
+    .grade-rail {
+      position: absolute;
+      left: 27px;
+      top: 30px;
+      bottom: 30px;
+      width: 2px;
+      background: linear-gradient(180deg, #52525b, var(--red));
+      z-index: 0;
+    }
+
+    .grade-card {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+    }
+
+    .grade-badge {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      background: var(--card);
+      border: 2px solid var(--border);
+      color: var(--muted);
+    }
+
+    .grade-card.lvl-1 .grade-badge { border-color: #52525b; color: #b0bec5; }
+    .grade-card.lvl-2 .grade-badge { border-color: #63b3ed; color: #63b3ed; background: rgba(99,179,237,0.08); }
+    .grade-card.lvl-3 .grade-badge { border-color: #f0b429; color: #f0b429; background: rgba(240,180,41,0.08); }
+    .grade-card.lvl-4 .grade-badge { border-color: #fb923c; color: #fb923c; background: rgba(251,146,60,0.08); }
+    .grade-card.lvl-5 .grade-badge { border-color: var(--red); color: var(--red); background: rgba(232,0,29,0.1); box-shadow: 0 0 0 4px rgba(232,0,29,0.08); }
+
+    .grade-body {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .grade-body-header {
+      padding: 1.25rem 1.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .grade-title-block { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .grade-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      line-height: 1.1;
+    }
+
+    .grade-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .grade-level-pill {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.7rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+
+    .lvl-1 .grade-level-pill { background: rgba(176,190,197,0.1); color: #b0bec5; border: 1px solid rgba(176,190,197,0.25); }
+    .lvl-2 .grade-level-pill { background: rgba(99,179,237,0.1); color: #63b3ed; border: 1px solid rgba(99,179,237,0.25); }
+    .lvl-3 .grade-level-pill { background: rgba(240,180,41,0.1); color: #f0b429; border: 1px solid rgba(240,180,41,0.3); }
+    .lvl-4 .grade-level-pill { background: rgba(251,146,60,0.1); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+    .lvl-5 .grade-level-pill { background: rgba(232,0,29,0.12); color: var(--red); border: 1px solid rgba(232,0,29,0.35); }
+
+    .grade-body-content {
+      padding: 1.25rem 1.75rem;
+    }
+
+    .grade-info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.86rem;
+    }
+
+    .grade-info-row:last-child { border-bottom: none; }
+
+    .grade-info-row .gi-label {
+      color: var(--muted);
+      white-space: nowrap;
+      min-width: 110px;
+    }
+
+    .grade-info-row .gi-val { color: var(--text); line-height: 1.55; }
+
+    .grade-info-row .gi-val strong { color: var(--white); }
+
+    /* ═══ MEMBRES TABLE ═══ */
+    .members-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .search-box { position: relative; display: flex; align-items: center; }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .search-input {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.85rem;
+      padding: 0.5rem 0.9rem 0.5rem 2.2rem;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 200px;
+    }
+
+    .search-input::placeholder { color: var(--muted); }
+    .search-input:focus { border-color: var(--red); }
+
+    .filter-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+    .chip {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .chip:hover { color: var(--white); border-color: #555; }
+
+    .chip.active {
+      background: rgba(232, 0, 29, 0.12);
+      border-color: rgba(232, 0, 29, 0.4);
+      color: var(--red);
+    }
+
+    .members-table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .members-table { width: 100%; border-collapse: collapse; }
+
+    .members-table thead tr {
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .members-table th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.75rem 1.25rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .members-table td {
+      padding: 0.9rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      vertical-align: middle;
+      font-size: 0.88rem;
+    }
+
+    .members-table tbody tr:last-child td { border-bottom: none; }
+    .members-table tbody tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    .member-name-cell { display: flex; align-items: center; gap: 0.75rem; }
+
+    .m-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      color: var(--white);
+    }
+
+    .m-fullname {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--white);
+    }
+
+    .m-role { font-size: 0.75rem; color: var(--muted); }
+
+    /* Grade badge dans le tableau */
+    .grade-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .grade-pill-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    .grade-pill.g1 { background: rgba(176,190,197,0.1); color: #b0bec5; border: 1px solid rgba(176,190,197,0.25); }
+    .grade-pill.g1 .grade-pill-dot { background: #b0bec5; }
+    .grade-pill.g2 { background: rgba(99,179,237,0.1); color: #63b3ed; border: 1px solid rgba(99,179,237,0.25); }
+    .grade-pill.g2 .grade-pill-dot { background: #63b3ed; }
+    .grade-pill.g3 { background: rgba(240,180,41,0.1); color: #f0b429; border: 1px solid rgba(240,180,41,0.3); }
+    .grade-pill.g3 .grade-pill-dot { background: #f0b429; }
+    .grade-pill.g4 { background: rgba(251,146,60,0.1); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+    .grade-pill.g4 .grade-pill-dot { background: #fb923c; }
+    .grade-pill.g5 { background: rgba(232,0,29,0.12); color: var(--red); border: 1px solid rgba(232,0,29,0.35); }
+    .grade-pill.g5 .grade-pill-dot { background: var(--red); }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .action-btn:hover { border-color: var(--red); color: var(--red); }
+
+    .table-footer {
+      padding: 0.75rem 1.25rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .table-footer-info { font-size: 0.78rem; color: var(--muted); }
+
+    .member-row { transition: opacity 0.15s; }
+    .member-row.hidden { display: none; }
+
+    /* ═══ SIDEBAR ═══ */
+    .grades-sidebar { position: sticky; top: 80px; }
+
+    .sidebar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .sidebar-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.83rem;
+    }
+
+    .stat-row:last-child { border-bottom: none; }
+    .stat-row .s-label { color: var(--muted); }
+    .stat-row .s-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; line-height: 1; }
+
+    .legend-block { display: flex; flex-direction: column; gap: 0.5rem; }
+    .legend-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.8rem; color: var(--muted); }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 1050px) {
+      .grades-layout { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .grades-sidebar { position: static; }
+    }
+
+    @media (max-width: 900px) {
+      .grades-hero { padding: 5rem 1.5rem 2.5rem; }
+      .rule-alert { margin: 0 1.5rem; flex-direction: column; gap: 0.75rem; }
+      .members-header { flex-direction: column; align-items: flex-start; }
+      .search-input { width: 100%; }
+      .grade-card { grid-template-columns: 40px 1fr; gap: 1rem; }
+      .grade-badge { width: 40px; height: 40px; font-size: 1.1rem; }
+      .grade-rail { left: 19px; }
+    }
+
+    @media (max-width: 600px) {
+      .members-table th, .members-table td { padding: 0.7rem 0.9rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- ═══ HERO ═══ -->
+    <div class="grades-hero">
+      <div class="hero-watermark">GRADES</div>
+      <div class="grades-hero-content">
+        <div
+          style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,0,29,0.1);border:1px solid rgba(232,0,29,0.25);border-radius:4px;padding:0.3rem 0.8rem;margin-bottom:1.25rem;">
+          <span style="width:7px;height:7px;background:var(--red);border-radius:50%;display:inline-block;"></span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);">Accès réservé aux membres</span>
+        </div>
+        <h1>Grades des<br><span>Responsables de Retransmission</span></h1>
+        <p>La fonction de Responsable de Retransmission suit une progression à cinq grades, du Stagiaire au Directeur
+          des Opérations de Retransmission, selon les articles 14 ter à 14 octies du Règlement général. Chaque grade
+          fixe le niveau d'autonomie accordé et les diffusions sur lesquelles le membre peut être désigné.</p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <span class="hero-meta-value" id="stat-total">—</span>
+            <span class="hero-meta-label">Responsables suivis</span>
+          </div>
+          <div class="hero-sep"></div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-value" id="stat-autonomes">—</span>
+            <span class="hero-meta-label">Autonomes seuls</span>
+          </div>
+          <div class="hero-sep"></div>
+          <div class="hero-meta-item">
+            <span class="hero-meta-value" id="stat-grades">5</span>
+            <span class="hero-meta-label">Grades existants</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ ALERTE ARTICLE 14 ═══ -->
+    <div class="rule-alert" style="margin-top:2rem;">
+      <span class="rule-alert-icon">⚖️</span>
+      <div class="rule-alert-body">
+        <div class="rule-alert-title">Articles 14 ter à 14 octies — Règlement général MHBTV</div>
+        <div class="rule-alert-text">
+          Le grade détermine le niveau d'autonomie d'un Responsable de Retransmission. Les grades de
+          <strong>Sous-Directeur des Opérations de Retransmission</strong> et de <strong>Directeur des Opérations de
+          Retransmission</strong> peuvent être désignés seuls sur une diffusion, qu'elle soit simple ou complexe /
+          multiplex — les grades inférieurs restent limités selon leur niveau d'habilitation.
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ LAYOUT PRINCIPAL ═══ -->
+    <div class="grades-layout">
+      <div>
+
+        <!-- PROGRESSION DES GRADES -->
+        <div style="margin-bottom:1rem;">
+          <h2 class="section-title">Échelle des <span>grades</span></h2>
+          <div class="section-line"></div>
+        </div>
+
+        <div class="grade-track" id="gradeTrack">
+          <div class="grade-rail"></div>
+          <!-- Cartes injectées par JS -->
+        </div>
+
+        <!-- TABLEAU MEMBRES -->
+        <div>
+          <div class="members-header">
+            <div>
+              <h2 class="section-title">Grade actuel des <span>Responsables</span></h2>
+              <div class="section-line" style="margin-bottom:0;"></div>
+            </div>
+            <div style="display:flex;gap:0.75rem;align-items:center;flex-wrap:wrap;">
+              <div class="filter-chips" id="gradeFilterChips">
+                <button class="chip active" onclick="filterTable('all',this)">Tous</button>
+              </div>
+              <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input class="search-input" type="text" placeholder="Rechercher…" id="searchInput" oninput="searchMembers(this.value)">
+              </div>
+            </div>
+          </div>
+
+          <div class="members-table-wrap">
+            <table class="members-table" id="membersTable">
+              <thead>
+                <tr>
+                  <th style="width:220px;">Membre</th>
+                  <th>Poste dans MHBTV</th>
+                  <th>Grade actuel</th>
+                  <th>Depuis</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="membersBody">
+                <!-- Les lignes sont injectées par JS -->
+              </tbody>
+            </table>
+            <div class="table-footer">
+              <span class="table-footer-info" id="tableCount">— membres affichés</span>
+              <span class="table-footer-info" style="color:var(--muted);">Données d'exemple — à mettre à jour</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /main col -->
+
+      <!-- ═══ SIDEBAR ═══ -->
+      <aside class="grades-sidebar">
+
+        <!-- Stats -->
+        <div class="sidebar-card">
+          <h3>Vue d'ensemble</h3>
+          <div class="stat-row"><span class="s-label">Total suivi</span><span class="s-val" style="color:var(--white);" id="sb-total">—</span></div>
+          <div class="stat-row"><span class="s-label">Peuvent être seuls</span><span class="s-val" style="color:#fb923c;" id="sb-autonomes">—</span></div>
+        </div>
+
+        <!-- Légende -->
+        <div class="sidebar-card">
+          <h4>Légende des grades</h4>
+          <div class="legend-block" id="gradeLegend"></div>
+        </div>
+
+        <!-- Contact -->
+        <div class="sidebar-card" style="background:rgba(232,0,29,0.05);border-color:rgba(232,0,29,0.2);">
+          <h4>Passage de grade</h4>
+          <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Le passage au grade
+            supérieur est proposé par la Coordination générale ou l'ICR, sur la base de l'expérience acquise en
+            diffusion. Pour toute question, contactez la Coordination générale.</p>
+          <a href="equipe.html" class="btn btn-outline"
+            style="width:100%;justify-content:center;font-size:0.78rem;">Voir les contacts →</a>
+        </div>
+
+      </aside>
+    </div><!-- /layout -->
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="accreditations.html">Accréditations</a></li>
+        <li><a href="grades.html">Grades</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+
+  <script>
+    /* ════════════════════════════════════════════════════════
+       DÉFINITION DES GRADES — Article 14 ter à 14 octies
+       niveau : 1 (le plus bas) à 5 (le plus haut)
+       seul   : true si peut être désigné seul sur une diffusion
+    ════════════════════════════════════════════════════════ */
+    const GRADES = [
+      {
+        id: 'stagiaire', niveau: 1, icone: '👁️',
+        nom: 'Responsable de Retransmission Stagiaire',
+        sous_titre: 'Grade d\'entrée — observation et découverte du poste',
+        perimetre: 'Observe une retransmission encadrée par un Responsable confirmé. Se familiarise avec le matériel et l\'organisation d\'une diffusion.',
+        prerequis: 'Aucun — grade d\'entrée dans la filière Responsable de Retransmission.',
+        autonomie: 'Ne peut jamais être désigné seul sur une diffusion.',
+        article: ''
+      },
+      {
+        id: 'assistant', niveau: 2, icone: '🧰',
+        nom: 'Responsable de Retransmission Assistant',
+        sous_titre: 'Seconde un Responsable en conditions réelles',
+        perimetre: 'Assiste activement un Responsable de Retransmission ou un grade supérieur : gestion partielle de la régie, coordination d\'une partie de l\'équipe.',
+        prerequis: 'Avoir été Stagiaire lors d\'au moins une retransmission.',
+        autonomie: 'Ne peut pas être désigné seul sur une diffusion.',
+        article: ''
+      },
+      {
+        id: 'responsable', niveau: 3, icone: '🎬',
+        nom: 'Responsable de Retransmission',
+        sous_titre: 'Grade de référence — autonome sur diffusion simple',
+        perimetre: 'Supervise techniquement la diffusion : régie, flux vidéo/audio, coordination de l\'équipe sur le terrain, gestion des imprévus techniques.',
+        prerequis: 'Avoir été Assistant, maîtriser le matériel MHBTV, être accrédité selon l\'article 12.',
+        autonomie: 'Peut être désigné seul sur une diffusion simple.',
+        article: ''
+      },
+      {
+        id: 'sous-directeur', niveau: 4, icone: '🧭',
+        nom: 'Sous-Directeur des Opérations de Retransmission',
+        sous_titre: 'Encadrement des équipes et diffusions complexes',
+        perimetre: 'Supervise plusieurs postes techniques simultanément, encadre les grades inférieurs, peut piloter une diffusion complexe ou multiplex.',
+        prerequis: 'Expérience confirmée en tant que Responsable de Retransmission, sur proposition de la Coordination générale ou de l\'ICR.',
+        autonomie: 'Peut être désigné seul sur une diffusion, simple ou complexe / multiplex.',
+        article: ''
+      },
+      {
+        id: 'directeur', niveau: 5, icone: '🏆',
+        nom: 'Directeur des Opérations de Retransmission',
+        sous_titre: 'Grade le plus élevé de la filière',
+        perimetre: 'Supervision globale des opérations de retransmission du club, référent technique et organisationnel, arbitre les décisions en cas de désaccord sur le terrain.',
+        prerequis: 'Expérience confirmée en tant que Sous-Directeur des Opérations de Retransmission, validation par la Coordination générale.',
+        autonomie: 'Peut être désigné seul sur une diffusion, simple ou complexe / multiplex.',
+        article: ''
+      },
+    ];
+
+    /* ════════════════════════════════════════════════════════
+       MEMBRES — données d'exemple, à adapter aux grades réels
+    ════════════════════════════════════════════════════════ */
+    const MEMBRES = [
+      { prenom: "Xavier", nom: "FINI", initiales: "XF", couleur: "#c0392b", role: "Coordinateur général", grade: "directeur", depuis: "2025-2026" },
+      { prenom: "Marie", nom: "DAL ZOTTO", initiales: "MD", couleur: "#8e44ad", role: "Coordinatrice adjointe", grade: "sous-directeur", depuis: "2025-2026" },
+      { prenom: "Enzo", nom: "ACHOUR", initiales: "EA", couleur: "#16a085", role: "Coordinateur délégué ICR", grade: "responsable", depuis: "2025-2026" },
+      { prenom: "Ennio", nom: "ARIZZI", initiales: "ENA", couleur: "#e74c3c", role: "Membre MHBTV", grade: "assistant", depuis: "2025-2026" },
+      { prenom: "Kylian", nom: "TOUR", initiales: "KT", couleur: "#2c3e50", role: "Membre MHBTV", grade: "stagiaire", depuis: "2025-2026" },
+    ];
+
+    const nomComplet = m => [m.prenom, m.nom].filter(Boolean).join(' ');
+    const gradeOf = id => GRADES.find(g => g.id === id);
+
+    function avatarHTML(m) {
+      return `<div class="m-avatar" style="background:${m.couleur}22;border:1px solid ${m.couleur}44;color:${m.couleur};">${m.initiales}</div>`;
+    }
+
+    function gradePillHTML(g) {
+      return `<span class="grade-pill g${g.niveau}"><span class="grade-pill-dot"></span>${g.nom.replace('Responsable de Retransmission ', '').replace('Responsable de Retransmission', 'Responsable')}</span>`;
+    }
+
+    /* ─── Rendu de la progression des grades ─── */
+    function renderGradeTrack() {
+      const track = document.getElementById('gradeTrack');
+      GRADES.forEach(g => {
+        const card = document.createElement('div');
+        card.className = `grade-card lvl-${g.niveau}`;
+        card.innerHTML = `
+          <div class="grade-badge">${g.icone}</div>
+          <div class="grade-body">
+            <div class="grade-body-header">
+              <div class="grade-title-block">
+                <div class="grade-name">${g.nom}</div>
+                <div class="grade-sub">${g.sous_titre}</div>
+              </div>
+              <span class="grade-level-pill">Niveau ${g.niveau} · Art. ${g.article}</span>
+            </div>
+            <div class="grade-body-content">
+              <div class="grade-info-row"><span class="gi-label">Périmètre</span><span class="gi-val">${g.perimetre}</span></div>
+              <div class="grade-info-row"><span class="gi-label">Prérequis</span><span class="gi-val">${g.prerequis}</span></div>
+              <div class="grade-info-row"><span class="gi-label">Autonomie</span><span class="gi-val"><strong>${g.autonomie}</strong></span></div>
+            </div>
+          </div>
+        `;
+        track.appendChild(card);
+      });
+    }
+
+    /* ─── Légende sidebar ─── */
+    function renderLegend() {
+      const legend = document.getElementById('gradeLegend');
+      legend.innerHTML = GRADES.map(g => `
+        <div class="legend-row">${gradePillHTML(g)}<span>Art. ${g.article}</span></div>
+      `).join('');
+    }
+
+    /* ─── Filtres du tableau (générés depuis GRADES) ─── */
+    function renderFilterChips() {
+      const wrap = document.getElementById('gradeFilterChips');
+      GRADES.forEach(g => {
+        const btn = document.createElement('button');
+        btn.className = 'chip';
+        btn.textContent = g.nom.replace('Responsable de Retransmission ', '').replace('Responsable de Retransmission', 'Responsable');
+        btn.onclick = () => filterTable(g.id, btn);
+        wrap.appendChild(btn);
+      });
+    }
+
+    /* ─── Tableau des membres ─── */
+    function renderTable() {
+      const tbody = document.getElementById('membersBody');
+      tbody.innerHTML = '';
+      MEMBRES.forEach(m => {
+        const g = gradeOf(m.grade);
+        const nc = nomComplet(m);
+        const tr = document.createElement('tr');
+        tr.className = 'member-row';
+        tr.dataset.grade = m.grade;
+        tr.dataset.name = nc.toLowerCase();
+        tr.innerHTML = `
+          <td>
+            <div class="member-name-cell">
+              ${avatarHTML(m)}
+              <div>
+                <div class="m-fullname">${nc}</div>
+                <div class="m-role">${m.role}</div>
+              </div>
+            </div>
+          </td>
+          <td style="color:var(--muted);font-size:0.82rem;">${m.role}</td>
+          <td>${gradePillHTML(g)}</td>
+          <td style="color:var(--muted);font-size:0.82rem;">${m.depuis}</td>
+          <td><a href="equipe.html" class="action-btn">Profil →</a></td>
+        `;
+        tbody.appendChild(tr);
+      });
+      updateCount();
+    }
+
+    function updateCount() {
+      const visible = document.querySelectorAll('.member-row:not(.hidden)').length;
+      const el = document.getElementById('tableCount');
+      if (el) el.textContent = `${visible} membre${visible > 1 ? 's' : ''} affiché${visible > 1 ? 's' : ''}`;
+    }
+
+    /* ─── Stats hero + sidebar ─── */
+    function updateStats() {
+      const tot = MEMBRES.length;
+      const autonomes = MEMBRES.filter(m => gradeOf(m.grade).autonomie.startsWith('Peut être désigné seul')).length;
+      ['stat-total', 'sb-total'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = tot; });
+      ['stat-autonomes', 'sb-autonomes'].forEach(id => { const el = document.getElementById(id); if (el) el.textContent = autonomes; });
+    }
+
+    /* ─── Filtres tableau ─── */
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function applyFilters() {
+      document.querySelectorAll('.member-row').forEach(row => {
+        const ok = (currentFilter === 'all' || row.dataset.grade === currentFilter)
+                && row.dataset.name.includes(currentSearch.toLowerCase());
+        row.classList.toggle('hidden', !ok);
+      });
+      updateCount();
+    }
+
+    function filterTable(type, btn) {
+      currentFilter = type;
+      document.querySelectorAll('#gradeFilterChips .chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    }
+
+    function searchMembers(val) { currentSearch = val; applyFilters(); }
+
+    /* ════════════════════════════════════════════════════════
+       INIT
+    ════════════════════════════════════════════════════════ */
+    renderGradeTrack();
+    renderLegend();
+    renderFilterChips();
+    renderTable();
+    updateStats();
+  </script>
+</body>
+
+</html>

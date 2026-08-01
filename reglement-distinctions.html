@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement Distinctions & Reconnaissances | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .doc-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-body { margin: 0 auto; }
+    .doc-body-wide { margin: 0 auto; }
+
+    .doc-preamble {
+      margin: 0 auto 3rem auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+    }
+    .doc-preamble h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble ul { margin: 0 0 0.9rem 1.4rem; padding: 0; }
+    .doc-preamble li {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .doc-preamble p:last-child, .doc-preamble ul:last-child { margin-bottom: 0; }
+
+    .doc-titre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-titre:first-of-type { margin-top: 0; }
+
+    .doc-article { margin-bottom: 2rem; }
+    .doc-article h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .doc-article p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-article ul {
+      margin: 0 0 0.9rem 1.4rem;
+      padding: 0;
+    }
+    .doc-article li {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .doc-article strong { color: var(--white); }
+
+    /* Section distinction (ordre / médaille / croix) */
+    .distinction-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .distinction-header {
+      background: linear-gradient(135deg, rgba(240,180,41,0.12), rgba(240,180,41,0.02));
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .distinction-icon { font-size: 1.75rem; flex-shrink: 0; }
+    .distinction-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.04em;
+      color: var(--white);
+      margin: 0;
+    }
+    .distinction-body { padding: 1.75rem 2rem; }
+    .distinction-body p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .distinction-body h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 1.25rem 0 0.6rem 0;
+    }
+    .distinction-body h4:first-child { margin-top: 0; }
+    .distinction-body ul { margin: 0 0 1rem 1.4rem; padding: 0; }
+    .distinction-body li {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .grade-table-wrap {
+      overflow-x: auto;
+      margin: 0.75rem 0 1.25rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .grade-table {
+      width: 100%;
+      min-width: 560px;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+    .grade-table th {
+      background: rgba(240,180,41,0.1);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-align: left;
+      padding: 0.65rem 0.9rem;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .grade-table td {
+      padding: 0.65rem 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .grade-table td:first-child { color: var(--gold); font-weight: 700; white-space: nowrap; }
+    .grade-table td:nth-child(2) { color: var(--white); font-weight: 600; white-space: nowrap; }
+    .grade-table tr:last-child td { border-bottom: none; }
+
+    .doc-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .doc-table th {
+      background: rgba(232,0,29,0.08);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table td {
+      padding: 0.75rem 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .doc-table tr:last-child td { border-bottom: none; }
+    .doc-table td.doc-td-label { color: var(--white); font-weight: 600; }
+
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0 auto 2.5rem auto;
+    }
+    .doc-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .doc-back:hover { color: var(--red); }
+
+    .doc-closing {
+      margin: 3rem auto 0 auto;
+      padding: 1.75rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+    }
+    .doc-closing p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Document officiel</div>
+        <h1>Règlement relatif aux <em>Distinctions et aux Reconnaissances</em></h1>
+        <p class="hero-sub">Ordres, médailles et croix honorifiques instaurés par Meylan Handball TV pour reconnaître l'engagement de ses membres.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="statuts.html" class="doc-back">← Retour aux statuts & règlements</a>
+        <a href="reglement-distinctions.pdf" class="btn btn-outline" style="padding:0.5rem 1.25rem;font-size:0.75rem;">Télécharger le PDF</a>
+      </div>
+
+      <div class="doc-meta">
+        <span>Version du <strong>23 juin 2026</strong></span>
+        <span>53 articles</span>
+        <span>4 ordres · 8 distinctions uniques</span>
+      </div>
+
+      <div class="doc-preamble">
+        <h4>Préambule</h4>
+        <p>Meylan Handball TV (ci-après « MHBTV » ou « collectif ») est un collectif de bénévoles dédié à la couverture médiatique des rencontres sportives du club de Meylan Handball. La qualité de ses retransmissions, la rigueur de ses membres et leur engagement constant constituent le fondement de sa réputation et de son développement.</p>
+        <p>Afin de reconnaître et de valoriser les contributions exceptionnelles de ses membres, qu'elles soient techniques, rédactionnelles, organisationnelles ou humaines, le Bureau de la Coordination générale institue un système de distinctions honorifiques structuré en plusieurs ordres, médailles et croix.</p>
+        <p>Ce système de distinctions vise à :</p>
+        <ul>
+          <li>Reconnaître l'engagement bénévole dans la durée ;</li>
+          <li>Valoriser l'excellence technique et éditoriale ;</li>
+          <li>Honorer la fidélité, la loyauté et le fair-play au sein du collectif ;</li>
+          <li>Encourager le dévouement et les initiatives remarquables ;</li>
+          <li>Renforcer la cohésion interne et la fierté d'appartenance à MHBTV.</li>
+        </ul>
+        <p>Les distinctions décernées par MHBTV sont des marques honorifiques internes. Elles n'emportent aucun effet juridique, avantage matériel ou rémunération, mais constituent une reconnaissance officielle de la valeur et du mérite de leurs récipiendaires.</p>
+        <p>Le présent règlement définit la nature, les conditions d'attribution, les procédures et les effets de chacune des distinctions instituées par Meylan Handball TV.</p>
+      </div>
+
+      <div class="doc-body">
+
+        <div class="doc-titre">Titre I — Dispositions générales</div>
+
+        <div class="doc-article">
+          <h3>Article 1 — Objet</h3>
+          <p>Le présent règlement a pour objet d'instituer et de régir l'ensemble des distinctions honorifiques délivrées par Meylan Handball TV en reconnaissance des mérites, de l'engagement et des apports de ses membres, collaborateurs et partenaires.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 2 — Champ d'application</h3>
+          <p>Les distinctions prévues au présent règlement peuvent être attribuées :</p>
+          <ul>
+            <li>Aux membres actifs de MHBTV, qu'ils exercent des fonctions techniques, éditoriales, organisationnelles ou administratives ;</li>
+            <li>Aux membres honoraires et anciens membres ayant contribué de façon significative à MHBTV ;</li>
+            <li>A titre exceptionnel, à des personnes extérieures à Meylan Handball TV ayant rendu des services éminents au collectif ou à son rayonnement.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 3 — Classification des distinctions</h3>
+          <p>MHBTV institue les distinctions suivantes, réparties en deux catégories :</p>
+          <p><strong>A. Ordres hiérarchiques à plusieurs niveaux :</strong></p>
+          <ul>
+            <li>Ordre du Mérite de Meylan Handball TV (5 niveaux) ;</li>
+            <li>Ordre de la Représentation Institutionnelle (5 niveaux) ;</li>
+            <li>Ordre des Responsables de Retransmissions (5 niveaux) ;</li>
+            <li>Ordre de la Résilience (5 niveaux).</li>
+          </ul>
+          <p><strong>B. Distinctions à niveau unique :</strong></p>
+          <ul>
+            <li>Médaille d'Honneur des Retransmissions ;</li>
+            <li>Croix du Service Continu ;</li>
+            <li>Médaille des Commentateurs et Présentateurs ;</li>
+            <li>Médaille du Rayonnement ;</li>
+            <li>Croix du Bénévolat ;</li>
+            <li>Ordre du Fair-Play ;</li>
+            <li>Médaille des Missions Spéciales et Exceptionnelles ;</li>
+            <li>Croix du Formateur.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 4 — Autorité compétente</h3>
+          <p>L'attribution de toute distinction est de la compétence exclusive du Bureau de Meylan Handball TV, réuni en séance ordinaire ou extraordinaire. Toute décision d'attribution est prise à la majorité absolue des membres du Bureau présents et votants.</p>
+          <p>Pour les distinctions à niveau unique, la proposition peut émaner de tout membre du Bureau ou de tout membre actif du collectif, sous réserve de réunir la signature d'au moins deux membres du Bureau à titre de parrainage.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 5 — Principe de non-cumul et de progression</h3>
+          <p>Au sein d'un même ordre hiérarchique, un membre ne peut détenir qu'un seul niveau à la fois. La progression s'opère de niveau en niveau, sans possibilité de saut de grade, sauf dérogation exceptionnelle accordée à l'unanimité du Bureau.</p>
+          <p>Un membre peut en revanche être titulaire simultanément de distinctions appartenant à des ordres ou catégories différents.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 6 — Périodicité des attributions</h3>
+          <p>Les distinctions sont attribuées à l'occasion :</p>
+          <ul>
+            <li>De l'assemblée générale annuelle ou trimestrielle du collectif ;</li>
+            <li>D'une séance spéciale du Bureau convoquée à cet effet ;</li>
+            <li>A titre exceptionnel, lors d'événements marquants de la vie du collectif.</li>
+          </ul>
+          <p>Aucune limitation n'est fixée quant au nombre total de distinctions pouvant être attribuées au cours d'une même période, sous réserve du respect des conditions prévues au présent règlement.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 7 — Registre des distinctions</h3>
+          <p>Le Coordinateur général de Meylan Handball TV tient un registre officiel des distinctions, dans lequel sont consignés, pour chaque récipiendaire : son identité, la distinction attribuée, la date d'attribution, le motif officiel et la référence de la délibération du Bureau.</p>
+          <p>Ce registre est conservé de façon permanente dans les archives de la Coordination générale et peut être consulté par tout membre sur demande adressée au Bureau.</p>
+        </div>
+      </div>
+
+      <!-- TITRE II — large body pour les tableaux -->
+      <div class="doc-body-wide">
+        <div class="doc-titre">Titre II — Les différentes distinctions</div>
+
+        <!-- Section 1 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">🏵️</span>
+            <h3>Section 1 — L'Ordre du Mérite de Meylan Handball TV</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 8 — Institution et objet</h4>
+            <p>Il est institué un Ordre du Mérite de Meylan Handball TV, distinction suprême de MHBTV destinée à récompenser les membres dont la contribution globale au collectif se distingue par son excellence, sa durée, son impact et sa polyvalence.</p>
+            <p>L'Ordre du Mérite constitue la plus haute distinction que Meylan Handball TV puisse décerner à l'un de ses membres. Il reconnaît une trajectoire d'engagement exemplaire et durable au service de MHBTV dans toutes ses dimensions.</p>
+
+            <h4>Article 9 — Niveaux et conditions d'attribution</h4>
+            <p>L'Ordre du Mérite de Meylan Handball TV comprend 5 niveaux, attribués dans l'ordre croissant suivant :</p>
+            <div class="grade-table-wrap">
+              <table class="grade-table">
+                <thead><tr><th>Niveau</th><th>Grade</th><th>Condition principale</th><th>Ancienneté min.</th></tr></thead>
+                <tbody>
+                  <tr><td>I</td><td>Chevalier</td><td>Contribution notable et régulière sur une saison complète</td><td>1 an</td></tr>
+                  <tr><td>II</td><td>Officier</td><td>Contribution significative et diversifiée reconnue sur plusieurs saisons</td><td>1 an</td></tr>
+                  <tr><td>III</td><td>Commandeur</td><td>Rôle de pilier technique ou organisationnel de MHBTV</td><td>1 an</td></tr>
+                  <tr><td>IV</td><td>Grand Officier</td><td>Contribution majeure ayant façonné l'identité ou l'organisation de MHBTV</td><td>2 ans</td></tr>
+                  <tr><td>V</td><td>Grand-Croix</td><td>Mérite exceptionnel et historique ; reconnaissance à vie</td><td>2 ans</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>L'ancienneté minimale s'apprécie à compter de la date d'adhésion effective à MHBTV, sous réserve d'une activité continue et documentée sur la période concernée.</p>
+
+            <h4>Article 10 — Critères qualitatifs d'attribution</h4>
+            <p>Au-delà des conditions de durée, l'attribution à chaque niveau requiert la réunion de critères qualitatifs. Le Bureau apprécie notamment :</p>
+            <ul>
+              <li>La régularité de la participation aux retransmissions et événements de MHBTV ;</li>
+              <li>La qualité technique du travail accompli (réalisation, son, image, commentaire) ;</li>
+              <li>La capacité à former, encadrer ou soutenir d'autres membres ;</li>
+              <li>La contribution au développement du collectif (nouveaux outils, partenariats, initiatives) ;</li>
+              <li>Le comportement exemplaire et la représentation positive de MHBTV.</li>
+            </ul>
+            <p>Pour les grades de Grand Officier et Grand-Croix, une lettre de motivation rédigée par le Bureau devra être conservée dans les archives de Meylan Handball TV aux côtés de la délibération.</p>
+          </div>
+        </div>
+
+        <!-- Section 2 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">🎖️</span>
+            <h3>Section 2 — L'Ordre de la Représentation Institutionnelle</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 11 — Institution et objet</h4>
+            <p>Il est institué un Ordre de la Représentation Institutionnelle, distinction de haut rang destinée à reconnaître les membres de MHBTV dont l'engagement dépasse le cadre interne du collectif pour porter, auprès des institutions, des partenaires, des médias et du monde sportif, les valeurs, l'image et les intérêts de Meylan Handball TV.</p>
+            <p>Cet Ordre honore les ambassadeurs de MHBTV : ceux qui parlent en son nom, qui nouent des relations durables en son nom, qui la représentent dignement dans des contextes extérieurs et qui contribuent à ancrer son identité dans le paysage sportif et médiatique local, régional ou national.</p>
+
+            <h4>Article 12 — Niveaux et conditions d'attribution</h4>
+            <div class="grade-table-wrap">
+              <table class="grade-table">
+                <thead><tr><th>Niveau</th><th>Grade</th><th>Condition principale</th><th>Ancienneté min.</th></tr></thead>
+                <tbody>
+                  <tr><td>I</td><td>Chevalier</td><td>Avoir représenté MHBTV lors d'au moins 3 occasions externes officielles</td><td>1 an</td></tr>
+                  <tr><td>II</td><td>Officier</td><td>Avoir noué ou consolidé au moins 1 partenariat institutionnel ou médiatique durable</td><td>1 an</td></tr>
+                  <tr><td>III</td><td>Commandeur</td><td>Rôle d'interlocuteur reconnu de MHBTV auprès d'au moins 2 institutions ou structures externes</td><td>1 an</td></tr>
+                  <tr><td>IV</td><td>Grand Officier</td><td>Avoir significativement étendu la sphère d'influence institutionnelle de MHBTV ; rôle de référent</td><td>2 ans</td></tr>
+                  <tr><td>V</td><td>Grand-Croix</td><td>Figure historique de la représentation institutionnelle de MHBTV ; legs durable et reconnu</td><td>2 ans</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Par « occasion externe officielle », on entend toute réunion, événement, forum, rencontre ou prise de parole publique se déroulant dans et hors du cadre interne du collectif et au cours de laquelle le membre agit explicitement en qualité de représentant de MHBTV.</p>
+
+            <h4>Article 13 — Critères qualitatifs d'attribution</h4>
+            <p>Au-delà des conditions de durée et de nombre, le Bureau apprécie notamment :</p>
+            <ul>
+              <li>La qualité et le professionnalisme de la représentation de MHBTV dans les contextes extérieurs ;</li>
+              <li>La capacité à défendre les positions et les intérêts de MHBTV avec discernement et tact ;</li>
+              <li>La contribution à l'établissement ou au maintien de relations stables et mutuellement bénéfiques ;</li>
+              <li>La discrétion et la loyauté dont le membre a fait preuve dans les échanges extérieurs sensibles ;</li>
+              <li>La capacité à restituer à MHBTV les informations et retours issus de ses interactions externes.</li>
+            </ul>
+            <p>Pour les grades de Grand Officier et Grand-Croix, le Bureau peut solliciter un rapport détaillé retraçant les actions de représentation accomplies par le candidat depuis son dernier grade ou depuis son entrée dans l'Ordre.</p>
+
+            <h4>Article 14 — Rang protocolaire de l'Ordre</h4>
+            <p>L'Ordre de la Représentation Institutionnelle constitue, avec l'Ordre du Mérite de Meylan Handball TV, la distinction la plus élevée que Meylan Handball TV puisse décerner. En matière de préséance protocolaire interne, les membres de l'Ordre de la Représentation Institutionnelle au grade de Grand-Croix sont placés, lors des cérémonies officielles de MHBTV, immédiatement après les membres de l'Ordre du Mérite au grade de Grand-Croix.</p>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">📹</span>
+            <h3>Section 3 — L'Ordre des Responsables de Retransmission</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 15 — Institution et objet</h4>
+            <p>Il est institué un Ordre des Responsables de Retransmissions destiné à honorer les membres de MHBTV exerçant ou ayant exercé la fonction de Responsable de Retransmission (RR), dont le rôle est central dans la conduite opérationnelle et technique des diffusions en direct.</p>
+            <p>Cet Ordre reconnaît spécifiquement l'expertise technique, le leadership situationnel et la fiabilité des membres prenant en charge la coordination générale d'une retransmission, de sa préparation à sa clôture.</p>
+
+            <h4>Article 16 — Niveaux et conditions d'attribution</h4>
+            <div class="grade-table-wrap">
+              <table class="grade-table">
+                <thead><tr><th>Niveau</th><th>Grade</th><th>Condition principale</th><th>Ancienneté min.</th></tr></thead>
+                <tbody>
+                  <tr><td>I</td><td>Chevalier</td><td>Avoir coordonné au moins 5 retransmissions à titre de RR</td><td>6 mois</td></tr>
+                  <tr><td>II</td><td>Officier</td><td>Avoir coordonné au moins 15 retransmissions avec évaluation positive</td><td>1 an</td></tr>
+                  <tr><td>III</td><td>Commandeur</td><td>Avoir coordonné au moins 35 retransmissions et formé au moins 1 nouveau RR</td><td>1 an</td></tr>
+                  <tr><td>IV</td><td>Grand Officier</td><td>Avoir coordonné au moins 60 retransmissions ; rôle de référent technique</td><td>2 ans</td></tr>
+                  <tr><td>V</td><td>Grand-Croix</td><td>Figure emblématique des retransmissions MHBTV ; contribution historique</td><td>2 ans</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Le nombre de retransmissions coordonnées s'entend des retransmissions effectivement réalisées, documentées dans les archives de MHBTV. Les retransmissions annulées en cours de préparation ne sont pas comptabilisées.</p>
+
+            <h4>Article 17 — Critères complémentaires</h4>
+            <p>Pour les grades d'Officier et au-delà, le Bureau prendra également en compte :</p>
+            <ul>
+              <li>La gestion des incidents techniques survenus en direct et la qualité des solutions apportées ;</li>
+              <li>La capacité à briefer et coordonner l'équipe présente lors de chaque retransmission ;</li>
+              <li>La transmission des savoir-faire aux membres moins expérimentés ;</li>
+              <li>La qualité des comptes rendus et des bilans post-retransmission rédigés.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 4 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">🛡️</span>
+            <h3>Section 4 — L'Ordre de la Résilience</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 18 — Institution et objet</h4>
+            <p>Il est institué un Ordre de la Résilience destiné à reconnaître les membres de MHBTV qui, face à des conditions d'exercice difficiles, inhabituelles ou adverses, ont su maintenir la qualité et la continuité des retransmissions avec détermination, sang-froid et professionnalisme.</p>
+            <p>Cet Ordre honore non pas la facilité, mais la constance dans l'adversité : le membre qui assure malgré une défaillance technique majeure en direct, qui part en déplacement dans des conditions logistiques dégradées, qui compense seul l'absence imprévisible de coéquipiers, ou qui maintient le niveau d'exigence de MHBTV dans des environnements non maîtrisés. La résilience est ici entendue comme une vertu opérationnelle et humaine, constitutive de l'identité de MHBTV.</p>
+
+            <h4>Article 19 — Niveaux et conditions d'attribution</h4>
+            <div class="grade-table-wrap">
+              <table class="grade-table">
+                <thead><tr><th>Niveau</th><th>Grade</th><th>Condition principale</th><th>Ancienneté min.</th></tr></thead>
+                <tbody>
+                  <tr><td>I</td><td>Chevalier</td><td>Avoir surmonté au moins 2 situations adverses documentées lors de retransmissions</td><td>4 mois</td></tr>
+                  <tr><td>II</td><td>Officier</td><td>Avoir géré au moins 5 situations adverses avec une issue positive reconnue par le Bureau</td><td>8 mois</td></tr>
+                  <tr><td>III</td><td>Commandeur</td><td>Avoir géré au moins 10 situations adverses avec une issue positive reconnue par le Bureau</td><td>1 an</td></tr>
+                  <tr><td>IV</td><td>Grand Officier</td><td>Profil de référence en gestion de crise ; avoir formé ou guidé d'autres membres dans ces situations</td><td>1 an 6 mois</td></tr>
+                  <tr><td>V</td><td>Grand-Croix</td><td>Résilience historique et exemplaire ; figure incontestée de l'endurance opérationnelle de MHBTV</td><td>2 ans</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Par « situation adverse documentée », on entend tout événement imprévu survenu avant ou pendant une retransmission et ayant nécessité une adaptation significative du membre pour maintenir la mission : panne technique, absence d'un ou plusieurs coéquipiers, conditions climatiques ou logistiques dégradées, incident sur site, pression temporelle extrême, ou tout autre facteur extérieur compromettant le bon déroulement de la retransmission.</p>
+
+            <h4>Article 20 — Critères qualitatifs d'attribution</h4>
+            <p>L'attribution à chaque niveau de l'Ordre de la Résilience suppose que le Bureau ait pu constater, sur la base de rapports, de témoignages ou de sa propre observation, les éléments suivants :</p>
+            <ul>
+              <li>Le maintien effectif de la retransmission dans des conditions où l'abandon ou la dégradation majeure aurait été compréhensible ;</li>
+              <li>La capacité du membre à improviser des solutions techniques, organisationnelles ou humaines en temps réel ;</li>
+              <li>L'absence de panique, de comportement défaillant ou de décisions nuisant à l'image de MHBTV dans les moments critiques ;</li>
+              <li>La transmission d'un bilan post-événement clair et constructif permettant à MHBTV d'améliorer sa gestion des situations similaires.</li>
+            </ul>
+            <p>Pour les grades Grand Officier et Grand-Croix, le Bureau exige la production d'un rapport circonstancié couvrant l'ensemble des situations adverses sur lesquelles repose la candidature, co-signé par au moins un autre membre présent lors des faits.</p>
+
+            <h4>Article 21 — Situations exclues du champ de l'Ordre</h4>
+            <p>Ne sont pas prises en compte au titre de l'Ordre de la Résilience :</p>
+            <ul>
+              <li>Les situations adverses résultant d'une négligence ou d'une erreur manifeste du membre lui-même ;</li>
+              <li>Les incidents mineurs n'ayant entraîné aucune perturbation réelle de la retransmission ;</li>
+              <li>Les situations dont le caractère exceptionnel n'est pas corroboré par un autre membre ou par une trace documentée.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 5 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">🥇</span>
+            <h3>Section 5 — La Médaille d'Honneur des Retransmissions</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 22 — Institution et objet</h4>
+            <p>La Médaille d'Honneur des Retransmissions est instituée afin de récompenser tout membre de MHBTV ayant accompli un nombre significatif de retransmissions avec constance et implication, indépendamment du rôle tenu au cours de celles-ci.</p>
+            <p>Cette distinction reconnaît la régularité et la fidélité du membre à sa mission première : assurer la couverture médiatique des matchs de handball, quel que soit le poste occupé (caméraman, technicien son, réalisateur adjoint, etc.).</p>
+
+            <h4>Article 23 — Conditions d'attribution</h4>
+            <p>La Médaille d'Honneur des Retransmissions est attribuée au membre remplissant l'ensemble des conditions suivantes :</p>
+            <ul>
+              <li>Avoir participé à au moins 25 retransmissions en qualité de membre actif de l'équipe technique ;</li>
+              <li>Avoir fait preuve d'une ponctualité et d'une fiabilité régulièrement constatées ;</li>
+              <li>Ne pas avoir fait l'objet d'une sanction disciplinaire au cours des 12 mois précédant la proposition ;</li>
+              <li>Être membre actif de MHBTV depuis au moins 1 an.</li>
+            </ul>
+
+            <h4>Article 24 — Portée de la distinction</h4>
+            <p>La Médaille d'Honneur des Retransmissions souligne l'engagement opérationnel du récipiendaire. Elle est mentionnée dans le registre de MHBTV et peut figurer dans la communication institutionnelle de MHBTV à la discrétion du Bureau.</p>
+          </div>
+        </div>
+
+        <!-- Section 6 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">✝️</span>
+            <h3>Section 6 — La Croix du Service Continu</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 25 — Institution et objet</h4>
+            <p>La Croix du Service Continu est instituée pour récompenser les membres de MHBTV dont la présence au sein du collectif se distingue par sa durée et son absence d'interruption significative.</p>
+            <p>Cette distinction honore avant tout la loyauté et la persévérance, qualités essentielles dans un collectif bénévole dépendant de l'engagement durable de ses membres.</p>
+
+            <h4>Article 26 — Conditions d'attribution</h4>
+            <p>La Croix du Service Continu est attribuée au membre remplissant les conditions suivantes :</p>
+            <ul>
+              <li>Être membre actif de MHBTV depuis au moins 3 années consécutives sans interruption de plus de deux mois consécutifs, sauf motif valable accepté par le Bureau (maladie, études, obligations professionnelles ou familiales) ;</li>
+              <li>Avoir participé activement à au moins une retransmission ou mission par mois en moyenne sur l'ensemble de la période ;</li>
+              <li>Avoir maintenu une implication régulière dans les activités internes de MHBTV (réunions, formations, préparations).</li>
+            </ul>
+
+            <h4>Article 27 — Renouvellement</h4>
+            <p>La Croix du Service Continu peut être renouvelée tous les 3 ans pour les membres continuant à remplir les conditions d'attribution. Chaque renouvellement est constaté par une délibération du Bureau et consigné dans le registre, avec la mention « 1ère attribution », « 2ème attribution », etc.</p>
+          </div>
+        </div>
+
+        <!-- Section 7 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">🎙️</span>
+            <h3>Section 7 — La Médaille des Commentateurs et Présentateurs</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 28 — Institution et objet</h4>
+            <p>La Médaille des Commentateurs et Présentateurs est instituée afin de reconnaître l'excellence du travail accompli par les membres de MHBTV intervenant à l'antenne, que ce soit en qualité de commentateur sportif, de présentateur de plateau, d'animateur d'avant et après-match, ou d'intervieweur.</p>
+            <p>Cette distinction valorise les compétences oratoires, l'expertise sportive et la qualité rédactionnelle des membres dont la voix et le visage représentent directement MHBTV auprès du public.</p>
+
+            <h4>Article 29 — Conditions d'attribution</h4>
+            <p>La Médaille des Commentateurs et Présentateurs est attribuée au membre satisfaisant aux conditions suivantes :</p>
+            <ul>
+              <li>Avoir officié en qualité de commentateur ou présentateur lors d'au moins 15 retransmissions ;</li>
+              <li>Avoir démontré une maîtrise satisfaisante des règles du handball et des codes propres au commentaire sportif ;</li>
+              <li>Avoir reçu une évaluation positive de la part du Bureau ou d'un Responsable de Retransmission accrédité, portant sur la qualité, la fluidité et la pertinence de ses interventions ;</li>
+              <li>Avoir adopté en permanence une posture professionnelle et neutre à l'antenne.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 8 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">📡</span>
+            <h3>Section 8 — La Médaille du Rayonnement</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 30 — Institution et objet</h4>
+            <p>La Médaille du Rayonnement est instituée pour honorer les membres ou les personnes extérieures au collectif dont les actions ont contribué à accroître la notoriété, la visibilité ou l'influence de MHBTV au-delà de son périmètre habituel.</p>
+            <p>Elle reconnaît les initiatives qui ont permis à Meylan Handball TV de se faire connaître, d'élargir son public, de nouer de nouveaux partenariats ou d'étendre son champ d'action géographique et médiatique.</p>
+
+            <h4>Article 31 — Conditions d'attribution</h4>
+            <p>La Médaille du Rayonnement peut être attribuée à toute personne, membre ou non de MHBTV, ayant contribué de façon significative et documentée à l'un des éléments suivants :</p>
+            <ul>
+              <li>Augmentation mesurable de l'audience ou de la communauté digitale de MHBTV ;</li>
+              <li>Mise en relation de MHBTV avec un partenaire institutionnel, médiatique ou sportif d'envergure ;</li>
+              <li>Représentation remarquée de MHBTV lors d'événements externes (tournois, forums, colloques) ;</li>
+              <li>Création de contenus diffusés hors des canaux habituels du collectif et ayant eu un impact positif.</li>
+            </ul>
+            <p>Pour les personnes extérieures à Meylan Handball TV, la proposition doit émaner d'au moins deux membres du Bureau et être adoptée à la majorité qualifiée des deux tiers.</p>
+          </div>
+        </div>
+
+        <!-- Section 9 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">🤝</span>
+            <h3>Section 9 — La Croix du Bénévolat</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 32 — Institution et objet</h4>
+            <p>La Croix du Bénévolat est instituée pour rendre hommage aux membres de MHBTV dont l'engagement bénévole se distingue par son ampleur, sa générosité et son caractère désintéressé, sans que cet engagement soit nécessairement lié à des fonctions techniques ou éditoriales.</p>
+            <p>Elle reconnaît toutes les formes de contribution à la vie de Meylan Handball TV qui ne se voient pas directement à l'écran : soutien logistique, transport du matériel, installation et démontage, gestion des réseaux sociaux, secrétariat, trésorerie, veille juridique, aide à l'organisation d'événements internes.</p>
+
+            <h4>Article 33 — Conditions d'attribution</h4>
+            <p>La Croix du Bénévolat est attribuée au membre dont la contribution bénévole complémentaire aux retransmissions est régulière, documentée et reconnue par au moins deux membres du Bureau, et qui remplit les conditions suivantes :</p>
+            <ul>
+              <li>Être membre actif de MHBTV depuis au moins 2 ans ;</li>
+              <li>Avoir consacré du temps de façon régulière à des tâches de soutien non directement liées aux retransmissions ;</li>
+              <li>Avoir fait preuve d'initiative, de disponibilité et de générosité reconnues par ses pairs ;</li>
+              <li>Ne pas avoir fait l'objet d'une sanction disciplinaire au cours des 24 mois précédant la proposition.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 10 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">⚖️</span>
+            <h3>Section 10 — L'Ordre du Fair-Play</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 34 — Institution et objet</h4>
+            <p>L'Ordre du Fair-Play est institué pour reconnaître les membres de MHBTV dont le comportement, l'éthique et les relations humaines au sein du collectif et avec ses partenaires constituent un exemple constant de droiture, de respect et de bienveillance.</p>
+            <p>Cette distinction ne récompense pas une performance technique mais une posture humaine : celle du membre qui traite ses collègues avec considération, qui ne laisse personne en difficulté, qui assume ses erreurs avec intégrité, et qui contribue à un climat associatif sain et serein.</p>
+
+            <h4>Article 35 — Conditions d'attribution</h4>
+            <p>L'Ordre du Fair-Play est attribué au membre remplissant les conditions suivantes :</p>
+            <ul>
+              <li>Être membre actif depuis au moins 1 an ;</li>
+              <li>Avoir démontré, de façon constante et observée, un comportement respectueux envers l'ensemble des membres, des partenaires, des sportifs couverts et du public ;</li>
+              <li>Avoir su gérer avec mesure et fair-play les situations conflictuelles ou délicates survenues dans le cadre associatif ;</li>
+              <li>Avoir été proposé à cette distinction par au moins deux membres du Bureau ou par vote de l'équipe lors d'une réunion de bilan.</li>
+            </ul>
+
+            <h4>Article 36 — Caractère moral de la distinction</h4>
+            <p>L'Ordre du Fair-Play revêt un caractère éminemment moral et humain. Le Bureau veillera à ce qu'il ne soit attribué qu'à des membres dont le comportement a été irréprochable sur une période prolongée. Toute sanction disciplinaire dans les 36 mois précédant la proposition rend le membre inéligible à cette distinction.</p>
+          </div>
+        </div>
+
+        <!-- Section 11 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">⭐</span>
+            <h3>Section 11 — La Médaille des Missions Spéciales et Exceptionnelles</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 37 — Institution et objet</h4>
+            <p>La Médaille des Missions Spéciales et Exceptionnelles est instituée pour récompenser les membres ayant accompli une mission ponctuelle d'une ampleur, d'une complexité ou d'un caractère stratégique exceptionnels pour Meylan Handball TV.</p>
+            <p>Il peut s'agir d'une couverture d'un événement sportif majeur en dehors du calendrier habituel, de la réalisation d'un reportage ou d'un documentaire, de la gestion d'une situation de crise technique en direct, de la création d'un outil ou d'un système structurant pour MHBTV, ou de toute autre mission jugée hors du commun par le Bureau.</p>
+
+            <h4>Article 38 — Conditions d'attribution</h4>
+            <p>La Médaille des Missions Spéciales et Exceptionnelles est attribuée à l'issue d'une mission répondant aux critères cumulatifs suivants :</p>
+            <ul>
+              <li>La mission présente un caractère exceptionnel clairement identifiable, distinct des activités régulières de MHBTV ;</li>
+              <li>La mission a été conduite avec succès et a produit un résultat concret et valorisant pour MHBTV ;</li>
+              <li>Le membre a fait preuve d'initiative et d'adaptabilité dans des conditions inhabituelles ;</li>
+              <li>La mission a été formellement validée et appréciée par le Bureau.</li>
+            </ul>
+
+            <h4>Article 39 — Pluralité d'attribution</h4>
+            <p>Un même membre peut recevoir la Médaille des Missions Spéciales et Exceptionnelles plusieurs fois au cours de sa trajectoire au sein de MHBTV, chaque attribution correspondant à une mission distincte. Chaque attribution est consignée séparément dans le registre avec le descriptif de la mission concernée.</p>
+          </div>
+        </div>
+
+        <!-- Section 12 -->
+        <div class="distinction-section">
+          <div class="distinction-header">
+            <span class="distinction-icon">📚</span>
+            <h3>Section 12 — La Croix du Formateur</h3>
+          </div>
+          <div class="distinction-body">
+            <h4>Article 40 — Institution et objet</h4>
+            <p>La Croix du Formateur est instituée pour honorer les membres de MHBTV qui consacrent une part significative de leur engagement à la transmission des savoirs, des savoir-faire et des valeurs du collectif à destination des membres moins expérimentés ou nouvellement intégrés.</p>
+            <p>Cette distinction reconnaît que la pérennité et la montée en compétences de MHBTV reposent autant sur les formateurs de l'ombre que sur les membres actifs en retransmission. Elle salue l'acte pédagogique, la patience et le sens de la transmission comme des vertus associatives à part entière.</p>
+
+            <h4>Article 41 — Conditions d'attribution</h4>
+            <p>La Croix du Formateur est attribuée au membre satisfaisant aux conditions cumulatives suivantes :</p>
+            <ul>
+              <li>Être membre actif de MHBTV depuis au moins 1 an et 6 mois ;</li>
+              <li>Avoir encadré, formé ou accompagné de manière documentée au moins 2 membres du collectif sur des compétences techniques, éditoriales ou organisationnelles propres aux activités de MHBTV ;</li>
+              <li>Avoir participé à l'élaboration ou à l'animation d'au moins une session de formation interne (présentation d'outil, tutorat encadré, briefing pédagogique structuré) ;</li>
+              <li>Avoir reçu une appréciation positive de la part des membres ayant bénéficié de ses apports, attestée par au moins un membre du Bureau ;</li>
+              <li>Ne pas avoir fait l'objet d'une sanction disciplinaire au cours des 18 mois précédant la proposition.</li>
+            </ul>
+
+            <h4>Article 42 — Portée et renouvellement</h4>
+            <p>La Croix du Formateur peut être attribuée une première fois dès lors que les conditions de l'article 41 sont réunies. Elle est renouvelable tous les 2 ans, à condition que le membre ait continué à exercer un rôle formateur actif et documenté sur la période écoulée.</p>
+            <p>Chaque renouvellement est consigné dans le registre des distinctions avec la mention des actions de formation accomplies depuis la dernière attribution. Le Bureau peut, à l'occasion d'un renouvellement, attribuer une mention spéciale si le rôle formateur du membre a été particulièrement structurant pour MHBTV.</p>
+
+            <h4>Article 43 — Lien avec les Ordres hiérarchiques</h4>
+            <p>La détention de la Croix du Formateur constitue un critère favorable, sans être suffisant à lui seul, lors de l'examen d'une candidature aux grades de Commandeur ou supérieurs de l'Ordre du Mérite de Meylan Handball TV et de l'Ordre des Responsables de Retransmissions. Le Bureau en tient compte dans son appréciation globale du dossier.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-body">
+        <div class="doc-titre">Titre III — Procédure d'attribution</div>
+
+        <div class="doc-article">
+          <h3>Article 44 — Procédure de proposition</h3>
+          <p>Toute attribution de distinction fait l'objet d'une proposition formelle présentée au Bureau. Cette proposition comprend :</p>
+          <ul>
+            <li>L'identité du candidat proposé ;</li>
+            <li>La distinction envisagée et le niveau proposé le cas échéant ;</li>
+            <li>Un exposé des mérites et des faits justificatifs documentés ;</li>
+            <li>La signature du ou des membres du Bureau proposants.</li>
+          </ul>
+          <p>La proposition est déposée auprès du Coordinateur général au plus tard quinze (15) jours avant la séance du Bureau au cours de laquelle elle sera examinée.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 45 — Examen de la proposition</h3>
+          <p>Le Bureau examine la proposition en séance. Le ou les membres proposants présentent les éléments de la candidature. Le Bureau délibère hors la présence du candidat s'il est lui-même membre du Bureau.</p>
+          <p>L'attribution est décidée à la majorité absolue des membres du Bureau présents et votants. En cas d'égalité, la voix du Coordinateur général est prépondérante.</p>
+          <p>Pour les grades de Grand Officier et Grand-Croix de l'Ordre du Mérite, ainsi que pour les distinctions accordées à des personnes extérieures à Meylan Handball TV, l'attribution requiert la majorité qualifiée des deux tiers de la Coordination générale.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 46 — Notification et remise</h3>
+          <p>La décision d'attribution est notifiée au récipiendaire dans les 8 jours suivant la délibération. La remise officielle de la distinction intervient :</p>
+          <ul>
+            <li>De préférence, lors d'une cérémonie organisée à l'occasion de l'assemblée générale annuelle ou trimestrielle ou d'un événement associatif ;</li>
+            <li>A défaut, lors d'une remise informelle organisée à la convenance du récipiendaire et du Bureau.</li>
+          </ul>
+          <p>Une attestation officielle signée par le Coordinateur général est remise au récipiendaire. Celui-ci reçoit également un diplôme ou un document commémoratif à la discrétion du Bureau.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 47 — Droit de refus</h3>
+          <p>Toute personne proposée à une distinction a le droit de refuser celle-ci sans avoir à en justifier le motif. Le refus est notifié au Bureau par écrit ou verbalement lors de la remise. Il est consigné dans le registre et n'emporte aucune conséquence sur le statut de la personne au sein de MHBTV.</p>
+        </div>
+
+        <div class="doc-titre">Titre IV — Perte et déchéance des distinctions</div>
+
+        <div class="doc-article">
+          <h3>Article 48 — Principe de déchéance</h3>
+          <p>Une distinction attribuée peut être retirée par décision du Bureau statuant à la majorité qualifiée des deux tiers, dans les cas suivants :</p>
+          <ul>
+            <li>Faute disciplinaire grave commise par le récipiendaire, caractérisée conformément au règlement relatif aux retransmissions des compétitions de MHBTV ;</li>
+            <li>Comportement portant gravement atteinte à l'image, à la réputation ou aux valeurs de MHBTV ;</li>
+            <li>Fraude avérée dans les éléments ayant conduit à l'attribution de la distinction.</li>
+          </ul>
+          <p>La déchéance est une mesure exceptionnelle et n'est prononcée qu'après que le récipiendaire a été mis en mesure de s'expliquer devant le Bureau.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 49 — Procédure de déchéance</h3>
+          <p>La procédure de déchéance est engagée par décision du Bureau. Le récipiendaire concerné est convoqué par tout moyen conférant date certaine, avec un préavis d'au moins 15 jours, pour être entendu.</p>
+          <p>La décision de déchéance, si elle est prononcée, est notifiée au récipiendaire par écrit dans les 8 jours suivant la délibération. Elle est consignée dans le registre des distinctions. Le récipiendaire est invité à restituer l'attestation et le diplôme remis.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 50 — Effet de la déchéance</h3>
+          <p>La déchéance entraîne la perte de la distinction et la suppression de toute mention dans les communications officielles de MHBTV. Elle n'emporte pas, en elle-même, d'autres conséquences sur le statut du membre au sein de MHBTV, sauf si elle est concomitante à une sanction disciplinaire décidée séparément.</p>
+        </div>
+
+        <div class="doc-titre">Titre V — Dispositions finales</div>
+
+        <div class="doc-article">
+          <h3>Article 51 — Révision du présent règlement</h3>
+          <p>Le présent règlement peut être modifié par délibération du Bureau, à la majorité absolue de ses membres. Toute modification est portée à la connaissance des membres de MHBTV lors de la première assemblée générale suivant son adoption.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 52 — Entrée en vigueur</h3>
+          <p>Le présent règlement entre en vigueur à compter de la date de son adoption par le Bureau de Meylan Handball TV. Il abroge toutes les dispositions antérieures relatives aux distinctions et reconnaissances internes.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 53 — Interprétation</h3>
+          <p>En cas de difficulté d'interprétation du présent règlement, le Bureau est seul compétent pour trancher. Sa décision est souveraine et consignée dans le registre des distinctions à titre de précédent.</p>
+        </div>
+      </div>
+
+      <!-- ANNEXE -->
+      <div class="doc-body-wide">
+        <div class="doc-titre">Annexe — Tableau récapitulatif des distinctions</div>
+        <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.5rem;">Le tableau ci-dessous récapitule l'ensemble des distinctions instituées par le présent règlement, leurs niveaux et la condition principale d'éligibilité.</p>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr><th>Distinction</th><th>Niveaux</th><th>Condition principale</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="doc-td-label">Ordre du Mérite de MHBTV</td><td>5</td><td>Contribution globale et ancienneté</td></tr>
+              <tr><td class="doc-td-label">Ordre de la Représentation Institutionnelle</td><td>5</td><td>Représentation externe et engagement institutionnel</td></tr>
+              <tr><td class="doc-td-label">Ordre des Responsables de Retransmission</td><td>5</td><td>Retransmissions coordonnées en qualité de Responsable de Retransmission (5–60+)</td></tr>
+              <tr><td class="doc-td-label">Ordre de la Résilience</td><td>5</td><td>Gestion de situations adverses documentées</td></tr>
+              <tr><td class="doc-td-label">Médaille d'Honneur des Retransmissions</td><td>1</td><td>25 retransmissions — 1 an d'ancienneté</td></tr>
+              <tr><td class="doc-td-label">Croix du Service Continu</td><td>1 (renouvelable)</td><td>3 ans de présence continue et active</td></tr>
+              <tr><td class="doc-td-label">Médaille des Commentateurs et Présentateurs</td><td>1</td><td>15 interventions à l'antenne — évaluation positive</td></tr>
+              <tr><td class="doc-td-label">Médaille du Rayonnement</td><td>1</td><td>Contribution documentée au rayonnement de MHBTV</td></tr>
+              <tr><td class="doc-td-label">Croix du Bénévolat</td><td>1</td><td>2 ans — implication bénévole dans et hors retransmissions</td></tr>
+              <tr><td class="doc-td-label">Ordre du Fair-Play</td><td>1</td><td>1 an — comportement exemplaire et reconnu</td></tr>
+              <tr><td class="doc-td-label">Médaille des Missions Spéciales et Exceptionnelles</td><td>1 (cumulable)</td><td>Mission ponctuelle exceptionnelle réussie</td></tr>
+              <tr><td class="doc-td-label">Croix du Formateur</td><td>1 (renouvelable)</td><td>Formation d'au moins 2 membres — 18 mois d'ancienneté</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-closing">
+        <p><strong>Meylan Handball TV — Règlement relatif aux distinctions et aux reconnaissances.</strong> Version du 23 juin 2026. Pour toute question relative à l'interprétation de ce règlement, contactez le Bureau de la Coordination générale.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

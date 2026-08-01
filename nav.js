@@ -4,7 +4,7 @@
   
   const navHTML = `
     <nav class="topbar">
-      <a href="index.html" class="topbar-logo">MEYLAN <span>HANDBALL</span> TV</a>
+      <a href="index.html" class="topbar-logo"><img src="Nouveau logo MHBTV4 (1)-Photoroom2.png"/></a>
       <ul class="topbar-nav" id="mainNav">
         <li><a href="index.html" ${currentPage==='index.html'?'class="active"':''}>Accueil</a></li>
         <li><a href="accreditations.html" ${currentPage==='accreditations.html'?'class="active"':''}>Accréditations</a></li>

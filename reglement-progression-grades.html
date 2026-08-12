@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement de Formation et de Progression des Grades | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .doc-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-body { margin: 0 auto; }
+    .doc-body-wide { margin: 0 auto; }
+
+    .doc-preamble {
+      margin: 0 auto 3rem auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+    }
+    .doc-preamble h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p:last-child { margin-bottom: 0; }
+    .doc-preamble p em { color: var(--white); font-style: italic; }
+
+    .doc-titre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-titre:first-of-type { margin-top: 0; }
+
+    .doc-article { margin-bottom: 2rem; }
+    .doc-article h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .doc-article h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .doc-article p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-article ul, .doc-article ol {
+      margin: 0 0 0.9rem 1.4rem;
+      padding: 0;
+    }
+    .doc-article li {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .doc-article strong { color: var(--white); }
+
+    .doc-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .doc-table th {
+      background: rgba(232,0,29,0.08);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table td {
+      padding: 0.75rem 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .doc-table tr:last-child td { border-bottom: none; }
+    .doc-table td.doc-td-label { color: var(--white); font-weight: 600; }
+
+    /* Grades du Responsable de retransmission */
+    .grade-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin: 1rem 0 1.5rem 0;
+    }
+    .grade-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .grade-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      background: linear-gradient(135deg, rgba(232,0,29,0.12), rgba(232,0,29,0.02));
+      border-bottom: 1px solid var(--border);
+    }
+    .grade-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      flex-shrink: 0;
+    }
+    .grade-card-header h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0;
+    }
+    .grade-card-body { padding: 1.25rem 1.5rem; }
+    .grade-card-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.9rem;
+    }
+    .grade-card-body p:last-child { margin-bottom: 0; }
+    .grade-card-body p strong { color: var(--white); }
+
+    /* Incident-style callout cards reused for jury / registre / dossier */
+    .incident-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .incident-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .incident-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+    .incident-card p:last-child { margin-bottom: 0; }
+    .incident-card ul { margin: 0 0 0.75rem 1.4rem; padding: 0; }
+    .incident-card li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.35rem;
+    }
+
+    .doc-example {
+      background: rgba(240,180,41,0.07);
+      border: 1px solid rgba(240,180,41,0.2);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .doc-example p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0; }
+    .doc-example p strong { color: var(--gold); }
+
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0 auto 2.5rem auto;
+    }
+    .doc-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .doc-back:hover { color: var(--red); }
+
+    .doc-closing {
+      margin: 3rem auto 0 auto;
+      padding: 1.75rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+    }
+    .doc-closing p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Document officiel</div>
+        <h1>Règlement de Progression des <em>Grades des Responsables de Retransmission</em></h1>
+        <p class="hero-sub">Pris en application de l'article 13.2 du Règlement applicable aux retransmissions des compétitions : conditions de formation, d'évaluation, de progression, de maintien et de retrait des grades de Responsable de retransmission.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="statuts.html" class="doc-back">← Retour aux statuts &amp; règlements</a>
+        <a href="reglement-formation-progression-grades.pdf" class="btn btn-outline" style="padding:0.5rem 1.25rem;font-size:0.75rem;">Télécharger le PDF</a>
+      </div>
+
+      <div class="doc-meta">
+        <span>Version du <strong>12 aout 206</strong></span>
+        <span>10 titres</span>
+        <span>25 articles</span>
+      </div>
+
+      <div class="doc-preamble">
+        <h4>Préambule</h4>
+        <p>Le présent règlement précise, en application de l'article 13.2 du Règlement applicable aux retransmissions des compétitions de Meylan Handball TV (MHBTV), les conditions de formation, d'évaluation, de progression, de maintien et de retrait des grades composant la fonction de Responsable de retransmission. Il complète, sans les modifier, les dispositions de l'article 13.2 relatives à la nature et aux pouvoirs de chaque grade.</p>
+        <p><em>Il abroge et remplace toute disposition antérieure relative à la grille de compétences dite « RFCI », désormais caduque, ainsi que tout usage interne non formalisé relatif à la progression des grades.</em></p>
+      </div>
+
+      <div class="doc-body">
+
+        <div class="doc-titre">Titre I — Dispositions générales</div>
+
+        <div class="doc-article">
+          <h3>Article 1 — Objet</h3>
+          <p>Le présent règlement a pour objet de définir :</p>
+          <ul>
+            <li>les conditions détaillées d'accès à chacun des quatre grades institués par l'article 13.2 du Règlement applicable aux retransmissions des compétitions ;</li>
+            <li>le contenu et les modalités de la formation initiale et de la formation continue des Responsables de retransmission ;</li>
+            <li>les modalités d'évaluation, de constitution et d'instruction des dossiers de candidature à un grade supérieur ;</li>
+            <li>la composition, la saisine et le fonctionnement du jury de grade ;</li>
+            <li>les conditions de suspension, de rétrogradation et de retrait d'un grade ;</li>
+            <li>les modalités de tenue du registre des grades et les voies de recours ouvertes aux membres.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 2 — Champ d'application</h3>
+          <p>Le présent règlement s'applique à tout membre actif ou occasionnel du collectif exerçant ou souhaitant exercer la fonction de Responsable de retransmission, quel que soit le grade actuellement détenu.</p>
+          <p>Il s'articule avec le Règlement général, notamment son article 12 relatif aux questionnaires d'accréditation, et avec le Règlement applicable aux retransmissions des compétitions, notamment ses articles 13 à 15 relatifs aux grades, à leur mise en œuvre et aux conditions minimales de retransmission.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 3 — Autorités compétentes</h3>
+          <p>Les autorités intervenant dans l'application du présent règlement sont :</p>
+          <ul>
+            <li>le chef de département Officiels de Retransmission de l'Instance Compétente des Retransmissions (ICR), chargé du suivi individuel des grades et de l'instruction des dossiers de candidature ;</li>
+            <li>le Bureau de la Coordination générale, compétent pour l'attribution, la confirmation et le retrait de tout grade, conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions ;</li>
+            <li>la Coordinatrice adjointe ou le Coordinateur adjoint, sur proposition de qui l'attribution d'un grade peut être soumise au Bureau ;</li>
+            <li>le jury de grade, institué à l'article 8 du présent règlement pour l'accès au grade IV (DOR).</li>
+          </ul>
+        </div>
+
+        <div class="doc-titre">Titre II — Le système de grades</div>
+
+        <div class="doc-article">
+          <h3>Article 4 — Rappel du système institué par l'article 13.2</h3>
+          <p>Conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions, la fonction de Responsable de retransmission comporte quatre grades hiérarchisés, du niveau le moins élevé au niveau le plus élevé : Responsable de Retransmission Stagiaire (RRS), Responsable de Retransmission (RR), Sous-Directeur des Opérations de Retransmission (SDOR) et Directeur des Opérations de Retransmission (DOR).</p>
+          <p>Le tableau suivant synthétise, à titre indicatif, les pouvoirs et le champ d'intervention de chaque grade. Il ne se substitue pas à l'article 13.2, qui demeure la référence en cas de divergence d'interprétation.</p>
+
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Grade</th>
+                  <th>Intitulé</th>
+                  <th>Fonction dominante</th>
+                  <th>Niveaux de rencontre accessibles (art. 13.3 RR)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="doc-td-label">I — RRS</td>
+                  <td>Responsable de Retransmission Stagiaire</td>
+                  <td>Opère la régie sous supervision directe et continue</td>
+                  <td>Niveau 5, et 3-4 à titre dérogatoire sous supervision</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">II — RR</td>
+                  <td>Responsable de Retransmission (Chef d'Équipe)</td>
+                  <td>Autorité autonome sur le dispositif, encadre les RRS</td>
+                  <td>Niveaux 2 à 5</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">III — SDOR</td>
+                  <td>Sous-Directeur des Opérations de Retransmission (Chef d'Antenne)</td>
+                  <td>Autorité sur toute production, y compris multiplex</td>
+                  <td>Niveaux 1 à 5</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">IV — DOR</td>
+                  <td>Directeur des Opérations de Retransmission</td>
+                  <td>Représentation du collectif, décisions structurantes</td>
+                  <td>Niveaux 1 à 5</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>La progression est strictement séquentielle : nul ne peut accéder à un grade sans avoir préalablement détenu, de manière confirmée, l'ensemble des grades qui le précèdent, sous réserve des dérogations prévues à l'article 13 du présent règlement.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 5 — Synthèse des conditions d'accès</h3>
+          <p>Le tableau suivant récapitule, pour chaque grade, les conditions cumulatives d'accès fixées par l'article 13.2 ainsi que les pièces devant être réunies dans le dossier de candidature en application du présent règlement.</p>
+
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Grade visé</th>
+                  <th>Conditions cumulatives d'accès</th>
+                  <th>Pièces du dossier de candidature</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="doc-td-label">RRS</td>
+                  <td>Certification au questionnaire d'accréditation de la fonction (art. 12 RG) ; observation d'au moins un match aux côtés d'un titulaire du grade II ou supérieur.</td>
+                  <td>Attestation de réussite au questionnaire ; fiche d'observation signée par le titulaire ayant encadré l'observation.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">RR</td>
+                  <td>Certification à l'accréditation ; trois (3) retransmissions réalisées en autonomie dans des conditions satisfaisantes ; absence de sanction disciplinaire active dans les 12 derniers mois.</td>
+                  <td>Trois fiches de compte rendu de retransmission validées ; avis écrit du ou des titulaires ayant supervisé le stagiaire ; attestation d'absence de sanction délivrée par l'ICR.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">SDOR</td>
+                  <td>Certification à l'accréditation ; une (1) saison sportive complète au grade RR ; absence de sanction disciplinaire active dans les 12 derniers mois.</td>
+                  <td>Bilan de saison au grade RR ; avis motivé du chef de département Officiels de Retransmission ; attestation d'absence de sanction.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">DOR</td>
+                  <td>Certification à l'accréditation ; une (1) saison sportive complète au grade SDOR ; absence de sanction disciplinaire active dans les 24 derniers mois ; nomination par le chef de département Officiels de Retransmission avec approbation du Bureau.</td>
+                  <td>Bilan de saison au grade SDOR ; lettre de nomination du chef de département ; avis du jury de grade (art. 8 du présent règlement).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-titre">Titre III — Formation initiale et accès au grade RRS</div>
+
+        <div class="doc-article">
+          <h3>Article 6 — Admission et intégration</h3>
+          <p>Tout nouveau membre du collectif souhaitant exercer la fonction de Responsable de retransmission est, dès la validation de son adhésion au titre de l'article 11 du Règlement général, invité à suivre le parcours de formation initiale décrit au présent article.</p>
+          <p>La formation initiale comprend :</p>
+          <ol>
+            <li>une session de présentation du matériel et des outils de production (régie, caméras, habillage graphique, système de diffusion), organisée par le chef de département Officiels de Retransmission ou un titulaire du grade III ou IV qu'il désigne ;</li>
+            <li>une présentation des règlements applicables, en particulier le Règlement général, le Règlement applicable aux retransmissions des compétitions et le présent règlement ;</li>
+            <li>la réussite du questionnaire d'accréditation prévu à l'article 12 du Règlement général, propre au poste de Responsable de retransmission ;</li>
+            <li>l'observation d'au moins un match aux côtés d'un titulaire du grade RR ou supérieur, donnant lieu à une fiche d'observation signée par ce dernier.</li>
+          </ol>
+          <p>À l'issue de ce parcours, le membre est inscrit au registre des grades en qualité de Responsable de Retransmission Stagiaire (RRS).</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 7 — Tutorat du stagiaire</h3>
+          <p>Tout titulaire du grade RRS est placé, pour chaque retransmission à laquelle il participe, sous la supervision directe et continue d'un titulaire du grade RR ou supérieur, conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions.</p>
+          <p>Le tuteur consigne, à l'issue de chaque retransmission encadrée, une brève appréciation dans la fiche de compte rendu prévue à l'article 13.1 dudit règlement. Ces appréciations successives constituent l'un des éléments du dossier de candidature au grade RR.</p>
+          <p>Le refus réitéré ou injustifié d'un titulaire RR ou supérieur d'assurer le tutorat d'un stagiaire peut être porté à la connaissance du chef de département Officiels de Retransmission, sans que cela constitue en soi un manquement disciplinaire.</p>
+        </div>
+
+        <div class="doc-titre">Titre IV — Progression vers le grade RR</div>
+
+        <div class="doc-article">
+          <h3>Article 8 — Conditions et constitution du dossier</h3>
+          <p>Le passage du grade RRS au grade RR suppose la réunion des conditions cumulatives fixées à l'article 13.2 du Règlement applicable aux retransmissions des compétitions, à savoir la certification à l'accréditation, la réalisation d'au moins trois retransmissions en autonomie dans des conditions satisfaisantes, et l'absence de sanction disciplinaire active dans les douze derniers mois.</p>
+          <p>Le stagiaire, ou le tuteur agissant en son nom avec son accord, dépose auprès du chef de département Officiels de Retransmission un dossier de candidature comprenant les pièces mentionnées à l'article 5 du présent règlement.</p>
+          <p>Le chef de département Officiels de Retransmission instruit le dossier dans un délai de quinze (15) jours à compter de sa réception complète. Il peut solliciter tout complément utile auprès du candidat ou de ses tuteurs.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 9 — Décision</h3>
+          <p>Le chef de département Officiels de Retransmission transmet le dossier, assorti de son avis motivé, au Bureau de la Coordination générale, qui statue sur l'attribution du grade RR conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions.</p>
+          <p>La décision est notifiée à l'intéressé par tout moyen laissant trace écrite et mentionnée sans délai au registre des grades tenu conformément à l'article 14 du présent règlement.</p>
+          <p>En cas de décision défavorable, les motifs en sont communiqués au candidat, qui peut présenter une nouvelle candidature dès que les conditions manquantes sont réunies.</p>
+        </div>
+
+        <div class="doc-titre">Titre V — Progression vers le grade SDOR</div>
+
+        <div class="doc-article">
+          <h3>Article 10 — Conditions et instruction</h3>
+          <p>Le passage au grade Sous-Directeur des Opérations de Retransmission (SDOR) suppose, conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions, la certification à l'accréditation, une ancienneté minimale d'une saison sportive complète au grade RR, et l'absence de sanction disciplinaire active dans les douze derniers mois.</p>
+          <p>Le candidat constitue un bilan de sa saison au grade RR, comprenant notamment le nombre et le niveau de priorisation (au sens de l'article 14 du Règlement applicable aux retransmissions des compétitions) des rencontres encadrées, ainsi que les éventuelles missions d'encadrement de stagiaires assurées.</p>
+          <p>Ce bilan est transmis au chef de département Officiels de Retransmission, qui recueille l'avis d'au moins un titulaire du grade SDOR ou DOR ayant travaillé avec le candidat au cours de la saison écoulée.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 11 — Formation complémentaire préalable</h3>
+          <p>Avant toute attribution du grade SDOR, le candidat suit une formation complémentaire portant notamment sur :</p>
+          <ul>
+            <li>la coordination d'une production multiplex et la répartition des rôles entre plusieurs Responsables de retransmission ;</li>
+            <li>les procédures d'interruption et de gestion des incidents en direct prévues aux articles 16 à 22 du Règlement applicable aux retransmissions des compétitions ;</li>
+            <li>les méthodes d'évaluation et de formation des titulaires du grade RRS, dans la perspective des missions de formation confiées au grade SDOR.</li>
+          </ul>
+          <p>Cette formation complémentaire est organisée par le chef de département Officiels de Retransmission, le cas échéant avec l'appui d'un titulaire du grade DOR.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 12 — Décision</h3>
+          <p>Le chef de département Officiels de Retransmission transmet au Bureau de la Coordination générale son avis motivé accompagné du dossier du candidat. Le Bureau statue sur l'attribution du grade SDOR dans les mêmes conditions de notification et d'inscription au registre que celles prévues à l'article 9 du présent règlement.</p>
+        </div>
+
+        <div class="doc-titre">Titre VI — Progression vers le grade DOR et jury de grade</div>
+
+        <div class="doc-article">
+          <h3>Article 13 — Conditions</h3>
+          <p>Le grade de Directeur des Opérations de Retransmission (DOR) constitue le grade le plus élevé du système institué par l'article 13.2 du Règlement applicable aux retransmissions des compétitions. Son attribution suppose la certification à l'accréditation, une ancienneté minimale d'une saison sportive complète au grade SDOR, l'absence de sanction disciplinaire active dans les vingt-quatre derniers mois, ainsi qu'une nomination par le chef de département Officiels de Retransmission avec approbation du Bureau.</p>
+          <p>À titre exceptionnel et sur avis motivé, le Bureau peut déroger à la condition d'ancienneté fixée à l'alinéa précédent, notamment en cas d'expérience équivalente acquise antérieurement au sein d'une autre structure de retransmission sportive, ou en cas de nécessité opérationnelle impérieuse dûment justifiée et consignée au procès-verbal du Bureau. Cette dérogation ne dispense pas le candidat de la procédure de jury prévue à l'article 15 du présent règlement.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 14 — Composition du jury de grade</h3>
+          <p>Le jury de grade, compétent pour rendre un avis préalable à toute nomination au grade DOR, est composé :</p>
+          <ul>
+            <li>du Coordinateur général ou de la Coordinatrice générale, ou de son représentant, qui le préside ;</li>
+            <li>du titulaire du grade DOR en exercice, ou, en cas de vacance du poste, du chef de département Officiels de Retransmission ;</li>
+            <li>d'un membre du Bureau de la Coordination générale désigné pour la circonstance.</li>
+          </ul>
+          <p>Tout membre du jury en situation de conflit d'intérêts à l'égard du candidat se déporte, dans les conditions prévues à l'article 7 du Règlement applicable aux retransmissions des compétitions, applicable par analogie.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 15 — Procédure devant le jury</h4>
+          <p>Le jury évalue le candidat au regard de son parcours, du bilan de sa saison au grade SDOR, des avis recueillis auprès des membres ayant travaillé avec lui et, le cas échéant, d'un entretien conduit à l'initiative du jury.</p>
+          <p>Le jury rend un avis motivé, favorable ou défavorable, dans un délai de trente (30) jours à compter de sa saisine par le chef de département Officiels de Retransmission. Cet avis est transmis au Bureau de la Coordination générale, qui statue en dernier ressort sur l'attribution du grade DOR.</p>
+          <p>En cas d'avis défavorable du jury, le Bureau peut néanmoins attribuer le grade par décision spécialement motivée ; à l'inverse, un avis favorable du jury ne lie pas le Bureau, qui demeure seul compétent pour la décision finale conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions.</p>
+        </div>
+
+        <div class="doc-titre">Titre VII — Formation continue et maintien des compétences</div>
+
+        <div class="doc-article">
+          <h3>Article 16 — Renouvellement de l'accréditation et recyclage</h3>
+          <p>Conformément à l'article 12 bis du Règlement général, les accréditations sont valables pour une saison sportive et doivent être renouvelées au début de chaque saison. Ce renouvellement conditionne le maintien de l'ensemble des grades définis par le présent règlement.</p>
+          <p>En cas de changement significatif de matériel, de procédure ou de règlement, tout titulaire d'un grade peut être tenu de suivre une session de mise à niveau organisée par le chef de département Officiels de Retransmission, dans les conditions de préavis prévues à l'article 12 bis du Règlement général.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 17 — Missions de formation attachées aux grades III et IV</h3>
+          <p>Conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions, le titulaire du grade SDOR assure la formation et l'évaluation des titulaires du grade RRS. Cette mission s'exerce notamment par le tutorat prévu à l'article 7 du présent règlement et par la participation aux sessions de formation initiale mentionnées à l'article 6.</p>
+          <p>Le titulaire du grade DOR peut être sollicité par le chef de département Officiels de Retransmission pour contribuer à la formation complémentaire prévue à l'article 11 du présent règlement, notamment sur les aspects relatifs à la représentation du collectif auprès des instances externes.</p>
+        </div>
+
+        <div class="doc-titre">Titre VIII — Suspension, rétrogradation et retrait de grade</div>
+
+        <div class="doc-article">
+          <h3>Article 18 — Lien avec le régime disciplinaire</h3>
+          <p>La détention de chaque grade, à compter du grade RR, est conditionnée à l'absence de sanction disciplinaire active dans la période de référence propre à ce grade, telle que fixée à l'article 13.2 du Règlement applicable aux retransmissions des compétitions.</p>
+          <p>Toute sanction prononcée par l'Instance Compétente des Retransmissions dans le cadre de ses attributions disciplinaires, conformément à l'article 10 du Règlement applicable aux retransmissions des compétitions, est communiquée au chef de département Officiels de Retransmission aux fins d'actualisation du registre des grades.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 19 — Suspension provisoire</h4>
+          <p>Dans l'attente de l'issue d'une procédure disciplinaire susceptible d'affecter les conditions de maintien d'un grade, le Bureau de la Coordination générale peut prononcer, sur proposition du chef de département Officiels de Retransmission ou de l'ICR, la suspension provisoire de l'exercice des prérogatives attachées à ce grade. Le membre concerné continue, le cas échéant, d'exercer les prérogatives du grade immédiatement inférieur qu'il détient de manière confirmée.</p>
+          <p>La suspension provisoire est motivée, notifiée à l'intéressé et levée de plein droit à l'issue de la procédure disciplinaire si celle-ci n'aboutit à aucune sanction.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 20 — Rétrogradation et retrait</h4>
+          <p>La rétrogradation d'un grade à un grade inférieur, ou le retrait pur et simple d'un grade, ne peuvent intervenir qu'après décision définitive de l'ICR statuant en matière disciplinaire, conformément aux dispositions du Règlement applicable aux retransmissions des compétitions.</p>
+          <p>La décision de rétrogradation ou de retrait est prononcée par le Bureau de la Coordination générale sur la base de la décision disciplinaire définitive. Elle est notifiée à l'intéressé par tout moyen laissant trace écrite et fait l'objet d'une mention motivée au registre des grades.</p>
+          <p>Un membre rétrogradé peut solliciter un nouvel accès au grade retiré dans les conditions de droit commun fixées par le présent règlement, sans préjudice d'un délai de carence éventuellement fixé par la décision disciplinaire elle-même.</p>
+        </div>
+
+        <div class="doc-titre">Titre IX — Registre des grades et voies de recours</div>
+
+        <div class="doc-article">
+          <h3>Article 21 — Tenue du registre</h3>
+          <p>Le chef de département Officiels de Retransmission tient à jour un registre des grades mentionnant, pour chaque membre exerçant la fonction de Responsable de retransmission, le grade détenu, la date de son attribution, les dérogations éventuellement accordées et, le cas échéant, les suspensions, rétrogradations ou retraits prononcés.</p>
+          <p>Ce registre est communicable, pour ce qui le concerne, à tout membre qui en fait la demande auprès du chef de département Officiels de Retransmission. Il peut être consulté dans son intégralité par le Bureau de la Coordination générale et par l'ICR dans l'exercice de leurs attributions respectives.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 22 — Recours contre une décision individuelle</h3>
+          <p>Tout membre s'estimant lésé par une décision individuelle prise en application du présent règlement, qu'il s'agisse d'un refus d'attribution de grade, d'une suspension provisoire ou d'une décision consécutive à une procédure disciplinaire, peut former un recours motivé auprès du Bureau de la Coordination générale dans un délai de quinze (15) jours à compter de la notification de la décision contestée.</p>
+          <p>Le Bureau statue sur ce recours dans un délai de trente (30) jours, après avoir, le cas échéant, recueilli l'avis du chef de département Officiels de Retransmission ou de l'ICR. Sa décision est notifiée à l'intéressé et n'est susceptible d'aucun recours interne supplémentaire.</p>
+        </div>
+
+        <div class="doc-titre">Titre X — Dispositions finales</div>
+
+        <div class="doc-article">
+          <h3>Article 23 — Disposition transitoire</h3>
+          <p>Les membres ayant obtenu un niveau de compétence sous l'empire de l'ancienne grille dite « RFCI » sont intégrés au système institué par l'article 13.2 du Règlement applicable aux retransmissions des compétitions selon une table de correspondance arrêtée par le Bureau de la Coordination générale, sur proposition du chef de département Officiels de Retransmission, dans un délai de trois mois à compter de l'entrée en vigueur du présent règlement.</p>
+          <p>Jusqu'à l'établissement de cette table de correspondance, les membres concernés conservent l'exercice des prérogatives correspondant à leur niveau RFCI antérieur.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 24 — Modification du règlement</h3>
+          <p>Le présent règlement ne peut être modifié que par l'Assemblée générale, sur proposition de la Coordination générale ou de l'ICR, dans les mêmes conditions que celles prévues à l'article 27 du Règlement applicable aux retransmissions des compétitions pour les modifications purement formelles, rédactionnelles ou sans incidence sur les droits et obligations des membres.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 25 — Entrée en vigueur</h3>
+          <p>Le présent règlement entre en vigueur dès son adoption par l'Assemblée générale de MHBTV. Il est opposable à l'ensemble des membres exerçant ou souhaitant exercer la fonction de Responsable de retransmission.</p>
+        </div>
+
+      </div>
+
+      <div class="doc-closing">
+        <p><strong>Meylan Handball TV — Règlement de Formation et de Progression des Grades.</strong> Pris en application de l'article 13.2 du Règlement applicable aux retransmissions des compétitions. Pour toute question relative à l'interprétation de ce règlement, contactez le chef de département Officiels de Retransmission de l'ICR.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

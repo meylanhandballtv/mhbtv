@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Communiqué | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .doc-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-body { margin: 0 auto; }
+
+    .doc-preamble {
+      margin: 0 auto 3rem auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+    }
+    .doc-preamble h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p:last-child { margin-bottom: 0; }
+    .doc-preamble p em { color: var(--white); font-style: italic; }
+
+    .doc-titre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-titre:first-of-type { margin-top: 0; }
+
+    .doc-article { margin-bottom: 2rem; }
+    .doc-article h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .doc-article p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-article ul { margin: 0 0 0.9rem 1.4rem; padding: 0; }
+    .doc-article li {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .doc-article strong { color: var(--white); }
+
+    /* Cartes de nomination */
+    .grade-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin: 1rem 0 1.5rem 0;
+    }
+    .grade-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .grade-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      background: linear-gradient(135deg, rgba(232,0,29,0.12), rgba(232,0,29,0.02));
+      border-bottom: 1px solid var(--border);
+    }
+    .grade-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .grade-card-header h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0;
+    }
+    .grade-card-header span {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+    .grade-card-body { padding: 1.25rem 1.5rem; }
+    .grade-card-body p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+    .grade-card-body p strong { color: var(--white); }
+
+    .doc-closing {
+      margin: 3rem auto 0 auto;
+      padding: 1.75rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+    }
+    .doc-closing p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.5rem;
+    }
+    .doc-closing p:last-child { margin-bottom: 0; }
+
+    .doc-signature {
+      margin-top: 3rem;
+      text-align: right;
+    }
+    .doc-signature p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0;
+    }
+    .doc-signature .doc-sign-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.03em;
+      margin-top: 0.4rem;
+    }
+
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0 auto 2.5rem auto;
+    }
+    .doc-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .doc-back:hover { color: var(--red); }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Communiqué officiel</div>
+        <h1>Nominations aux postes de <em>Chefs de Département</em> de l'ICR</h1>
+        <p class="hero-sub">Le Bureau de la Coordination générale annonce la nomination des Chefs des départements Gestion des Compétitions et Officiels de Retransmission de l'Instance Compétente des Retransmissions.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="index.html" class="doc-back">← Retour à l'accueil</a>
+      </div>
+
+      <div class="doc-meta">
+        <span>Communiqué du <strong>14 août 2026</strong></span>
+        <span>Effet au <strong>1er septembre 2026</strong></span>
+        <span>Bureau de la Coordination générale</span>
+      </div>
+
+      <div class="doc-preamble">
+        <h4>Objet</h4>
+        <p>Le Bureau de la Coordination générale de Meylan Handball TV annonce la nomination de deux Chefs de département au sein de l'Instance Compétente des Retransmissions (ICR), avec effet au <em>1er septembre 2026</em>.</p>
+      </div>
+
+      <div class="doc-body">
+
+        <div class="doc-article">
+          <p>Dans le cadre de la structuration de l'ICR pour la saison 2026-2027, le Bureau de la Coordination générale a procédé à la nomination des Chefs des départements <strong>Gestion des Compétitions</strong> et <strong>Officiels de Retransmission</strong>. Ces nominations prendront effet au 1<sup>er</sup> septembre 2026.</p>
+        </div>
+
+        <div class="grade-cards">
+          <div class="grade-card">
+            <div class="grade-card-header">
+              <div class="grade-badge">Nomination</div>
+              <div>
+                <h4>M. Marin</h4>
+                <span>Chef du département Gestion des Compétitions — ICR</span>
+              </div>
+            </div>
+            <div class="grade-card-body">
+              <p>Membre de MHBTV depuis plusieurs saisons, <strong>M. Marin</strong> s'est notamment illustré par son implication dans le suivi des calendriers de rencontres et la coordination des affectations sur les compétitions couvertes par le collectif. Sa connaissance fine des championnats isérois et son sens de l'organisation en font un profil naturel pour prendre la tête de ce département, chargé de la planification et du bon déroulement administratif des compétitions retransmises.</p>
+            </div>
+          </div>
+
+          <div class="grade-card">
+            <div class="grade-card-header">
+              <div class="grade-badge">Nomination</div>
+              <div>
+                <h4>M. Achour</h4>
+                <span>Chef du département Officiels de Retransmission — ICR</span>
+              </div>
+            </div>
+            <div class="grade-card-body">
+              <p><strong>M. Achour</strong> occupe depuis plusieurs saisons des fonctions de Responsable de retransmission au sein du collectif, où il s'est distingué par la qualité de son encadrement des équipes sur le terrain et son investissement dans la formation des nouveaux membres. Sa nomination à la tête du département Officiels de Retransmission traduit la confiance du Bureau dans sa capacité à piloter le suivi des grades et la montée en compétence des Responsables de retransmission.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-article">
+          <p>Le Bureau de la Coordination générale adresse ses félicitations à M. Marin et à M. Achour pour ces nominations, et les remercie pour leur engagement au service du collectif. Il rappelle que les Chefs de département de l'ICR exercent leurs missions dans le cadre fixé par le Règlement applicable aux retransmissions des compétitions et par le Règlement général de MHBTV.</p>
+        </div>
+
+      </div>
+
+      <div class="doc-signature">
+        <p>Fait à Meylan, le 14 août 2026.</p>
+        <p>Pour le Bureau de la Coordination générale,</p>
+        <p class="doc-sign-name">La Coordinatrice adjointe</p>
+      </div>
+
+      <div class="doc-closing">
+        <p><strong>Meylan Handball TV — Communiqué du Bureau de la Coordination générale.</strong> Pour toute question relative à ces nominations, contactez le Bureau de la Coordination générale.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

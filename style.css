@@ -77,7 +77,7 @@ body {
   text-transform: uppercase;
   color: var(--muted);
   text-decoration: none;
-  padding: 0.4rem 0.7rem;
+  padding: 0.4rem 0.2rem;
   border-radius: 4px;
   transition: color 0.2s, background 0.2s;
   position: relative;

@@ -89,7 +89,7 @@ body {
 .topbar-nav a.active { color: var(--red); }
 
 .topbar-logo-img {
-  height: 64px; /* ajuste selon la hauteur de ta topbar */
+  height: 40px; /* ajuste selon la hauteur de ta topbar */
   width: auto;
   display: block;
 }

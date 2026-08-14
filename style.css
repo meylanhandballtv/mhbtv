@@ -88,6 +88,12 @@ body {
 }
 .topbar-nav a.active { color: var(--red); }
 
+.topbar-logo-img {
+  height: 64px; /* ajuste selon la hauteur de ta topbar */
+  width: auto;
+  display: block;
+}
+
 /* Dropdown */
 .nav-dropdown { position: relative; }
 .nav-dropdown > a::after { content: ' ▾'; font-size: 0.6rem; }

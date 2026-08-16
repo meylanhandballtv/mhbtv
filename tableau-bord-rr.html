@@ -234,6 +234,13 @@
       font-size: .65rem; font-weight: 700; letter-spacing: .15em;
       text-transform: uppercase; color: var(--red);
     }
+
+    .date-divider {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--red); background: rgba(232,0,29,0.05);
+      text-align: center; padding: 0.5rem 0.85rem;
+    }
   </style>
 </head>
 <body>
@@ -412,17 +419,23 @@
           return;
         }
 
-        tbody.innerHTML = rows.map(r => `
-          <tr>
-            <td>${escapeHtml(r.colB ?? '—')}</td>
-            <td>${escapeHtml(r.colD ?? '—')}</td>
-            <td>${escapeHtml(r.colG ?? '—')}</td>
-            <td>${statusBadge(r.colH)}</td>
-            <td class="rr-cell">${escapeHtml(r.responsable || 'Non désigné')}</td>
-          </tr>
-        `).join('');
+        tbody.innerHTML = rows.map(r => {
+          if (r.isDate) {
+            return `<tr><td colspan="5" class="date-divider">${escapeHtml(r.dateText)}</td></tr>`;
+          }
+          return `
+            <tr>
+              <td>${escapeHtml(r.colB ?? '—')}</td>
+              <td>${escapeHtml(r.colD ?? '—')}</td>
+              <td>${escapeHtml(r.colG ?? '—')}</td>
+              <td>${statusBadge(r.colH)}</td>
+              <td class="rr-cell">${escapeHtml(r.responsable || 'Non désigné')}</td>
+            </tr>
+          `;
+        }).join('');
 
-        badge.textContent = `${rows.length} à venir`;
+        const matchCount = rows.filter(r => !r.isDate).length;
+        badge.textContent = `${matchCount} à venir`;
 
       } catch (err) {
         console.error('Erreur chargement désignations :', err);

@@ -401,23 +401,18 @@
     async function loadDesignations() {
       const tbody = document.getElementById('designations-body');
       const badge = document.getElementById('designations-badge');
-      const statCount = document.getElementById('stat-designations-count');
- 
+
       try {
         const res = await fetch(DESIGNATIONS_API_URL);
         if (!res.ok) throw new Error(`Réponse HTTP ${res.status}`);
         const rows = await res.json();
- 
+
         if (!Array.isArray(rows) || rows.length === 0) {
           tbody.innerHTML = `<tr><td colspan="5" class="desig-status">Aucune désignation à venir pour le moment.</td></tr>`;
           badge.textContent = "0 à venir";
-          statCount.textContent = "0";
           return;
         }
- 
-        // Construit les lignes du tableau à partir des données du Sheet.
-        // Mapping à ajuster selon le contenu réel de tes colonnes B, D, G, H :
-        //   colB -> Collectif | colD -> Adversaire | colG -> Date | colH -> Heure
+
         tbody.innerHTML = rows.map(r => `
           <tr>
             <td>${escapeHtml(r.colB ?? '—')}</td>
@@ -427,15 +422,13 @@
             <td class="rr-cell">${escapeHtml(r.responsable || 'Non désigné')}</td>
           </tr>
         `).join('');
- 
+
         badge.textContent = `${rows.length} à venir`;
-        statCount.textContent = rows.length;
- 
+
       } catch (err) {
         console.error('Erreur chargement désignations :', err);
         tbody.innerHTML = `<tr><td colspan="5" class="desig-status err">Impossible de charger les désignations depuis le Sheet. Réessaie plus tard.</td></tr>`;
         badge.textContent = "Erreur";
-        statCount.textContent = "—";
       }
     }
  

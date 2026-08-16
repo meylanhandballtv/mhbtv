@@ -362,9 +362,105 @@
       </div>
 
     </div><!-- /dash-wrap -->
+
+
+    <!-- PROCHAINES DESIGNATIONS (dynamique — alimenté depuis Google Sheet) -->
+      <div class="form-card">
+        <div class="form-card-head">
+          <div class="head-bar"></div>
+          <h2>Prochaines <span>Désignations</span></h2>
+          <span class="badge-opt" id="designations-badge">Chargement…</span>
+        </div>
+        <div class="form-card-body" style="padding: 0.5rem 0 1rem;">
+          <table class="std-table">
+            <thead>
+              <tr><th>Collectif</th><th>Adversaire</th><th>Jour</th><th>Heure</th><th>RR désigné</th></tr>
+            </thead>
+            <tbody id="designations-body">
+              <tr><td colspan="5" class="desig-status">Chargement des désignations…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    
   </main>
 
   <script src="footer.js"></script>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       DÉSIGNATIONS DYNAMIQUES — lecture du Google Sheet planning
+       Le Sheet doit exposer un endpoint via Google Apps Script (voir
+       le script "Code.gs" fourni séparément). Cet endpoint renvoie un
+       tableau JSON de toutes les lignes où la colonne A = "Direct",
+       avec les colonnes B, D, G, H (infos match) et AA (responsable).
+       ═══════════════════════════════════════════════════════════════ -->
+  <script>
+    // 1) Remplace par l'URL de ton Web App Apps Script (voir Code.gs)
+    const DESIGNATIONS_API_URL = "https://script.google.com/macros/s/AKfycbw-cgbI1l4p6xcQoVWDuddUh7juML_YZlJ19Sg8KPJ3BSrm3rBBqcI-GUMz9Hdh_SM/exec";
+ 
+    async function loadDesignations() {
+      const tbody = document.getElementById('designations-body');
+      const badge = document.getElementById('designations-badge');
+      const statCount = document.getElementById('stat-designations-count');
+ 
+      try {
+        const res = await fetch(DESIGNATIONS_API_URL);
+        if (!res.ok) throw new Error(`Réponse HTTP ${res.status}`);
+        const rows = await res.json();
+ 
+        if (!Array.isArray(rows) || rows.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="5" class="desig-status">Aucune désignation à venir pour le moment.</td></tr>`;
+          badge.textContent = "0 à venir";
+          statCount.textContent = "0";
+          return;
+        }
+ 
+        // Construit les lignes du tableau à partir des données du Sheet.
+        // Mapping à ajuster selon le contenu réel de tes colonnes B, D, G, H :
+        //   colB -> Collectif | colD -> Adversaire | colG -> Date | colH -> Heure
+        tbody.innerHTML = rows.map(r => `
+          <tr>
+            <td>${escapeHtml(r.colB ?? '—')}</td>
+            <td>${escapeHtml(r.colD ?? '—')}</td>
+            <td>${escapeHtml(r.colG ?? '—')}</td>
+            <td>${statusBadge(r.colH)}</td>
+            <td class="rr-cell">${escapeHtml(r.responsable || 'Non désigné')}</td>
+          </tr>
+        `).join('');
+ 
+        badge.textContent = `${rows.length} à venir`;
+        statCount.textContent = rows.length;
+ 
+      } catch (err) {
+        console.error('Erreur chargement désignations :', err);
+        tbody.innerHTML = `<tr><td colspan="5" class="desig-status err">Impossible de charger les désignations depuis le Sheet. Réessaie plus tard.</td></tr>`;
+        badge.textContent = "Erreur";
+        statCount.textContent = "—";
+      }
+    }
+ 
+    // Transforme le texte de statut (colonne H) en badge visuel.
+    // Ajuste les libellés attendus selon ce que contient réellement la colonne H.
+    function statusBadge(value) {
+      const v = (value ?? '').toString().trim().toLowerCase();
+      if (v.includes('complet') || v.includes('confirm')) {
+        return `<span class="badge-status confirm">${escapeHtml(value)}</span>`;
+      }
+      if (v.includes('vacant') || v.includes('attente') || v.includes('confirmer')) {
+        return `<span class="badge-status pending">${escapeHtml(value)}</span>`;
+      }
+      return `<span class="badge-status wait">${escapeHtml(value || '—')}</span>`;
+    }
+ 
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+ 
+    document.addEventListener('DOMContentLoaded', loadDesignations);
+  </script>
 
 </body>
 </html>

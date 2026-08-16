@@ -311,7 +311,7 @@ footer ul a:hover { color: var(--white); }
 .footer-bottom p { font-size: 0.75rem; color: var(--muted); }
 
 .footer-logo-img {
-  height: 32px; /* ajuste selon le rendu */
+  height: 45px; /* ajuste selon le rendu */
   width: auto;
   display: block;
 }

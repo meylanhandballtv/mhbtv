@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Confirmation | Meylan Handball TV</title>
+<title>Connexion | Meylan Handball TV</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  /* ── PAGE CONFIRMATION ── */
-  .confirm-wrap {
+  /* ── PAGE CONNEXION ── */
+  .login-wrap {
     min-height: calc(100vh - 64px);
     display: flex;
     align-items: center;
@@ -16,7 +16,7 @@
     position: relative;
     overflow: hidden;
   }
-  .confirm-wrap::before {
+  .login-wrap::before {
     content: '';
     position: absolute; inset: 0;
     background:
@@ -25,7 +25,7 @@
     pointer-events: none;
   }
 
-  .confirm-card {
+  .login-card {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -37,7 +37,7 @@
     animation: fadeSlide 0.4s ease;
   }
 
-  .confirm-title {
+  .login-title {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 2.4rem;
     letter-spacing: 0.03em;
@@ -45,18 +45,18 @@
     color: var(--white);
     margin: 1rem 0 0.5rem;
   }
-  .confirm-title em { color: var(--red); font-style: normal; display: block; }
+  .login-title em { color: var(--red); font-style: normal; display: block; }
 
-  .confirm-sub {
+  .login-sub {
     font-size: 0.85rem;
     color: var(--muted);
     line-height: 1.6;
     margin-bottom: 2rem;
   }
 
-  /* CODE INPUT — cases individuelles */
-  .code-field { margin-bottom: 1.25rem; }
-  .code-field label {
+  /* FORM */
+  .field { margin-bottom: 1.25rem; }
+  .field label {
     display: block;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.72rem;
@@ -64,29 +64,33 @@
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 0.75rem;
-    text-align: center;
+    margin-bottom: 0.5rem;
   }
-  .code-boxes {
-    display: flex;
-    gap: 0.6rem;
-    justify-content: center;
-  }
-  .code-boxes input {
-    width: 3rem;
-    height: 3.4rem;
-    text-align: center;
+  .input-wrap { position: relative; }
+  .field input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    padding-right: 2.8rem;
     background: var(--darker);
     border: 1px solid var(--border);
     border-radius: 6px;
     color: var(--text);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.6rem;
-    letter-spacing: 0.02em;
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
     outline: none;
-    transition: border-color 0.2s, transform 0.15s;
+    transition: border-color 0.2s;
   }
-  .code-boxes input:focus { border-color: var(--red); transform: translateY(-1px); }
+  .field input:focus { border-color: var(--red); }
+  .field input::placeholder { color: var(--muted); }
+
+  .toggle-pwd {
+    position: absolute; right: 0.85rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; cursor: pointer; color: var(--muted);
+    display: flex; align-items: center; padding: 0;
+    transition: color 0.2s;
+  }
+  .toggle-pwd:hover { color: var(--text); }
+  .toggle-pwd svg { width: 18px; height: 18px; }
 
   /* Error */
   .error-box {
@@ -107,35 +111,13 @@
   .attempts-warn.visible { display: block; }
   .attempts-warn span { color: var(--red); font-weight: 700; }
 
-  /* Success */
-  .success-box {
-    display: none; align-items: center; gap: 0.6rem;
-    background: rgba(46,204,113,0.08); border: 1px solid rgba(46,204,113,0.3);
-    border-radius: 6px; padding: 0.75rem 1rem;
-    font-size: 0.83rem; color: #4ade80; margin-bottom: 1.25rem;
-  }
-  .success-box.visible { display: flex; }
-  .success-box svg { width: 16px; height: 16px; flex-shrink: 0; }
-
   /* Submit — réutilise .btn .btn-red du design system */
-  .btn-confirm {
+  .btn-login {
     width: 100%;
     justify-content: center;
-    margin-top: 0.5rem;
   }
-  .btn-confirm:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
-  .btn-confirm svg { width: 16px; height: 16px; }
-
-  .resend-link {
-    display: block;
-    text-align: center;
-    margin-top: 1.25rem;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-  .resend-link a { color: var(--red); text-decoration: none; cursor: pointer; }
-  .resend-link a:hover { text-decoration: underline; }
+  .btn-login:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+  .btn-login svg { width: 16px; height: 16px; }
 
   /* Lockout */
   .lockout-screen { display: none; text-align: center; padding: 1rem 0; }
@@ -150,15 +132,60 @@
     font-size: 2.2rem; color: var(--white); letter-spacing: 0.1em; margin: 1.25rem 0;
   }
 
+  /* ── Étape code à 6 chiffres ── */
+  #codeView { display: none; }
+  .code-back {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 0; margin-bottom: 1.25rem; transition: color 0.2s;
+  }
+  .code-back:hover { color: var(--text); }
+  .code-back svg { width: 14px; height: 14px; }
+
+  .code-identity {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.85rem; color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .code-identity strong { color: var(--white); }
+
+  .code-boxes {
+    display: flex; gap: 0.6rem; justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .code-boxes input {
+    width: 2.6rem; height: 3.1rem;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0;
+    background: var(--darker);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+    padding: 0;
+  }
+  .code-boxes input:focus { border-color: var(--red); }
+
   @keyframes fadeSlide {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes shakeX {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+  .shake { animation: shakeX 0.35s ease; }
 
   @media (max-width: 480px) {
-    .confirm-card { padding: 2rem 1.25rem; }
-    .code-boxes input { width: 2.5rem; height: 3rem; font-size: 1.35rem; }
+    .login-card { padding: 2rem 1.25rem; }
+    .code-boxes input { width: 2.3rem; height: 2.8rem; font-size: 1.4rem; }
   }
 </style>
 </head>
@@ -167,49 +194,90 @@
 <script src="nav.js"></script>
 
 <main class="page">
-  <div class="confirm-wrap">
-    <div class="confirm-card">
+  <div class="login-wrap">
+    <div class="login-card">
 
-      <!-- Formulaire de confirmation -->
+      <!-- Étape 1 : Identifiant + mot de passe -->
       <div id="formView">
-        <div class="tag">Vérification</div>
-        <h1 class="confirm-title">Confirmation<em>de connexion</em></h1>
-        <p class="confirm-sub">Entrez le code de vérification qui vous a été communiqué pour finaliser votre connexion.</p>
+        <div class="tag">Accès restreint</div>
+        <h1 class="login-title">Connexion<em>Coordination générale</em></h1>
+        <p class="login-sub">Réservé aux membres du Bureau de la Coordination générale et de l'Instance Compétente des Retransmissions.</p>
 
         <div class="error-box" id="errorBox">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <span id="errorMsg">Code incorrect.</span>
-        </div>
-
-        <div class="success-box" id="successBox">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          <span>Code validé, redirection…</span>
+          <span id="errorMsg">Identifiant ou mot de passe incorrect.</span>
         </div>
 
         <div class="attempts-warn" id="attemptsWarn">
           Tentative <span id="attemptCount">0</span> / <span id="maxAttempts">5</span> — trop d'erreurs bloqueront l'accès.
         </div>
 
-        <div class="code-field">
-          <label for="code0">Code de vérification</label>
-          <div class="code-boxes" id="codeBoxes">
-            <input type="text" inputmode="numeric" maxlength="1" id="code0" autocomplete="one-time-code">
-            <input type="text" inputmode="numeric" maxlength="1" id="code1">
-            <input type="text" inputmode="numeric" maxlength="1" id="code2">
-            <input type="text" inputmode="numeric" maxlength="1" id="code3">
-            <input type="text" inputmode="numeric" maxlength="1" id="code4">
-            <input type="text" inputmode="numeric" maxlength="1" id="code5">
+        <div class="field">
+          <label for="identifiant">Identifiant</label>
+          <div class="input-wrap">
+            <input type="text" id="identifiant" placeholder="Votre identifiant…" autocomplete="username" onkeydown="handleKey(event, tryLogin)" />
           </div>
         </div>
 
-        <button class="btn btn-red btn-confirm" id="btnConfirm" onclick="tryConfirm()">
+        <div class="field">
+          <label for="motdepasse">Mot de passe</label>
+          <div class="input-wrap">
+            <input type="password" id="motdepasse" placeholder="Votre mot de passe…" autocomplete="current-password" onkeydown="handleKey(event, tryLogin)" />
+            <button class="toggle-pwd" type="button" onclick="togglePwd()" title="Afficher / masquer">
+              <svg id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button class="btn btn-red btn-login" id="btnLogin" onclick="tryLogin()">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <polyline points="20 6 9 17 4 12"/>
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
           </svg>
-          Confirmer
+          Continuer
+        </button>
+      </div>
+
+      <!-- Étape 2 : Code à 6 chiffres -->
+      <div id="codeView">
+        <button class="code-back" type="button" onclick="backToForm()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Retour
         </button>
 
-        <span class="resend-link">Vous n'avez pas reçu de code ? <a onclick="resendCode()">Renvoyer</a></span>
+        <div class="tag">Vérification</div>
+        <h1 class="login-title">Code<em>de sécurité</em></h1>
+        <p class="login-sub">Saisissez le code à 6 chiffres associé à votre identifiant.</p>
+
+        <p class="code-identity">Connexion en tant que <strong id="codeIdentity">—</strong></p>
+
+        <div class="error-box" id="codeErrorBox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="codeErrorMsg">Code incorrect.</span>
+        </div>
+
+        <div class="attempts-warn" id="codeAttemptsWarn">
+          Tentative <span id="codeAttemptCount">0</span> / <span id="codeMaxAttempts">5</span> — trop d'erreurs bloqueront l'accès.
+        </div>
+
+        <div class="code-boxes" id="codeBoxes">
+          <input type="text" inputmode="numeric" maxlength="1" class="code-digit" />
+          <input type="text" inputmode="numeric" maxlength="1" class="code-digit" />
+          <input type="text" inputmode="numeric" maxlength="1" class="code-digit" />
+          <input type="text" inputmode="numeric" maxlength="1" class="code-digit" />
+          <input type="text" inputmode="numeric" maxlength="1" class="code-digit" />
+          <input type="text" inputmode="numeric" maxlength="1" class="code-digit" />
+        </div>
+
+        <button class="btn btn-red btn-login" id="btnCode" onclick="tryCode()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+            <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+          </svg>
+          Se connecter
+        </button>
       </div>
 
       <!-- Écran de blocage -->
@@ -218,7 +286,7 @@
         <div class="lockout-title">Accès bloqué</div>
         <p class="lockout-msg">Trop de tentatives incorrectes.<br>Réessayez dans :</p>
         <div class="lockout-timer" id="lockoutTimer">05:00</div>
-        <p class="lockout-msg" style="font-size:0.78rem;">Si vous avez un problème,<br>contactez la Coordination générale.</p>
+        <p class="lockout-msg" style="font-size:0.78rem;">Si vous avez oublié vos identifiants,<br>contactez la Coordination générale.</p>
       </div>
 
     </div>
@@ -229,106 +297,160 @@
 
 <script>
 /* ═══════════════════════════════════════════════════════
-   ⚙️  PARAMÈTRES DE CONFIRMATION — Modifier ici
+   ⚙️  COMPTES AUTORISÉS  — Modifier ici
+   Chaque entrée : { identifiant, motDePasse, code (6 chiffres), page }
+   Vous pouvez en ajouter autant que nécessaire.
    ═══════════════════════════════════════════════════════ */
-const CODE_ATTENDU     = '123456';              // Le code à saisir pour valider
-const PAGE_REDIRECTION = 'tableau-bord-rr.html'; // Page vers laquelle rediriger une fois le code validé
+const COMPTES = [
+  { identifiant: 'icr.admin',            motDePasse: 'MhbtvICR2025!',  code: '482915', page: 'icr-suivi.html'        },
+  { identifiant: 'xavierfini',           motDePasse: 'MHBTV2026@',     code: '193764', page: 'tableau-bord-rr.html' },
+  { identifiant: 'mariedalzotto',        motDePasse: 'MHBTV2026@',     code: '627058', page: 'tableau-bord-rr.html' },
+  { identifiant: 'emmanuelalvesdemoura', motDePasse: 'MHBTV2026@',     code: '350841', page: 'tableau-bord-rr.html' },
+  { identifiant: 'coordinateur',         motDePasse: 'Coord@MHBTV26',  code: '706219', page: 'tableau-bord-rr.html' },
+  { identifiant: 'responsable',          motDePasse: 'Coord@MHBTV26',  code: '914537', page: 'fiche_presence_rr.html' },
+];
 
 /* ── Paramètres de sécurité ── */
-const MAX_TENTATIVES   = 5;         // Nombre de tentatives avant blocage
+const MAX_TENTATIVES   = 5;         // Nombre de tentatives avant blocage (partagé entre les deux étapes)
 const LOCKOUT_SECONDES = 5 * 60;    // Durée du blocage en secondes (5 min)
 /* ═══════════════════════════════════════════════════════ */
 
 let tentatives = 0;
 let lockoutTimer = null;
 let lockoutRemaining = 0;
+let compteEnAttente = null; // compte validé à l'étape 1, en attente du code
 
-const boxes = Array.from(document.querySelectorAll('.code-boxes input'));
-
-boxes.forEach((box, i) => {
-  box.addEventListener('input', () => {
-    box.value = box.value.replace(/[^0-9]/g, '').slice(0, 1);
-    if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
-  });
-  box.addEventListener('keydown', (e) => {
-    if (e.key === 'Backspace' && !box.value && i > 0) boxes[i - 1].focus();
-    if (e.key === 'Enter') tryConfirm();
-  });
-  box.addEventListener('paste', (e) => {
-    e.preventDefault();
-    const digits = (e.clipboardData.getData('text') || '').replace(/[^0-9]/g, '').split('');
-    digits.slice(0, boxes.length).forEach((d, idx) => { boxes[idx].value = d; });
-    const next = boxes[Math.min(digits.length, boxes.length - 1)];
-    if (next) next.focus();
-  });
-});
-
-function getCode() {
-  return boxes.map(b => b.value).join('');
+function handleKey(e, fn) {
+  if (e.key === 'Enter') fn();
 }
 
-function clearCode() {
-  boxes.forEach(b => b.value = '');
-  boxes[0].focus();
+function togglePwd() {
+  const input = document.getElementById('motdepasse');
+  const icon  = document.getElementById('eyeIcon');
+  const isHidden = input.type === 'password';
+  input.type = isHidden ? 'text' : 'password';
+  icon.innerHTML = isHidden
+    ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+       <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+       <line x1="1" y1="1" x2="23" y2="23"/>`
+    : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
 }
 
-function tryConfirm() {
-  const saisi = getCode();
-  const btn = document.getElementById('btnConfirm');
+/* ── Étape 1 : identifiant / mot de passe ── */
+function tryLogin() {
+  const id  = document.getElementById('identifiant').value.trim();
+  const mdp = document.getElementById('motdepasse').value;
 
-  if (saisi.length < boxes.length) {
-    showError('Veuillez saisir le code complet.');
+  if (!id || !mdp) {
+    showError('errorBox', 'errorMsg', 'Veuillez remplir les deux champs.');
     return;
   }
 
-  const ok = saisi === CODE_ATTENDU;
+  const compte = COMPTES.find(c => c.identifiant === id && c.motDePasse === mdp);
 
-  if (ok) {
-    boxes.forEach(b => b.disabled = true);
+  if (compte) {
+    compteEnAttente = compte;
+    goToCodeStep(id);
+  } else {
+    registerFailedAttempt('errorBox', 'errorMsg', 'attemptsWarn', 'attemptCount', 'maxAttempts',
+      'Identifiant ou mot de passe incorrect.');
+    const mdpInput = document.getElementById('motdepasse');
+    mdpInput.value = '';
+    mdpInput.classList.add('shake');
+    setTimeout(() => mdpInput.classList.remove('shake'), 350);
+  }
+}
+
+/* ── Étape 2 : code à 6 chiffres ── */
+function goToCodeStep(id) {
+  document.getElementById('formView').style.display = 'none';
+  document.getElementById('codeView').style.display = 'block';
+  document.getElementById('codeIdentity').textContent = id;
+  document.getElementById('codeErrorBox').classList.remove('visible');
+  document.getElementById('codeAttemptsWarn').classList.remove('visible');
+  setupCodeBoxes();
+}
+
+function backToForm() {
+  compteEnAttente = null;
+  document.getElementById('codeView').style.display = 'none';
+  document.getElementById('formView').style.display = 'block';
+  document.getElementById('motdepasse').value = '';
+  document.getElementById('errorBox').classList.remove('visible');
+}
+
+function setupCodeBoxes() {
+  const boxes = Array.from(document.querySelectorAll('.code-digit'));
+  boxes.forEach(b => (b.value = ''));
+  boxes.forEach((box, i) => {
+    box.oninput = () => {
+      box.value = box.value.replace(/[^0-9]/g, '').slice(0, 1);
+      if (box.value && i < boxes.length - 1) boxes[i + 1].focus();
+      if (boxes.every(b => b.value.length === 1)) tryCode();
+    };
+    box.onkeydown = (e) => {
+      if (e.key === 'Backspace' && !box.value && i > 0) boxes[i - 1].focus();
+      if (e.key === 'Enter') tryCode();
+    };
+    box.onpaste = (e) => {
+      e.preventDefault();
+      const digits = (e.clipboardData.getData('text') || '').replace(/[^0-9]/g, '').slice(0, 6).split('');
+      digits.forEach((d, idx) => { if (boxes[idx]) boxes[idx].value = d; });
+      const next = boxes[digits.length] || boxes[boxes.length - 1];
+      next.focus();
+      if (boxes.every(b => b.value.length === 1)) tryCode();
+    };
+  });
+  boxes[0].focus();
+}
+
+function tryCode() {
+  if (!compteEnAttente) return;
+  const boxes = Array.from(document.querySelectorAll('.code-digit'));
+  const saisi = boxes.map(b => b.value).join('');
+
+  if (saisi.length < 6) {
+    showError('codeErrorBox', 'codeErrorMsg', 'Veuillez saisir les 6 chiffres.');
+    return;
+  }
+
+  if (saisi === compteEnAttente.code) {
+    const btn = document.getElementById('btnCode');
     btn.disabled = true;
-    document.getElementById('errorBox').classList.remove('visible');
-    document.getElementById('successBox').classList.add('visible');
     btn.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin .7s linear infinite">
         <circle cx="12" cy="12" r="10" stroke-opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/>
       </svg>
-      Redirection…`;
-    setTimeout(() => { window.location.href = PAGE_REDIRECTION; }, 900);
+      Connexion…`;
+    setTimeout(() => { window.location.href = compteEnAttente.page; }, 700);
   } else {
-    tentatives++;
-    document.getElementById('attemptsWarn').classList.add('visible');
-    document.getElementById('attemptCount').textContent = tentatives;
-    document.getElementById('maxAttempts').textContent  = MAX_TENTATIVES;
-
-    if (tentatives >= MAX_TENTATIVES) {
-      startLockout();
-    } else {
-      const restantes = MAX_TENTATIVES - tentatives;
-      showError(`Code incorrect. ${restantes} tentative${restantes > 1 ? 's' : ''} restante${restantes > 1 ? 's' : ''}.`);
-      boxes.forEach(b => b.style.borderColor = '#E8001D');
-      clearCode();
-      setTimeout(() => { boxes.forEach(b => b.style.borderColor = ''); }, 1500);
-    }
+    registerFailedAttempt('codeErrorBox', 'codeErrorMsg', 'codeAttemptsWarn', 'codeAttemptCount', 'codeMaxAttempts',
+      'Code incorrect.');
+    boxes.forEach(b => (b.value = ''));
+    document.getElementById('codeBoxes').classList.add('shake');
+    setTimeout(() => document.getElementById('codeBoxes').classList.remove('shake'), 350);
+    boxes[0].focus();
   }
 }
 
-function resendCode() {
-  document.getElementById('errorBox').classList.remove('visible');
-  showError('Un nouveau code a été envoyé.');
-  document.getElementById('errorBox').style.color = '#4ade80';
-  document.getElementById('errorBox').style.background = 'rgba(46,204,113,0.08)';
-  document.getElementById('errorBox').style.borderColor = 'rgba(46,204,113,0.3)';
-  setTimeout(() => {
-    document.getElementById('errorBox').classList.remove('visible');
-    document.getElementById('errorBox').style.color = '';
-    document.getElementById('errorBox').style.background = '';
-    document.getElementById('errorBox').style.borderColor = '';
-  }, 2500);
+/* ── Tentatives / blocage (partagés entre les deux étapes) ── */
+function registerFailedAttempt(errBoxId, errMsgId, warnId, countId, maxId, msg) {
+  tentatives++;
+  document.getElementById(warnId).classList.add('visible');
+  document.getElementById(countId).textContent = tentatives;
+  document.getElementById(maxId).textContent = MAX_TENTATIVES;
+
+  if (tentatives >= MAX_TENTATIVES) {
+    startLockout();
+  } else {
+    const restantes = MAX_TENTATIVES - tentatives;
+    showError(errBoxId, errMsgId, `${msg} ${restantes} tentative${restantes > 1 ? 's' : ''} restante${restantes > 1 ? 's' : ''}.`);
+  }
 }
 
-function showError(msg) {
-  const box = document.getElementById('errorBox');
-  document.getElementById('errorMsg').textContent = msg;
+function showError(boxId, msgId, msg) {
+  const box = document.getElementById(boxId);
+  document.getElementById(msgId).textContent = msg;
   box.classList.remove('visible');
   void box.offsetWidth; // force reflow pour relancer l'animation
   box.classList.add('visible');
@@ -337,6 +459,7 @@ function showError(msg) {
 function startLockout() {
   lockoutRemaining = LOCKOUT_SECONDES;
   document.getElementById('formView').style.display = 'none';
+  document.getElementById('codeView').style.display = 'none';
   document.getElementById('lockoutScreen').style.display = 'block';
   updateLockoutTimer();
   lockoutTimer = setInterval(() => {
@@ -344,20 +467,37 @@ function startLockout() {
     updateLockoutTimer();
     if (lockoutRemaining <= 0) {
       clearInterval(lockoutTimer);
-      tentatives = 0;
-      document.getElementById('lockoutScreen').style.display = 'none';
-      document.getElementById('formView').style.display = 'block';
-      document.getElementById('attemptsWarn').classList.remove('visible');
-      document.getElementById('errorBox').classList.remove('visible');
-      clearCode();
-      document.getElementById('btnConfirm').disabled = false;
-      document.getElementById('btnConfirm').innerHTML = `
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-        Confirmer`;
+      resetAll();
     }
   }, 1000);
+}
+
+function resetAll() {
+  tentatives = 0;
+  compteEnAttente = null;
+  document.getElementById('lockoutScreen').style.display = 'none';
+  document.getElementById('codeView').style.display = 'none';
+  document.getElementById('formView').style.display = 'block';
+  document.getElementById('attemptsWarn').classList.remove('visible');
+  document.getElementById('codeAttemptsWarn').classList.remove('visible');
+  document.getElementById('errorBox').classList.remove('visible');
+  document.getElementById('codeErrorBox').classList.remove('visible');
+  document.getElementById('identifiant').value = '';
+  document.getElementById('motdepasse').value  = '';
+  document.getElementById('btnLogin').disabled = false;
+  document.getElementById('btnLogin').innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+      <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+    </svg>
+    Continuer`;
+  document.getElementById('btnCode').disabled = false;
+  document.getElementById('btnCode').innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+      <polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+    </svg>
+    Se connecter`;
 }
 
 function updateLockoutTimer() {

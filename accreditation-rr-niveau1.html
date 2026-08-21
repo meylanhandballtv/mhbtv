@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QCM d'Accréditation — Certificat Niveau 1 | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .doc-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0 auto 2.5rem auto;
+    }
+    .doc-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .doc-back:hover { color: var(--red); }
+
+    .doc-preamble {
+      margin: 0 auto 3rem auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+    }
+    .doc-preamble h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p:last-child { margin-bottom: 0; }
+    .doc-preamble p strong { color: var(--white); }
+
+    /* Honor-code callout, styled like incident-card */
+    .honor-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .honor-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .honor-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.6rem;
+    }
+    .honor-card p:last-child { margin-bottom: 0; }
+    .honor-card strong { color: var(--white); }
+
+    /* Quiz shell */
+    .quiz-progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .quiz-progress-track {
+      flex: 1;
+      height: 6px;
+      background: var(--border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .quiz-progress-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .question-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .question-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .option-item:hover { border-color: var(--gold); }
+    .option-item.selected {
+      border-color: var(--gold);
+      background: rgba(240,180,41,0.08);
+    }
+    .option-item input[type="radio"] {
+      margin-top: 0.2rem;
+      accent-color: var(--red);
+      flex-shrink: 0;
+    }
+    .option-item span {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .option-item.selected span { color: var(--white); }
+
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    /* Results screen */
+    .results-wrap { display: none; text-align: center; padding: 1rem 0 2rem 0; }
+    .results-score-20 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      letter-spacing: 0.03em;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+    .results-score-20 span { color: var(--muted); font-size: 2.2rem; }
+    .results-score-raw {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .results-verdict {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      padding: 0.5rem 1.4rem;
+      margin-bottom: 2rem;
+    }
+    .results-verdict.pass {
+      background: rgba(80,200,120,0.12);
+      border: 1px solid rgba(80,200,120,0.4);
+      color: #6fd68c;
+    }
+    .results-verdict.fail {
+      background: rgba(232,0,29,0.1);
+      border: 1px solid rgba(232,0,29,0.4);
+      color: var(--red);
+    }
+
+    .results-honor {
+      text-align: left;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 2rem;
+    }
+    .results-honor p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+    .results-honor p:last-child { margin-bottom: 0; }
+    .results-honor strong { color: var(--white); }
+
+    .results-review { text-align: left; margin-top: 2.5rem; }
+    .review-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.4rem;
+      margin-bottom: 0.9rem;
+    }
+    .review-item .review-q {
+      font-size: 0.9rem;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .review-item .review-your {
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+    }
+    .review-item .review-correct-answer {
+      font-size: 0.85rem;
+    }
+    .review-item.correct { border-left: 4px solid #6fd68c; }
+    .review-item.incorrect { border-left: 4px solid var(--red); }
+    .tag-ok { color: #6fd68c; font-weight: 700; }
+    .tag-ko { color: var(--red); font-weight: 700; }
+
+    .btn-restart {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Accréditation MHBTV</div>
+        <h1>Certificat de <em>Niveau 1</em></h1>
+        <p class="hero-sub">Questionnaire d'accréditation ouvrant l'accès à la fonction de Responsable de retransmission et au grade de Responsable de Retransmission Stagiaire (RRS).</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="statuts.html" class="doc-back">← Retour aux statuts &amp; règlements</a>
+      </div>
+
+      <div class="doc-meta">
+        <span>Certificat <strong>Niveau 1</strong></span>
+        <span id="meta-question-count">12 questions</span>
+        <span>Seuil de réussite : <strong>12/20</strong></span>
+      </div>
+
+      <div class="doc-preamble">
+        <h4>À propos de ce certificat</h4>
+        <p>Ce QCM porte sur le Règlement applicable aux retransmissions des compétitions (articles 13.1, 13.2, 14 et 15) et sur le Règlement de Progression des Grades (articles 6 et 7), en application de l'article 12 du Règlement général relatif aux questionnaires d'accréditation.</p>
+        <p>La réussite de ce questionnaire, combinée à l'observation d'au moins un match aux côtés d'un titulaire du grade RR ou supérieur, conditionne l'inscription au registre des grades en qualité de <strong>Responsable de Retransmission Stagiaire (RRS)</strong>.</p>
+      </div>
+
+      <div class="honor-card">
+        <h4>Engagement sur l'honneur</h4>
+        <p>Ce questionnaire fonctionne en autonomie, sans surveillance directe. <strong>La Coordination générale fait confiance à ses membres.</strong></p>
+        <p>Il appartient au candidat de transmettre lui-même sa note à l'Instance Compétente des Retransmissions (ICR) s'il obtient une note finale <strong>égale ou supérieure à 12/20</strong>.</p>
+        <p>Toute fraude avérée (utilisation non autorisée du règlement pendant l'épreuve, communication des réponses entre candidats, usurpation d'identité, etc.) est susceptible d'engager une procédure disciplinaire devant l'ICR.</p>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- ZONE À MODIFIER : ajouter / éditer les questions ici          -->
+      <!-- Chaque question est un objet avec :                          -->
+      <!--   question   : texte de la question                          -->
+      <!--   options    : tableau de 4 réponses possibles                -->
+      <!--   answer     : index (0 à 3) de la bonne réponse              -->
+      <!--   article    : référence réglementaire affichée en correction -->
+      <!-- ============================================================ -->
+      <script>
+        const QUIZ_TITLE = "Certificat Niveau 1";
+        const PASS_THRESHOLD_20 = 12;
+
+        const QUESTIONS = [
+          {
+            question: "Un Responsable de Retransmission Stagiaire (RRS) peut-il évaluer ou valider l'accréditation d'un autre membre ?",
+            options: [
+              "Non, en aucun cas",
+              "Oui, uniquement pour un autre stagiaire",
+              "Oui, avec l'accord de son tuteur",
+              "Oui, à partir de sa deuxième retransmission"
+            ],
+            answer: 0,
+            article: "Art. 13.2 — Grade I (RRS)"
+          },
+          {
+            question: "Quel est le signe distinctif obligatoire que doit porter le responsable de retransmission pendant toute la durée de l'événement (installation, retransmission, rangement) ?",
+            options: [
+              "Un badge nominatif",
+              "Un gilet portant le logo du collectif",
+              "Une accréditation papier visible",
+              "Aucun signe n'est obligatoire"
+            ],
+            answer: 1,
+            article: "Art. 13.1"
+          },
+          {
+            question: "Le responsable de retransmission dispose-t-il d'une autorité disciplinaire ?",
+            options: [
+              "Oui, sur l'ensemble de l'équipe présente",
+              "Non, mais il dispose d'une autorité fonctionnelle pour assurer le bon déroulement de la retransmission",
+              "Oui, mais uniquement envers les stagiaires",
+              "Non, il n'a aucune autorité, même fonctionnelle"
+            ],
+            answer: 1,
+            article: "Art. 13.1"
+          },
+          {
+            question: "Parmi les missions suivantes, laquelle ne fait PAS partie des missions du responsable de retransmission selon l'Article 13.1 ?",
+            options: [
+              "Vérification du matériel avant la rencontre",
+              "Répartition des rôles entre les membres présents",
+              "Sanction disciplinaire d'un membre fautif",
+              "Rangement complet du matériel en fin d'événement"
+            ],
+            answer: 2,
+            article: "Art. 13.1"
+          },
+          {
+            question: "Quel est l'effectif minimum requis par l'Article 15 pour démarrer une retransmission ?",
+            options: [
+              "Un responsable, un opérateur caméra, un commentateur (ou dispositif sans commentaire validé)",
+              "Un responsable et un opérateur caméra uniquement",
+              "Deux responsables de retransmission",
+              "Un responsable, deux opérateurs caméra, un commentateur"
+            ],
+            answer: 0,
+            article: "Art. 15"
+          },
+          {
+            question: "Que doit faire le responsable de retransmission si les conditions minimales de l'Article 15 (effectif ou matériel) ne sont pas réunies avant le lancement ?",
+            options: [
+              "Démarrer quand même en faisant au mieux",
+              "En informer sans délai le Coordinateur adjoint à la vie associative",
+              "Annuler définitivement de sa propre initiative",
+              "Attendre l'arrivée d'un responsable de grade supérieur"
+            ],
+            answer: 1,
+            article: "Art. 15"
+          },
+          {
+            question: "Quelle est la durée de validité d'une accréditation avant renouvellement obligatoire ?",
+            options: [
+              "Une saison sportive",
+              "Deux saisons sportives",
+              "Elle est valable à vie sauf sanction",
+              "Six mois"
+            ],
+            answer: 0,
+            article: "Règlement de Progression des Grades — Art. 16"
+          },
+          {
+            question: "Pour intégrer la formation initiale et être inscrit au registre des grades en tant que RRS, quelles conditions doivent être cumulativement remplies ?",
+            options: [
+              "Réussir le questionnaire d'accréditation uniquement",
+              "Réussir le questionnaire d'accréditation et observer au moins un match aux côtés d'un titulaire du grade RR ou supérieur",
+              "Réaliser trois retransmissions en autonomie",
+              "Être parrainé par un membre du Bureau"
+            ],
+            answer: 1,
+            article: "Règlement de Progression des Grades — Art. 6"
+          },
+          {
+            question: "À quel niveau de priorisation des rencontres (Article 14) un RRS peut-il être désigné responsable de retransmission de façon standard (hors dérogation) ?",
+            options: [
+              "Niveau 1 uniquement",
+              "Niveaux 1 et 2",
+              "Niveau 5",
+              "Tous les niveaux sans restriction"
+            ],
+            answer: 2,
+            article: "Art. 13.3"
+          },
+          {
+            question: "Un incident technique mineur (perte audio temporaire, léger défaut graphique) pendant un direct impose-t-il d'arrêter la retransmission ?",
+            options: [
+              "Oui, systématiquement",
+              "Non, la retransmission est maintenue et l'équipe adapte les moyens disponibles",
+              "Oui, mais seulement si un spectateur se plaint",
+              "Non, mais il faut immédiatement en informer le Coordinateur adjoint"
+            ],
+            answer: 1,
+            article: "Art. 18"
+          },
+          {
+            question: "Qui supervise un titulaire du grade RRS pendant une retransmission ?",
+            options: [
+              "Il agit seul, sans supervision",
+              "Un titulaire du grade RR ou supérieur, de manière directe et continue",
+              "Un membre du Bureau, à distance",
+              "Le chef de département Officiels de Retransmission, uniquement par téléphone"
+            ],
+            answer: 1,
+            article: "Règlement de Progression des Grades — Art. 7"
+          },
+          {
+            question: "À qui le stagiaire (ou son tuteur en son nom) doit-il déposer son dossier de candidature pour accéder au grade RR ?",
+            options: [
+              "Au Bureau de la Coordination générale directement",
+              "Au chef de département Officiels de Retransmission de l'ICR",
+              "À l'Assemblée générale",
+              "Au Directeur des Opérations de Retransmission"
+            ],
+            answer: 1,
+            article: "Règlement de Progression des Grades — Art. 8"
+          }
+        ];
+      </script>
+      <!-- ============================================================ -->
+      <!-- FIN DE LA ZONE À MODIFIER                                     -->
+      <!-- ============================================================ -->
+
+      <div id="quiz-wrap">
+        <div class="quiz-progress-wrap">
+          <span class="quiz-progress-label" id="progress-label">Question 1 / 12</span>
+          <div class="quiz-progress-track"><div class="quiz-progress-fill" id="progress-fill"></div></div>
+        </div>
+
+        <div class="question-card">
+          <div class="question-eyebrow" id="question-article"></div>
+          <div class="question-text" id="question-text"></div>
+          <div class="option-list" id="option-list"></div>
+        </div>
+
+        <div class="quiz-nav">
+          <button class="btn btn-outline" id="btn-prev" style="padding:0.6rem 1.5rem;font-size:0.8rem;">← Précédent</button>
+          <button class="btn btn-primary" id="btn-next" style="padding:0.6rem 1.5rem;font-size:0.8rem;">Suivant →</button>
+        </div>
+      </div>
+
+      <div class="results-wrap" id="results-wrap">
+        <div class="results-score-20"><span id="score-num-part"></span><span> / 20</span></div>
+        <div class="results-score-raw" id="score-raw"></div>
+        <div id="results-verdict-holder"></div>
+
+        <div class="results-honor">
+          <p><strong>Rappel :</strong> si votre note finale est égale ou supérieure à 12/20, il vous appartient de la transmettre vous-même à l'Instance Compétente des Retransmissions (ICR) afin de faire valider votre passage au grade de Responsable de Retransmission Stagiaire.</p>
+          <p>La Coordination générale fait confiance à ses membres pour la sincérité de cette démarche. Toute fraude avérée expose son auteur à une procédure disciplinaire devant l'ICR.</p>
+        </div>
+
+        <div class="results-review" id="results-review"></div>
+
+        <button class="btn btn-outline btn-restart" id="btn-restart" style="padding:0.6rem 1.5rem;font-size:0.8rem;">Recommencer le questionnaire</button>
+      </div>
+
+      <script>
+        (function() {
+          const state = { current: 0, answers: new Array(QUESTIONS.length).fill(null) };
+
+          const quizWrap = document.getElementById('quiz-wrap');
+          const resultsWrap = document.getElementById('results-wrap');
+          const progressLabel = document.getElementById('progress-label');
+          const progressFill = document.getElementById('progress-fill');
+          const questionArticle = document.getElementById('question-article');
+          const questionText = document.getElementById('question-text');
+          const optionList = document.getElementById('option-list');
+          const btnPrev = document.getElementById('btn-prev');
+          const btnNext = document.getElementById('btn-next');
+          const btnRestart = document.getElementById('btn-restart');
+
+          document.getElementById('meta-question-count').textContent = QUESTIONS.length + " questions";
+
+          function renderQuestion() {
+            const q = QUESTIONS[state.current];
+            progressLabel.textContent = "Question " + (state.current + 1) + " / " + QUESTIONS.length;
+            progressFill.style.width = (((state.current + 1) / QUESTIONS.length) * 100) + "%";
+            questionArticle.textContent = q.article || "";
+            questionText.textContent = q.question;
+
+            optionList.innerHTML = "";
+            q.options.forEach(function(optText, idx) {
+              const item = document.createElement('label');
+              item.className = 'option-item' + (state.answers[state.current] === idx ? ' selected' : '');
+              item.innerHTML =
+                '<input type="radio" name="option" ' + (state.answers[state.current] === idx ? 'checked' : '') + '>' +
+                '<span>' + optText + '</span>';
+              item.addEventListener('click', function() {
+                state.answers[state.current] = idx;
+                renderQuestion();
+              });
+              optionList.appendChild(item);
+            });
+
+            btnPrev.disabled = state.current === 0;
+            btnPrev.style.opacity = state.current === 0 ? '0.4' : '1';
+            btnNext.textContent = state.current === QUESTIONS.length - 1 ? "Terminer le QCM" : "Suivant →";
+          }
+
+          btnPrev.addEventListener('click', function() {
+            if (state.current > 0) { state.current--; renderQuestion(); }
+          });
+
+          btnNext.addEventListener('click', function() {
+            if (state.answers[state.current] === null) {
+              alert("Merci de sélectionner une réponse avant de continuer.");
+              return;
+            }
+            if (state.current < QUESTIONS.length - 1) {
+              state.current++;
+              renderQuestion();
+            } else {
+              showResults();
+            }
+          });
+
+          function showResults() {
+            let correctCount = 0;
+            QUESTIONS.forEach(function(q, idx) {
+              if (state.answers[idx] === q.answer) correctCount++;
+            });
+
+            const scoreOn20 = (correctCount / QUESTIONS.length) * 20;
+            const scoreOn20Rounded = Math.round(scoreOn20 * 10) / 10;
+
+            document.getElementById('score-num-part').textContent = scoreOn20Rounded;
+            document.getElementById('score-raw').textContent = correctCount + " bonnes réponses sur " + QUESTIONS.length;
+
+            const verdictHolder = document.getElementById('results-verdict-holder');
+            if (scoreOn20 >= PASS_THRESHOLD_20) {
+              verdictHolder.innerHTML = '<div class="results-verdict pass">Seuil de réussite atteint (' + PASS_THRESHOLD_20 + '/20)</div>';
+            } else {
+              verdictHolder.innerHTML = '<div class="results-verdict fail">Seuil de réussite non atteint (' + PASS_THRESHOLD_20 + '/20 requis)</div>';
+            }
+
+            const reviewHolder = document.getElementById('results-review');
+            reviewHolder.innerHTML = "";
+            QUESTIONS.forEach(function(q, idx) {
+              const isCorrect = state.answers[idx] === q.answer;
+              const div = document.createElement('div');
+              div.className = 'review-item ' + (isCorrect ? 'correct' : 'incorrect');
+              div.innerHTML =
+                '<div class="review-q">' + (idx + 1) + '. ' + q.question + '</div>' +
+                '<div class="review-your">Votre réponse : <span class="' + (isCorrect ? 'tag-ok' : 'tag-ko') + '">' +
+                  (state.answers[idx] === null ? 'Non répondu' : q.options[state.answers[idx]]) +
+                '</span></div>' +
+                (isCorrect ? '' : '<div class="review-correct-answer">Bonne réponse : <strong>' + q.options[q.answer] + '</strong></div>');
+              reviewHolder.appendChild(div);
+            });
+
+            quizWrap.style.display = 'none';
+            resultsWrap.style.display = 'block';
+            window.scrollTo({ top: resultsWrap.offsetTop - 100, behavior: 'smooth' });
+          }
+
+          btnRestart.addEventListener('click', function() {
+            state.current = 0;
+            state.answers = new Array(QUESTIONS.length).fill(null);
+            quizWrap.style.display = 'block';
+            resultsWrap.style.display = 'none';
+            renderQuestion();
+            window.scrollTo({ top: quizWrap.offsetTop - 100, behavior: 'smooth' });
+          });
+
+          renderQuestion();
+        })();
+      </script>
+    </section>
+  </main>
+
+  <script src="footer.js"></script>
+</body>
+</html>

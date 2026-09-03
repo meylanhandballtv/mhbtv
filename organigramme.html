@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organigramme | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .hero-equipe {
+      position: relative;
+      height: 420px;
+      display: flex;
+      align-items: flex-end;
+      padding: 3rem 4rem;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0005 50%, #0a0a0a 100%);
+    }
+    .hero-equipe::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px),
+        repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(232,0,29,0.03) 60px, rgba(232,0,29,0.03) 61px);
+    }
+    .hero-equipe::after {
+      content: 'ORG';
+      position: absolute;
+      right: -1rem; bottom: -2rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20vw;
+      color: rgba(232,0,29,0.04);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .hero-accent { position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(232,0,29,0.15) 0%, transparent 70%); pointer-events: none; }
+
+    .team-section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .team-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .role-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.5rem;
+      border-radius: 2px;
+      margin-top: 0.4rem;
+    }
+    .badge-bureau { background: rgba(232,0,29,0.15); color: var(--red); border: 1px solid rgba(232,0,29,0.3); }
+    .badge-icr { background: rgba(240,180,41,0.12); color: var(--gold); border: 1px solid rgba(240,180,41,0.25); }
+    .badge-membre { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ---- Organigramme ---- */
+    .orgchart { display: flex; flex-direction: column; align-items: center; }
+
+    .org-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.3rem;
+      text-align: center;
+      min-width: 190px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .org-box:hover { transform: translateY(-3px); border-color: var(--red); }
+    .org-box.root { border-color: rgba(232,0,29,0.45); min-width: 240px; }
+    .org-box .org-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .org-box .org-role {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.3;
+      margin-top: 0.2rem;
+    }
+    .org-box.root .org-role { color: var(--red); }
+
+    .org-line-v { width: 1px; height: 34px; background: var(--border); }
+
+    .org-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 3rem;
+      position: relative;
+    }
+    .org-row::before {
+      content: '';
+      position: absolute;
+      top: -34px; left: 0; right: 0; height: 34px;
+      pointer-events: none;
+    }
+    .org-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    /* horizontal connector across a row of branches */
+    .org-connector {
+      position: relative;
+      width: 100%;
+      height: 34px;
+    }
+    .org-connector::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; right: 50%;
+      height: 1px;
+      background: var(--border);
+    }
+    .org-row.two .org-connector::before { left: calc(25% + 95px); right: calc(25% + 95px); }
+    .org-row.two .org-branch:first-child .org-connector::after,
+    .org-row.two .org-branch:last-child .org-connector::after {
+      content: ''; position: absolute; top: 0; left: 50%; width: 1px; height: 34px; background: var(--border);
+    }
+
+    .org-dept {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 1.2rem 1.4rem;
+      background: rgba(240,180,41,0.04);
+      border: 1px solid rgba(240,180,41,0.18);
+      border-radius: 10px;
+    }
+    .org-dept-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .org-members-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.3rem 1.6rem;
+      max-width: 780px;
+      text-align: center;
+    }
+    .org-members-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.6rem 0.8rem;
+      margin-top: 0.8rem;
+    }
+    .org-member-chip {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 0.3rem 0.9rem;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 900px) {
+      .hero-equipe { padding: 2rem 1.5rem; }
+      .org-row { flex-direction: column; align-items: center; gap: 1.6rem; }
+      .org-row::before, .org-connector { display: none; }
+      .org-line-v { height: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <!-- HERO -->
+    <section class="hero-equipe">
+      <div class="hero-accent"></div>
+      <div class="hero-content" style="position:relative;z-index:1;">
+        <div class="hero-eyebrow">Saison 2025-2026</div>
+        <h1 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6rem);line-height:0.9;color:var(--white);">Organi<em style="color:var(--red);font-style:normal;">gramme</em></h1>
+        <p class="hero-sub">Structure hiérarchique de Meylan Handball TV — Bureau, ICR et membres.</p>
+      </div>
+    </section>
+
+    <!-- ORGANIGRAMME -->
+    <section class="section">
+      <h2 class="section-title">Structure <span>Hiérarchique</span></h2>
+      <div class="section-line"></div>
+      <div class="team-section-title">Bureau de la Coordination générale</div>
+
+      <div class="orgchart" style="margin-bottom:3rem;">
+
+        <!-- Root : Coordinateur général -->
+        <div class="org-box root">
+          <div class="org-name">Xavier FINI</div>
+          <div class="org-role">Coordinateur général</div>
+          <span class="role-badge badge-bureau">Bureau</span>
+        </div>
+
+        <div class="org-line-v"></div>
+
+        <!-- Bureau row -->
+        <div class="org-row two">
+          <div class="org-branch">
+            <div class="org-connector"></div>
+            <div class="org-box">
+              <div class="org-name">Marie DAL ZOTTO</div>
+              <div class="org-role">Coordinatrice adjointe</div>
+              <span class="role-badge badge-bureau">Bureau</span>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-connector"></div>
+            <div class="org-box">
+              <div class="org-name">Emmanuel ALVES DE MOURA</div>
+              <div class="org-role">Secrétaire général</div>
+              <span class="role-badge badge-bureau">Bureau</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="org-line-v"></div>
+
+        <!-- ICR row -->
+        <div class="org-row two">
+          <div class="org-branch">
+            <div class="org-connector"></div>
+            <div class="org-dept">
+              <div class="org-dept-title">Gestion des Compétitions</div>
+              <div class="org-box">
+                <div class="org-name">Nicolas MARIN</div>
+                <div class="org-role">Chef de département</div>
+                <span class="role-badge badge-icr">ICR</span>
+              </div>
+              <div class="org-line-v" style="height:18px;"></div>
+              <div class="org-box">
+                <div class="org-name">Gaetan FERRE</div>
+                <div class="org-role">Adjoint au Chef de département</div>
+                <span class="role-badge badge-icr">ICR</span>
+              </div>
+            </div>
+          </div>
+          <div class="org-branch">
+            <div class="org-connector"></div>
+            <div class="org-dept">
+              <div class="org-dept-title">Officiels de Retransmission</div>
+              <div class="org-box">
+                <div class="org-name">Enzo ACHOUR</div>
+                <div class="org-role">Chef de département</div>
+                <span class="role-badge badge-icr">ICR</span>
+              </div>
+              <div class="org-line-v" style="height:18px;"></div>
+              <div class="org-box">
+                <div class="org-name">Tim TOUR</div>
+                <div class="org-role">Adjoint au Chef de département</div>
+                <span class="role-badge badge-icr">ICR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="org-line-v"></div>
+
+        <!-- Membres -->
+        <div class="org-members-box">
+          <div class="org-role" style="color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Membres de l'association</div>
+          <div class="org-members-list">
+            <span class="org-member-chip">Dorina HELIE-JOLY</span>
+            <span class="org-member-chip">Nabil SABAH</span>
+            <span class="org-member-chip">Yoan DUSSERT</span>
+            <span class="org-member-chip">Younes CHIKER</span>
+            <span class="org-member-chip">Ennio ARIZZI</span>
+            <span class="org-member-chip">Kylian TOUR</span>
+            <span class="org-member-chip">Kyliann HEQUETTE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
+      <p>Association bénévole de retransmission sportive du handball isérois.<br>Saison 2025-2026.</p>
+    </div>
+    <div>
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="diffusions.html">Diffusions / Événements</a></li>
+        <li><a href="equipe.html">L'équipe MHBTV</a></li>
+        <li><a href="gratification.html">Gratification</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ressources</h4>
+      <ul>
+        <li><a href="statuts.html">Statuts</a></li>
+        <li><a href="documentation.html">Documentation</a></li>
+        <li><a href="audiences.html">Audiences</a></li>
+        <li><a href="charte.html">Charte graphique</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025-2026 Meylan Handball TV · Tous droits réservés</p>
+    <p>Site interne — Usage réservé aux membres</p>
+  </div>
+</body>
+</html>

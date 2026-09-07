@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Parcours RR | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ═══ HERO ═══ */
+    .parcours-hero {
+      position: relative;
+      padding: 5.5rem 4rem 3.5rem;
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    .parcours-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 85% 40%, rgba(232, 0, 29, 0.08) 0%, transparent 65%),
+        radial-gradient(ellipse 35% 50% at 5% 90%, rgba(255, 255, 255, 0.02) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 72px, rgba(255, 255, 255, 0.012) 72px, rgba(255, 255, 255, 0.012) 73px);
+    }
+
+    .hero-watermark {
+      position: absolute;
+      right: -1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: min(20vw, 260px);
+      color: rgba(232, 0, 29, 0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+
+    .parcours-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    .parcours-hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 6rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+
+    .parcours-hero h1 span {
+      color: var(--red);
+    }
+
+    .parcours-hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 500px;
+    }
+
+    .grade-actuel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
+      background: rgba(232, 0, 29, 0.08);
+      border: 1px solid rgba(232, 0, 29, 0.25);
+      border-radius: 6px;
+      padding: 0.6rem 1.1rem;
+    }
+
+    .grade-actuel-badge .g-icon { font-size: 1.3rem; }
+
+    .grade-actuel-badge .g-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .grade-actuel-badge .g-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+
+    /* Bandeau surgrade exceptionnel */
+    .surgrade-banner {
+      margin: 0 4rem 0;
+      margin-top: 1.5rem;
+      padding: 1rem 1.5rem;
+      background: rgba(240, 180, 41, 0.08);
+      border: 1px solid rgba(240, 180, 41, 0.3);
+      border-left: 4px solid #f0b429;
+      border-radius: 6px;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .surgrade-banner strong { color: var(--text); }
+
+    /* ═══ LAYOUT ═══ */
+    .parcours-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 2.5rem;
+      padding: 3rem 4rem;
+      align-items: start;
+    }
+
+    /* ═══ TIMELINE DES GRADES ═══ */
+    .timeline {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 3rem;
+      padding: 0 0.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 21px;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .timeline-track-fill {
+      position: absolute;
+      top: 21px;
+      left: 5%;
+      height: 2px;
+      background: var(--red);
+      z-index: 0;
+      transition: width 0.3s;
+    }
+
+    .timeline-step {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      width: 25%;
+      text-align: center;
+    }
+
+    .timeline-dot {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    .timeline-step.done .timeline-dot {
+      background: rgba(74, 222, 128, 0.15);
+      border-color: #4ade80;
+      color: #4ade80;
+    }
+
+    .timeline-step.current .timeline-dot {
+      background: rgba(232, 0, 29, 0.15);
+      border-color: var(--red);
+      color: var(--red);
+      box-shadow: 0 0 0 5px rgba(232, 0, 29, 0.1);
+    }
+
+    .timeline-step-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      max-width: 140px;
+      line-height: 1.3;
+    }
+
+    .timeline-step.done .timeline-step-name,
+    .timeline-step.current .timeline-step-name {
+      color: var(--white);
+    }
+
+    .timeline-step-tag {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+    }
+
+    .timeline-step.done .timeline-step-tag {
+      background: rgba(74, 222, 128, 0.12);
+      color: #4ade80;
+    }
+
+    .timeline-step.current .timeline-step-tag {
+      background: rgba(232, 0, 29, 0.12);
+      color: var(--red);
+    }
+
+    .timeline-step.todo .timeline-step-tag {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+    }
+
+    /* ═══ CARTE PROCHAIN PALIER ═══ */
+    .palier-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .palier-card-header {
+      padding: 1.5rem 1.75rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .palier-card-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.03em;
+      color: var(--white);
+    }
+
+    .palier-card-header h3 span { color: var(--red); }
+
+    .palier-card-body {
+      padding: 1.5rem 1.75rem;
+    }
+
+    .critere-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .critere-row:last-child { border-bottom: none; }
+
+    .critere-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .critere-icon.ok {
+      background: rgba(74, 222, 128, 0.15);
+      color: #4ade80;
+    }
+
+    .critere-icon.pending {
+      background: rgba(250, 204, 21, 0.12);
+      color: #fbbf24;
+    }
+
+    .critere-icon.ko {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--muted);
+    }
+
+    .critere-text { font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+    .critere-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .palier-card-footer {
+      padding: 1.1rem 1.75rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* Grade sommital atteint */
+    .sommet-box {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.75rem;
+    }
+
+    .sommet-icon { font-size: 2.2rem; }
+
+    /* ═══ SIDEBAR ═══ */
+    .parcours-sidebar { position: sticky; top: 80px; }
+
+    .sidebar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .sidebar-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      font-size: 0.83rem;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+    .info-row .i-label { color: var(--muted); }
+    .info-row .i-val { color: var(--text); font-weight: 600; text-align: right; }
+
+    @media (max-width: 1050px) {
+      .parcours-layout { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .parcours-sidebar { position: static; }
+      .surgrade-banner { margin: 1.5rem 1.5rem 0; }
+    }
+
+    @media (max-width: 900px) {
+      .parcours-hero { padding: 5rem 1.5rem 2.5rem; }
+      .timeline { flex-wrap: wrap; gap: 1.5rem; }
+      .timeline::before, .timeline-track-fill { display: none; }
+      .timeline-step { width: 45%; }
+    }
+  </style>
+</head>
+
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- ════════════════════════════════════════════════════════
+         CONFIGURATION — UNE PAGE = UNE PERSONNE
+         Dupliquer ce fichier par RR (ex: parcours-xavier-fini.html),
+         renseigner l'objet MEMBRE et l'éventuel SURGRADE ci-dessous.
+         gradeIndex : 0 = Stagiaire, 1 = RR Titulaire,
+                      2 = Sous-Directeur, 3 = Directeur
+    ════════════════════════════════════════════════════════ -->
+    <div id="app"
+      data-prenom="Xavier"
+      data-nom="FINI"
+      data-grade-index="3"
+      data-date-obtention="2026-08-01"
+      data-surgrade-actif="false"
+      data-surgrade-grade=""
+      data-surgrade-fin=""
+      data-qcm-statut="accredite">
+      <!-- data-qcm-statut : statut du certificat requis pour le PROCHAIN grade
+           ('accredite' | 'en-attente' | 'non-accredite') — à mettre à jour
+           manuellement à la main, ou en copiant le statut lu sur accreditations.html -->
+    </div>
+
+    <!-- ═══ HERO ═══ -->
+    <div class="parcours-hero">
+      <div class="hero-watermark">RR</div>
+      <div class="parcours-hero-content">
+        <div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(232,0,29,0.1);border:1px solid rgba(232,0,29,0.25);border-radius:4px;padding:0.3rem 0.8rem;margin-bottom:1.25rem;">
+          <span style="width:7px;height:7px;background:var(--red);border-radius:50%;display:inline-block;"></span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);">Espace personnel</span>
+        </div>
+        <h1>Mon Parcours<br><span>de Grade RR</span></h1>
+        <p>Suivi de votre progression dans la filière Responsable de Retransmission, telle que définie par le
+          Règlement de Formation et de Progression des Grades (Article 13.2 et suivants).</p>
+        <div class="grade-actuel-badge">
+          <span class="g-icon">🎖️</span>
+          <div>
+            <div class="g-label">Grade actuel</div>
+            <div class="g-name" id="gradeActuelNom">—</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ BANDEAU SURGRADE (affiché si actif) ═══ -->
+    <div class="surgrade-banner" id="surgradeBanner" style="display:none;">
+      <span style="font-size:1.2rem;">⚡</span>
+      <div>
+        <strong>Surgrade exceptionnel en cours.</strong>
+        <span id="surgradeTexte"></span>
+        Ce surgrade est temporaire et accordé par le Directeur des Opérations de Retransmission ; il n'emporte pas
+        de changement définitif de grade à son terme.
+      </div>
+    </div>
+
+    <!-- ═══ LAYOUT ═══ -->
+    <div class="parcours-layout">
+      <div>
+
+        <h2 class="section-title">Progression <span>dans la filière RR</span></h2>
+        <div class="section-line"></div>
+
+        <!-- TIMELINE -->
+        <div class="timeline" id="timeline">
+          <div class="timeline-track-fill" id="timelineFill" style="width:0%;"></div>
+          <!-- Injecté par JS -->
+        </div>
+
+        <!-- CARTE PROCHAIN PALIER / SOMMET -->
+        <div class="palier-card" id="palierCard">
+          <!-- Injecté par JS -->
+        </div>
+
+      </div><!-- /main col -->
+
+      <!-- ═══ SIDEBAR ═══ -->
+      <aside class="parcours-sidebar">
+
+        <div class="sidebar-card">
+          <h4>Mes informations</h4>
+          <div class="info-row">
+            <span class="i-label">Membre</span>
+            <span class="i-val" id="sb-nom">—</span>
+          </div>
+          <div class="info-row">
+            <span class="i-label">Grade actuel</span>
+            <span class="i-val" id="sb-grade">—</span>
+          </div>
+          <div class="info-row">
+            <span class="i-label">Depuis le</span>
+            <span class="i-val" id="sb-date">—</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Ressources</h4>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem;font-size:0.85rem;">
+            <li><a href="reglement-progression-grades.html" style="color:var(--text);">📖 Règlement de Progression des Grades</a></li>
+            <li><a href="reglement-retransmissions.html" style="color:var(--text);">📖 Règlement des Retransmissions</a></li>
+            <li><a href="accreditation-niveau1.html" style="color:var(--text);">📝 QCM Accréditation Niveau 1</a></li>
+            <li><a href="accreditation-niveau2.html" style="color:var(--text);">📝 QCM Accréditation Niveau 2</a></li>
+            <li><a href="accreditation-niveau3.html" style="color:var(--text);">📝 QCM Accréditation Niveau 3</a></li>
+            <li><a href="accreditations.html" style="color:var(--text);">🎓 Statut des accréditations</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card" style="background:rgba(232,0,29,0.05);border-color:rgba(232,0,29,0.2);">
+          <h4>Un doute sur votre parcours ?</h4>
+          <p style="font-size:0.83rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;">Pour toute question sur
+            votre grade ou votre progression, contactez le Directeur des Opérations de Retransmission ou l'ICR.</p>
+          <a href="equipe.html" class="btn btn-outline" style="width:100%;justify-content:center;font-size:0.78rem;">Voir les contacts →</a>
+        </div>
+
+      </aside>
+    </div><!-- /layout -->
+
+  </main>
+
+  <script src="footer.js"></script>
+
+  <script>
+    /* ════════════════════════════════════════════════════════
+       DÉFINITION DE LA FILIÈRE RR (Articles 14 ter à 14 octies)
+       niveauQCM : le certificat requis pour ATTEINDRE ce grade
+       (null = pas de certificat associé, cf. Règlement de
+       Progression des Grades pour les autres critères de ce palier)
+    ════════════════════════════════════════════════════════ */
+    const GRADES = [
+      {
+        nom: "Responsable de Retransmission Stagiaire",
+        court: "Stagiaire",
+        niveauQCM: 1,
+        description: "Grade d'entrée dans la filière RR. Donne accès à la fonction de Responsable de Retransmission."
+      },
+      {
+        nom: "Responsable de Retransmission",
+        court: "RR Titulaire",
+        niveauQCM: 2,
+        description: "Confirmation du grade Stagiaire vers le statut de titulaire."
+      },
+      {
+        nom: "Sous-Directeur des Opérations de Retransmission",
+        court: "Sous-Directeur",
+        niveauQCM: 3,
+        description: "Peut être désigné seul sur une diffusion simple, y compris sans supervision."
+      },
+      {
+        nom: "Directeur des Opérations de Retransmission",
+        court: "Directeur",
+        niveauQCM: null,
+        description: "Grade sommital de la filière RR. Passage non conditionné à un certificat QCM : se reporter au Règlement de Progression des Grades pour les critères applicables à ce palier (ancienneté, nomination, etc.)."
+      }
+    ];
+
+    const SEUIL_QCM = 12; // seuil de réussite sur 20, identique aux 3 niveaux
+
+    /* ─── Lecture de la config membre (attributs data-*) ─── */
+    const cfg = document.getElementById('app').dataset;
+    const MEMBRE = {
+      prenom: cfg.prenom,
+      nom: cfg.nom,
+      gradeIndex: parseInt(cfg.gradeIndex, 10),
+      dateObtention: cfg.dateObtention,
+      surgradeActif: cfg.surgradeActif === 'true',
+      surgradeGrade: cfg.surgradeGrade,
+      surgradeFin: cfg.surgradeFin,
+      qcmStatut: cfg.qcmStatut || 'non-accredite'
+    };
+
+    function formatDateFR(iso) {
+      if (!iso) return '—';
+      const d = new Date(iso);
+      if (isNaN(d)) return iso;
+      return d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
+    }
+
+    /* ─── Rendu en-tête / sidebar ─── */
+    function renderEnTete() {
+      const grade = GRADES[MEMBRE.gradeIndex];
+      document.getElementById('gradeActuelNom').textContent = grade.court;
+      document.getElementById('sb-nom').textContent = MEMBRE.prenom + ' ' + MEMBRE.nom;
+      document.getElementById('sb-grade').textContent = grade.court;
+      document.getElementById('sb-date').textContent = formatDateFR(MEMBRE.dateObtention);
+
+      if (MEMBRE.surgradeActif) {
+        document.getElementById('surgradeBanner').style.display = 'flex';
+        document.getElementById('surgradeTexte').textContent =
+          ` Vous exercez temporairement au grade "${MEMBRE.surgradeGrade}"` +
+          (MEMBRE.surgradeFin ? ` jusqu'au ${formatDateFR(MEMBRE.surgradeFin)}.` : '.');
+      }
+    }
+
+    /* ─── Rendu timeline ─── */
+    function renderTimeline() {
+      const track = document.getElementById('timeline');
+      const fill = document.getElementById('timelineFill');
+      const steps = GRADES.map((g, i) => {
+        const state = i < MEMBRE.gradeIndex ? 'done' : (i === MEMBRE.gradeIndex ? 'current' : 'todo');
+        const tag = state === 'done' ? 'Validé' : (state === 'current' ? 'Actuel' : 'À venir');
+        return `
+          <div class="timeline-step ${state}">
+            <div class="timeline-dot">${state === 'done' ? '✓' : i + 1}</div>
+            <div class="timeline-step-name">${g.court}</div>
+            <div class="timeline-step-tag">${tag}</div>
+          </div>`;
+      }).join('');
+      track.innerHTML = `<div class="timeline-track-fill" id="timelineFill"></div>` + steps;
+
+      const pct = GRADES.length > 1 ? (MEMBRE.gradeIndex / (GRADES.length - 1)) * 90 : 0;
+      document.getElementById('timelineFill').style.width = pct + '%';
+    }
+
+    /* ─── Rendu carte "Prochain palier" / sommet ─── */
+    function renderPalier() {
+      const card = document.getElementById('palierCard');
+      const estAuSommet = MEMBRE.gradeIndex >= GRADES.length - 1;
+
+      if (estAuSommet) {
+        card.innerHTML = `
+          <div class="sommet-box">
+            <span class="sommet-icon">🏆</span>
+            <div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--white);">Vous avez atteint le grade sommital</div>
+              <div style="color:var(--muted);font-size:0.87rem;margin-top:0.25rem;">${GRADES[MEMBRE.gradeIndex].description}</div>
+            </div>
+          </div>`;
+        return;
+      }
+
+      const prochain = GRADES[MEMBRE.gradeIndex + 1];
+      let qcmStatutHTML = '';
+
+      if (prochain.niveauQCM) {
+        const statutQCM = MEMBRE.qcmStatut;
+        const icon = statutQCM === 'accredite' ? 'ok' : (statutQCM === 'en-attente' ? 'pending' : 'ko');
+        const label = statutQCM === 'accredite'
+          ? `Certificat Niveau ${prochain.niveauQCM} validé`
+          : statutQCM === 'en-attente'
+            ? `Certificat Niveau ${prochain.niveauQCM} soumis, en attente de validation ICR`
+            : `Certificat Niveau ${prochain.niveauQCM} non encore validé`;
+        const symbole = icon === 'ok' ? '✓' : (icon === 'pending' ? '⏳' : '○');
+
+        qcmStatutHTML = `
+          <div class="critere-row">
+            <div class="critere-icon ${icon}">${symbole}</div>
+            <div>
+              <div class="critere-text">${label}</div>
+              <div class="critere-sub">Seuil de réussite : ${SEUIL_QCM}/20 — voir votre statut détaillé sur la page Accréditations.</div>
+            </div>
+          </div>`;
+      } else {
+        qcmStatutHTML = `
+          <div class="critere-row">
+            <div class="critere-icon ko">ℹ️</div>
+            <div>
+              <div class="critere-text">Aucun certificat QCM associé à ce palier</div>
+              <div class="critere-sub">Se reporter au Règlement de Progression des Grades pour les critères applicables.</div>
+            </div>
+          </div>`;
+      }
+
+      card.innerHTML = `
+        <div class="palier-card-header">
+          <h3>Prochain palier : <span>${prochain.court}</span></h3>
+        </div>
+        <div class="palier-card-body">
+          <p style="color:var(--muted);font-size:0.88rem;line-height:1.6;margin-bottom:1.25rem;">${prochain.description}</p>
+          ${qcmStatutHTML}
+          <div class="critere-row">
+            <div class="critere-icon ko">📋</div>
+            <div>
+              <div class="critere-text">Autres critères du Règlement de Progression des Grades</div>
+              <div class="critere-sub">Ancienneté, nombre de retransmissions, avis de la Coordination — voir le règlement complet pour le détail applicable à ce palier.</div>
+            </div>
+          </div>
+        </div>
+        <div class="palier-card-footer">
+          ${prochain.niveauQCM ? `<a href="accreditation-niveau${prochain.niveauQCM}.html" class="btn btn-outline" style="font-size:0.8rem;">Passer le QCM Niveau ${prochain.niveauQCM} →</a>` : ''}
+          <a href="reglement-progression-grades.html" class="btn btn-outline" style="font-size:0.8rem;">Consulter le règlement →</a>
+        </div>`;
+    }
+
+    /* ─── Init ─── */
+    (function init() {
+      renderEnTete();
+      renderTimeline();
+      renderPalier();
+    })();
+  </script>
+</body>
+
+</html>

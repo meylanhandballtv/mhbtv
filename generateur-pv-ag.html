@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Générateur de PV — Assemblée Générale | Meylan Handball TV</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b12; --panel:#111118; --panel2:#15151f; --border:#232332;
+  --red:#e8001d; --red-dim:rgba(232,0,29,.12); --gold:#f5b800; --white:#f0f0f5;
+  --muted:#7a7a90; --light:#b0b0c8; --green:#4ade80; --blue:#60a5fa;
+  box-sizing:border-box;
+}
+*,*::before,*::after{box-sizing:inherit;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--white); font-family:'Barlow',sans-serif; font-size:14px;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.app{display:grid; grid-template-columns: 460px 1fr; height:100vh}
+@media (max-width: 980px){ .app{grid-template-columns: 1fr; height:auto} }
+
+/* ── PANEL BUILDER ─────────────────────────── */
+.builder{
+  background:var(--panel); border-right:1px solid var(--border);
+  overflow-y:auto; padding:1.2rem 1.2rem 4rem;
+}
+.builder-top{
+  position:sticky; top:0; background:var(--panel); z-index:5; padding-bottom:.8rem; margin-bottom:1rem;
+  border-bottom:1px solid var(--border);
+}
+.app-title{font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:.03em; color:var(--white)}
+.app-title em{color:var(--red); font-style:normal}
+.app-sub{font-size:.75rem; color:var(--muted); margin-top:.15rem}
+.top-actions{display:flex; gap:.5rem; margin-top:.8rem; flex-wrap:wrap}
+
+button{
+  font-family:'Barlow Condensed',sans-serif; font-weight:600; letter-spacing:.03em;
+  border-radius:6px; border:1px solid var(--border); background:var(--panel2); color:var(--light);
+  padding:.45rem .8rem; font-size:.82rem; cursor:pointer; transition:.15s;
+}
+button:hover{border-color:var(--red); color:var(--white)}
+button.primary{background:var(--red); border-color:var(--red); color:#fff}
+button.primary:hover{background:#c40018}
+button.ghost{background:transparent}
+button.small{padding:.25rem .55rem; font-size:.72rem}
+button.danger:hover{border-color:var(--red); color:var(--red)}
+
+fieldset{border:1px solid var(--border); border-radius:8px; padding:.8rem; margin-bottom:.9rem}
+legend{
+  font-family:'Barlow Condensed',sans-serif; font-size:.68rem; font-weight:700; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--gold); padding:0 .4rem;
+}
+label{display:block; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:.5rem 0 .25rem}
+label:first-child{margin-top:0}
+input[type=text], input[type=number], textarea, select{
+  width:100%; background:var(--bg); border:1px solid var(--border); border-radius:5px; color:var(--white);
+  padding:.45rem .55rem; font-family:'Barlow',sans-serif; font-size:.85rem;
+}
+textarea{resize:vertical; min-height:3.2rem; font-family:'Barlow',sans-serif}
+.row2{display:grid; grid-template-columns:1fr 1fr; gap:.5rem}
+.row3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:.5rem}
+.row4{display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:.5rem}
+
+.card{background:var(--panel2); border:1px solid var(--border); border-radius:8px; padding:.7rem; margin-bottom:.6rem}
+.card-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:.4rem; gap:.5rem}
+.card-head .tag{font-family:'Barlow Condensed',sans-serif; font-size:.68rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--red)}
+.section-card{border-left:3px solid var(--red)}
+.block-card{border-left:3px solid var(--gold); margin-left:.4rem}
+.subcard{background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:.55rem; margin-bottom:.4rem}
+.add-row{display:flex; gap:.4rem; align-items:center; margin-top:.4rem}
+.add-row select{flex:1}
+.hint{font-size:.72rem; color:var(--muted); margin-top:.2rem; line-height:1.4}
+
+/* ── PREVIEW SIDE ─────────────────────────── */
+.preview-side{display:flex; flex-direction:column; background:#000}
+.preview-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:.6rem; flex-wrap:wrap;
+  padding:.7rem 1rem; background:var(--panel); border-bottom:1px solid var(--border);
+}
+.preview-bar .info{font-size:.78rem; color:var(--muted)}
+iframe{flex:1; width:100%; border:none; background:#09090f}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══════════════ BUILDER ═══════════════ -->
+  <div class="builder" id="builder">
+    <div class="builder-top">
+      <div class="app-title">Générateur <em>PV</em></div>
+      <div class="app-sub">Procès-verbal d'Assemblée Générale — Meylan Handball TV</div>
+      <div class="top-actions">
+        <button class="primary" data-action="download">⬇ Télécharger le PV</button>
+        <button data-action="loadExample">Charger l'exemple</button>
+        <button class="danger" data-action="reset">Vierge</button>
+      </div>
+    </div>
+    <div id="builder-root"></div>
+  </div>
+
+  <!-- ═══════════════ PREVIEW ═══════════════ -->
+  <div class="preview-side">
+    <div class="preview-bar">
+      <div class="info">Aperçu en direct — se met à jour automatiquement</div>
+      <button data-action="print">🖨 Imprimer / PDF</button>
+    </div>
+    <iframe id="preview"></iframe>
+  </div>
+
+</div>
+
+<script>
+/* ============================================================
+   STATE
+============================================================ */
+function blankState(){
+  return {
+    meta:{
+      badge:"Meylan Handball TV",
+      label:"Procès-Verbal · Assemblée Générale",
+      titleLine1:"Assemblée",
+      titleLine2:"Générale",
+      subtitle:"",
+      president:"",
+      secretary:"",
+      ouverture:"",
+      cloture:""
+    },
+    presence:{
+      presents:[{name:"",role:""}],
+      proxies:[],
+      absents:[]
+    },
+    quorum:{pct:"", mainLine:"", detailText:""},
+    sections:[
+      {title:"", blocks:[]}
+    ],
+    compoGroups:[],
+    closingNote:"",
+    signatures:[{role:"",name:""}],
+    footer:{org:"Meylan Handball TV", rest:"Document interne — Usage réservé aux membres"}
+  };
+}
+
+function blockTemplate(type){
+  switch(type){
+    case "text": return {type:"text", content:""};
+    case "vote": return {type:"vote", subject:"", pour:0, contre:0, abstention:0, resultText:""};
+    case "stats": return {type:"stats", periodTitle:"", cards:[{label:"",value:"",delta:"",deltaType:"none"}]};
+    case "table": return {type:"table", intro:"", rows:[{name:"",votes:"",resultText:"",resultType:"none"}]};
+    case "callout": return {type:"callout", text:"", variant:"default"};
+    case "proclist": return {type:"proclist", items:[{icon:"⚡",title:"",text:"",variant:"auto"}]};
+    default: return {type:"text", content:""};
+  }
+}
+
+var state = blankState();
+
+/* ============================================================
+   EXAMPLE DATA (pré-rempli avec le PV du 19 juin 2026)
+============================================================ */
+function exampleState(){
+  return {
+    meta:{
+      badge:"Meylan Handball TV",
+      label:"Procès-Verbal · Assemblée Générale Ordinaire &amp; Élective Anticipée",
+      titleLine1:"Assemblée",
+      titleLine2:"Générale",
+      subtitle:"Réunion du vendredi 19 juin 2026 · Gymnase des Buclos, Meylan",
+      president:"Xavier FINI",
+      secretary:"Emmanuel ALVES DE MOURA",
+      ouverture:"19h00",
+      cloture:"20h12"
+    },
+    presence:{
+      presents:[
+        {name:"Xavier FINI",role:"Coordinateur général"},
+        {name:"Marie DAL ZOTTO",role:"Coordinatrice adjointe"},
+        {name:"Emmanuel ALVES DE MOURA",role:"Secrétaire général"},
+        {name:"Enzo ACHOUR",role:""},
+        {name:"Gaëtan FERRE",role:""}
+      ],
+      proxies:[
+        {name:"Nicolas MARIN",role:"Président de l'ICR"},
+        {name:"Yoan DUSSERT",role:"Vice-président de l'ICR"},
+        {name:"Dorina HELIE-JOLY",role:""},
+        {name:"Ennio ARIZZI",role:""}
+      ],
+      absents:[
+        {name:"Younes CHIKER",role:""},
+        {name:"Tim TOUR",role:""},
+        {name:"Kylian TOUR",role:""}
+      ]
+    },
+    quorum:{pct:"75%", mainLine:"9 membres sur 12", detailText:"ont participé au vote. Le quorum prévu à l'article 13.2.2 des statuts étant atteint, l'Assemblée générale peut valablement délibérer."},
+    sections:[
+      {title:"Approbation de l'ordre du jour", blocks:[
+        {type:"text", content:"Le président de séance soumet l'ordre du jour au vote de l'assemblée."},
+        {type:"vote", subject:"Approbation de l'ordre du jour", pour:9, contre:0, abstention:0, resultText:"L'ordre du jour est approuvé."}
+      ]},
+      {title:"Rapport moral du Coordinateur général", blocks:[
+        {type:"text", content:"Le Coordinateur général de Meylan Handball TV présente à l'ensemble des membres du collectif, présents ou représentés à cette Assemblée générale de clôture de saison, son rapport moral pour l'année sportive 2025–2026.\n\nCette saison a confirmé le rôle de Meylan Handball TV comme outil d'accompagnement, de valorisation et de mise en lumière de la vie du club. Tout au long de l'année, notre objectif est resté le même : faire vivre le handball au-delà du terrain. Nous avons poursuivi nos actions autour de plusieurs axes : couvrir les rencontres et événements du club et du Comité Isère de Handball afin de permettre au plus grand nombre de suivre les rencontres, valoriser les équipes, des plus jeunes aux collectifs séniors, mettre en avant les bénévoles, éducateurs, dirigeants et partenaires, développer des contenus accessibles, réguliers et fidèles aux valeurs associatives du club.\n\nCette saison a également démontré l'importance du collectif. Derrière chaque captation, chaque diffusion en direct se trouve des heures d'engagement souvent discrètes mais essentielles. Le Coordinateur général tient à remercier les bénévoles du collectif pour leur disponibilité et leur implication, les entraîneurs pour leur confiance, les familles pour leur soutien permanent, et le club qui nous accompagne dans ce projet. M. Xavier FINI remercie à toutes celles et tous ceux qui contribuent, de près ou de loin, à faire vivre cette aventure qui va fêter ses 2 ans d'ici peu de temps."},
+        {type:"vote", subject:"Approbation du rapport moral", pour:9, contre:0, abstention:0, resultText:"Le rapport moral est approuvé."}
+      ]},
+      {title:"Élection de l'Instance Compétente des Retransmissions (ICR)", blocks:[
+        {type:"text", content:"À la suite d'une adoption en Bureau puis approuvée par le Président de l'ICR, la motion propose de créer pour les élus de l'instance des mandats plus courts (en termes de phases sportives : juin à décembre / janvier à mai) et avec moins de membres (passer de 6 à 4 membres), afin de permettre à l'instance de renouveler régulièrement ses membres, d'avoir différents points de vue, ainsi que de laisser de la responsabilité et de la liberté d'expression à ceux qui le veulent. Dans le cas où cette motion est adoptée par l'Assemblée générale, le Bureau supervisera l'élection anticipée."},
+        {type:"vote", subject:"Approbation de la motion de modification", pour:9, contre:0, abstention:0, resultText:"La motion est adoptée."},
+        {type:"text", content:"Procédure : chaque membre dispose de 4 voix. Les candidat(e)s ayant obtenu le plus de voix sont élu(e)s dans la limite des 4 postes à pourvoir. Le vote se déroule en un tour unique. La présidence de l'ICR est attribuée de plein droit au membre élu ayant obtenu le plus grand nombre de suffrages exprimés lors du scrutin pour un mandat d'une saison sportive."},
+        {type:"table", intro:"", rows:[
+          {name:"Nicolas MARIN", votes:"10", resultText:"Élu Président", resultType:"pres"},
+          {name:"Enzo ACHOUR", votes:"8", resultText:"Élu Vice-président", resultType:"vp"},
+          {name:"Gaetan FERRE", votes:"6", resultText:"Élu", resultType:"elu"},
+          {name:"Tim TOUR", votes:"6", resultText:"Élu", resultType:"elu"},
+          {name:"Dorina HELIE-JOLY", votes:"2", resultText:"Non élue", resultType:"non"},
+          {name:"Yoan DUSSERT", votes:"2", resultText:"Non élu", resultType:"non"},
+          {name:"Nabil SABAH", votes:"2", resultText:"Non élu", resultType:"non"}
+        ]},
+        {type:"callout", variant:"info", text:"M. Nicolas MARIN est élu président de l'Instance Compétente des Retransmissions pour la saison 2026–2027. M. Enzo ACHOUR, M. Gaetan FERRE et M. Tim TOUR sont élus Coordinateurs délégués de l'ICR avec un mandat de 6 mois (leurs mandats prendront fin à l'Assemblée générale de décembre 2026). Ils assisteront le président de l'ICR dans ses fonctions sur les volets disciplinaire et de planification des retransmissions."}
+      ]},
+      {title:"Bilan trimestriel — Janvier / Mars 2026", blocks:[
+        {type:"text", content:"Le bilan trimestriel de la saison 2025–2026 est présenté à l'assemblée."},
+        {type:"stats", periodTitle:"", cards:[
+          {label:"Téléspectateurs cumulés", value:"1 180", delta:"", deltaType:"none"},
+          {label:"Heures de direct", value:"16 h", delta:"", deltaType:"none"},
+          {label:"Heures de visionnage", value:"335,2 h", delta:"", deltaType:"none"},
+          {label:"Vues des vidéos", value:"2 746", delta:"", deltaType:"none"},
+          {label:"Clics sur les vidéos", value:"1 118", delta:"", deltaType:"none"}
+        ]},
+        {type:"vote", subject:"Approbation du bilan trimestriel", pour:9, contre:0, abstention:0, resultText:"Le bilan trimestriel est approuvé."}
+      ]},
+      {title:"Approbation des audiences — Avril, Mai, Juin 2026", blocks:[
+        {type:"stats", periodTitle:"Avril 2026", cards:[
+          {label:"Téléspectateurs", value:"194", delta:"−70,47 %", deltaType:"down"},
+          {label:"Vues cumulées", value:"459", delta:"−66,35 %", deltaType:"down"},
+          {label:"Heures de visionnage", value:"47,8 h", delta:"−66,41 %", deltaType:"down"},
+          {label:"Heures de retransmission", value:"1,4 h", delta:"−88,71 %", deltaType:"down"}
+        ]},
+        {type:"stats", periodTitle:"Mai 2026", cards:[
+          {label:"Téléspectateurs", value:"244", delta:"+25,77 %", deltaType:"up"},
+          {label:"Vues cumulées", value:"583", delta:"+26,44 %", deltaType:"up"},
+          {label:"Heures de visionnage", value:"72,6 h", delta:"+51,88 %", deltaType:"up"},
+          {label:"Heures de retransmission", value:"4,9 h", delta:"+250,0 %", deltaType:"up"}
+        ]},
+        {type:"stats", periodTitle:"Juin 2026", cards:[
+          {label:"Téléspectateurs", value:"848", delta:"+247,54 %", deltaType:"up"},
+          {label:"Vues cumulées", value:"1 890", delta:"+224,19 %", deltaType:"up"},
+          {label:"Heures de visionnage", value:"242,7 h", delta:"+234,30 %", deltaType:"up"},
+          {label:"Heures de retransmission", value:"10,0 h", delta:"+104,08 %", deltaType:"up"}
+        ]},
+        {type:"vote", subject:"Approbation des audiences (Avr./Mai/Jun.)", pour:9, contre:0, abstention:0, resultText:"Les audiences sont approuvées."}
+      ]},
+      {title:"Approbation des audiences de la saison 2025–2026", blocks:[
+        {type:"stats", periodTitle:"", cards:[
+          {label:"Abonnés", value:"286", delta:"+129 sur la saison", deltaType:"up"},
+          {label:"Bénévoles actifs", value:"13", delta:"", deltaType:"none"},
+          {label:"Téléspectateurs cumulés", value:"4 807", delta:"", deltaType:"none"},
+          {label:"Vues cumulées", value:"11 424", delta:"", deltaType:"none"},
+          {label:"Heures de visionnage", value:"1 403", delta:"", deltaType:"none"},
+          {label:"Clics sur nos vidéos", value:"5 911", delta:"", deltaType:"none"}
+        ]},
+        {type:"vote", subject:"Approbation des audiences de la saison", pour:9, contre:0, abstention:0, resultText:"Les audiences sont approuvées."}
+      ]},
+      {title:"Rapport de la Commission Disciplinaire de l'ICR", blocks:[
+        {type:"text", content:"Le Coordinateur délégué M. Enzo ACHOUR, représentant l'Instance Compétente des Retransmissions à cette Assemblée générale, présente le rapport de la Commission Disciplinaire sur la saison 2025–2026.\n\nAu cours de la saison 2025–2026, la Commission disciplinaire de l'ICR de Meylan Handball TV a poursuivi sa mission de garantir le respect des règles de fonctionnement du collectif, des valeurs et du cadre collectif nécessaire au bon déroulement de l'activité."},
+        {type:"stats", periodTitle:"", cards:[
+          {label:"Signalements reçus", value:"10", delta:"", deltaType:"none"},
+          {label:"Irrecevables", value:"5", delta:"", deltaType:"none"},
+          {label:"Procédures ouvertes", value:"5", delta:"", deltaType:"none"},
+          {label:"Procédures clôturées", value:"4", delta:"", deltaType:"none"},
+          {label:"Avertissements", value:"2", delta:"", deltaType:"none"},
+          {label:"Suspensions", value:"1", delta:"", deltaType:"none"}
+        ]},
+        {type:"callout", variant:"default", text:"Une procédure demeure actuellement en cours dans le cadre d'un recours en appel et fera l'objet d'un suivi sur la saison suivante."},
+        {type:"text", content:"La commission souhaite rappeler un principe essentiel de fonctionnement : tout comportement, fait ou événement constaté dans le cadre d'une retransmission et relevant potentiellement d'un manquement disciplinaire doit faire l'objet d'un signalement. L'absence volontaire ou non de signalement d'un fait connu constitue en elle-même un manquement aux obligations de vigilance et de contribution au bon fonctionnement des dispositifs disciplinaires du collectif."},
+        {type:"vote", subject:"Approbation du rapport de la Commission Disciplinaire", pour:9, contre:0, abstention:0, resultText:"Le rapport de la Commission Disciplinaire de l'ICR est approuvé."}
+      ]},
+      {title:"Classement interne de gratification", blocks:[
+        {type:"table", intro:"", rows:[
+          {name:"Nicolas MARIN", votes:"3 430 pts", resultText:"1er", resultType:"non"},
+          {name:"Marie DAL ZOTTO", votes:"3 345 pts", resultText:"2e", resultType:"non"},
+          {name:"Ennio ARIZZI", votes:"3 340 pts", resultText:"3e", resultType:"non"},
+          {name:"Enzo ACHOUR", votes:"3 120 pts", resultText:"4e", resultType:"none"},
+          {name:"Xavier FINI (hors compétition)", votes:"2 530 pts", resultText:"Coordinateur", resultType:"none"},
+          {name:"Emmanuel ALVES DE MOURA", votes:"2 040 pts", resultText:"5e", resultType:"none"},
+          {name:"Tim TOUR", votes:"1 225 pts", resultText:"6e", resultType:"none"},
+          {name:"Nabil SABAH", votes:"1 200 pts", resultText:"7e", resultType:"none"},
+          {name:"Yoan DUSSERT", votes:"1 015 pts", resultText:"8e", resultType:"none"},
+          {name:"Gaetan FERRE", votes:"800 pts", resultText:"9e", resultType:"none"},
+          {name:"Dorina HELIE-JOLY", votes:"470 pts", resultText:"10e", resultType:"none"},
+          {name:"Younes CHIKER", votes:"415 pts", resultText:"11e", resultType:"none"},
+          {name:"Kylian TOUR", votes:"100 pts", resultText:"12e", resultType:"none"},
+          {name:"Kyliann HEQUETTE", votes:"0 pts", resultText:"—", resultType:"none"}
+        ]},
+        {type:"vote", subject:"Approbation du classement interne", pour:9, contre:0, abstention:0, resultText:"Le classement interne est approuvé."}
+      ]},
+      {title:"Nouvelles procédures d'interruption de direct", blocks:[
+        {type:"text", content:"Le Bureau de la Coordination générale veut donner aux Responsables de Retransmission un peu plus de pouvoir fonctionnel. Les cas d'interruption autonome sont désormais définis comme suit :"},
+        {type:"proclist", items:[
+          {icon:"⚡", title:"Interruption autonome autorisée", text:"Panne majeure empêchant la poursuite de la diffusion dans des conditions acceptables.", variant:"auto"},
+          {icon:"🛑", title:"Interruption autonome autorisée", text:"Demande d'arrêt émanant du corps arbitral, d'un délégué ou d'un représentant du club.", variant:"auto"},
+          {icon:"✅", title:"Interruption soumise à validation", text:"Dans toutes les autres raisons nécessitant une interruption de direct, le Responsable de Retransmission peut suspendre le direct mais doit attendre la validation d'interruption par la Coordinatrice adjointe ou par tout autre personne de la Coordination générale.", variant:"conditional"}
+        ]},
+        {type:"vote", subject:"Approbation des nouvelles procédures d'interruption", pour:9, contre:0, abstention:0, resultText:"Les procédures d'interruption sont approuvées."}
+      ]},
+      {title:"Plan de formation interne", blocks:[
+        {type:"text", content:"À la suite de la montée en Nationale 3 de nos SF, le Bureau souhaite mettre en place auprès de tous les membres intéressés 3 différents webinaires de formation. Les dates ne sont pas encore communiquées mais celles-ci devraient se dérouler durant les grandes vacances en visioconférence."},
+        {type:"stats", periodTitle:"", cards:[
+          {label:"Webinaire 1", value:"Gestion de direct", delta:"", deltaType:"none"},
+          {label:"Webinaire 2", value:"Commentaires sportifs", delta:"", deltaType:"none"},
+          {label:"Webinaire 3", value:"Score & temps", delta:"", deltaType:"none"}
+        ]},
+        {type:"vote", subject:"Approbation des webinaires de formation", pour:9, contre:0, abstention:0, resultText:"Les webinaires sont approuvés."}
+      ]},
+      {title:"Cartographie des productions 2026–2027", blocks:[
+        {type:"text", content:"Le Bureau veut pour la saison 2026–2027 mettre en place 4 types de retransmissions : Simple Différé (Cadreur large, Réal), Simple Live (Cadreur large, OTS, Réal, Commentateurs), Production Semi-Complète — PSC (Cadreur large & terrain, OTS, Réal, Commentateurs), Production Complète — PC (Cadreur large, serré & terrain, OTS, Réal, Commentateurs).\n\nProposition de cartographie pour la saison prochaine : Nationale 3 → PSC ; Coupe de France régionale → PC ; Coupe Jacques Battu (tours de qualification) → Simple live ou PSC selon enjeux ; Coupe Jacques Battu (demi-finales & finales) → PSC ou PC selon effectif ; Championnats régionaux → Simple différé, Simple live ou PSC ; Championnats départementaux → Simple différé ou Simple live."},
+        {type:"callout", variant:"info", text:"Avec ces différentes cartographies, le Bureau propose à l'Assemblée générale 3 différents génériques pour les matchs normaux, les matchs N3, et les matchs CJB ou Évènements."},
+        {type:"vote", subject:"Approbation de la cartographie des productions", pour:9, contre:0, abstention:0, resultText:"La cartographie est approuvée."}
+      ]},
+      {title:"Affichage graphique Nationale 3", blocks:[
+        {type:"text", content:"La Coordination générale présente à l'ensemble des membres présents l'affichage graphique pour les matchs de Nationale 3."},
+        {type:"vote", subject:"Approbation de l'affichage graphique N3", pour:9, contre:0, abstention:0, resultText:"L'affichage graphique est approuvé."}
+      ]},
+      {title:"Questions, idées & échanges ouverts", blocks:[
+        {type:"callout", variant:"green", text:"Mme Marie DAL ZOTTO a fait part à M. Xavier FINI de présenter le nouveau site interne du collectif en vigueur pour la saison 2026–2027."}
+      ]}
+    ],
+    compoGroups:[
+      {header:"Instance Compétente des Retransmissions", rows:[
+        {name:"Nicolas MARIN", role:"Président de l'ICR", color:"gold"},
+        {name:"Enzo ACHOUR", role:"Vice-président de l'ICR", color:"blue"},
+        {name:"Gaetan FERRE", role:"Membre de l'ICR", color:"green"},
+        {name:"Tim TOUR", role:"Membre de l'ICR", color:"green"}
+      ]},
+      {header:"Bureau de la Coordination générale", rows:[
+        {name:"Xavier FINI", role:"Coordinateur général", color:"gold"},
+        {name:"Marie DAL ZOTTO", role:"Coordinatrice adjointe", color:"blue"},
+        {name:"Emmanuel ALVES DE MOURA", role:"Secrétaire général", color:"green"}
+      ]}
+    ],
+    closingNote:"Séance levée à 20h12",
+    signatures:[
+      {role:"Le Coordinateur général", name:"Xavier FINI"},
+      {role:"La Coordinatrice adjointe", name:"Marie DAL ZOTTO"}
+    ],
+    footer:{org:"Meylan Handball TV", rest:"Document interne — Usage réservé aux membres"}
+  };
+}
+
+/* ============================================================
+   PATH UTILS
+============================================================ */
+function getParent(path){
+  var parts = path.split(".");
+  var last = parts.pop();
+  var obj = state;
+  for(var i=0;i<parts.length;i++){ obj = obj[parts[i]]; }
+  return {obj:obj, key: /^\d+$/.test(last) ? parseInt(last,10) : last};
+}
+function getPath(path){
+  var parts = path.split(".");
+  var obj = state;
+  for(var i=0;i<parts.length;i++){ obj = obj[ /^\d+$/.test(parts[i]) ? parseInt(parts[i],10) : parts[i] ]; }
+  return obj;
+}
+function setPath(path, value){
+  var p = getParent(path);
+  p.obj[p.key] = value;
+}
+function addToArray(path, item){
+  var arr = getPath(path);
+  arr.push(item);
+}
+function removeFromArray(path, index){
+  var arr = getPath(path);
+  arr.splice(index,1);
+}
+
+/* ============================================================
+   ESCAPE
+============================================================ */
+function esc(s){
+  if(s===undefined||s===null) return "";
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function nl2p(s){
+  return String(s||"").split(/\n\s*\n/).map(function(p){return '<p class="prose">'+esc(p).replace(/\n/g,"<br>")+'</p>';}).join("");
+}
+
+/* ============================================================
+   BUILDER RENDER
+============================================================ */
+function inp(path, val, placeholder, type){
+  type = type||"text";
+  return '<input type="'+type+'" data-path="'+path+'" value="'+esc(val)+'" placeholder="'+esc(placeholder||"")+'">';
+}
+function txt(path, val, placeholder){
+  return '<textarea data-path="'+path+'" placeholder="'+esc(placeholder||"")+'">'+esc(val)+'</textarea>';
+}
+function sel(path, val, options){
+  var h = '<select data-path="'+path+'">';
+  options.forEach(function(o){
+    h += '<option value="'+o[0]+'"'+(o[0]===val?" selected":"")+'>'+o[1]+'</option>';
+  });
+  return h+'</select>';
+}
+
+function renderPresenceList(label, path, list){
+  var h = '<div style="margin-bottom:.6rem"><label>'+label+'</label>';
+  list.forEach(function(row,i){
+    h += '<div class="subcard row2" style="align-items:center">'
+      + '<div>'+inp(path+'.'+i+'.name', row.name, "Nom Prénom")+'</div>'
+      + '<div style="display:flex;gap:.3rem">'+inp(path+'.'+i+'.role', row.role, "Rôle (optionnel)")
+      + '<button class="small danger" data-action="removeItem" data-path="'+path+'" data-index="'+i+'">✕</button></div>'
+      + '</div>';
+  });
+  h += '<button class="small" data-action="addPresence" data-path="'+path+'">+ Ajouter</button></div>';
+  return h;
+}
+
+function renderBlock(sIdx, bIdx, block){
+  var base = 'sections.'+sIdx+'.blocks.'+bIdx;
+  var h = '<div class="block-card card"><div class="card-head"><span class="tag">'+block.type.toUpperCase()+'</span>'
+    + '<button class="small danger" data-action="removeBlock" data-si="'+sIdx+'" data-bi="'+bIdx+'">Supprimer</button></div>';
+
+  if(block.type==="text"){
+    h += '<label>Paragraphe(s) — séparer par une ligne vide</label>'+txt(base+'.content', block.content, "Texte du paragraphe...");
+  }
+  else if(block.type==="vote"){
+    h += '<label>Objet du vote</label>'+inp(base+'.subject', block.subject, "Ex : Approbation du rapport moral");
+    h += '<div class="row3"><div><label>Pour</label>'+inp(base+'.pour', block.pour, "0","number")+'</div>'
+       + '<div><label>Contre</label>'+inp(base+'.contre', block.contre, "0","number")+'</div>'
+       + '<div><label>Abstentions</label>'+inp(base+'.abstention', block.abstention, "0","number")+'</div></div>';
+    h += '<label>Texte de résultat</label>'+inp(base+'.resultText', block.resultText, "Ex : Le rapport moral est approuvé.");
+  }
+  else if(block.type==="callout"){
+    h += '<label>Variante</label>'+sel(base+'.variant', block.variant, [["default","Rouge (par défaut)"],["info","Or (info)"],["green","Vert (validé)"]]);
+    h += '<label>Texte</label>'+txt(base+'.text', block.text, "Texte de l'encart...");
+  }
+  else if(block.type==="stats"){
+    h += '<label>Titre de période (optionnel — ex : "Avril 2026")</label>'+inp(base+'.periodTitle', block.periodTitle, "");
+    h += '<label>Cartes statistiques</label>';
+    block.cards.forEach(function(c,ci){
+      var cb = base+'.cards.'+ci;
+      h += '<div class="subcard"><div class="row2">'+inp(cb+'.label', c.label, "Libellé")+inp(cb+'.value', c.value, "Valeur")+'</div>'
+        + '<div class="row2" style="margin-top:.35rem">'+inp(cb+'.delta', c.delta, "Variation (optionnel, ex: +25,7 %)")
+        + sel(cb+'.deltaType', c.deltaType, [["none","Sans couleur"],["up","Vert (hausse)"],["down","Rouge (baisse)"],["neu","Gris (neutre)"]])+'</div>'
+        + '<button class="small danger" style="margin-top:.35rem" data-action="removeCard" data-si="'+sIdx+'" data-bi="'+bIdx+'" data-ci="'+ci+'">✕ Retirer la carte</button></div>';
+    });
+    h += '<button class="small" data-action="addCard" data-si="'+sIdx+'" data-bi="'+bIdx+'">+ Ajouter une carte</button>';
+  }
+  else if(block.type==="table"){
+    h += '<label>Candidats / lignes</label>';
+    block.rows.forEach(function(r,ri){
+      var rb = base+'.rows.'+ri;
+      h += '<div class="subcard"><div class="row2">'+inp(rb+'.name', r.name, "Nom")+inp(rb+'.votes', r.votes, "Voix / valeur")+'</div>'
+        + '<div class="row2" style="margin-top:.35rem">'+inp(rb+'.resultText', r.resultText, "Texte resultat (ex : Elu)")
+        + sel(rb+'.resultType', r.resultType, [["none","Neutre"],["elu","Vert — Élu"],["pres","Or — Président"],["vp","Bleu — Vice-président"],["non","Gris — Non élu"]])+'</div>'
+        + '<button class="small danger" style="margin-top:.35rem" data-action="removeRow" data-si="'+sIdx+'" data-bi="'+bIdx+'" data-ri="'+ri+'">✕ Retirer la ligne</button></div>';
+    });
+    h += '<button class="small" data-action="addRow" data-si="'+sIdx+'" data-bi="'+bIdx+'">+ Ajouter une ligne</button>';
+  }
+  else if(block.type==="proclist"){
+    h += '<label>Points de procédure</label>';
+    block.items.forEach(function(it,ii){
+      var ib = base+'.items.'+ii;
+      h += '<div class="subcard"><div class="row3">'+inp(ib+'.icon', it.icon, "Emoji")
+        + sel(ib+'.variant', it.variant, [["auto","Vert — autonome"],["conditional","Or — soumis à validation"],["none","Neutre"]])
+        + '<button class="small danger" data-action="removeProcItem" data-si="'+sIdx+'" data-bi="'+bIdx+'" data-ii="'+ii+'">✕</button></div>'
+        + '<div style="margin-top:.35rem">'+inp(ib+'.title', it.title, "Titre du point")+'</div>'
+        + '<div style="margin-top:.35rem">'+txt(ib+'.text', it.text, "Description...")+'</div></div>';
+    });
+    h += '<button class="small" data-action="addProcItem" data-si="'+sIdx+'" data-bi="'+bIdx+'">+ Ajouter un point</button>';
+  }
+  h += '</div>';
+  return h;
+}
+
+function renderSection(sIdx, sec){
+  var h = '<div class="section-card card">'
+    + '<div class="card-head"><span class="tag">Section '+String(sIdx+1).padStart(2,"0")+'</span>'
+    + '<button class="small danger" data-action="removeSection" data-index="'+sIdx+'">Supprimer la section</button></div>'
+    + '<label>Titre de la section</label>'+inp('sections.'+sIdx+'.title', sec.title, "Ex : Rapport moral du Coordinateur général");
+  sec.blocks.forEach(function(b,bIdx){ h += renderBlock(sIdx,bIdx,b); });
+  h += '<div class="add-row"><select id="newBlockType-'+sIdx+'">'
+    + '<option value="text">Paragraphe de texte</option>'
+    + '<option value="vote">Bloc de vote</option>'
+    + '<option value="stats">Grille de statistiques</option>'
+    + '<option value="table">Tableau (élection / classement)</option>'
+    + '<option value="callout">Encart (callout)</option>'
+    + '<option value="proclist">Liste de procédures</option>'
+    + '</select><button data-action="addBlock" data-si="'+sIdx+'">+ Ajouter un bloc</button></div>'
+    + '</div>';
+  return h;
+}
+
+function renderCompo(){
+  var h = '<fieldset><legend>Composition finale des instances (optionnel)</legend>';
+  state.compoGroups.forEach(function(g,gi){
+    h += '<div class="subcard"><div class="row2"><div>'+inp('compoGroups.'+gi+'.header', g.header, "Nom de l'instance / du bureau")+'</div>'
+      + '<button class="small danger" data-action="removeCompoGroup" data-index="'+gi+'">✕ Supprimer le groupe</button></div>';
+    g.rows.forEach(function(r,ri){
+      var rb = 'compoGroups.'+gi+'.rows.'+ri;
+      h += '<div class="row3" style="margin-top:.35rem;align-items:center">'+inp(rb+'.name', r.name, "Nom")+inp(rb+'.role', r.role, "Rôle")
+        + sel(rb+'.color', r.color, [["default","Gris"],["gold","Or"],["blue","Bleu"],["green","Vert"],["red","Rouge"]])+'</div>'
+        + '<button class="small danger" style="margin-top:.25rem" data-action="removeCompoRow" data-gi="'+gi+'" data-ri="'+ri+'">✕ Retirer la ligne</button>';
+    });
+    h += '<div class="add-row"><button class="small" data-action="addCompoRow" data-gi="'+gi+'">+ Ajouter une personne</button></div></div>';
+  });
+  h += '<button class="small" data-action="addCompoGroup">+ Ajouter un groupe (instance / bureau)</button></fieldset>';
+  return h;
+}
+
+function renderBuilderRoot(){
+  var s = state;
+  var h = "";
+
+  h += '<fieldset><legend>En-tête du document</legend>'
+    + '<label>Badge (nom de l\'organisation)</label>'+inp('meta.badge', s.meta.badge, "Meylan Handball TV")
+    + '<label>Libellé au-dessus du titre</label>'+inp('meta.label', s.meta.label, "Procès-Verbal · Assemblée Générale")
+    + '<div class="row2"><div><label>Titre (ligne 1)</label>'+inp('meta.titleLine1', s.meta.titleLine1, "Assemblée")+'</div>'
+    + '<div><label>Titre (ligne 2, en rouge)</label>'+inp('meta.titleLine2', s.meta.titleLine2, "Générale")+'</div></div>'
+    + '<label>Sous-titre (date, lieu)</label>'+inp('meta.subtitle', s.meta.subtitle, "Réunion du ... · Lieu")
+    + '<div class="row2"><div><label>Président de séance</label>'+inp('meta.president', s.meta.president, "")+'</div>'
+    + '<div><label>Secrétaire de séance</label>'+inp('meta.secretary', s.meta.secretary, "")+'</div></div>'
+    + '<div class="row2"><div><label>Heure d\'ouverture</label>'+inp('meta.ouverture', s.meta.ouverture, "19h00")+'</div>'
+    + '<div><label>Heure de clôture</label>'+inp('meta.cloture', s.meta.cloture, "20h00")+'</div></div>'
+    + '</fieldset>';
+
+  h += '<fieldset><legend>Présences</legend>'
+    + renderPresenceList("Membres présents","presence.presents", s.presence.presents)
+    + renderPresenceList("Représentés par procuration","presence.proxies", s.presence.proxies)
+    + renderPresenceList("Membres non présents","presence.absents", s.presence.absents)
+    + '</fieldset>';
+
+  h += '<fieldset><legend>Quorum</legend>'
+    + '<div class="row3"><div><label>Pourcentage affiché</label>'+inp('quorum.pct', s.quorum.pct, "75%")+'</div>'
+    + '<div style="grid-column:span 2"><label>Ligne principale (en gras)</label>'+inp('quorum.mainLine', s.quorum.mainLine, "9 membres sur 12")+'</div></div>'
+    + '<label>Suite du texte</label>'+txt('quorum.detailText', s.quorum.detailText, "ont participé au vote. Le quorum...")
+    + '</fieldset>';
+
+  h += '<fieldset><legend>Sections de l\'ordre du jour</legend>';
+  s.sections.forEach(function(sec,si){ h += renderSection(si,sec); });
+  h += '<button data-action="addSection">+ Ajouter une section</button></fieldset>';
+
+  h += renderCompo();
+
+  h += '<fieldset><legend>Clôture & signatures</legend>'
+    + '<label>Note de clôture (encart vert, optionnel)</label>'+inp('closingNote', s.closingNote, "Séance levée à ...");
+  s.signatures.forEach(function(sig,i){
+    h += '<div class="subcard row2" style="align-items:center">'+inp('signatures.'+i+'.role', sig.role, "Fonction (ex : Le Coordinateur général)")
+      + '<div style="display:flex;gap:.3rem">'+inp('signatures.'+i+'.name', sig.name, "Nom Prénom")
+      + '<button class="small danger" data-action="removeSignature" data-index="'+i+'">✕</button></div></div>';
+  });
+  h += '<button class="small" data-action="addSignature">+ Ajouter une signature</button>';
+  h += '<div class="row2" style="margin-top:.6rem"><div><label>Pied de page — nom de l\'organisation</label>'+inp('footer.org', s.footer.org, "Meylan Handball TV")+'</div>'
+    + '<div><label>Pied de page — reste du texte</label>'+inp('footer.rest', s.footer.rest, "Document interne — Usage réservé aux membres")+'</div></div>'
+    + '</fieldset>';
+
+  h += '<div class="hint">Astuce : les modifications se répercutent en direct dans l\'aperçu à droite. Utilisez « Télécharger le PV » pour obtenir un fichier HTML autonome, prêt à archiver ou imprimer.</div>';
+
+  document.getElementById("builder-root").innerHTML = h;
+}
+
+/* ============================================================
+   EVENT DELEGATION
+============================================================ */
+var builderRoot = document.getElementById("builder");
+
+builderRoot.addEventListener("input", function(e){
+  var t = e.target;
+  if(t.dataset && t.dataset.path){
+    var val = t.value;
+    if(t.type==="number") val = val===""?"":Number(val);
+    setPath(t.dataset.path, val);
+    scheduleRender();
+  }
+});
+
+builderRoot.addEventListener("click", function(e){
+  var b = e.target.closest("button");
+  if(!b) return;
+  var act = b.dataset.action;
+  if(!act) return;
+
+  if(act==="addSection"){ state.sections.push({title:"", blocks:[]}); }
+  else if(act==="removeSection"){ state.sections.splice(parseInt(b.dataset.index,10),1); }
+  else if(act==="addBlock"){
+    var si = parseInt(b.dataset.si,10);
+    var type = document.getElementById("newBlockType-"+si).value;
+    state.sections[si].blocks.push(blockTemplate(type));
+  }
+  else if(act==="removeBlock"){ state.sections[parseInt(b.dataset.si,10)].blocks.splice(parseInt(b.dataset.bi,10),1); }
+  else if(act==="addCard"){ state.sections[parseInt(b.dataset.si,10)].blocks[parseInt(b.dataset.bi,10)].cards.push({label:"",value:"",delta:"",deltaType:"none"}); }
+  else if(act==="removeCard"){ state.sections[parseInt(b.dataset.si,10)].blocks[parseInt(b.dataset.bi,10)].cards.splice(parseInt(b.dataset.ci,10),1); }
+  else if(act==="addRow"){ state.sections[parseInt(b.dataset.si,10)].blocks[parseInt(b.dataset.bi,10)].rows.push({name:"",votes:"",resultText:"",resultType:"none"}); }
+  else if(act==="removeRow"){ state.sections[parseInt(b.dataset.si,10)].blocks[parseInt(b.dataset.bi,10)].rows.splice(parseInt(b.dataset.ri,10),1); }
+  else if(act==="addProcItem"){ state.sections[parseInt(b.dataset.si,10)].blocks[parseInt(b.dataset.bi,10)].items.push({icon:"⚡",title:"",text:"",variant:"auto"}); }
+  else if(act==="removeProcItem"){ state.sections[parseInt(b.dataset.si,10)].blocks[parseInt(b.dataset.bi,10)].items.splice(parseInt(b.dataset.ii,10),1); }
+  else if(act==="addPresence"){ addToArray(b.dataset.path, {name:"",role:""}); }
+  else if(act==="removeItem"){ removeFromArray(b.dataset.path, parseInt(b.dataset.index,10)); }
+  else if(act==="addCompoGroup"){ state.compoGroups.push({header:"",rows:[{name:"",role:"",color:"default"}]}); }
+  else if(act==="removeCompoGroup"){ state.compoGroups.splice(parseInt(b.dataset.index,10),1); }
+  else if(act==="addCompoRow"){ state.compoGroups[parseInt(b.dataset.gi,10)].rows.push({name:"",role:"",color:"default"}); }
+  else if(act==="removeCompoRow"){ state.compoGroups[parseInt(b.dataset.gi,10)].rows.splice(parseInt(b.dataset.ri,10),1); }
+  else if(act==="addSignature"){ state.signatures.push({role:"",name:""}); }
+  else if(act==="removeSignature"){ state.signatures.splice(parseInt(b.dataset.index,10),1); }
+  else if(act==="loadExample"){ state = exampleState(); }
+  else if(act==="reset"){ if(confirm("Repartir d'un document vierge ? Les modifications non téléchargées seront perdues.")) state = blankState(); }
+  else if(act==="download"){ downloadDoc(); return; }
+  else if(act==="print"){ printDoc(); return; }
+
+  renderBuilderAndPreview();
+});
+
+var renderTimer = null;
+function scheduleRender(){
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(updatePreview, 150);
+}
+function renderBuilderAndPreview(){
+  renderBuilderRoot();
+  updatePreview();
+}
+
+/* ============================================================
+   DOCUMENT TEMPLATE
+============================================================ */
+var DOC_CSS = "\
+:root{--bg:#09090f;--darker:#05050a;--card:#111118;--border:#1e1e2a;--red:#e8001d;--red-dim:rgba(232,0,29,0.12);--gold:#f5b800;--gold-dim:rgba(245,184,0,0.12);--white:#f0f0f5;--muted:#6b6b80;--light:#a0a0b8}\
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}\
+body{background:var(--bg);color:var(--white);font-family:'Barlow',sans-serif;font-weight:400;font-size:15px;line-height:1.65}\
+@media print{body{background:#fff;color:#111}.hero{background:#111 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.no-print{display:none !important}.section{break-inside:avoid}.vote-block{break-inside:avoid}}\
+.hero{position:relative;background:linear-gradient(135deg,#09090f 0%,#1a000a 55%,#09090f 100%);padding:4rem 4rem 3rem;overflow:hidden}\
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(232,0,29,0.025) 60px,rgba(232,0,29,0.025) 61px),repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(232,0,29,0.025) 60px,rgba(232,0,29,0.025) 61px)}\
+.hero::after{content:'AG';position:absolute;right:-1rem;bottom:-3rem;font-family:'Bebas Neue',sans-serif;font-size:22vw;color:rgba(232,0,29,0.035);line-height:1;pointer-events:none}\
+.hero-glow{position:absolute;top:-120px;right:-80px;width:550px;height:550px;background:radial-gradient(circle,rgba(232,0,29,0.13) 0%,transparent 70%);pointer-events:none}\
+.hero-inner{position:relative;z-index:1;max-width:820px}\
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--red-dim);border:1px solid rgba(232,0,29,0.25);border-radius:4px;padding:0.3rem 0.8rem;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:1.4rem}\
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red)}\
+.hero-label{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}\
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,7vw,5.5rem);line-height:0.92;color:var(--white);margin-bottom:0.6rem}\
+.hero-title em{color:var(--red);font-style:normal}\
+.hero-sub{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:300;color:var(--light);margin-top:1rem;letter-spacing:0.02em}\
+.hero-meta{display:flex;flex-wrap:wrap;gap:1.5rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}\
+.meta-item{display:flex;flex-direction:column;gap:0.15rem}\
+.meta-label{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted)}\
+.meta-value{font-family:'Barlow Condensed',sans-serif;font-size:0.95rem;font-weight:600;color:var(--white)}\
+.doc-body{margin:0 auto;padding:3rem 2rem 5rem;max-width:980px}\
+.presence-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.5rem}\
+.presence-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.3rem}\
+.presence-card-title{font-family:'Barlow Condensed',sans-serif;font-size:0.66rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.8rem}\
+.presence-card-title.present{color:var(--gold)}.presence-card-title.proxy{color:var(--light)}.presence-card-title.absent{color:var(--muted)}\
+.presence-list{list-style:none;display:flex;flex-direction:column;gap:0.45rem}\
+.presence-list li{font-size:0.85rem;color:var(--light);padding-left:0.9rem;position:relative}\
+.presence-list li::before{content:'—';position:absolute;left:0;color:var(--muted);font-size:0.7rem}\
+.presence-list li strong{color:var(--white);font-weight:600}\
+.presence-list li span{display:block;font-size:0.75rem;color:var(--muted);font-style:italic}\
+.quorum-bar{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:8px;padding:1rem 1.4rem;margin-bottom:2.5rem;display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap}\
+.quorum-pct{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1}\
+.quorum-text{font-size:0.88rem;color:var(--light);line-height:1.5}.quorum-text strong{color:var(--white)}\
+.section{margin-bottom:2.5rem}\
+.section-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem}\
+.section-num{font-family:'Bebas Neue',sans-serif;font-size:0.85rem;letter-spacing:0.1em;color:var(--red);background:var(--red-dim);border:1px solid rgba(232,0,29,0.2);border-radius:4px;padding:0.2rem 0.6rem;flex-shrink:0}\
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.2rem,3vw,1.6rem);letter-spacing:0.04em;color:var(--white);line-height:1.1}\
+.section-line{height:1px;background:linear-gradient(90deg,var(--border) 0%,transparent 100%);margin-bottom:1.25rem}\
+.prose{font-size:0.92rem;color:var(--light);line-height:1.7;margin-bottom:1rem}\
+.vote-block{margin:1.5rem 0}\
+.vote-label{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}\
+.vote-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}\
+.vote-table th,.vote-table td{padding:0.8rem 1.2rem;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:0.9rem}\
+.vote-table thead tr{background:#16161f}\
+.vote-table th{font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);font-size:0.72rem;border-bottom:1px solid var(--border)}\
+.vote-table td.subject{text-align:left;color:var(--white);font-weight:600;font-size:0.88rem}\
+.vote-table td.pour{color:#4ade80;font-weight:700;font-size:1.1rem}.vote-table td.contre{color:var(--red);font-weight:700;font-size:1.1rem}.vote-table td.abstention{color:var(--muted);font-weight:600;font-size:1.1rem}\
+.vote-result{display:inline-flex;align-items:center;gap:0.5rem;margin-top:0.6rem;font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.08em;color:#4ade80}\
+.vote-result::before{content:'→'}\
+.data-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:1rem 0;font-size:0.88rem}\
+.data-table th{padding:0.75rem 1rem;background:#16161f;text-align:left;font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}\
+.data-table td{padding:0.7rem 1rem;border-bottom:1px solid rgba(30,30,42,0.6);color:var(--light);font-family:'Barlow Condensed',sans-serif;font-size:0.92rem}\
+.data-table tbody tr:last-child td{border-bottom:none}\
+.data-table td.name{color:var(--white);font-weight:600}.data-table td.votes{font-weight:700;color:var(--white);text-align:center}\
+.data-table td.result-elu{color:#4ade80;font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.08em}\
+.data-table td.result-pres{color:var(--gold);font-weight:700;font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.08em}\
+.data-table td.result-vp{color:#60a5fa;font-weight:700;font-size:0.8rem;letter-spacing:0.08em}\
+.data-table td.result-non{color:var(--muted);font-family:'Barlow Condensed',sans-serif;font-size:0.8rem}\
+.data-table tr.row-elected{background:rgba(74,222,128,0.04)}.data-table tr.row-president{background:rgba(245,184,0,0.06)}.data-table tr.row-vp{background:rgba(96,165,250,0.05)}\
+.compo-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}\
+.compo-block{background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden}\
+.compo-block-header{background:#16161f;padding:0.6rem 1rem;font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}\
+.compo-row{display:flex;justify-content:space-between;align-items:center;padding:0.6rem 1rem;border-bottom:1px solid rgba(30,30,42,0.5);gap:1rem}\
+.compo-row:last-child{border-bottom:none}\
+.compo-name{font-family:'Barlow Condensed',sans-serif;font-size:0.9rem;font-weight:600;color:var(--white)}\
+.compo-role{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;color:var(--muted);text-align:right}\
+.compo-role.gold{color:var(--gold)}.compo-role.blue{color:#60a5fa}.compo-role.green{color:#4ade80}.compo-role.red{color:var(--red)}\
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:0.75rem;margin:1rem 0}\
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem 1.1rem}\
+.stat-label{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem}\
+.stat-value{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--white);line-height:1}\
+.stat-delta{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;font-weight:600;margin-top:0.2rem}\
+.delta-up{color:#4ade80}.delta-down{color:var(--red)}.delta-neu{color:var(--muted)}\
+.period-title{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 0.6rem;display:flex;align-items:center;gap:0.5rem}\
+.period-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,184,0,0.2),transparent)}\
+.proc-list{margin:0.75rem 0;display:flex;flex-direction:column;gap:0.6rem}\
+.proc-item{display:flex;gap:0.9rem;align-items:flex-start;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1.1rem}\
+.proc-icon{font-size:1.1rem;flex-shrink:0;margin-top:0.05rem}\
+.proc-text{font-size:0.88rem;color:var(--light);line-height:1.5}\
+.proc-item.auto{border-left:3px solid #4ade80}.proc-item.conditional{border-left:3px solid var(--gold)}\
+.callout{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:8px;padding:1rem 1.3rem;margin:1rem 0;font-size:0.88rem;color:var(--light);line-height:1.6}\
+.callout.info{border-left-color:var(--gold)}.callout.green{border-left-color:#4ade80}\
+.divider{height:1px;background:var(--border);margin:2.5rem 0}\
+.signature-block{display:flex;gap:3rem;flex-wrap:wrap;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}\
+.sig-role{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:0.2rem}\
+.sig-name{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:0.8rem}\
+.sig-line{width:180px;height:1px;background:var(--border);margin-top:2rem}\
+.doc-footer{background:var(--darker);border-top:1px solid var(--border);padding:1.5rem 2rem;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;color:var(--muted);letter-spacing:0.06em}\
+.doc-footer strong{color:var(--white)}\
+@media (max-width:700px){.hero{padding:2.5rem 1.5rem 2rem}.presence-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:1fr 1fr}.compo-grid{grid-template-columns:1fr}.doc-body{padding:2rem 1.25rem 4rem}}\
+";
+
+function presenceHTML(title, cls, list){
+  var items = list.filter(function(r){return r.name;}).map(function(r){
+    return '<li><strong>'+esc(r.name)+'</strong>'+(r.role?'<span>'+esc(r.role)+'</span>':'')+'</li>';
+  }).join("");
+  return '<div class="presence-card"><div class="presence-card-title '+cls+'">'+esc(title)+'</div><ul class="presence-list">'+items+'</ul></div>';
+}
+
+function voteBlockHTML(b){
+  return '<div class="vote-block"><table class="vote-table"><thead><tr><th style="text-align:left">Résolution</th><th>Pour</th><th>Contre</th><th>Abstentions</th></tr></thead>'
+    + '<tbody><tr><td class="subject">'+esc(b.subject)+'</td><td class="pour">'+esc(b.pour)+'</td><td class="contre">'+esc(b.contre)+'</td><td class="abstention">'+esc(b.abstention)+'</td></tr></tbody></table>'
+    + (b.resultText? '<div class="vote-result">'+esc(b.resultText)+'</div>' : '')
+    + '</div>';
+}
+function statsHTML(b){
+  var cards = b.cards.map(function(c){
+    var deltaCls = c.deltaType==="up"?"delta-up":c.deltaType==="down"?"delta-down":c.deltaType==="neu"?"delta-neu":"";
+    return '<div class="stat-card"><div class="stat-label">'+esc(c.label)+'</div><div class="stat-value">'+esc(c.value)+'</div>'
+      + (c.delta? '<div class="stat-delta '+deltaCls+'">'+esc(c.delta)+'</div>' : '')+'</div>';
+  }).join("");
+  return (b.periodTitle? '<div class="period-title">'+esc(b.periodTitle)+'</div>' : '')+'<div class="stats-grid">'+cards+'</div>';
+}
+function tableHTML(b){
+  var rows = b.rows.map(function(r){
+    var rowCls = r.resultType==="elu"?"row-elected":r.resultType==="pres"?"row-president":r.resultType==="vp"?"row-vp":"";
+    var tdCls = r.resultType==="elu"?"result-elu":r.resultType==="pres"?"result-pres":r.resultType==="vp"?"result-vp":r.resultType==="non"?"result-non":"";
+    return '<tr class="'+rowCls+'"><td class="name">'+esc(r.name)+'</td><td class="votes">'+esc(r.votes)+'</td><td class="'+tdCls+'">'+esc(r.resultText)+'</td></tr>';
+  }).join("");
+  return '<table class="data-table"><thead><tr><th>Candidat(e)</th><th style="text-align:center">Voix / valeur</th><th>Résultat</th></tr></thead><tbody>'+rows+'</tbody></table>';
+}
+function calloutHTML(b){
+  var cls = b.variant==="info"?"info":b.variant==="green"?"green":"";
+  return '<div class="callout '+cls+'">'+esc(b.text)+'</div>';
+}
+function proclistHTML(b){
+  var items = b.items.map(function(it){
+    var cls = it.variant==="auto"?"auto":it.variant==="conditional"?"conditional":"";
+    return '<div class="proc-item '+cls+'"><div class="proc-icon">'+esc(it.icon)+'</div><div class="proc-text"><strong style="color:var(--white)">'+esc(it.title)+'</strong> — '+esc(it.text)+'</div></div>';
+  }).join("");
+  return '<div class="proc-list">'+items+'</div>';
+}
+
+function blockHTML(b){
+  if(b.type==="text") return nl2p(b.content);
+  if(b.type==="vote") return voteBlockHTML(b);
+  if(b.type==="stats") return statsHTML(b);
+  if(b.type==="table") return tableHTML(b);
+  if(b.type==="callout") return calloutHTML(b);
+  if(b.type==="proclist") return proclistHTML(b);
+  return "";
+}
+
+function sectionHTML(sec, idx){
+  var num = String(idx+1).padStart(2,"0");
+  var body = sec.blocks.map(blockHTML).join("");
+  return '<div class="section"><div class="section-header"><span class="section-num">'+num+'</span><h2 class="section-title">'+esc(sec.title)+'</h2></div><div class="section-line"></div>'+body+'</div>';
+}
+
+function compoHTML(){
+  if(!state.compoGroups.length) return "";
+  var groups = state.compoGroups.map(function(g){
+    var rows = g.rows.filter(function(r){return r.name;}).map(function(r){
+      var colorCls = r.color && r.color!=="default" ? r.color : "";
+      return '<div class="compo-row"><span class="compo-name">'+esc(r.name)+'</span><span class="compo-role '+colorCls+'">'+esc(r.role)+'</span></div>';
+    }).join("");
+    return '<div class="compo-block"><div class="compo-block-header">'+esc(g.header)+'</div>'+rows+'</div>';
+  }).join("");
+  return '<p class="prose" style="margin-top:1.5rem;">Composition des instances à l\'issue de l\'Assemblée générale :</p><div class="compo-grid">'+groups+'</div>';
+}
+
+function buildDocument(){
+  var m = state.meta;
+  var presentCount = state.presence.presents.filter(function(r){return r.name;}).length + state.presence.proxies.filter(function(r){return r.name;}).length;
+  var totalCount = presentCount + state.presence.absents.filter(function(r){return r.name;}).length;
+
+  var html = '<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8">'
+    + '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+    + '<title>PV — '+esc(m.titleLine1)+' '+esc(m.titleLine2)+' | '+esc(m.badge)+'</title>'
+    + '<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">'
+    + '<style>'+DOC_CSS+'</style></head><body>'
+    + '<header class="hero"><div class="hero-glow"></div><div class="hero-inner">'
+    + '<div class="hero-badge">'+esc(m.badge)+'</div>'
+    + '<div class="hero-label">'+m.label+'</div>'
+    + '<h1 class="hero-title">'+esc(m.titleLine1)+'<br><em>'+esc(m.titleLine2)+'</em></h1>'
+    + '<p class="hero-sub">'+esc(m.subtitle)+'</p>'
+    + '<div class="hero-meta">'
+    + '<div class="meta-item"><span class="meta-label">Président de séance</span><span class="meta-value">'+esc(m.president)+'</span></div>'
+    + '<div class="meta-item"><span class="meta-label">Secrétaire de séance</span><span class="meta-value">'+esc(m.secretary)+'</span></div>'
+    + '<div class="meta-item"><span class="meta-label">Ouverture</span><span class="meta-value">'+esc(m.ouverture)+'</span></div>'
+    + '<div class="meta-item"><span class="meta-label">Clôture</span><span class="meta-value">'+esc(m.cloture)+'</span></div>'
+    + '</div></div></header>'
+    + '<main class="doc-body">'
+    + '<div class="presence-grid">'
+      + presenceHTML("Membres présents","present", state.presence.presents)
+      + presenceHTML("Représentés par procuration","proxy", state.presence.proxies)
+      + presenceHTML("Membres non présents","absent", state.presence.absents)
+    + '</div>'
+    + '<div class="quorum-bar"><div class="quorum-pct">'+esc(state.quorum.pct)+'</div><div class="quorum-text"><strong>'+esc(state.quorum.mainLine)+'</strong> '+esc(state.quorum.detailText)+'</div></div>'
+    + state.sections.map(sectionHTML).join("")
+    + compoHTML()
+    + (state.closingNote? '<div class="callout green" style="margin-top:1rem;"><strong style="color:#4ade80">'+esc(state.closingNote)+'</strong></div>' : '')
+    + '<div class="divider"></div>'
+    + '<div class="signature-block">'+state.signatures.map(function(s){
+        return '<div class="sig-item"><div class="sig-role">'+esc(s.role)+'</div><div class="sig-name">'+esc(s.name)+'</div><div class="sig-line"></div></div>';
+      }).join("")+'</div>'
+    + '</main>'
+    + '<footer class="doc-footer"><strong>'+esc(state.footer.org)+'</strong> · Procès-Verbal — '+esc(m.subtitle)+' · '+esc(state.footer.rest)+'</footer>'
+    + '</body></html>';
+  return html;
+}
+
+/* ============================================================
+   PREVIEW / DOWNLOAD / PRINT
+============================================================ */
+function updatePreview(){
+  document.getElementById("preview").srcdoc = buildDocument();
+}
+function downloadDoc(){
+  var html = buildDocument();
+  var blob = new Blob([html], {type:"text/html"});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  var fname = "PV-AG-" + (state.meta.subtitle||"document").replace(/[^a-zA-Z0-9]+/g,"-").toLowerCase().slice(0,40).replace(/^-+|-+$/g,"");
+  a.href = url; a.download = (fname||"pv-assemblee-generale") + ".html";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);}, 2000);
+}
+function printDoc(){
+  var f = document.getElementById("preview");
+  f.contentWindow.focus();
+  f.contentWindow.print();
+}
+
+/* ============================================================
+   INIT
+============================================================ */
+state = exampleState();
+renderBuilderRoot();
+updatePreview();
+</script>
+</body>
+</html>

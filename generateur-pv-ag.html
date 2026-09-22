@@ -170,33 +170,27 @@ function exampleState(){
       label:"Procès-Verbal · Assemblée Générale Ordinaire &amp; Élective Anticipée",
       titleLine1:"Assemblée",
       titleLine2:"Générale",
-      subtitle:"Réunion du vendredi 19 juin 2026 · Gymnase des Buclos, Meylan",
+      subtitle:"Réunion du -- -- -- 2026 · Gymnase des Buclos, Meylan",
       president:"Xavier FINI",
       secretary:"Emmanuel ALVES DE MOURA",
-      ouverture:"19h00",
-      cloture:"20h12"
+      ouverture:"--h00",
+      cloture:"--h--"
     },
     presence:{
       presents:[
         {name:"Xavier FINI",role:"Coordinateur général"},
         {name:"Marie DAL ZOTTO",role:"Coordinatrice adjointe"},
-        {name:"Emmanuel ALVES DE MOURA",role:"Secrétaire général"},
-        {name:"Enzo ACHOUR",role:""},
-        {name:"Gaëtan FERRE",role:""}
+        {name:"Emmanuel ALVES DE MOURA",role:"Secrétaire général"}
+
       ],
       proxies:[
         {name:"Nicolas MARIN",role:"Président de l'ICR"},
-        {name:"Yoan DUSSERT",role:"Vice-président de l'ICR"},
-        {name:"Dorina HELIE-JOLY",role:""},
-        {name:"Ennio ARIZZI",role:""}
       ],
       absents:[
         {name:"Younes CHIKER",role:""},
-        {name:"Tim TOUR",role:""},
-        {name:"Kylian TOUR",role:""}
       ]
     },
-    quorum:{pct:"75%", mainLine:"9 membres sur 12", detailText:"ont participé au vote. Le quorum prévu à l'article 13.2.2 des statuts étant atteint, l'Assemblée générale peut valablement délibérer."},
+    quorum:{pct:"--%", mainLine:"-- membres sur --", detailText:"ont participé au vote. Le quorum prévu à l'article 13.2.2 des statuts étant atteint, l'Assemblée générale peut valablement délibérer."},
     sections:[
       {title:"Approbation de l'ordre du jour", blocks:[
         {type:"text", content:"Le président de séance soumet l'ordre du jour au vote de l'assemblée."},
@@ -205,32 +199,6 @@ function exampleState(){
       {title:"Rapport moral du Coordinateur général", blocks:[
         {type:"text", content:"Le Coordinateur général de Meylan Handball TV présente à l'ensemble des membres du collectif, présents ou représentés à cette Assemblée générale de clôture de saison, son rapport moral pour l'année sportive 2025–2026.\n\nCette saison a confirmé le rôle de Meylan Handball TV comme outil d'accompagnement, de valorisation et de mise en lumière de la vie du club. Tout au long de l'année, notre objectif est resté le même : faire vivre le handball au-delà du terrain. Nous avons poursuivi nos actions autour de plusieurs axes : couvrir les rencontres et événements du club et du Comité Isère de Handball afin de permettre au plus grand nombre de suivre les rencontres, valoriser les équipes, des plus jeunes aux collectifs séniors, mettre en avant les bénévoles, éducateurs, dirigeants et partenaires, développer des contenus accessibles, réguliers et fidèles aux valeurs associatives du club.\n\nCette saison a également démontré l'importance du collectif. Derrière chaque captation, chaque diffusion en direct se trouve des heures d'engagement souvent discrètes mais essentielles. Le Coordinateur général tient à remercier les bénévoles du collectif pour leur disponibilité et leur implication, les entraîneurs pour leur confiance, les familles pour leur soutien permanent, et le club qui nous accompagne dans ce projet. M. Xavier FINI remercie à toutes celles et tous ceux qui contribuent, de près ou de loin, à faire vivre cette aventure qui va fêter ses 2 ans d'ici peu de temps."},
         {type:"vote", subject:"Approbation du rapport moral", pour:9, contre:0, abstention:0, resultText:"Le rapport moral est approuvé."}
-      ]},
-      {title:"Élection de l'Instance Compétente des Retransmissions (ICR)", blocks:[
-        {type:"text", content:"À la suite d'une adoption en Bureau puis approuvée par le Président de l'ICR, la motion propose de créer pour les élus de l'instance des mandats plus courts (en termes de phases sportives : juin à décembre / janvier à mai) et avec moins de membres (passer de 6 à 4 membres), afin de permettre à l'instance de renouveler régulièrement ses membres, d'avoir différents points de vue, ainsi que de laisser de la responsabilité et de la liberté d'expression à ceux qui le veulent. Dans le cas où cette motion est adoptée par l'Assemblée générale, le Bureau supervisera l'élection anticipée."},
-        {type:"vote", subject:"Approbation de la motion de modification", pour:9, contre:0, abstention:0, resultText:"La motion est adoptée."},
-        {type:"text", content:"Procédure : chaque membre dispose de 4 voix. Les candidat(e)s ayant obtenu le plus de voix sont élu(e)s dans la limite des 4 postes à pourvoir. Le vote se déroule en un tour unique. La présidence de l'ICR est attribuée de plein droit au membre élu ayant obtenu le plus grand nombre de suffrages exprimés lors du scrutin pour un mandat d'une saison sportive."},
-        {type:"table", intro:"", rows:[
-          {name:"Nicolas MARIN", votes:"10", resultText:"Élu Président", resultType:"pres"},
-          {name:"Enzo ACHOUR", votes:"8", resultText:"Élu Vice-président", resultType:"vp"},
-          {name:"Gaetan FERRE", votes:"6", resultText:"Élu", resultType:"elu"},
-          {name:"Tim TOUR", votes:"6", resultText:"Élu", resultType:"elu"},
-          {name:"Dorina HELIE-JOLY", votes:"2", resultText:"Non élue", resultType:"non"},
-          {name:"Yoan DUSSERT", votes:"2", resultText:"Non élu", resultType:"non"},
-          {name:"Nabil SABAH", votes:"2", resultText:"Non élu", resultType:"non"}
-        ]},
-        {type:"callout", variant:"info", text:"M. Nicolas MARIN est élu président de l'Instance Compétente des Retransmissions pour la saison 2026–2027. M. Enzo ACHOUR, M. Gaetan FERRE et M. Tim TOUR sont élus Coordinateurs délégués de l'ICR avec un mandat de 6 mois (leurs mandats prendront fin à l'Assemblée générale de décembre 2026). Ils assisteront le président de l'ICR dans ses fonctions sur les volets disciplinaire et de planification des retransmissions."}
-      ]},
-      {title:"Bilan trimestriel — Janvier / Mars 2026", blocks:[
-        {type:"text", content:"Le bilan trimestriel de la saison 2025–2026 est présenté à l'assemblée."},
-        {type:"stats", periodTitle:"", cards:[
-          {label:"Téléspectateurs cumulés", value:"1 180", delta:"", deltaType:"none"},
-          {label:"Heures de direct", value:"16 h", delta:"", deltaType:"none"},
-          {label:"Heures de visionnage", value:"335,2 h", delta:"", deltaType:"none"},
-          {label:"Vues des vidéos", value:"2 746", delta:"", deltaType:"none"},
-          {label:"Clics sur les vidéos", value:"1 118", delta:"", deltaType:"none"}
-        ]},
-        {type:"vote", subject:"Approbation du bilan trimestriel", pour:9, contre:0, abstention:0, resultText:"Le bilan trimestriel est approuvé."}
       ]},
       {title:"Approbation des audiences — Avril, Mai, Juin 2026", blocks:[
         {type:"stats", periodTitle:"Avril 2026", cards:[
@@ -263,66 +231,6 @@ function exampleState(){
           {label:"Clics sur nos vidéos", value:"5 911", delta:"", deltaType:"none"}
         ]},
         {type:"vote", subject:"Approbation des audiences de la saison", pour:9, contre:0, abstention:0, resultText:"Les audiences sont approuvées."}
-      ]},
-      {title:"Rapport de la Commission Disciplinaire de l'ICR", blocks:[
-        {type:"text", content:"Le Coordinateur délégué M. Enzo ACHOUR, représentant l'Instance Compétente des Retransmissions à cette Assemblée générale, présente le rapport de la Commission Disciplinaire sur la saison 2025–2026.\n\nAu cours de la saison 2025–2026, la Commission disciplinaire de l'ICR de Meylan Handball TV a poursuivi sa mission de garantir le respect des règles de fonctionnement du collectif, des valeurs et du cadre collectif nécessaire au bon déroulement de l'activité."},
-        {type:"stats", periodTitle:"", cards:[
-          {label:"Signalements reçus", value:"10", delta:"", deltaType:"none"},
-          {label:"Irrecevables", value:"5", delta:"", deltaType:"none"},
-          {label:"Procédures ouvertes", value:"5", delta:"", deltaType:"none"},
-          {label:"Procédures clôturées", value:"4", delta:"", deltaType:"none"},
-          {label:"Avertissements", value:"2", delta:"", deltaType:"none"},
-          {label:"Suspensions", value:"1", delta:"", deltaType:"none"}
-        ]},
-        {type:"callout", variant:"default", text:"Une procédure demeure actuellement en cours dans le cadre d'un recours en appel et fera l'objet d'un suivi sur la saison suivante."},
-        {type:"text", content:"La commission souhaite rappeler un principe essentiel de fonctionnement : tout comportement, fait ou événement constaté dans le cadre d'une retransmission et relevant potentiellement d'un manquement disciplinaire doit faire l'objet d'un signalement. L'absence volontaire ou non de signalement d'un fait connu constitue en elle-même un manquement aux obligations de vigilance et de contribution au bon fonctionnement des dispositifs disciplinaires du collectif."},
-        {type:"vote", subject:"Approbation du rapport de la Commission Disciplinaire", pour:9, contre:0, abstention:0, resultText:"Le rapport de la Commission Disciplinaire de l'ICR est approuvé."}
-      ]},
-      {title:"Classement interne de gratification", blocks:[
-        {type:"table", intro:"", rows:[
-          {name:"Nicolas MARIN", votes:"3 430 pts", resultText:"1er", resultType:"non"},
-          {name:"Marie DAL ZOTTO", votes:"3 345 pts", resultText:"2e", resultType:"non"},
-          {name:"Ennio ARIZZI", votes:"3 340 pts", resultText:"3e", resultType:"non"},
-          {name:"Enzo ACHOUR", votes:"3 120 pts", resultText:"4e", resultType:"none"},
-          {name:"Xavier FINI (hors compétition)", votes:"2 530 pts", resultText:"Coordinateur", resultType:"none"},
-          {name:"Emmanuel ALVES DE MOURA", votes:"2 040 pts", resultText:"5e", resultType:"none"},
-          {name:"Tim TOUR", votes:"1 225 pts", resultText:"6e", resultType:"none"},
-          {name:"Nabil SABAH", votes:"1 200 pts", resultText:"7e", resultType:"none"},
-          {name:"Yoan DUSSERT", votes:"1 015 pts", resultText:"8e", resultType:"none"},
-          {name:"Gaetan FERRE", votes:"800 pts", resultText:"9e", resultType:"none"},
-          {name:"Dorina HELIE-JOLY", votes:"470 pts", resultText:"10e", resultType:"none"},
-          {name:"Younes CHIKER", votes:"415 pts", resultText:"11e", resultType:"none"},
-          {name:"Kylian TOUR", votes:"100 pts", resultText:"12e", resultType:"none"},
-          {name:"Kyliann HEQUETTE", votes:"0 pts", resultText:"—", resultType:"none"}
-        ]},
-        {type:"vote", subject:"Approbation du classement interne", pour:9, contre:0, abstention:0, resultText:"Le classement interne est approuvé."}
-      ]},
-      {title:"Nouvelles procédures d'interruption de direct", blocks:[
-        {type:"text", content:"Le Bureau de la Coordination générale veut donner aux Responsables de Retransmission un peu plus de pouvoir fonctionnel. Les cas d'interruption autonome sont désormais définis comme suit :"},
-        {type:"proclist", items:[
-          {icon:"⚡", title:"Interruption autonome autorisée", text:"Panne majeure empêchant la poursuite de la diffusion dans des conditions acceptables.", variant:"auto"},
-          {icon:"🛑", title:"Interruption autonome autorisée", text:"Demande d'arrêt émanant du corps arbitral, d'un délégué ou d'un représentant du club.", variant:"auto"},
-          {icon:"✅", title:"Interruption soumise à validation", text:"Dans toutes les autres raisons nécessitant une interruption de direct, le Responsable de Retransmission peut suspendre le direct mais doit attendre la validation d'interruption par la Coordinatrice adjointe ou par tout autre personne de la Coordination générale.", variant:"conditional"}
-        ]},
-        {type:"vote", subject:"Approbation des nouvelles procédures d'interruption", pour:9, contre:0, abstention:0, resultText:"Les procédures d'interruption sont approuvées."}
-      ]},
-      {title:"Plan de formation interne", blocks:[
-        {type:"text", content:"À la suite de la montée en Nationale 3 de nos SF, le Bureau souhaite mettre en place auprès de tous les membres intéressés 3 différents webinaires de formation. Les dates ne sont pas encore communiquées mais celles-ci devraient se dérouler durant les grandes vacances en visioconférence."},
-        {type:"stats", periodTitle:"", cards:[
-          {label:"Webinaire 1", value:"Gestion de direct", delta:"", deltaType:"none"},
-          {label:"Webinaire 2", value:"Commentaires sportifs", delta:"", deltaType:"none"},
-          {label:"Webinaire 3", value:"Score & temps", delta:"", deltaType:"none"}
-        ]},
-        {type:"vote", subject:"Approbation des webinaires de formation", pour:9, contre:0, abstention:0, resultText:"Les webinaires sont approuvés."}
-      ]},
-      {title:"Cartographie des productions 2026–2027", blocks:[
-        {type:"text", content:"Le Bureau veut pour la saison 2026–2027 mettre en place 4 types de retransmissions : Simple Différé (Cadreur large, Réal), Simple Live (Cadreur large, OTS, Réal, Commentateurs), Production Semi-Complète — PSC (Cadreur large & terrain, OTS, Réal, Commentateurs), Production Complète — PC (Cadreur large, serré & terrain, OTS, Réal, Commentateurs).\n\nProposition de cartographie pour la saison prochaine : Nationale 3 → PSC ; Coupe de France régionale → PC ; Coupe Jacques Battu (tours de qualification) → Simple live ou PSC selon enjeux ; Coupe Jacques Battu (demi-finales & finales) → PSC ou PC selon effectif ; Championnats régionaux → Simple différé, Simple live ou PSC ; Championnats départementaux → Simple différé ou Simple live."},
-        {type:"callout", variant:"info", text:"Avec ces différentes cartographies, le Bureau propose à l'Assemblée générale 3 différents génériques pour les matchs normaux, les matchs N3, et les matchs CJB ou Évènements."},
-        {type:"vote", subject:"Approbation de la cartographie des productions", pour:9, contre:0, abstention:0, resultText:"La cartographie est approuvée."}
-      ]},
-      {title:"Affichage graphique Nationale 3", blocks:[
-        {type:"text", content:"La Coordination générale présente à l'ensemble des membres présents l'affichage graphique pour les matchs de Nationale 3."},
-        {type:"vote", subject:"Approbation de l'affichage graphique N3", pour:9, contre:0, abstention:0, resultText:"L'affichage graphique est approuvé."}
       ]},
       {title:"Questions, idées & échanges ouverts", blocks:[
         {type:"callout", variant:"green", text:"Mme Marie DAL ZOTTO a fait part à M. Xavier FINI de présenter le nouveau site interne du collectif en vigueur pour la saison 2026–2027."}

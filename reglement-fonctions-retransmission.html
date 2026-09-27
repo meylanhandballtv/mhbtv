@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement de Progression des Grades | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 2.5rem;
+    }
+    .doc-meta span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+    }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-body { margin: 0 auto; }
+    .doc-body-wide { margin: 0 auto; }
+
+    .doc-preamble {
+      margin: 0 auto 3rem auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1.75rem 2rem;
+    }
+    .doc-preamble h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-preamble p:last-child { margin-bottom: 0; }
+    .doc-preamble p em { color: var(--white); font-style: italic; }
+
+    .doc-titre {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 0.06em;
+      color: var(--red);
+      margin-top: 3.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-titre:first-of-type { margin-top: 0; }
+
+    .doc-article { margin-bottom: 2rem; }
+    .doc-article h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .doc-article h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .doc-article p {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+    .doc-article ul, .doc-article ol {
+      margin: 0 0 0.9rem 1.4rem;
+      padding: 0;
+    }
+    .doc-article li {
+      font-size: 0.92rem;
+      line-height: 1.75;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+    .doc-article strong { color: var(--white); }
+
+    .doc-table-wrap {
+      overflow-x: auto;
+      margin: 1rem 0 1.5rem 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .doc-table th {
+      background: rgba(232,0,29,0.08);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table td {
+      padding: 0.75rem 1rem;
+      color: var(--muted);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .doc-table tr:last-child td { border-bottom: none; }
+    .doc-table td.doc-td-label { color: var(--white); font-weight: 600; }
+
+    /* Grades du Responsable de retransmission */
+    .grade-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin: 1rem 0 1.5rem 0;
+    }
+    .grade-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .grade-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.5rem;
+      background: linear-gradient(135deg, rgba(232,0,29,0.12), rgba(232,0,29,0.02));
+      border-bottom: 1px solid var(--border);
+    }
+    .grade-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      background: var(--red);
+      border-radius: 6px;
+      padding: 0.3rem 0.75rem;
+      flex-shrink: 0;
+    }
+    .grade-card-header h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 0;
+    }
+    .grade-card-body { padding: 1.25rem 1.5rem; }
+    .grade-card-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.9rem;
+    }
+    .grade-card-body p:last-child { margin-bottom: 0; }
+    .grade-card-body p strong { color: var(--white); }
+
+    /* Incident-style callout cards reused for jury / registre / dossier */
+    .incident-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .incident-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+    .incident-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+    .incident-card p:last-child { margin-bottom: 0; }
+    .incident-card ul { margin: 0 0 0.75rem 1.4rem; padding: 0; }
+    .incident-card li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.35rem;
+    }
+
+    .doc-example {
+      background: rgba(240,180,41,0.07);
+      border: 1px solid rgba(240,180,41,0.2);
+      border-left: 4px solid var(--gold);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+    .doc-example p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0; }
+    .doc-example p strong { color: var(--gold); }
+
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0 auto 2.5rem auto;
+    }
+    .doc-back {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .doc-back:hover { color: var(--red); }
+
+    .doc-closing {
+      margin: 3rem auto 0 auto;
+      padding: 1.75rem 2rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+    }
+    .doc-closing p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Document officiel</div>
+        <h1>Règlement de <em>Progression des Grades</em></h1>
+        <p class="hero-sub">Conditions de formation, d'évaluation, de progression, de maintien et de retrait des grades de Responsable de retransmission.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="statuts.html" class="doc-back">← Retour aux statuts &amp; règlements</a>
+      </div>
+
+      <div class="doc-meta">
+        <span>Version du <strong>12 aout 2026</strong></span>
+        <span>10 titres</span>
+        <span>25 articles</span>
+      </div>
+
+      <div class="doc-preamble">
+        <h4>Préambule</h4>
+        <p>Le présent règlement précise, en application de l'article 13.2 du Règlement applicable aux retransmissions des compétitions de Meylan Handball TV (MHBTV), les conditions d'accréditation, de désignation, de maintien et de retrait des fonctions exercées lors des retransmissions. </p>
+      </div>
+
+      <div class="doc-body">
+
+        <div class="doc-titre">Titre I — Dispositions générales</div>
+
+        <div class="doc-article">
+          <h3>Article 1 — Objet</h3>
+          <p>Le présent règlement a pour objet de définir :</p>
+          <ul>
+            <li>les trois fonctions instituées par l'article 13.2 du Règlement applicable aux retransmissions des compétitions : Responsable de Retransmission, Sous-Directeur des Opérations de Retransmission et Directeur des Opérations de Retransmission ;</li>
+            <li>les conditions d'accréditation à chacune de ces fonctions et le contenu de la formation initiale et continue afférente ;</li>
+            <li>les modalités de désignation, pour chaque diffusion déterminée, des membres accrédités appelés à exercer l'une de ces fonctions ;</li>
+            <li>les conditions de suspension et de retrait d'une accréditation ;</li>
+            <li>les modalités de tenue du registre des accréditations et les voies de recours ouvertes aux membres.</li>
+          </ul>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 2 — Champ d'application</h3>
+          <p>Le présent règlement s'applique à tout membre actif ou occasionnel du collectif exerçant ou souhaitant exercer une fonction de responsable lors d'une retransmission, quelles que soient les accréditations qu'il détient déjà.</p>
+          <p>Il s'articule avec le Règlement général, notamment son article 5 relatif aux questionnaires d'accréditation, et avec le Règlement applicable aux retransmissions des compétitions, notamment ses articles 6 à 8 relatifs aux fonctions, à leur mise en œuvre et aux conditions minimales de retransmission.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 3 — Autorités compétentes</h3>
+          <p>Les autorités intervenant dans l'application du présent règlement sont :</p>
+          <ul>
+            <li>le chef de département Officiels de Retransmission de l'Instance Compétente des Retransmissions (ICR), chargé du suivi des accréditations et de l'instruction des dossiers de candidature ;</li>
+            <li>la Coordination générale, compétent pour l'attribution, la confirmation et le retrait de toute accréditation, conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions ;</li>
+            <li>le/la Coordinateur/trice adjoint/e, sur proposition de qui l'attribution d'une accréditation peut être soumise au Bureau ;</li>
+            <li>l'autorité de planification visée à l'article 14 du présent règlement, compétente pour la désignation nominative des membres accrédités à chaque diffusion.</li>
+          </ul>
+        </div>
+
+        <div class="doc-titre">Titre II — Les fonctions de responsable de retransmission</div>
+
+        <div class="doc-article">
+          <h3>Article 4 — Rappel du système institué par l'article 13.2</h3>
+          <p>Conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions, une retransmission est placée sous la responsabilité d'un ou plusieurs membres exerçant, pour cette diffusion et pour elle seule, l'une des trois fonctions suivantes :</p>
+
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Abréviation</th>
+                  <th>Fonction</th>
+                  <th>Champ d'exercice</th>
+                  <th>Rôle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="doc-td-label">RR</td>
+                  <td>Responsable de Retransmission (Chef d'Équipe)</td>
+                  <td>Retransmission d'un match unique, sur un seul site</td>
+                  <td>Autorité autonome sur l'ensemble du dispositif de la diffusion</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">SDOR</td>
+                  <td>Sous-Directeur des Opérations de Retransmission (Chef d'Antenne)</td>
+                  <td>Un site déterminé, dans le cadre d'une retransmission multiplex</td>
+                  <td>Autorité sur la production du site dont il a la charge, sous la coordination du Directeur des Opérations</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">DOR</td>
+                  <td>Directeur des Opérations de Retransmission</td>
+                  <td>Ensemble d'une retransmission multiplex, tous sites confondus</td>
+                  <td>Coordination générale du multiplex, représentation du collectif, décisions structurantes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Ces fonctions ne constituent pas un grade permanent. Nul n'en est titulaire de façon continue : un membre accrédité est désigné pour les exercer, diffusion par diffusion, selon les modalités du Titre V du présent règlement. Un même membre peut ainsi exercer la fonction de Chef d'Équipe pour une diffusion et celle de Sous-Directeur, voire de Directeur des Opérations, pour une autre, dès lors qu'il détient l'accréditation correspondante.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 5 — Synthèse des conditions d'accès</h3>
+          <p>Le tableau suivant récapitule, pour chaque fonction, les conditions cumulatives d'accréditation fixées par l'article 13.2 ainsi que les pièces devant être réunies dans le dossier de candidature en application du présent règlement.</p>
+
+          <div class="doc-table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Fonction</th>
+                  <th>Conditions cumulatives d'accès</th>
+                  <th>Pièces du dossier</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="doc-td-label">RR</td>
+                  <td>Certification au questionnaire d'accréditation de la fonction (art. 12 RG) ; observation d'au moins un match aux côtés d'un membre accrédité à la fonction de Chef d'Équipe ou supérieure.</td>
+                  <td>Attestation de réussite au questionnaire ; fiche d'observation signée.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">SDOR</td>
+                  <td>Accréditation Chef d'Équipe active ; trois (3) diffusions réalisées en autonomie comme Chef d'Équipe dans des conditions satisfaisantes ; formation complémentaire à la coordination multiplex ; absence de sanction disciplinaire active dans les 12 derniers mois.</td>
+                  <td>Trois fiches de compte rendu de retransmission validées ; attestation de formation complémentaire ; attestation d'absence de sanction délivrée par l'ICR.</td>
+                </tr>
+                <tr>
+                  <td class="doc-td-label">DOR</td>
+                  <td>Accréditation Sous-Directeur active ; trois (3) diffusions multiplex réalisées comme Sous-Directeur dans des conditions satisfaisantes ; absence de sanction disciplinaire active dans les 24 derniers mois ; validation par le chef de département Officiels de Retransmission avec approbation du Bureau.</td>
+                  <td>Bilan des diffusions multiplex assurées comme Sous-Directeur ; avis motivé du chef de département Officiels de Retransmission ; attestation d'absence de sanction.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="doc-titre">Titre III — Accréditation à la fonction de Responsable de retransmission - Chef d'équipe</div>
+
+        <div class="doc-article">
+          <h3>Article 6 — Admission et formation initiale</h3>
+          <p>Tout nouveau membre du collectif souhaitant exercer une fonction de responsable de retransmission est, dès la validation de son adhésion au titre de l'article 11 du Règlement général, invité à suivre le parcours de formation initiale décrit au présent article.</p>
+          <p>La formation initiale comprend :</p>
+          <ol>
+            <li>une session de présentation du matériel et des outils de production (régie, caméras, habillage graphique, système de diffusion), organisée par le chef de département Officiels de Retransmission ou un membre accrédité qu'il désigne ;</li>
+            <li>une présentation des règlements applicables, en particulier le Règlement général, le Règlement applicable aux retransmissions des compétitions et le présent règlement ;</li>
+            <li>la réussite du questionnaire d'accréditation prévu à l'article 12 du Règlement général, propre à la fonction de Chef d'Équipe ;</li>
+            <li>l'observation d'au moins un match aux côtés d'un membre accrédité à la fonction de Chef d'Équipe ou supérieure, donnant lieu à une fiche d'observation signée par ce dernier.</li>
+          </ol>
+          <p>À l'issue de ce parcours, le membre est inscrit au registre des accréditations en qualité de titulaire de l'accréditation Responsable de Retransmission - Chef d'Équipe.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 7 — Encadrement du membre non accrédité</h3>
+          <p>Tout membre non encore accrédité qui participe à une retransmission n'exerce aucune fonction de responsable : il agit sous la supervision directe et continue du membre désigné Chef d'Équipe, Sous-Directeur ou Directeur des Opérations pour cette diffusion.</p>
+          <p>Le membre accrédité qui l'encadre consigne, à l'issue de la retransmission, une brève appréciation dans la fiche de compte rendu prévue à l'article 13.1 du Règlement applicable aux retransmissions des compétitions, lorsque cette appréciation est utile à la constitution d'un futur dossier de candidature.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 8 — Conditions et procédure d'accréditation</h3>
+          <p>Le candidat, ou le membre accrédité l'ayant encadré agissant en son nom avec son accord, dépose auprès du chef de département Officiels de Retransmission un dossier de candidature comprenant les pièces mentionnées à l'article 5 du présent règlement.</p>
+          <p>Le chef de département Officiels de Retransmission instruit le dossier dans un délai de quinze (15) jours à compter de sa réception complète et transmet son avis motivé au Bureau de la Coordination générale, qui statue sur l'attribution de l'accréditation.</p>
+          <p>La décision est notifiée à l'intéressé par tout moyen laissant trace écrite et mentionnée sans délai au registre des accréditations tenu conformément à l'article 21 du présent règlement. En cas de décision défavorable, les motifs en sont communiqués au candidat, qui peut présenter une nouvelle candidature dès que les conditions manquantes sont réunies.</p>
+        </div>
+
+        <div class="doc-titre">Titre IV — Accréditation aux fonctions de Sous-Directeur et de Directeur des Opérations</div>
+
+        <div class="doc-article">
+          <h3>Article 9 — Conditions d'accréditation à la fonction de sous-directeur des opérations</h3>
+          <p>L'accréditation à la fonction de Sous-Directeur des Opérations de Retransmission suppose, conformément à l'article 13.2 du Règlement applicable aux retransmissions des compétitions, la détention active de l'accréditation Chef d'Équipe, la réalisation d'au moins trois diffusions en autonomie dans des conditions satisfaisantes, et l'absence de sanction disciplinaire active dans les douze derniers mois.</p>
+          <p>Le candidat constitue un bilan des diffusions assurées comme Chef d'Équipe, comprenant notamment leur nombre et leur niveau de priorisation au sens de l'article 14 du Règlement applicable aux retransmissions des compétitions. Ce bilan est transmis au chef de département Officiels de Retransmission, qui recueille l'avis d'au moins un membre accrédité Sous-Directeur ou Directeur des Opérations ayant travaillé avec le candidat.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 10 — Formation complémentaire à la coordination multiplex</h3>
+          <p>Avant toute attribution de l'accréditation Sous-Directeur, le candidat suit une formation complémentaire portant notamment sur :</p>
+          <ul>
+            <li>la coordination d'une production multiplex et la répartition des rôles entre les membres présents sur chaque site ;</li>
+            <li>les procédures d'interruption et de gestion des incidents en direct prévues aux articles 16 à 22 du Règlement applicable aux retransmissions des compétitions ;</li>
+            <li>les méthodes d'encadrement des membres non accrédités, dans la perspective des missions de formation confiées aux fonctions de Sous-Directeur et de Directeur des Opérations.</li>
+          </ul>
+          <p>Cette formation complémentaire est organisée par le chef de département Officiels de Retransmission, le cas échéant avec l'appui d'un membre accrédité Directeur des Opérations.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 11 — Conditions d'accréditation à la fonction de Directeur des Opérations</h3>
+          <p>L'accréditation à la fonction de Directeur des Opérations de Retransmission, la plus élevée du système institué par l'article 13.2 du Règlement applicable aux retransmissions des compétitions, suppose la détention active de l'accréditation Sous-Directeur, la réalisation d'au moins trois diffusions multiplex dans des conditions satisfaisantes en cette qualité, l'absence de sanction disciplinaire active dans les vingt-quatre derniers mois, ainsi qu'une validation par le chef de département Officiels de Retransmission avec approbation du Bureau.</p>
+          <p>À titre exceptionnel et sur avis motivé, le Bureau peut déroger à la condition de nombre de diffusions fixée à l'alinéa précédent, notamment en cas d'expérience équivalente acquise antérieurement au sein d'une autre structure de retransmission sportive, ou en cas de nécessité opérationnelle impérieuse dûment justifiée et consignée au procès-verbal du Bureau.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 12 — Procédure d'accréditation</h3>
+          <p>Le chef de département Officiels de Retransmission transmet au Bureau de la Coordination générale son avis motivé accompagné du dossier du candidat, pour les accréditations Sous-Directeur et Directeur des Opérations. Le Bureau statue dans les mêmes conditions de notification et d'inscription au registre que celles prévues à l'article 8 du présent règlement.</p>
+        </div>
+
+        <div class="doc-titre">Titre V — Désignation pour une diffusion déterminée</div>
+
+        <div class="doc-article">
+          <h3>Article 13 — Principe de désignation ponctuelle</h3>
+          <p>Pour chaque diffusion, l'autorité de planification désigne, parmi les membres accrédités disponibles :</p>
+          <ul>
+            <li>un Chef d'Équipe, lorsque la diffusion porte sur un match unique sur un seul site ;</li>
+            <li>un Directeur des Opérations et un Sous-Directeur des Opérations par site, lorsque la diffusion est réalisée en multiplex.</li>
+          </ul>
+          <p>Cette désignation ne vaut que pour la diffusion concernée. Elle ne confère à son bénéficiaire aucun droit acquis, aucune priorité de désignation pour une diffusion ultérieure, et prend fin de plein droit à l'issue de la diffusion, sans qu'il soit besoin d'aucune formalité.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 14 — Autorité de désignation</h3>
+          <p>La désignation est arrêtée par le chef de département Officiels de Retransmission ou par toute personne qu'il habilite à cet effet au sein de l'ICR, en tenant compte des accréditations détenues, des disponibilités déclarées et, le cas échéant, du niveau de priorisation de la rencontre au sens de l'article 14 du Règlement applicable aux retransmissions des compétitions.</p>
+          <p>La désignation est communiquée aux intéressés selon les modalités habituelles de diffusion du planning des retransmissions.</p>
+        </div>
+
+        <div class="doc-article">
+          <h4>Article 15 — Désignation dérogatoire pour nécessité opérationnelle</h4>
+          <p>En cas d'indisponibilité imprévue d'un membre accrédité pour la fonction requise par une diffusion donnée, le chef de département Officiels de Retransmission peut, à titre exceptionnel et pour cette seule diffusion, désigner un membre ne détenant pas encore l'accréditation correspondante, sous réserve que ce dernier soit placé sous la supervision d'un membre accrédité à la fonction ou à une fonction supérieure lorsque les circonstances le permettent.</p>
+          <p>Cette désignation dérogatoire est motivée et consignée. Elle n'emporte aucun droit acquis, ne dispense pas de la procédure d'accréditation ordinaire prévue au présent règlement, et ne peut être renouvelée pour le même membre plus de deux fois au cours d'une même saison sportive sans dérogation motivée du Bureau.</p>
+        </div>
+
+        <div class="doc-titre">Titre VI — Maintien de l'accréditation</div>
+
+        <div class="doc-article">
+          <h3>Article 16 — Renouvellement de l'accréditation et recyclage</h3>
+          <p>Conformément à l'article 12 bis du Règlement général, les accréditations sont valables pour une saison sportive et doivent être renouvelées au début de chaque saison. Ce renouvellement conditionne l'éligibilité du membre à toute désignation au titre du présent règlement.</p>
+          <p>En cas de changement significatif de matériel, de procédure ou de règlement, tout membre accrédité peut être tenu de suivre une session de mise à niveau organisée par le chef de département Officiels de Retransmission, dans les conditions de préavis prévues à l'article 12 bis du Règlement général.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 17 — Missions de formation attachées aux accréditations sous-directeur et directeur des opérations</h3>
+          <p>Tout membre accrédité Sous-Directeur des Opérations peut être sollicité pour assurer la formation et l'évaluation des membres non accrédités et des titulaires de l'accréditation Chef d'Équipe, notamment dans le cadre de l'encadrement prévu à l'article 7 et des sessions de formation initiale mentionnées à l'article 6 du présent règlement.</p>
+          <p>Tout membre accrédité Directeur des Opérations peut être sollicité par le chef de département Officiels de Retransmission pour contribuer à la formation complémentaire prévue à l'article 10, notamment sur les aspects relatifs à la représentation du collectif auprès des instances externes.</p>
+        </div>
+
+        <div class="doc-titre">Titre VII — Suspension et retrait de l'accréditation</div>
+
+        <div class="doc-article">
+          <h3>Article 18 — Lien avec le régime disciplinaire</h3>
+          <p>Le maintien de chaque accréditation, à compter de l'accréditation Sous-Directeur, est conditionné à l'absence de sanction disciplinaire active dans la période de référence propre à cette accréditation, telle que fixée à l'article 13.2 du Règlement applicable aux retransmissions des compétitions.</p>
+          <p>Toute sanction prononcée par l'Instance Compétente des Retransmissions dans le cadre de ses attributions disciplinaires, conformément à l'article 10 du Règlement applicable aux retransmissions des compétitions, est communiquée au chef de département Officiels de Retransmission aux fins d'actualisation du registre des accréditations.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 19 — Suspension provisoire</h4>
+          <p>Dans l'attente de l'issue d'une procédure disciplinaire susceptible d'affecter les conditions de maintien d'une accréditation, le Bureau de la Coordination générale peut prononcer, sur proposition du chef de département Officiels de Retransmission ou de l'ICR, la suspension provisoire d'une ou plusieurs accréditations. Le membre concerné cesse d'être éligible à toute désignation au titre de l'accréditation suspendue jusqu'à la levée de la mesure ; il demeure éligible aux désignations correspondant aux accréditations non suspendues qu'il détient.</p>
+          <p>La suspension provisoire est motivée, notifiée à l'intéressé et levée de plein droit à l'issue de la procédure disciplinaire si celle-ci n'aboutit à aucune sanction.</p>
+        </div>
+
+        <div class="incident-card">
+          <h4>Article 20 — Retrait de l'accréditation</h4>
+          <p>Le retrait pur et simple d'une accréditation ne peut intervenir qu'après décision définitive de l'ICR statuant en matière disciplinaire, conformément aux dispositions du Règlement applicable aux retransmissions des compétitions.</p>
+          <p>La décision de retrait est prononcée par le Bureau de la Coordination générale sur la base de la décision disciplinaire définitive. Elle est notifiée à l'intéressé par tout moyen laissant trace écrite et fait l'objet d'une mention motivée au registre des accréditations.</p>
+          <p>Un membre dont l'accréditation a été retirée peut solliciter une nouvelle accréditation dans les conditions de droit commun fixées par le présent règlement, sans préjudice d'un délai de carence éventuellement fixé par la décision disciplinaire elle-même.</p>
+        </div>
+
+        <div class="doc-titre">Titre VIII — Registre des accréditations et voies de recours</div>
+
+        <div class="doc-article">
+          <h3>Article 21 — Tenue du registre</h3>
+          <p>Le chef de département Officiels de Retransmission tient à jour un registre des accréditations mentionnant, pour chaque membre, les accréditations détenues, la date de leur attribution, les dérogations éventuellement accordées et, le cas échéant, les suspensions ou retraits prononcés.</p>
+          <p>Ce registre est communicable, pour ce qui le concerne, à tout membre qui en fait la demande auprès du chef de département Officiels de Retransmission. Il peut être consulté dans son intégralité par le Bureau de la Coordination générale et par l'ICR dans l'exercice de leurs attributions respectives.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 22 — Recours contre une décision individuelle</h3>
+          <p>Tout membre s'estimant lésé par une décision individuelle prise en application du présent règlement, qu'il s'agisse d'un refus d'accréditation, d'une suspension provisoire ou d'une décision consécutive à une procédure disciplinaire, peut former un recours motivé auprès du Bureau de la Coordination générale dans un délai de quinze (15) jours à compter de la notification de la décision contestée.</p>
+          <p>Le Bureau statue sur ce recours dans un délai de trente (30) jours, après avoir, le cas échéant, recueilli l'avis du chef de département Officiels de Retransmission ou de l'ICR. Sa décision est notifiée à l'intéressé et n'est susceptible d'aucun recours interne supplémentaire.</p>
+        </div>
+
+        <div class="doc-titre">Titre IX — Dispositions finales</div>
+
+        <div class="doc-article">
+          <h3>Article 23 — Modification du règlement</h3>
+          <p>LLe présent règlement ne peut être modifié que par l'Assemblée générale, sur proposition de la Coordination générale ou de l'ICR, dans les mêmes conditions que celles prévues à l'article 27 du Règlement applicable aux retransmissions des compétitions pour les modifications purement formelles, rédactionnelles ou sans incidence sur les droits et obligations des membres.</p>
+        </div>
+
+        <div class="doc-article">
+          <h3>Article 24 — Entrée en vigueur</h3>
+          <p>LLe présent règlement entre en vigueur dès son adoption par l'Assemblée générale de MHBTV et se substitue, à compter de cette date, au Règlement de Progression des Grades du 12 août 2026. Il est opposable à l'ensemble des membres exerçant ou souhaitant exercer une fonction de responsable lors d'une retransmission.</p>
+        </div>
+
+      </div>
+
+      <div class="doc-closing">
+        <p><strong>Meylan Handball TV — Règlement de Progression des Grades des Responsables de Retransmission.</strong> Pris en application de l'article 13.2 du Règlement applicable aux retransmissions des compétitions. Pour toute question relative à l'interprétation de ce règlement, contactez le chef de département Officiels de Retransmission de l'ICR.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="footer.js"></script>
+</body>
+</html>

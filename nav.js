@@ -10,10 +10,10 @@
       <ul class="topbar-nav" id="mainNav">
         <li><a href="index.html" ${currentPage==='index.html'?'class="active"':''}>Accueil</a></li>
         <li><a href="accreditations.html" ${currentPage==='accreditations.html'?'class="active"':''}>Accréditations</a></li>
-        <li><a href="composition.html" ${currentPage==='composition.html'?'class="active"':''}>Diffusions</a></li>
         <li><a href="equipe.html" ${currentPage==='equipe.html'?'class="active"':''}>L'Équipe</a></li>
         <li><a href="gratification.html" ${currentPage==='gratification.html'?'class="active"':''}>Gratification</a></li>
         <li><a href="documentation.html" ${currentPage==='documentation.html'?'class="active"':''}>Documentation</a></li>
+        <li><a href="statuts.html" ${currentPage==='statuts.html'?'class="active"':''}>Règlements</a></li>
         <li><a href="connexion.html">Se connecter</a></li>
       </ul>
       <div class="hamburger" id="hamburger" onclick="document.getElementById('mainNav').classList.toggle('open')">

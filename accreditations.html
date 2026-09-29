@@ -319,6 +319,7 @@
       border: 1px solid var(--border);
       border-radius: 10px;
       overflow: hidden;
+      overflow-x: auto;
     }
 
     .members-table {
@@ -1016,11 +1017,8 @@
               <thead>
                 <tr>
                   <th style="width:220px;">Membre</th>
-                  <th>Poste dans MHBTV</th>
-                  <th class="col-postes">Accréditations</th>
                   <th>Resp. retr.</th>
                   <th>Commentateur</th>
-                  <th></th>
                 </tr>
               </thead>
               <tbody id="membersBody">
@@ -1340,11 +1338,8 @@
               </div>
             </div>
           </td>
-          <td style="color:var(--muted);font-size:0.82rem;">${m.role}</td>
-          <td class="col-postes">${accreds.length ? accreds.join('') : '<span style="color:var(--muted);font-size:0.78rem;">Aucune</span>'}</td>
           <td>${statutHTML(m.resp)}</td>
           <td>${statutHTML(m.comm)}</td>
-          <td><a href="equipe.html" class="action-btn">Profil →</a></td>
         `;
         tbody.appendChild(tr);
       });

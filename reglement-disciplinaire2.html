@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Règlement Disciplinaire — Bureau de l'Inspection générale | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doc-meta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2.5rem; }
+    .doc-meta span { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--card); border: 1px solid var(--border); border-radius: 999px; padding: 0.4rem 1rem; }
+    .doc-meta span strong { color: var(--gold); }
+
+    .doc-body { margin: 0 auto; }
+    .doc-body-wide { margin: 0 auto; }
+
+    .doc-titre { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.06em; color: var(--red); margin-top: 3.5rem; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+    .doc-titre:first-of-type { margin-top: 0; }
+
+    .doc-article { margin-bottom: 2rem; }
+    .doc-article h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; }
+    .doc-article h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; color: var(--muted); margin-top: 1.25rem; margin-bottom: 0.5rem; }
+    .doc-article h5 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--red); margin-top: 1.75rem; margin-bottom: 0.6rem; }
+    .doc-article p { font-size: 0.92rem; line-height: 1.75; color: var(--muted); margin-bottom: 0.9rem; }
+    .doc-article ul { margin: 0 0 0.9rem 1.4rem; padding: 0; }
+    .doc-article li { font-size: 0.92rem; line-height: 1.75; color: var(--muted); margin-bottom: 0.4rem; }
+    .doc-article strong { color: var(--white); }
+
+    /* Petits tableaux (rôles, décisions...) */
+    .doc-table-wrap { overflow-x: auto; margin: 1rem 0 1.5rem 0; border: 1px solid var(--border); border-radius: 8px; }
+    .doc-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .doc-table th { background: rgba(232,0,29,0.08); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 0.72rem; text-align: left; padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); }
+    .doc-table td { padding: 0.75rem 1rem; color: var(--muted); line-height: 1.6; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .doc-table tr:last-child td { border-bottom: none; }
+    .doc-table td strong, .doc-table td.doc-td-label { color: var(--white); font-weight: 600; }
+
+    /* Barème disciplinaire — table dense */
+    .doc-annexe-legend { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0 2.5rem 0; }
+    .doc-annexe-legend-item { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.25rem; }
+    .doc-annexe-legend-item h5 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+    .doc-annexe-legend-item p { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 0; }
+
+    .doc-cat-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 0.05em; color: var(--white); margin-top: 2.5rem; margin-bottom: 0.25rem; }
+    .doc-cat-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+
+    .bareme-table-wrap { overflow-x: auto; margin-bottom: 1.5rem; border: 1px solid var(--border); border-radius: 8px; }
+    .bareme-table { width: 100%; min-width: 760px; border-collapse: collapse; font-size: 0.78rem; }
+    .bareme-table th { background: rgba(232,0,29,0.08); color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.02em; text-align: left; padding: 0.65rem 0.9rem; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    .bareme-table td { padding: 0.65rem 0.9rem; color: var(--muted); line-height: 1.5; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .bareme-table td:first-child { color: var(--white); font-weight: 500; min-width: 220px; }
+    .bareme-table tr:last-child td { border-bottom: none; }
+    .bareme-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .doc-example { background: rgba(240,180,41,0.07); border: 1px solid rgba(240,180,41,0.2); border-left: 4px solid var(--gold); border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0; }
+    .doc-example p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0; }
+    .doc-example p strong { color: var(--gold); }
+
+    .doc-toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin: 0 auto 2.5rem auto; }
+
+    .doc-back { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+    .doc-back:hover { color: var(--red); }
+
+    .doc-closing { margin: 3rem auto 0 auto; padding: 1.75rem 2rem; background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 6px; }
+    .doc-closing p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    .doc-notes { margin-top: 1rem; }
+    .doc-notes li { margin-bottom: 0.9rem; }
+    .doc-notes li strong { color: var(--white); }
+
+    @media (max-width: 700px) {
+      .doc-annexe-legend { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Document officiel</div>
+        <h1>Règlement <em>Disciplinaire</em></h1>
+        <p class="hero-sub">Département Inspection générale de l'ICR : procédure disciplinaire et barème des manquements applicables aux membres de Meylan Handball TV.</p>
+      </div>
+    </div>
+    <section class="section">
+      <div class="doc-toolbar">
+        <a href="statuts.html" class="doc-back">← Retour aux statuts &amp; règlements</a>
+      </div>
+      <div class="doc-meta">
+        <span>Version du <strong>2 octobre 2026</strong></span>
+        <span>20 articles</span>
+        <span>Annexe : barème des manquements</span>
+      </div>
+      <div class="doc-body">
+<div class="doc-titre">Titre I — Le Département de l'Inspection générale</div>
+<div class="doc-article">
+  <h3>Article 1 — Création et mission</h3>
+  <p><strong>Le Département de l'Inspection générale</strong> est l'organe par lequel l'ICR exerce son pouvoir disciplinaire et veille au respect des statuts et règlements de Meylan Handball TV.</p>
+  <p>Le Département reçoit les signalements, fait enquêter, prononce les sanctions et conduit des missions de contrôle. Les autres compétences de l'ICR, notamment la planification et l'accréditation, ne relèvent pas du Département de l'Inspection générale.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 2 — Composition et suppléance</h3>
+  <p>Le Département de l'Inspection générale est composé de 3 membres :</p>
+  <ul>
+    <li>le chef de département de l'Inspection générale, qui <strong>préside</strong> ;</li>
+    <li>les <strong>2 chefs de département de l'ICR</strong> (Inspection générale ; Gestion et Planification des Diffusions ; Officiels de Retransmission), membres de droit pour la durée de leur mandat ;</li>
+    <li><strong>Un membre de la Coordination générale</strong></li>
+  </ul>
+  <p>Un chef de département absent, empêché ou déporté est remplacé par son adjoint pour l'affaire concernée. Le membre de la Coordination générale absent, empêché ou déporté est remplacé par un autre membre de celle-ci désigné par la Coordination générale. Le BIG ne siège valablement qu'à trois membres et décide à la majorité.</p><p>La perte de la qualité de chef de département ou de membre de la Coordination générale met fin de plein droit à la fonction au BIG.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 3 — Indépendance et déport</h3>
+  <p>Dans le traitement d'une affaire, l'Inspection générale ne reçoit aucune instruction, ni de l'ICR dans ses autres attributions, ni de la Coordination générale. Ses membres sont tenus à la confidentialité des dossiers.</p>
+  <p>Tout membre du Département en situation de conflit d'intérêts (lien familial, amical ou hiérarchique, litige personnel, qualité de partie, de témoin ou de personne mise en cause, décision de planification ou d'accréditation prise par lui et à l'origine de l'affaire) se déporte sans délai et est remplacé selon l'article 2. La personne mise en cause peut demander la récusation d'un membre par écrit motivé ; les deux autres membres tranchent. Un membre déporté ne participe à aucun acte relatif à l'affaire.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 4 — Compétence</h3>
+  <p>Relèvent du Département les manquements aux statuts et règlements, aux décisions des instances, aux obligations de loyauté, de respect et d'éthique, à l'intégrité des processus électoraux et à l'image et aux intérêts du collectif.</p>
+  <p>Peut être poursuivi tout membre actif ou occasionnel, tout membre d'une instance (y compris de la Coordination générale, de l'ICR et du Département lui-même) et tout représentant agissant au nom de MHBTV. Le membre du Département mis en cause est remplacé pour l'affaire selon l'article 2.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 5 — Missions de contrôle et rapport annuel</h3>
+  <p>Le Département de l'Inspection générale peut, de sa propre initiative ou à la demande de la Coordination générale, conduire :</p>
+  <ul>
+    <li>des <strong>inspections de retransmission</strong> (accréditations, gilets, matériel, conformité au conducteur et à la charte graphique) ;</li>
+    <li>des <strong>audits</strong> du matériel, des accès aux outils numériques et des registres internes ;</li>
+    <li>des <strong>missions de prévention</strong> : rappels réglementaires, recommandations.</li>
+  </ul>
+  <p>Une inspection constatant un manquement peut conduire à l'auto-saisine du Département. Chaque saison, le·la président·e du Département de l'Inspection générale présente à l'Assemblée générale un <strong>rapport annuel</strong> anonymisé : nombre de signalements, décisions, délais, recommandations.</p>
+</div>
+        
+<div class="doc-titre">Titre II — Principes et comportements proscrits</div>
+<div class="doc-article">
+  <h3>Article 6 — Principes de la procédure</h3>
+  <p>Toute procédure devant le Département respecte le principe du contradictoire, le droit à l'information, le droit à la défense, l'impartialité, la proportionnalité et la motivation écrite des décisions. Aucune décision défavorable n'est prise sans que la personne concernée ait pu présenter ses observations.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 7 — Comportements proscrits</h3>
+  <p>Sont proscrits, et classés par gravité à l'annexe, les manquements relevant des huit catégories suivantes :</p>
+    <ul>
+      <li>I — présence, ponctualité et engagement ;</li>
+      <li>II — accréditation, rôles et identité opérationnelle ;</li>
+      <li>III — production, qualité technique et éditorial ;</li>
+      <li>IV — matériel, équipements et ressources ;</li>
+      <li>V — image du collectif et représentation externe ;</li>
+      <li>VI — droits de diffusion, données personnelles et confidentialité ;</li>
+      <li>VII — vie interne et relations entre membres ;</li>
+      <li>VIII — responsabilités, gouvernance et atteintes à l'Inspection.</li>
+    </ul>    
+</div>
+        
+<div class="doc-titre">Titre III — Signalement et examen préliminaire</div>
+<div class="doc-article">
+  <h3>Article 8 — Signalement et prescription</h3>
+  <p>Tout signalement est adressé <strong>directement au Département</strong>, point d'entrée unique, par le formulaire du site interne ou par écrit. Il est circonstancié et accompagné des éléments utiles. Le Département en accuse réception. Les signalements anonymes sont irrecevables, sauf auto-saisine du Département sur des éléments matériels qu'il a lui-même constatés.</p>
+  <p>Les faits se prescrivent par <strong>4 mois</strong> à compter de leur découverte ; 3 ans pour les faits de harcèlement, de violence ou de discrimination.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 9 — Examen préliminaire</h3>
+  <p>Dans un délai de 3 jours, le Département examine la recevabilité et la qualification des faits, et prend l'une des décisions suivantes, motivée et notifiée à l'auteur·e du signalement :</p>
+  <div class="doc-table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr>
+          <th>Décision</th>
+          <th>Effets</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="doc-td-label">Classement</td>
+          <td>Signalement irrecevable (infondé, abusif, malveillant, hors délai) ou faits non établis ni sanctionnables. Aucune suite.</td>
+        </tr>
+        <tr>
+          <td class="doc-td-label">Procédure simplifiée</td>
+          <td>Faits établis de classe 1 (annexe) : traitement par le Département selon l'article 10.</td>
+        </tr>
+        <tr>
+          <td class="doc-td-label">Ouverture de la procédure complète</td>
+          <td>Faits de classe 2 à 4 ou contestés.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Les signalements abusifs ou malveillants établis peuvent eux-mêmes être poursuivis.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 10 — Procédure simplifiée</h3>
+  <p>La personne mise en cause est informée par écrit des faits et dispose de 3 jours pour présenter ses observations. Le Département peut alors prononcer un <strong>avertissement</strong> ou un <strong>blâme</strong>, ou classer.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 11 — Mesures conservatoires</h3>
+  <p>En cas de risque pour une personne, pour le matériel ou pour une retransmission, le Département peut ordonner par décision motivée un retrait de poste, une suspension d'accès aux outils ou un retrait provisoire d'accréditation. La mesure dure 7 jours au plus, renouvelable une fois par décision motivée. Elle n'est pas une sanction et se déduit de la sanction éventuelle.</p>
+</div>
+        
+<div class="doc-titre">Titre IV — L'Inspection générale</div>
+<div class="doc-article">
+  <h3>Article 14 — Séance</h3>
+  <p>Le Département se réunit en visioconférence dans un délai de 15 jours après l'ouverture de la procédure complète, pour motif sérieux. Il entend le rapport, puis la personne mise en cause, puis les témoins utiles ; la personne mise en cause a la parole en dernier. Si elle ne se présente pas malgré une convocation régulière, le Département peut statuer en son absence après un report unique.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 15 — Délibération et notification</h3>
+  <p>Le Département délibère à huis clos le jour même. Il décide à la majorité ; l'<strong>exclusion définitive</strong> requiert l'unanimité. Les délibérations sont confidentielles. La décision, écrite et motivée, est transmise à la Coordination générale le lendemain et notifiée aux parties sous 2 jours. Aucune communication n'intervient avant ces délais.</p>
+</div>
+<div class="doc-article">
+  <h3>Article 16 — Sanctions et modulation</h3>
+  <p>Les sanctions sont, par gravité croissante : <strong>l'avertissement, le blâme, la suspension temporaire de retransmission, la suspension saison, l'exclusion temporaire, l'exclusion définitive</strong>. Elles peuvent être assorties des sanctions accessoires de l'annexe (retrait d'accréditation, inéligibilité à la Coordination générale, retrait du droit de vote, formation obligatoire, période probatoire, remboursement). Le retrait d'accréditation prononcé par le Département est mis en œuvre par l'ICR.</p>
+  <p>La sanction est choisie dans le barème de l'annexe selon la classe du manquement et les circonstances retenues, de manière proportionnée. Le Département peut classer sans suite par décision motivée.</p>
+</div>
+        
+<div class="doc-titre">Titre VI — Recours</div>
+<div class="doc-article">
+  <h3>Article 17 — Appel</h3>
+  <p>Toute sanction peut être contestée par écrit motivé dans les 5 jours de sa notification, devant le <strong>Département siégeant en formation d'appel</strong>. Les motifs admis sont le vice de procédure, l'erreur d'appréciation, la disproportion et la méconnaissance des textes.</p><p>L'appel n'est pas suspensif ; la personne sanctionnée peut demander la suspension provisoire de la sanction. La formation d'appel statue dans les 7 jours de l'appel ; elle peut confirmer, réduire ou annuler la sanction ou annuler la procédure en cas de vice substantiel ; <strong>elle ne peut pas aggraver la sanction</strong>. Sa décision, motivée, est notifiée sous 2 jours et définitive. L'appel ne peut être exercé qu'une fois par affaire.</p>
+</div>
+        
+<div class="doc-titre">Titre VII — Dispositions finales</div>
+<div class="doc-article">
+  <h3>Article 18 — Modification et entrée en vigueur</h3>
+  <p>Le présent règlement ne peut être modifié que par l'Assemblée générale, sur proposition de la Coordination générale ou du Département. La Coordination générale peut procéder seule aux modifications purement formelles.</p>
+</div>
+        
+<div class="doc-titre">Annexe — Barème des manquements</div>
+<p>Les manquements sont répartis en <strong>quatre classes de gravité</strong>. Les circonstances retenues (art. 16) déterminent le palier ; toute circonstance aggravante avérée impose au minimum le palier 2.</p>
+<div class="doc-table-wrap">
+  <table class="doc-table">
+    <thead>
+      <tr>
+        <th>Classe</th>
+        <th>Palier 1 — sans circonstance aggravante</th>
+        <th>Palier 2 — circonstance(s) aggravante(s)</th>
+        <th>Palier 3 — très aggravante(s)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="doc-td-label">1 — Léger</td>
+        <td>Avertissement</td>
+        <td>Blâme</td>
+        <td>Suspension 2 retransmissions</td>
+      </tr>
+      <tr>
+        <td class="doc-td-label">2 — Sérieux</td>
+        <td>Blâme</td>
+        <td>Suspension 3 retransmissions (+ formation si accréditation)</td>
+        <td>Suspension 5 retransmissions + retrait d'accréditation 1 mois</td>
+      </tr>
+      <tr>
+        <td class="doc-td-label">3 — Grave</td>
+        <td>Suspension 4 retransmissions</td>
+        <td>Suspension saison + inéligibilité CG 1 an</td>
+        <td>Exclusion temporaire + inéligibilité CG 2 ans</td>
+      </tr>
+      <tr>
+        <td class="doc-td-label">4 — Très grave</td>
+        <td>Exclusion temporaire + retrait d'accréditation + inéligibilité CG 2 ans</td>
+        <td>Exclusion définitive</td>
+        <td>Exclusion définitive</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+        
+<div class="doc-article"><h5>Classe 1 — Léger</h5></div>
+  <ul>
+    <li>Retard injustifié (> 5 min) ou absence à une réunion interne obligatoire ; absence justifiée sans prévenir 24 h avant ;</li>
+    <li>Non-port du gilet MHBTV ; non-respect des procédures de rangement ou de retour du matériel ;</li>
+    <li>Qualité image/son négligée ; non-intégration des éléments graphiques ; effets ou habillage non validés ; non-déclaration d'un incident ;</li>
+    <li>Moqueries ou comportement irrespectueux envers un membre, le public ou un officiel ; refus de coopérer ; ostracisme, conflit ouvert ; non-réponse aux convocations.</li>
+  </ul>
+<div class="doc-article"><h5>Classe 2 — Sérieux</h5></div>
+  <ul>
+    <li>Absence non justifiée à une retransmission ; retards répétés (3 ou plus) ; participation passive volontaire ;</li>
+    <li>Poste sans accréditation valide ; délégation de rôle non autorisée ; refus d'une consigne du responsable de retransmission ; usurpation de rôle ou de badge ;</li>
+    <li>Coupure du direct par négligence ; perte ou dégradation de matériel par négligence ; usage personnel ou prêt non autorisé du matériel ;</li>
+    <li>Propos inappropriés, polémiques ou dénigrants en direct ; propos dénigrants, fausses informations ou contacts non autorisés avec partenaires au nom du collectif ;</li>
+    <li>Retransmission non autorisée ; enregistrement d'une réunion interne ; publication de photos ou vidéos sans consentement ; favoritisme ou rétention d'information.</li>
+  </ul>
+<div class="doc-article"><h5>Classe 3 — Grave</h5></div>
+  <ul>
+    <li>Abandon de poste ; désistements de dernière minute répétés ; falsification d'accréditation ;</li>
+    <li>Dégradation volontaire de matériel ; partage d'identifiants ; suppression non autorisée de fichiers ou d'archives ; création d'un compte imitant le collectif ;</li>
+    <li>Révélation d'informations confidentielles en direct ; propos ou attitudes discriminatoires entre membres ;</li><li>Harcèlement moral, cyberharcèlement, violence psychologique ; abus de position hiérarchique ou inaction délibérée d'un responsable ;</li>
+    <li>Contact avec le BIG ou sollicitation de témoins pour influer sur une procédure ; fausse déclaration, faux témoignage, non-respect d'une sanction.</li>
+  </ul>
+<div class="doc-article"><h5>Classe 4 — Très grave</h5></div>
+  <ul>
+    <li>Propos discriminatoires en direct ; harcèlement sexuel ; violences physiques ou menaces ;</li>
+    <li>Détournement de ressources ou d'équipements à profit personnel ; tentative d'intimidation ou de pression sur un membre du BIG.</li>
+  </ul>
+<div class="doc-article"><h5>Circonstances</h5></div>
+  <ul>
+    <li><strong>Atténuantes</strong> (le BIG peut retenir le palier inférieur, jamais en classe 4) : absence d'antécédents ; reconnaissance spontanée des faits ; coopération avec l'enquête ; excuses acceptées avant saisine ; comportement irréprochable sur deux saisons.</li>
+    <li><strong>Aggravantes</strong> : victime officielle ; faits après avertissement ; atteinte avérée à l'image du collectif ; abus d'autorité ; faits d'une personne investie de responsabilités ; perturbation ou interruption d'une retransmission ; mise en danger ; présence de mineurs ou de personnes en formation.</li>
+    <li><strong>Très aggravantes</strong> : récidive répétée (3 fois ou plus) ; victime mineure ou vulnérable ; préméditation ou action concertée ; faits ayant entraîné le départ d'un membre ; refus de se conformer aux décisions ; atteinte directe aux instances ; plainte externe ou médiatisation.</li>
+  </ul>
+<div class="doc-article"><h5>Dispositions générales</h5></div>
+  <ul>
+    <li><strong>Récidive</strong> : une nouvelle faute de même classe dans la saison relève au minimum du palier supérieur.</li>
+    <li><strong>Cumul</strong> : trois avertissements, deux blâmes ou deux suspensions dans la saison entraînent la sanction du palier supérieur de la classe 2 ; des fautes multiples lors d'un même événement conduisent à la sanction la plus lourde, majorable.</li>
+    <li><strong>Accessoires</strong> : l'inéligibilité à la CG, le retrait du droit de vote en AG, le retrait d'accréditation (nouveau questionnaire requis au retour), la formation obligatoire (module défini par la Coordination générale), la période probatoire (tout nouveau manquement relève alors du palier 3) et le remboursement du préjudice réel sur inventaire sont fixés par le BIG dans la limite du barème.</li>
+  </ul>
+</div>
+</section>
+</main>
+
+  <script src="footer.js"></script>
+</body>
+</html>

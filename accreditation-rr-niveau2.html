@@ -293,9 +293,9 @@
     <div class="hero">
       <div class="hero-accent"></div>
       <div class="hero-content">
-        <div class="hero-eyebrow">Accréditation Niveau 2</div>
+        <div class="hero-eyebrow">Accréditation Niveau 1</div>
         <h1>Certificat de <em>Responsable de retransmission</em></h1>
-        <p class="hero-sub">Questionnaire d'accréditation conditionnant le passage du grade de Responsable de Retransmission Stagiaire (RRS) au grade de Responsable de Retransmission (RR) Titulaire.</p>
+        <p class="hero-sub">Questionnaire d'accréditation conditionnant le passage au titre de Responsable de Retransmission.</p>
       </div>
     </div>
 
@@ -305,21 +305,21 @@
       </div>
 
       <div class="doc-meta">
-        <span>Certificat <strong>Niveau 2</strong></span>
+        <span>Certificat <strong>Niveau 1</strong></span>
         <span id="meta-question-count">14 questions</span>
-        <span>Seuil de réussite : <strong>12/20</strong></span>
+        <span>Seuil de réussite : <strong>10/20</strong></span>
       </div>
 
       <div class="doc-preamble">
         <h4>À propos de ce certificat</h4>
-        <p>Ce QCM porte sur les pouvoirs propres au grade Responsable de Retransmission (Art. 13.2 — Grade II), sur les procédures en cas d'incident lors d'un direct (articles 16 à 22 du Règlement applicable aux retransmissions des compétitions), ainsi que sur les conditions d'accès au grade RR.</p>
-        <p>La réussite de ce questionnaire, combinée aux conditions cumulatives de l'article 13.2 (trois retransmissions réalisées en autonomie dans des conditions satisfaisantes et absence de sanction disciplinaire active dans les douze derniers mois), conditionne l'attribution du grade de <strong>Responsable de Retransmission (RR)</strong>.</p>
+        <p>Ce QCM porte sur les pouvoirs propres au grade Responsable de Retransmission, sur les procédures en cas d'incident lors d'un direct, ainsi que sur les conditions d'accès au titre de RR.</p>
+        <p>La réussite de ce questionnaire, combinée aux conditions cumulatives nécessaires, conditionne l'attribution du titre de <strong>Responsable de Retransmission (RR)</strong>.</p>
       </div>
 
       <div class="honor-card">
         <h4>Engagement sur l'honneur</h4>
         <p>Ce questionnaire fonctionne en autonomie, sans surveillance directe. <strong>La Coordination générale fait confiance à ses membres.</strong></p>
-        <p>Il appartient au candidat de transmettre lui-même sa note à l'Instance Compétente des Retransmissions (ICR) s'il obtient une note finale <strong>égale ou supérieure à 12/20</strong>.</p>
+        <p>Il appartient au candidat de transmettre lui-même sa note à l'Instance Compétente des Retransmissions (ICR) s'il obtient une note finale <strong>égale ou supérieure à 10/20</strong>.</p>
       </div>
 
       <!-- ============================================================ -->
@@ -331,31 +331,31 @@
       <!--   article    : référence réglementaire affichée en correction -->
       <!-- ============================================================ -->
       <script>
-        const QUIZ_TITLE = "Certificat Niveau 2";
-        const PASS_THRESHOLD_20 = 12;
+        const QUIZ_TITLE = "Certificat Niveau 1";
+        const PASS_THRESHOLD_20 = 10;
 
         const QUESTIONS = [
           {
-            question: "Un titulaire du grade RR peut-il exercer une autorité autonome sur le dispositif technique pour une production multiplex ?",
+            question: "Quel est le signe distinctif obligatoire que doit porter le responsable de retransmission pendant toute la durée de l'événement (installation, retransmission, rangement) ?",
             options: [
-              "Oui, sans restriction",
-              "Non — il ne dispose d'aucune autorité sur l'affectation des équipes lors des productions multiplex",
-              "Oui, mais seulement si un SDOR est absent",
-              "Non, il ne peut intervenir sur aucune production"
-            ],
-            answer: 1,
-            article: "Art. 13.2 — Grade II (RR)"
-          },
-          {
-            question: "Pour quels niveaux de production (Article 14) le RR exerce-t-il une autorité autonome sur le dispositif technique ?",
-            options: [
-              "Niveaux 2 et 3",
-              "Niveau 1 uniquement",
-              "Tous les niveaux, y compris multiplex",
-              "Aucun, il reste toujours sous supervision"
+              "Un badge avec son titre",
+              "Un gilet portant le logo du collectif",
+              "Une accréditation papier visible",
+              "Aucun signe n'est obligatoire"
             ],
             answer: 0,
-            article: "Art. 13.2 — Grade II (RR)"
+            article: ""
+          },
+          {
+            question: "Le responsable de retransmission dispose-t-il d'une autorité disciplinaire ?",
+            options: [
+              "Oui, sur l'ensemble de l'équipe présente",
+              "Non, mais il dispose d'une autorité fonctionnelle pour assurer le bon déroulement de la retransmission",
+              "Oui, mais uniquement envers les stagiaires",
+              "Non, il n'a aucune autorité, même fonctionnelle"
+            ],
+            answer: 0,
+            article: ""
           },
           {
             question: "Le responsable de retransmission peut-il décider seul de l'interruption définitive d'un direct en cas de panne technique majeure ?",
@@ -366,18 +366,18 @@
               "Non, seul le Bureau peut en décider"
             ],
             answer: 1,
-            article: "Art. 16"
+            article: ""
           },
           {
-            question: "En cas d'urgence absolue nécessitant une interruption immédiate du direct, que peut faire le responsable de retransmission ?",
+            question: "Quel est l'effectif minimum requis par l'Article 15 pour démarrer une retransmission ?",
             options: [
-              "Rien, il doit attendre l'autorisation du Coordinateur adjoint",
-              "Procéder à une suspension provisoire sans autorisation préalable, puis en informer sans délai le Coordinateur adjoint",
-              "Contacter uniquement l'ICR",
-              "Couper la diffusion et ne rendre compte qu'en fin de saison"
+              "Un responsable et un opérateur caméra uniquement",
+              "Deux responsables de retransmission",
+              "Un responsable, un opérateur caméra, un commentateur (ou dispositif sans commentaire validé)",
+              "Un responsable, deux opérateurs caméra, un commentateur"
             ],
-            answer: 1,
-            article: "Art. 16"
+            answer: 2,
+            article: ""
           },
           {
             question: "Que doit faire le responsable de retransmission face à une demande d'arrêt de diffusion émanant du corps arbitral ?",
@@ -388,18 +388,18 @@
               "Transmettre la demande à l'ICR et attendre sa décision avant d'agir"
             ],
             answer: 1,
-            article: "Art. 17"
+            article: ""
           },
           {
             question: "Un ballon endommage le matériel de diffusion pendant le jeu. Le responsable de retransmission doit-il obtenir une autorisation avant de sécuriser la zone ?",
             options: [
               "Oui, il doit attendre l'aval du Coordinateur adjoint",
-              "Non, la sécurisation de la zone et des personnes est immédiate, sans autorisation préalable requise",
-              "Oui, il doit d'abord contacter l'ICR",
+              "Non, la sécurisation de la zone et des personnes est immédiate, sans autorisation requise",
+              "Oui, il doit d'abord contacter l'ICR avant d'agir",
               "Non, mais il doit filmer les dégâts avant d'intervenir"
             ],
             answer: 1,
-            article: "Art. 19"
+            article: ""
           },
           {
             question: "La décision de ne pas reprendre la retransmission après des dommages matériels constatés est-elle libre pour le responsable de retransmission ?",
@@ -410,7 +410,7 @@
               "Oui, à condition d'en informer l'ICR dans les 48h"
             ],
             answer: 1,
-            article: "Art. 19"
+            article: ""
           },
           {
             question: "Lors d'une urgence médicale concernant un joueur, quelle est la toute première priorité du membre du collectif présent ?",
@@ -421,7 +421,7 @@
               "Couper le direct pour éviter de filmer la scène"
             ],
             answer: 1,
-            article: "Art. 20"
+            article: ""
           },
           {
             question: "Une image d'une personne en situation de détresse médicale peut-elle être diffusée ou archivée ?",
@@ -432,7 +432,7 @@
               "Non, sauf autorisation du Bureau"
             ],
             answer: 1,
-            article: "Art. 20"
+            article: ""
           },
           {
             question: "En cas de coupure de réseau pendant un direct, de combien de temps dispose le responsable de retransmission pour tenter un rétablissement avant que l'interruption soit officiellement constatée ?",
@@ -443,7 +443,7 @@
               "Il n'y a pas de délai fixé"
             ],
             answer: 1,
-            article: "Art. 21"
+            article: ""
           },
           {
             question: "En cas de coupure d'alimentation électrique, à partir de quel délai (ou en cas de délai indéterminé) la retransmission est-elle considérée comme officiellement interrompue ?",
@@ -454,7 +454,7 @@
               "30 minutes"
             ],
             answer: 2,
-            article: "Art. 21"
+            article: ""
           },
           {
             question: "En cas d'intrusion non autorisée dans l'espace de retransmission, comment le responsable de retransmission doit-il réagir en priorité ?",
@@ -465,29 +465,29 @@
               "Ignorer la situation tant que la sécurité n'est pas menacée"
             ],
             answer: 1,
-            article: "Art. 22"
+            article: ""
           },
           {
-            question: "Quelle mission supplémentaire, propre au grade RR (par rapport au RRS), consiste à encadrer d'autres membres ?",
+            question: "Quelle mission supplémentaire, propre au grade RR (par rapport au stagiaires), consiste à encadrer d'autres membres ?",
             options: [
               "Le RR n'encadre personne, il reste seul responsable de son poste",
               "Le RR peut encadrer un ou plusieurs RRS et leur confier des tâches d'exécution définies",
               "Le RR encadre uniquement d'autres RR",
-              "Seul le SDOR peut encadrer un stagiaire"
+              "Seul le réalisateur peut encadrer un stagiaire"
             ],
             answer: 1,
-            article: "Art. 13.2 — Grade II (RR)"
+            article: ""
           },
           {
             question: "Le RR peut-il solliciter directement le Bureau pour le prêt de matériel additionnel en vue d'une retransmission donnée ?",
             options: [
-              "Non, il doit passer par le SDOR",
-              "Oui, c'est une prérogative propre à son grade",
-              "Non, seul le DOR peut faire cette démarche",
+              "Non, il doit passer par le Chef de département Officiels de Retransmission ou son adjoint",
+              "Oui, c'est une prérogative propre à son titre",
+              "Non, seul le Coordinateur adjoint peut faire cette démarche",
               "Oui, mais uniquement pour les productions multiplex"
             ],
             answer: 1,
-            article: "Art. 13.2 — Grade II (RR)"
+            article: ""
           }
         ];
       </script>
@@ -519,7 +519,7 @@
         <div id="results-verdict-holder"></div>
 
         <div class="results-honor">
-          <p><strong>Rappel :</strong> si votre note finale est égale ou supérieure à 12/20, il vous appartient de la transmettre vous-même à l'Instance Compétente des Retransmissions (ICR) afin de faire valider votre passage au grade de Responsable de Retransmission.</p>
+          <p><strong>Rappel :</strong> si votre note finale est égale ou supérieure à 10/20, il vous appartient de la transmettre vous-même à l'Instance Compétente des Retransmissions (ICR) afin de faire valider votre passage au grade de Responsable de Retransmission.</p>
           <p>La Coordination générale fait confiance à ses membres pour la sincérité de cette démarche.</p>
         </div>
 

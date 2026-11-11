@@ -262,83 +262,185 @@
   </table>
 </div>
         
-<div class="doc-article"><h5>Classe 1 — Léger</h5></div>
+<style>
+  .bareme-table td.ref { min-width: 0; white-space: nowrap; color: var(--gold); font-weight: 700; }
+  .bareme-table td.cl { min-width: 0; white-space: nowrap; font-weight: 700; color: var(--white); text-align: center; }
+  .bareme-table td.cl3 { color: var(--gold); }
+  .bareme-table td.cl4 { color: var(--red); }
+  .bareme-table th.cl { text-align: center; }
+  .bareme-table td.faute { color: var(--muted); font-weight: 400; }
+  .bareme-table td em { color: var(--gold); font-style: normal; font-size: 0.72rem; }
+</style>
+
+<div class="doc-article"><h5>Liste des manquements par catégorie</h5>
+  <p>Chaque manquement porte une <strong>référence</strong> (catégorie de l'article 7, puis numéro) et une <strong>classe</strong> de gravité (1 à 4), à laquelle s'applique le barème ci-dessus. Les références sont stables : un numéro supprimé n'est pas réattribué.</p>
+</div>
+
+<div class="doc-cat-title">I — Présence, ponctualité et engagement</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">I-01</td><td class="faute">Absence justifiée, prévenue entre 24h et 48h (72h sur poste critique), sans remplaçant proposé</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">I-02</td><td class="faute">Absence justifiée, prévenue moins de 24h, motif légitime mais non prouvé ou tardif</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">I-03</td><td class="faute">Désistement de dernière minute (moins de 24h) sans motif légitime <em>(classe 3 sur poste critique)</em></td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">I-04</td><td class="faute">Désistement de dernière minute ayant entraîné l'annulation ou une retransmission dégradée</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">I-07</td><td class="faute">Désistements de dernière minute ou absences non justifiées répétés (2 ou plus sur la saison)</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">I-09</td><td class="faute">Départ anticipé avant la fin du bilan post-retransmission</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">I-10</td><td class="faute">Abandon de poste en cours de retransmission, poste secondaire</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">I-11</td><td class="faute">Abandon de poste en cours de retransmission, poste majeur ou critique</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">I-13</td><td class="faute">Retard injustifié de plus de 5 min entraînant un démarrage tardif de la retransmission</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">I-14</td><td class="faute">Retard de plus de 30 min sur un poste majeur ou critique</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">I-15</td><td class="faute">Retards injustifiés répétés (3 occurrences ou plus sur la saison)</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">I-16</td><td class="faute">Absence non justifiée à une réunion, un bilan ou une session obligatoire</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">I-17</td><td class="faute">Absence non justifiée à une formation obligatoire</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">I-18</td><td class="faute">Faux motif d'absence ou justificatif falsifié</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">I-19</td><td class="faute">Participation passive et volontaire lors d'une retransmission</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">I-20</td><td class="faute">Consommation d'alcool ou de substances avant ou pendant une retransmission</td><td class="cl cl2">2</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-title">II — Accréditation, rôles et identité opérationnelle</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">II-01</td><td class="faute">Non-port du gilet identifié MHBTV pendant la durée complète de l'événement</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">II-02</td><td class="faute">Changement de poste sans accord</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">II-03</td><td class="faute">Occupation d'un poste sans accréditation valide <em>(classe 3 sur poste critique)</em></td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">II-04</td><td class="faute">Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">II-05</td><td class="faute">Falsification d'une accréditation ou d'un questionnaire d'aptitude</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">II-06</td><td class="faute">Usurpation de rôle ou d'identité lors d'une retransmission</td><td class="cl cl4">4</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-title">III — Production, qualité technique et éditorial</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">III-01</td><td class="faute">Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé…)</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">III-02</td><td class="faute">Coupure intempestive du direct causée par une négligence technique évitable</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">III-03</td><td class="faute">Non-vérification du matériel avant la retransmission entraînant un dysfonctionnement</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">III-04</td><td class="faute">Non-respect du conducteur ou du plan de retransmission</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">III-05</td><td class="faute">Non-déclaration d'un incident technique, comportemental ou matériel constaté lors d'un événement</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">III-06</td><td class="faute">Utilisation non autorisée d'effets, filtres, overlays ou incrustations non validés</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">III-07</td><td class="faute">Intervention non autorisée d'une personne extérieure pendant une retransmission en direct</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">III-08</td><td class="faute">Introduction de personnes non autorisées dans les espaces du collectif pendant une retransmission</td><td class="cl cl1">1</td></tr>
+<tr><td class="ref">III-09</td><td class="faute">Modification ou suppression non autorisée du générique, de l'habillage graphique ou du jingle officiel</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">III-10</td><td class="faute">Propos inappropriés en direct (insultes, humour déplacé, hors-sujet, irrespectueux)</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">III-11</td><td class="faute">Prise de position polémique, partisane ou politique en direct sans lien avec la retransmission</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">III-12</td><td class="faute">Dénigrement public d'un membre du collectif, du club ou d'un adversaire en direct</td><td class="cl cl4">4</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-title">IV — Matériel, équipements et ressources</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">IV-01</td><td class="faute">Non-respect des procédures d'utilisation ou de rangement, non-retour du matériel dans les délais</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">IV-02</td><td class="faute">Utilisation du matériel à des fins personnelles sans autorisation, ou prêt non autorisé à un tiers</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">IV-03</td><td class="faute">Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie…)</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">IV-04</td><td class="faute">Perte de matériel lors d'un déplacement sans signalement immédiat</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">IV-05</td><td class="faute">Dégradation volontaire de matériel ou d'équipements du collectif</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">IV-06</td><td class="faute">Détournement à profit personnel de ressources ou d'équipements du collectif</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">IV-07</td><td class="faute">Suppression non autorisée de fichiers, archives ou projets du collectif</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">IV-08</td><td class="faute">Accès non autorisé ou partage d'identifiants et mots de passe des comptes et outils du collectif</td><td class="cl cl3">3</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-title">V — Image du collectif et représentation externe</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">V-01</td><td class="faute">Utilisation du nom, du logo ou de l'identité visuelle MHBTV à des fins personnelles sans autorisation</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">V-02</td><td class="faute">Publication, modification ou suppression non autorisée de contenus au nom ou sous l'identité du collectif</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">V-03</td><td class="faute">Prise de parole publique au nom du collectif sans mandat, ou partage de contenus attentatoires à son image</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">V-04</td><td class="faute">Création d'un compte ou d'une page imitant le collectif ou l'un de ses membres</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">V-05</td><td class="faute">Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">V-06</td><td class="faute">Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux sociaux, espace public)</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">V-07</td><td class="faute">Diffusion de fausses informations concernant le collectif ou ses membres</td><td class="cl cl4">4</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-title">VI — Droits de diffusion, données personnelles et confidentialité</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">VI-01</td><td class="faute">Retransmission non autorisée d'un événement privé ou protégé par des droits de diffusion</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">VI-02</td><td class="faute">Publication de photos ou vidéos de membres sans consentement explicite des personnes concernées</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VI-03</td><td class="faute">Enregistrement non autorisé d'une réunion interne du collectif</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">VI-04</td><td class="faute">Révélation d'informations confidentielles en direct (données internes, privées ou réservées)</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VI-05</td><td class="faute">Partage non autorisé de rushes, archives ou projets internes du collectif à l'extérieur</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VI-06</td><td class="faute">Divulgation d'informations confidentielles internes (décisions, finances, données personnelles) à l'extérieur</td><td class="cl cl4">4</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-title">VII — Vie interne et relations entre membres</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">VII-01</td><td class="faute">Comportement irrespectueux, moqueries ou propos humiliants ou vexatoires envers un membre</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">VII-02</td><td class="faute">Comportement perturbateur lors d'une réunion ou session interne, ou nuisant à la concentration de l'équipe</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">VII-03</td><td class="faute">Refus persistant de coopérer avec un autre membre dans le cadre d'une production</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">VII-04</td><td class="faute">Commentaires blessants ou moqueries publiques envers un membre du collectif</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VII-05</td><td class="faute">Mise à l'écart volontaire d'un membre (ostracisme, exclusion sociale au sein du groupe)</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VII-06</td><td class="faute">Conflit ouvert ou sabotage délibéré de la réputation d'un membre pendant une production ou session</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VII-07</td><td class="faute">Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.), en direct ou non</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">VII-08</td><td class="faute">Cyberharcèlement envers un membre du collectif (messages répétés, intimidation en ligne)</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">VII-09</td><td class="faute">Harcèlement moral répété envers un membre du collectif</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">VII-10</td><td class="faute">Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis)</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">VII-11</td><td class="faute">Violence psychologique, manipulation ou intimidation envers un membre</td><td class="cl cl4">4</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-title">VIII — Responsabilités, gouvernance et atteintes à l'Inspection</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Réf.</th><th>Manquement</th><th class="cl">Classe</th></tr></thead>
+<tbody>
+<tr><td class="ref">VIII-01</td><td class="faute">Conflit d'intérêts non déclaré dans une décision engageant le collectif</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">VIII-02</td><td class="faute">Non-réponse aux convocations ou sollicitations de la Coordination générale dans un délai raisonnable</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">VIII-03</td><td class="faute">Inactivité caractérisée d'un responsable</td><td class="cl cl2">2</td></tr>
+<tr><td class="ref">VIII-04</td><td class="faute">Opacité, refus de rendre compte ou dépense non validée au nom du collectif</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VIII-05</td><td class="faute">Abus de position hiérarchique</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VIII-06</td><td class="faute">Prise de décision engageant le collectif sans mandat, ou non-respect d'une décision collective</td><td class="cl cl3">3</td></tr>
+<tr><td class="ref">VIII-07</td><td class="faute">Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire (ICR)</td><td class="cl cl4">4</td></tr>
+<tr><td class="ref">VIII-08</td><td class="faute">Absence de désignation d'un suppléant sur un poste critique par la personne chargée de l'organisation</td><td class="cl cl2">2</td></tr>
+</tbody></table></div>
+
+<div class="doc-cat-sub">Index par classe</div>
+<div class="bareme-table-wrap"><table class="bareme-table">
+<thead><tr><th>Classe</th><th>Références</th></tr></thead>
+<tbody>
+<tr><td>1 — Léger (11)</td><td>I-01, I-02, I-09, I-13, I-16, II-01, II-02, III-02, III-03, III-04, III-08</td></tr>
+<tr><td>2 — Sérieux (24)</td><td>I-03, I-10, I-14, I-15, I-17, I-19, I-20, II-03, II-04, III-01, III-05, III-06, III-07, IV-01, V-01, V-02, VI-03, VII-01, VII-02, VII-03, VIII-01, VIII-02, VIII-03, VIII-08</td></tr>
+<tr><td>3 — Grave (24)</td><td>I-04, I-07, I-11, I-18, II-05, III-09, III-10, III-11, IV-02, IV-03, IV-04, IV-07, IV-08, V-03, V-05, VI-02, VI-04, VI-05, VII-04, VII-05, VII-06, VIII-04, VIII-05, VIII-06</td></tr>
+<tr><td>4 — Très grave (15)</td><td>II-06, III-12, IV-05, IV-06, V-04, V-06, V-07, VI-01, VI-06, VII-07, VII-08, VII-09, VII-10, VII-11, VIII-07</td></tr>
+</tbody></table></div>
+
+<div class="doc-article"><h5>Postes critiques</h5>
+  <p>Les postes d'une retransmission sont classés en trois niveaux selon l'effet de leur absence sur le direct. Le niveau de chaque poste est fixé pour chaque retransmission par le responsable de retransmission : il dépend de l'événement et non de la personne.</p>
+  <div class="doc-table-wrap">
+    <table class="doc-table">
+      <thead>
+        <tr><th>Niveau</th><th>Critère</th><th>Exemples</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="doc-td-label">Critique</td>
+          <td>Le direct est impossible ou compromis sans ce poste, et il ne peut être tenu sur place dans un délai de 10 minutes.</td>
+          <td>Responsable de retransmission, réalisateur / régie (OBS)</td>
+        </tr>
+        <tr>
+          <td class="doc-td-label">Majeur</td>
+          <td>Le direct reste possible mais est nettement dégradé en l'absence de ce poste.</td>
+          <td>Commentateurs, opérateur score / chrono, caméra principale (plan large)</td>
+        </tr>
+        <tr>
+          <td class="doc-td-label">Secondaire</td>
+          <td>Le poste est substituable sur place et son absence n'a qu'un effet limité sur le direct.</td>
+          <td>Caméras supplémentaires, replay, interviews, photo</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Pour déterminer le niveau d'un poste, le responsable de retransmission se demande : le direct peut-il démarrer sans lui ? quelqu'un d'autre présent sur place peut-il le tenir en moins de 10 minutes sans formation ? le public perçoit-il la différence (image, son, score, commentaire absents) ?</p>
   <ul>
-    <li>Absence non justifiée à une retransmission (tout poste) ;</li>
-    <li>Absence justifiée sans prévenir dans un délai raisonnable (min. 24h) et sans proposer de remplacement ;</li>
-    <li>Retard injustifié entraînant un démarrage tardif de retransmission (> 5 min) ;</li>
-    <li>Non-port du gilet identifié MHBTV obligatoire pendant la durée complète de l'événement ;</li>
-    <li>Qualité image ou son volontairement négligée (flou persistant, micro coupé, larsen non corrigé…) ;</li>
-    <li>Coupure intempestive du direct causée par une négligence technique évitable ;</li>
-    <li>Non-vérification du matériel avant la retransmission entraînant un dysfonctionnement ;</li>
-    <li>Non-respect du conducteur, du plan de retransmission ou changement de poste sans accord ;</li>
-    <li>Consommation d'alcool ou de substances avant ou pendant une retransmission ;</li>
-    <li>Introduction de personnes non autorisées dans les espaces du collectif pendant une retransmission ;</li>
-    <li>Conflit d'intérêts non déclaré dans une décision engageant le collectif.</li>
+    <li>Pour les manquements I-03 et II-03, la classe est majorée d'un cran sur poste critique.</li>
+    <li>La conséquence sur le direct (annulation, interruption) joue sur le palier et non sur la classe : elle ne se cumule pas avec la circonstance aggravante « perturbation ou interruption d'une retransmission » pour un même fait.</li>
+    <li>Un suppléant est désigné pour chaque poste critique avant l'événement ; la présence est confirmée la veille, et la personne arrive 45 minutes avant le début du direct.</li>
   </ul>
-<div class="doc-article"><h5>Classe 2 — Sérieux</h5></div>
-  <ul>
-    <li>Désistement de dernière minute répété :</li>
-    <li>Retard injustifié répété (3 occurrences ou plus sur la saison) ;</li>
-    <li>Participation passive et volontaire lors d'une retransmission ;</li>
-    <li>Occupation d'un poste (responsable de retransmission, commentateur) sans accréditation valide ;</li>
-    <li>Refus d'appliquer une consigne du responsable de retransmission désigné en cours d'événement ;</li>
-    <li>Non-déclaration d'un incident technique, comportemental ou matériel constaté lors d'un événement ;</li>
-    <li>Utilisation non autorisée d'effets, filtres, overlays ou incrustations non validés ;</li>
-    <li>Intervention non autorisée d'une personne extérieure pendant une retransmission en direct ;</li>
-    <li>Non-respect des procédures d'utilisation ou de rangement / non-retour dans les délais ;</li>
-    <li>Accès non autorisé ou partage d'identifiants/mots de passe des comptes et outils du collectif ;</li>
-    <li>Utilisation du nom, du logo ou de l'identité visuelle MHBTV à des fins personnelles sans autorisation ;</li>
-    <li>Publication, modification ou suppression non autorisée de contenus au nom ou sous l'identité du collectif ;</li>
-    <li>Enregistrement non autorisé d'une réunion interne du collectif ;</li>
-    <li>Publication de photos ou vidéos de membres sans consentement explicite des personnes concernées ;</li>
-    <li>Comportement irrespectueux, moqueries ou propos humiliants / vexatoires envers un membre ;</li>
-    <li>Comportement perturbateur lors d'une réunion, session interne ou nuisant à la concentration de l'équipe ;</li>
-    <li>Refus persistant de coopérer avec un autre membre dans le cadre d'une production ;</li>
-    <li>Abus de position hiérarchique ou inactivité caractérisée d'un responsable ;</li>
-    <li>Opacité, refus de rendre compte ou dépense non validée au nom du collectif.</li>
-  </ul>
-<div class="doc-article"><h5>Classe 3 — Grave</h5></div>
-  <ul>
-    <li>Abandon de poste en cours de retransmission sans motif valable ;</li>
-    <li>Départ anticipé non autorisé avant la fin du bilan post-retransmission ;</li>
-    <li>Non-réponse aux convocations ou sollicitations de la Coordination générale dans un délai raisonnable ;</li>
-    <li>Falsification d'une accréditation ou d'un questionnaire d'aptitude ;</li>
-    <li>Modification ou suppression non autorisée du générique, habillage graphique ou jingle officiel ;</li>
-    <li>Propos inappropriés en direct (insultes, humour déplacé, hors-sujet, irrespectueux) ;</li>
-    <li>Prise de position polémique, partisane ou politique en direct sans lien avec la retransmission ;</li>
-    <li>Révélation d'informations confidentielles en direct (données internes, privées ou réservées) ;</li>
-    <li>Utilisation du matériel à des fins personnelles sans autorisation ou prêt non autorisé à un tiers ;</li>
-    <li>Dégradation de matériel par négligence (caméra, micro, câbles, trépied, régie…) ;</li>
-    <li>Suppression non autorisée de fichiers, archives ou projets du collectif ;</li>
-    <li>Partage non autorisé de rushes, archives ou projets internes du collectif à l'extérieur ;</li>
-    <li>Création d'un compte ou d'une page imitant le collectif ou l'un de ses membres ;</li>
-    <li>Prise de parole publique au nom du collectif sans mandat ou partage de contenus attentatoires à son image ;</li>
-    <li>Commentaires blessants ou moqueries publiques envers un membre du collectif ;</li>
-    <li>Retransmission non autorisée d'un événement privé ou protégé par des droits de diffusion ;</li>
-    <li>Mise à l'écart volontaire d'un membre (ostracisme, exclusion sociale au sein du groupe) ;</li>
-    <li>Conflit ouvert ou sabotage délibéré de la réputation d'un membre pendant une production ou session ;</li>
-    <li>Prise de décision engageant le collectif sans mandat, ou non-respect d'une décision collective ;</li>
-    <li>Détournement à profit personnel de ressources ou équipements du collectif.</li>
-  </ul>
-<div class="doc-article"><h5>Classe 4 — Très grave</h5></div>
-  <ul>
-    <li>Usurpation de rôle ou d'identité lors d'une retransmission ;</li>
-    <li>Propos discriminatoires en direct (racisme, sexisme, homophobie, validisme, etc.) ;</li>
-    <li>Dénigrement public d'un membre du collectif, du club ou d'un adversaire en direct ;</li>
-    <li>Perte de matériel lors d'un déplacement sans signalement immédiat ;</li>
-    <li>Dégradation volontaire de matériel ou d'équipements du collectif ;</li>
-    <li>Prise de contact non autorisée avec des partenaires ou sponsors au nom du collectif ;</li>
-    <li>Propos dénigrants ou diffamatoires envers le collectif ou ses membres (réseaux sociaux, espace public) ;</li>
-    <li>Diffusion de fausses informations concernant le collectif ou ses membres ;</li>
-    <li>Cyberharcèlement envers un membre du collectif (messages répétés, intimidation en ligne) ;</li>
-    <li>Divulgation d'informations confidentielles internes (décisions, finances, données personnelles) à l'extérieur ;</li>
-    <li>Propos ou attitudes discriminatoires (racisme, sexisme, homophobie, validisme, etc.) ;</li>
-    <li>Harcèlement moral répété envers un membre du collectif ;</li>
-    <li>Harcèlement sexuel (paroles, gestes, messages à caractère sexuel non consentis) ;</li>
-    <li>Violence psychologique, manipulation ou intimidation envers un membre ;</li>
-    <li>Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire (ICR).</li>
-  </ul>
+</div>
 <div class="doc-article"><h5>Circonstances</h5></div>
   <ul>
     <li><strong>Atténuantes</strong> (le BIG peut retenir le palier inférieur, jamais en classe 4) : absence d'antécédents ; reconnaissance spontanée des faits ; coopération avec l'enquête ; excuses acceptées avant saisine ; comportement irréprochable sur deux saisons.</li>

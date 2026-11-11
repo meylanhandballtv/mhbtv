@@ -284,7 +284,7 @@
       switch(d.statut){
         case"recu":return d.recu?{l:"Décision préliminaire",d:add(d.recu,3)}:null;
         case"simplifiee":return d.info?{l:"Observations du mis en cause",d:add(d.info,3)}:null;
-        case"complete":return d.ouv?{l:"Séance",d:add(d.ouv,15)}:null;
+        case"complete":return d.ouv?{l:"Séance",d:add(d.ouv,3)}:null;
         case"seance":return d.seance?{l:"Notification aux parties",d:add(d.seance,2)}:null;
         case"notifie":return d.notif?{l:"Limite d'appel",d:add(d.notif,5)}:null;
         case"appel":return d.appel?{l:"Décision d'appel",d:add(d.appel,7)}:null;

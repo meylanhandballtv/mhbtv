@@ -80,13 +80,13 @@
 <body>
   <script src="nav.js"></script>
   <main class="page">
-    <div class="restricted-banner"><b>🔒 Accès réservé</b> Document interne destiné aux membres de la Direction de la Coordination Opérationnelle Les dossiers sont confidentiels. Ne pas diffuser sous peine de sanctions.</div>
+    <div class="restricted-banner"><b>🔒 Accès réservé</b> Document interne destiné aux membres de la DCO. Les dossiers sont confidentiels (art. 3). Ne pas diffuser.</div>
 
     <section class="hero-home">
       <div class="hero-content">
         <div class="live-badge">Espace DCO</div>
         <h1>Inspection<em>générale</em></h1>
-        <p>Suivi des dossiers disciplinaires de Meylan Handball TV selon le Règlement disciplinaire du 2 octobre 2026 : échéances calculées, barème appliqué et registre des dossiers traités.</p>
+        <p>Suivi des dossiers disciplinaires de Meylan Handball TV selon le Règlement disciplinaire du 2 octobre 2026 : qualification par références du barème, échéances calculées et registre des dossiers traités.</p>
       </div>
     </section>
 
@@ -113,7 +113,7 @@
         </table>
         <div class="empty" id="empty" hidden>Aucun dossier à afficher.</div>
       </div>
-      <p style="color:var(--muted);font-size:.8rem;margin-top:.9rem;max-width:760px">Les dossiers sont saisis à la main dans le tableau <code>DOSSIERS</code> du script de cette page (voir les instructions en commentaire). Cliquez sur une ligne pour ouvrir la fiche ; « Copier le bloc du dossier » donne son texte prêt à coller dans le script. Le registre officiel reste la référence.</p>
+      <p style="color:var(--muted);font-size:.8rem;margin-top:.9rem;max-width:760px">Les dossiers se saisissent dans le tableau <code>DOSSIERS</code> du script de cette page, avec un modèle commenté à copier. La classe, le palier, la prescription et les échéances sont calculés automatiquement. Cliquez sur une ligne pour ouvrir la fiche. Le registre officiel reste la référence.</p>
     </section>
 
     <div class="divider"></div>
@@ -123,15 +123,15 @@
       <h2 class="section-title">Procédure <span>et délais</span></h2>
       <div class="section-line"></div>
       <div class="rules-grid">
-        <div class="rule-card"><span class="art">Art. 8</span><h3>Signalement</h3><p>Adressé directement au Département. Accusé de réception. Anonyme irrecevable sauf auto-saisine. Prescription : 4 mois dès la découverte, 3 ans pour harcèlement, violence ou discrimination.</p></div>
-        <div class="rule-card"><span class="art">Art. 9</span><h3>Examen préliminaire · 3 jours</h3><p>Décision motivée et notifiée au signalant : classement, procédure simplifiée (classe 1) ou procédure complète (classes 2 à 4 ou faits contestés).</p></div>
-        <div class="rule-card"><span class="art">Art. 10</span><h3>Procédure simplifiée</h3><p>Mis en cause informé par écrit, 3 jours pour ses observations. Avertissement, blâme ou classement.</p></div>
-        <div class="rule-card"><span class="art">Art. 11</span><h3>Mesures conservatoires</h3><p>Retrait de poste, suspension d'accès ou retrait provisoire d'accréditation. 7 jours maximum, renouvelable une fois. Déduite de la sanction.</p></div>
-        <div class="rule-card"><span class="art">Art. 14</span><h3>Séance · 15 jours</h3><p>Visioconférence après l'ouverture de la procédure complète. Rapport, mis en cause, témoins ; le mis en cause parle en dernier. Un report unique en cas d'absence.</p></div>
-        <div class="rule-card"><span class="art">Art. 15</span><h3>Délibération et notification</h3><p>Huis clos le jour même, majorité (unanimité pour l'exclusion définitive). Transmise à la Coordination générale le lendemain, notifiée aux parties sous 2 jours.</p></div>
-        <div class="rule-card"><span class="art">Art. 17</span><h3>Appel · 5 jours + 7 jours</h3><p>Appel motivé sous 5 jours, non suspensif. La formation d'appel statue sous 7 jours, sans pouvoir aggraver. Décision définitive, notifiée sous 2 jours.</p></div>
-        <div class="rule-card"><span class="art">Art. 2 et 3</span><h3>Composition et déport</h3><p>3 membres, quorum de 3, majorité. Tout conflit d'intérêts impose le déport et le remplacement (adjoint ou autre membre de la CG). Récusation possible par écrit motivé.</p></div>
-        <div class="rule-card"><span class="art">Art. 16</span><h3>Sanctions</h3><p>Avertissement, blâme, suspension de retransmission, suspension saison, exclusion temporaire, exclusion définitive, plus accessoires de l'annexe.</p></div>
+        <div class="rule-card"><span class="art">Art. 8</span><h3>Signalement</h3><p>Adressé directement au Département, avec accusé de réception. Anonyme irrecevable sauf auto-saisine. Prescription : 4 mois dès la découverte des faits, 3 ans pour harcèlement, violence ou discrimination.</p></div>
+        <div class="rule-card"><span class="art">Art. 9</span><h3>Examen préliminaire · 3 jours</h3><p>Décision motivée, notifiée au signalant : classement, procédure simplifiée (classe 1) ou procédure complète (classes 2 à 4, ou faits contestés).</p></div>
+        <div class="rule-card"><span class="art">Art. 10</span><h3>Procédure simplifiée · 3 jours</h3><p>Le mis en cause est informé par écrit et dispose de 3 jours pour ses observations. Avertissement, blâme ou classement.</p></div>
+        <div class="rule-card"><span class="art">Art. 11</span><h3>Mesures conservatoires · 7 jours</h3><p>Retrait de poste, suspension d'accès ou retrait provisoire d'accréditation. 7 jours maximum, renouvelable une fois. Pas une sanction, déduite de la sanction éventuelle.</p></div>
+        <div class="rule-card"><span class="art">Art. 14</span><h3>Séance · 3 jours</h3><p>Visioconférence dans les 3 jours après l'ouverture de la procédure complète. Rapport, mis en cause, témoins ; le mis en cause parle en dernier. Un seul report en cas d'absence.</p></div>
+        <div class="rule-card"><span class="art">Art. 15</span><h3>Délibération et notification</h3><p>Huis clos le jour même, majorité (unanimité pour l'exclusion définitive). Décision transmise à la CG le lendemain, notifiée aux parties sous 2 jours, sans communication avant.</p></div>
+        <div class="rule-card"><span class="art">Art. 17</span><h3>Appel · 5 jours + 7 jours</h3><p>Appel motivé sous 5 jours, non suspensif, une seule fois. La formation d'appel statue sous 7 jours sans pouvoir aggraver. Décision notifiée sous 2 jours, définitive.</p></div>
+        <div class="rule-card"><span class="art">Art. 2 et 3</span><h3>Composition et déport</h3><p>Quorum de 3 membres, majorité. Tout conflit d'intérêts impose le déport et le remplacement. Récusation possible par écrit motivé, tranchée par les deux autres membres.</p></div>
+        <div class="rule-card"><span class="art">Art. 16</span><h3>Sanctions</h3><p>Avertissement, blâme, suspension de retransmission, suspension saison, exclusion temporaire, exclusion définitive, plus les accessoires de l'annexe (retrait d'accréditation, inéligibilité, formation, probatoire…).</p></div>
       </div>
     </section>
 
@@ -144,7 +144,20 @@
         <thead><tr><th>Classe</th><th>Palier 1 · sans aggravante</th><th>Palier 2 · aggravante(s)</th><th>Palier 3 · très aggravante(s)</th></tr></thead>
         <tbody id="bar"></tbody>
       </table></div>
-      <p style="color:var(--muted);font-size:.8rem;margin-top:.9rem;max-width:760px">Toute circonstance aggravante avérée impose au minimum le palier 2. Les atténuantes permettent le palier inférieur, jamais en classe 4. La liste détaillée des manquements figure à l'annexe du règlement.</p>
+      <p style="color:var(--muted);font-size:.8rem;margin-top:.9rem;max-width:820px">Toute circonstance aggravante avérée impose au minimum le palier 2. Les atténuantes permettent le palier inférieur, jamais en classe 4. Récidive (même classe dans la saison) : palier supérieur au minimum. Période probatoire : tout nouveau manquement relève du palier 3. Cumul : trois avertissements, deux blâmes ou deux suspensions dans la saison entraînent la sanction du palier supérieur de la classe 2.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="section">
+      <h2 class="section-title">Liste <span>des manquements</span></h2>
+      <div class="section-line"></div>
+      <p style="color:var(--muted);margin-bottom:1rem;max-width:760px">Ce sont les références à indiquer dans le champ <code>manquements</code> d'un dossier. La classe du dossier en est déduite automatiquement.</p>
+      <div class="toolbar"><input class="grow" id="mq-q" type="search" placeholder="Rechercher un manquement ou une référence (ex. VII, retard, matériel…)"></div>
+      <div class="tbl-wrap"><table class="reg bareme">
+        <thead><tr><th>Réf.</th><th>Manquement</th><th>Classe</th></tr></thead>
+        <tbody id="mq-rows"></tbody>
+      </table></div>
     </section>
   </main>
 
@@ -159,206 +172,531 @@
   </div></div>
 
   <script>
-  /* ══════════════════════════════════════════════════════════════
-     DOSSIERS — À MODIFIER ICI
-     Ajoutez un bloc { ... } par dossier, séparé par une virgule.
-     Dates au format "AAAA-MM-JJ" (laisser "" si pas encore de date).
+  /* ═══════════════════════════════════════════════════════════════════
+     DOSSIERS — C'EST ICI QU'ON AJOUTE LES DOSSIERS
+     ───────────────────────────────────────────────────────────────────
+     1. Copiez le MODÈLE ci-dessous (ou cliquez sur « Copier un modèle
+        de dossier » sur la page).
+     2. Collez-le entre les crochets [ ] du tableau DOSSIERS, à la suite
+        des autres dossiers (sans oublier la virgule après chaque }).
+     3. Remplacez les valeurs entre guillemets. Une date non connue reste "".
+     4. Les dates s'écrivent JJ/MM/AAAA. Pas besoin de calculer la classe,
+        le palier, la prescription ni les échéances : la page s'en charge.
 
-     statut  : "recu" | "simplifiee" | "complete" | "seance" | "notifie" | "appel" | "clos" | "classe"
-     cat     : "I" à "VIII" (catégorie, art. 7)
-     classe  : 1, 2, 3 ou 4 (0 ou "" = à qualifier)
-     circ    : 0 = aucune aggravante · 1 = aggravante(s) · 2 = très aggravante(s)
-     long    : true si harcèlement, violence ou discrimination (prescription 3 ans)
-
-     MODÈLE (copier-coller, décommenter, remplir) :
+     MODÈLE :
      {
-       ref: "IG-2026-001", statut: "recu",
-       recu: "2026-11-08", faits: "2026-11-05",
-       sig: "Nom du signalant", mis: "Nom du mis en cause",
-       cat: "III", classe: 2, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "", notes: ""
+       numero: "IG-2026-001",           // Numéro du dossier
+       etape: "Examen préliminaire",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "08/11/2026",              // Date de réception du signalement
+       faits: "05/11/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Nom du signalant",   // ou "Auto-saisine"
+       mis_en_cause: "Nom du mis en cause",
+
+       // — La qualification —
+       manquements: ["III-10"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-     ══════════════════════════════════════════════════════════════ */
+     ═══════════════════════════════════════════════════════════════════ */
   var DOSSIERS = [
-    {
-       ref: "IG-2026-009", statut: "complete",
-       recu: "2026-11-11", faits: "2026-11-11",
-       sig: "Emmanuel ALVES DR MOURA", mis: "Younes CHIKER",
-       cat: "I", classe: 4, circ: 2, long: false,
-       dep: "", info: "", ouv: "2026-11-11", cons: "", seance: "", notif: "", appel: "",
-       sanc: "", notes: ""
+      {
+       numero: "IG-2026-010",           // Numéro du dossier
+       etape: "Procédure complète",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "11/11/2026",              // Date de réception du signalement
+       faits: "11/11/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Emmanuel ALVES DE MOURA",   // ou "Auto-saisine"
+       mis_en_cause: "Younes CHIKER",
+
+       // — La qualification —
+       manquements: ["I-04", "I-11"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: true,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: ["récidive répétée"],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: true,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: true,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "11/11/2026",          // Date d'ouverture de la procédure complète
+       seance: "",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-008", statut: "classe",
-       recu: "2026-08-28", faits: "2026-08-28",
-       sig: "Enzo ACHOUR", mis: "Nabil SABAH",
-       cat: "I", classe: 2, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "", notes: ""
+
+
+      {
+       numero: "IG-2026-009",           // Numéro du dossier
+       etape: "Clos",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "07/06/2026",              // Date de réception du signalement
+       faits: "07/06/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Xavier FINI",   // ou "Auto-saisine"
+       mis_en_cause: "Younes CHIKER",
+
+       // — La qualification —
+       manquements: ["I-11"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: true,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: ["récidive sur poste critique"],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: true,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "12/06/2026",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "Blame assorti d'un écartement des retransmissions réaliséees en  extérieur et de l'ensemble des matchs relevant de la Nationale 3 Féminine",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-008", statut: "clos",
-       recu: "2026-06-07", faits: "2026-06-07",
-       sig: "Xavier FINI", mis: "Younes CHIKER",
-       cat: "I", classe: 1, circ: 2, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "Blâme assorti d'un écrartement des retransmissions réalisées en extérieur et de l'ensemble des matchs relevant de la Nationale 3 Féminine", notes: ""
+
+
+      {
+       numero: "IG-2026-008",           // Numéro du dossier
+       etape: "Classé",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "28/08/2026",              // Date de réception du signalement
+       faits: "28/08/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Enzo ACHOUR",   // ou "Auto-saisine"
+       mis_en_cause: "Nabil SABAH",
+
+       // — La qualification —
+       manquements: ["I-19"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-007", statut: "clos",
-       recu: "2026-04-18", faits: "2026-04-18",
-       sig: "Enzo ACHOUR", mis: "Ennio ARIZZI",
-       cat: "I", classe: 1, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "Avertissement", notes: ""
+
+
+      {
+       numero: "IG-2026-007",           // Numéro du dossier
+       etape: "Clos",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "08/11/2026",              // Date de réception du signalement
+       faits: "05/11/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Enzo ACHOUR",   // ou "Auto-saisine"
+       mis_en_cause: "Ennio ARIZZI",
+
+       // — La qualification —
+       manquements: ["I-02"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "07/05/2026",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "Avertissement",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-006", statut: "clos",
-       recu: "2026-04-18", faits: "2026-04-18",
-       sig: "Marie DAL ZOTTO", mis: "Gaetan FERRE",
-       cat: "I", classe: 1, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "Avertissement", notes: ""
+
+
+      {
+       numero: "IG-2026-006",           // Numéro du dossier
+       etape: "Clos",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "18/04/2026",              // Date de réception du signalement
+       faits: "18/04/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Marie DAL ZOTTO",   // ou "Auto-saisine"
+       mis_en_cause: "Gaetan FERRE",
+
+       // — La qualification —
+       manquements: ["I-10"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "07/05/2026",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "Avertissement",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-005", statut: "clos",
-       recu: "2026-04-19", faits: "2026-04-19",
-       sig: "Enzo ACHOUR", mis: "Younes CHIKER",
-       cat: "I", classe: 1, circ: 1, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "Suspension 3 retransmissions", notes: ""
+
+
+      {
+       numero: "IG-2026-005",           // Numéro du dossier
+       etape: "Clos",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "07/05/2026",              // Date de réception du signalement
+       faits: "19/04/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Enzo ACHOUR",   // ou "Auto-saisine"
+       mis_en_cause: Younes CHIKER",
+
+       // — La qualification —
+       manquements: ["II-11"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: ["récidive"],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: true,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "07/05/2026",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "Suspension de 3 retransmissions",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-004", statut: "classe",
-       recu: "2026-04-03", faits: "2026-04-03",
-       sig: "", mis: "Gaetan FERRE",
-       cat: "I", classe: 1, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "", notes: ""
+
+
+      {
+       numero: "IG-2026-004",           // Numéro du dossier
+       etape: "Classé",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "03/04/2026",              // Date de réception du signalement
+       faits: "03/04/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "",   // ou "Auto-saisine"
+       mis_en_cause: "Gaetan FERRE",
+
+       // — La qualification —
+       manquements: ["I-10"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-003", statut: "classe",
-       recu: "2026-03-10", faits: "2026-03-10",
-       sig: "", mis: "Younes CHIKER",
-       cat: "I", classe: 3, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "", notes: ""
+
+      {
+       numero: "IG-2026-003",           // Numéro du dossier
+       etape: "Classé",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "21/03/2026",              // Date de réception du signalement
+       faits: "21/03/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "",   // ou "Auto-saisine"
+       mis_en_cause: "Younes CHIKER",
+
+       // — La qualification —
+       manquements: ["II-11", "II-04"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-002", statut: "clos",
-       recu: "2026-01-31", faits: "2026-02-02",
-       sig: "Enzo ACHOUR", mis: "Dorina HELIE-JOLY",
-       cat: "IV", classe: 1, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "Accompagnement", notes: "Accompagnement spécifique sur le poste d'Officiel Technique Score"
+
+
+      {
+       numero: "IG-2026-002",           // Numéro du dossier
+       etape: "Clos",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "31/01/2026",              // Date de réception du signalement
+       faits: "02/02/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "Enzo ACHOUR",   // ou "Auto-saisine"
+       mis_en_cause: "Dorina HELIE-JOLY",
+
+       // — La qualification —
+       manquements: ["III-03"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "01/02/2026",          // Date d'ouverture de la procédure complète
+       seance: "03/02/2026",                      // Date de la séance et de la délibération
+       notification: "14/02/2026",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "Accompagnement pédagogique sur le poste d'Officiel Technique Score",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
-    {
-       ref: "IG-2026-001", statut: "classe",
-       recu: "2026-02-08", faits: "2026-02-08",
-       sig: "", mis: "Gaetan FERRE",
-       cat: "VIII", classe: 3, circ: 0, long: false,
-       dep: "", info: "", ouv: "", cons: "", seance: "", notif: "", appel: "",
-       sanc: "", notes: ""
+
+     {
+       numero: "IG-2026-001",           // Numéro du dossier
+       etape: "Classé",    // Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé
+
+       // — Le signalement —
+       recu: "08/02/2026",              // Date de réception du signalement
+       faits: "03/02/2026",             // Date de découverte des faits (départ de la prescription)
+       signalant: "",   // ou "Auto-saisine"
+       mis_en_cause: "Gaetan FERRE",
+
+       // — La qualification —
+       manquements: ["VIII-02"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
+       attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
+       aggravantes: [],                 // ex. "faits après avertissement", "perturbation de la retransmission"
+       tres_aggravantes: [],            // ex. "récidive répétée", "victime mineure ou vulnérable"
+       recidive: false,                 // true si nouvelle faute de même classe dans la saison
+       probatoire: false,               // true si la personne est en période probatoire
+       deport: "",                      // Membre déporté et remplaçant, le cas échéant
+
+       // — Les dates de la procédure (laisser "" tant que ce n'est pas fait) —
+       mesure_conservatoire: "",        // Début de la mesure conservatoire
+       info_mis_en_cause: "",           // Procédure simplifiée : date d'information du mis en cause
+       ouverture_complete: "",          // Date d'ouverture de la procédure complète
+       seance: "",                      // Date de la séance et de la délibération
+       notification: "",                // Date de notification de la décision
+       appel: "",                       // Date de l'appel
+
+       // — L'issue —
+       decision: "",                    // Sanction prononcée ou classement motivé
+       notes: ""                        // Historique, remarques
      },
+
+
   ];
-  /* ══════════════════════ FIN DE LA ZONE À MODIFIER ══════════════════════ */
+  /* ════════════════════ FIN DE LA ZONE À MODIFIER ════════════════════ */
 
   (function(){
     var $=function(i){return document.getElementById(i)};
-    var ST=[["recu","Examen préliminaire"],["simplifiee","Procédure simplifiée"],["complete","Instruction"],["seance","Séance / délibéré"],["notifie","Décision notifiée"],["appel","En appel"],["clos","Clos"],["classe","Classé sans suite"]];
+    var ST=[["recu","Examen préliminaire"],["simplifiee","Procédure simplifiée"],["complete","Procédure complète"],["seance","Séance"],["notifie","Décision notifiée"],["appel","Appel"],["clos","Clos"],["classe","Classé"]];
     var ROM=["I","II","III","IV","V","VI","VII","VIII"];
-    var CAT=["I — Présence, ponctualité, engagement","II — Accréditation, rôles, identité","III — Production, technique, éditorial","IV — Matériel et ressources","V — Image et représentation externe","VI — Droits de diffusion, données, confidentialité","VII — Vie interne, relations","VIII — Gouvernance, atteintes à l'Inspection"];
+    var CAT=["I — Présence, ponctualité et engagement","II — Accréditation, rôles et identité opérationnelle","III — Production, qualité technique et éditorial","IV — Matériel, équipements et ressources","V — Image du collectif et représentation externe","VI — Droits de diffusion, données personnelles et confidentialité","VII — Vie interne et relations entre membres","VIII — Responsabilités, gouvernance et atteintes à l'Inspection"];
     var BAR={1:["Avertissement","Blâme","Suspension 2 retransmissions"],2:["Blâme","Suspension 3 retransmissions (+ formation si accréditation)","Suspension 5 retransmissions + retrait d'accréditation 1 mois"],3:["Suspension 4 retransmissions","Suspension saison + inéligibilité CG 1 an","Exclusion temporaire + inéligibilité CG 2 ans"],4:["Exclusion temporaire + retrait d'accréditation + inéligibilité CG 2 ans","Exclusion définitive","Exclusion définitive"]};
     var LBL={1:"1 — Léger",2:"2 — Sérieux",3:"3 — Grave",4:"4 — Très grave"};
+    var RAW=["I-01|1|Absence prévenue 24h à 48h (72h poste critique), sans remplaçant proposé","I-02|1|Absence prévenue moins de 24h, motif légitime mais non prouvé ou tardif","I-03|2|Désistement de dernière minute sans motif légitime (classe 3 si poste critique)","I-04|3|Désistement de dernière minute ayant entraîné annulation ou direct dégradé","I-07|3|Désistements ou absences non justifiées répétés (2 ou plus sur la saison)","I-09|1|Départ anticipé avant la fin du bilan post-retransmission","I-10|2|Abandon de poste en cours de retransmission, poste secondaire","I-11|3|Abandon de poste en cours de retransmission, poste majeur ou critique","I-13|1|Retard injustifié de plus de 5 min entraînant un démarrage tardif","I-14|2|Retard de plus de 30 min sur un poste majeur ou critique","I-15|2|Retards injustifiés répétés (3 ou plus sur la saison)","I-16|1|Absence non justifiée à une réunion, un bilan ou une session obligatoire","I-17|2|Absence non justifiée à une formation obligatoire","I-18|3|Faux motif d'absence ou justificatif falsifié","I-19|2|Participation passive et volontaire lors d'une retransmission","I-20|2|Alcool ou substances avant ou pendant une retransmission",
+"II-01|1|Non-port du gilet MHBTV pendant la durée de l'événement","II-02|1|Changement de poste sans accord","II-03|2|Poste occupé sans accréditation valide (classe 3 si poste critique)","II-04|2|Refus d'appliquer une consigne du responsable de retransmission","II-05|3|Falsification d'une accréditation ou d'un questionnaire d'aptitude","II-06|4|Usurpation de rôle ou d'identité lors d'une retransmission",
+"III-01|2|Qualité image ou son volontairement négligée","III-02|1|Coupure intempestive du direct par négligence technique évitable","III-03|1|Matériel non vérifié avant la retransmission, dysfonctionnement","III-04|1|Non-respect du conducteur ou du plan de retransmission","III-05|2|Incident technique, comportemental ou matériel non déclaré","III-06|2|Effets, filtres, overlays ou incrustations non validés","III-07|2|Intervention non autorisée d'une personne extérieure en direct","III-08|1|Personnes non autorisées dans les espaces du collectif pendant une retransmission","III-09|3|Modification ou suppression non autorisée du générique, de l'habillage ou du jingle","III-10|3|Propos inappropriés en direct (insultes, humour déplacé, irrespectueux)","III-11|3|Prise de position polémique, partisane ou politique en direct","III-12|4|Dénigrement public d'un membre, du club ou d'un adversaire en direct",
+"IV-01|2|Non-respect des procédures d'utilisation ou de rangement, retour tardif du matériel","IV-02|3|Matériel utilisé à des fins personnelles ou prêté sans autorisation","IV-03|3|Dégradation de matériel par négligence","IV-04|3|Perte de matériel en déplacement sans signalement immédiat","IV-05|4|Dégradation volontaire de matériel ou d'équipements","IV-06|4|Détournement à profit personnel de ressources ou d'équipements","IV-07|3|Suppression non autorisée de fichiers, archives ou projets","IV-08|3|Accès non autorisé ou partage d'identifiants et de mots de passe",
+"V-01|2|Nom, logo ou identité visuelle MHBTV utilisés à des fins personnelles sans autorisation","V-02|2|Publication, modification ou suppression non autorisée de contenus au nom du collectif","V-03|3|Prise de parole publique au nom du collectif sans mandat, ou contenus attentatoires à son image","V-04|4|Compte ou page imitant le collectif ou l'un de ses membres","V-05|3|Contact non autorisé avec des partenaires ou sponsors au nom du collectif","V-06|4|Propos dénigrants ou diffamatoires envers le collectif ou ses membres","V-07|4|Fausses informations concernant le collectif ou ses membres",
+"VI-01|4|Retransmission non autorisée d'un événement privé ou protégé par des droits de diffusion","VI-02|3|Photos ou vidéos de membres publiées sans consentement explicite","VI-03|2|Enregistrement non autorisé d'une réunion interne","VI-04|3|Informations confidentielles révélées en direct","VI-05|3|Rushes, archives ou projets internes partagés à l'extérieur sans autorisation","VI-06|4|Informations confidentielles internes divulguées à l'extérieur (décisions, finances, données personnelles)",
+"VII-01|2|Comportement irrespectueux, moqueries ou propos humiliants envers un membre","VII-02|2|Comportement perturbateur en réunion ou session interne","VII-03|2|Refus persistant de coopérer avec un autre membre en production","VII-04|3|Commentaires blessants ou moqueries publiques envers un membre","VII-05|3|Mise à l'écart volontaire d'un membre (ostracisme)","VII-06|3|Conflit ouvert ou sabotage délibéré de la réputation d'un membre","VII-07|4|Propos ou attitudes discriminatoires, en direct ou non","VII-08|4|Cyberharcèlement envers un membre","VII-09|4|Harcèlement moral répété envers un membre","VII-10|4|Harcèlement sexuel","VII-11|4|Violence psychologique, manipulation ou intimidation envers un membre",
+"VIII-01|2|Conflit d'intérêts non déclaré dans une décision engageant le collectif","VIII-02|2|Non-réponse aux convocations de la Coordination générale dans un délai raisonnable","VIII-03|2|Inactivité caractérisée d'un responsable","VIII-04|3|Opacité, refus de rendre compte ou dépense non validée au nom du collectif","VIII-05|3|Abus de position hiérarchique","VIII-06|3|Décision engageant le collectif sans mandat, ou décision collective non respectée","VIII-07|4|Tentative d'intimidation ou de pression sur un membre de la commission disciplinaire","VIII-08|2|Absence de suppléant désigné sur un poste critique par la personne chargée de l'organisation"];
+    var MQ={};RAW.forEach(function(s){var p=s.split("|");MQ[p[0]]={c:+p[1],t:p[2]}});
+    var LONG3=["VII-07","VII-08","VII-09","VII-10","VII-11"];
+    var FD=[["Le dossier"],["numero","IG-2026-001","Numéro du dossier"],["etape","Examen préliminaire","Examen préliminaire | Procédure simplifiée | Procédure complète | Séance | Décision notifiée | Appel | Clos | Classé"],
+      ["Le signalement"],["recu","08/11/2026","Date de réception du signalement"],["faits","05/11/2026","Date de découverte des faits (départ de la prescription)"],["signalant","Nom du signalant","ou \"Auto-saisine\""],["mis_en_cause","Nom du mis en cause",""],
+      ["La qualification"],["manquements",["III-10"],"Références de la liste en bas de page. Plusieurs : [\"III-10\", \"VII-01\"]"],["poste_critique",false,"true si les faits concernent un poste critique (majore I-03 et II-03)"],["attenuantes",[],"ex. \"absence d'antécédents\", \"reconnaissance spontanée des faits\""],["aggravantes",[],"ex. \"faits après avertissement\", \"perturbation de la retransmission\""],["tres_aggravantes",[],"ex. \"récidive répétée\", \"victime mineure ou vulnérable\""],["recidive",false,"true si nouvelle faute de même classe dans la saison"],["probatoire",false,"true si la personne est en période probatoire"],["deport","","Membre déporté et remplaçant, le cas échéant"],
+      ["Les dates de la procédure (laisser \"\" tant que ce n'est pas fait)"],["mesure_conservatoire","","Début de la mesure conservatoire"],["info_mis_en_cause","","Procédure simplifiée : date d'information du mis en cause"],["ouverture_complete","","Date d'ouverture de la procédure complète"],["seance","","Date de la séance et de la délibération"],["notification","","Date de notification de la décision"],["appel","","Date de l'appel"],
+      ["L'issue"],["decision","","Sanction prononcée ou classement motivé"],["notes","","Historique, remarques"]];
     var DB=DOSSIERS||[],cur=null,flt="all";
+
     function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
-    function pd(s){if(!s)return null;var p=String(s).split("-");return new Date(+p[0],+p[1]-1,+p[2])}
+    function pd(s){if(!s)return null;var m=String(s).trim().match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+      if(m)return new Date(+m[3],+m[2]-1,+m[1]);var p=String(s).split("-");return p.length==3?new Date(+p[0],+p[1]-1,+p[2]):null}
     function add(s,n){var d=pd(s);if(!d)return null;d.setDate(d.getDate()+n);return d}
     function fr(d){return d?d.toLocaleDateString("fr-FR"):"—"}
     function today(){var t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate())}
-    function stLabel(k){for(var i=0;i<ST.length;i++)if(ST[i][0]==k)return ST[i][1];return k||"—"}
-    function isOpen(d){return d.statut!="clos"&&d.statut!="classe"}
-    function presc(d){var f=pd(d.faits);if(!f)return null;if(d.long)f.setFullYear(f.getFullYear()+3);else f.setMonth(f.getMonth()+4);return f}
+    function arr(a){return Array.isArray(a)?a:(a?[a]:[])}
+    function ek(d){var s=String(d.etape||"").toLowerCase().trim();for(var i=0;i<ST.length;i++)if(ST[i][0]==s||ST[i][1].toLowerCase()==s)return ST[i][0];return s||"recu"}
+    function el(d){for(var i=0;i<ST.length;i++)if(ST[i][0]==ek(d))return ST[i][1];return d.etape||"—"}
+    function isOpen(d){var k=ek(d);return k!="clos"&&k!="classe"}
+    function classe(d){var c=0;arr(d.manquements).forEach(function(r){var m=MQ[r];if(!m)return;var v=m.c;if((r=="I-03"||r=="II-03")&&d.poste_critique)v++;c=Math.max(c,Math.min(v,4))});return c}
+    function palier(d){var c=classe(d),a=arr(d.aggravantes).length,t=arr(d.tres_aggravantes).length,p=t?3:(a?2:1);
+      if(arr(d.attenuantes).length&&c&&c<4&&p>((a||t)?2:1))p--;
+      if(d.recidive)p=Math.min(p+1,3);if(d.probatoire)p=3;return p}
+    function sugg(d){var c=classe(d);return c?BAR[c][palier(d)-1]:null}
+    function presc(d){var f=pd(d.faits);if(!f)return null;
+      if(arr(d.manquements).some(function(r){return LONG3.indexOf(r)>-1}))f.setFullYear(f.getFullYear()+3);else f.setMonth(f.getMonth()+4);return f}
     function next(d){
-      switch(d.statut){
+      switch(ek(d)){
         case"recu":return d.recu?{l:"Décision préliminaire",d:add(d.recu,3)}:null;
-        case"simplifiee":return d.info?{l:"Observations du mis en cause",d:add(d.info,3)}:null;
-        case"complete":return d.ouv?{l:"Séance",d:add(d.ouv,3)}:null;
+        case"simplifiee":return d.info_mis_en_cause?{l:"Observations du mis en cause",d:add(d.info_mis_en_cause,3)}:null;
+        case"complete":return d.ouverture_complete?{l:"Séance",d:add(d.ouverture_complete,3)}:null;
         case"seance":return d.seance?{l:"Notification aux parties",d:add(d.seance,2)}:null;
-        case"notifie":return d.notif?{l:"Limite d'appel",d:add(d.notif,5)}:null;
+        case"notifie":return d.notification?{l:"Limite d'appel",d:add(d.notification,5)}:null;
         case"appel":return d.appel?{l:"Décision d'appel",d:add(d.appel,7)}:null;
       }return null}
-    function sugg(d){var c=+d.classe;return c?BAR[c][Math.min(Math.max(+d.circ||0,0),2)]:null}
     function late(d){var n=next(d);return !!(n&&isOpen(d)&&n.d<today())}
     function dl(d){var n=next(d);if(!n||!isOpen(d))return"";var diff=Math.round((n.d-today())/864e5);
-      var c=diff<0?"late":(diff<=2?"soon":"");
+      var c=diff<0?"late":(diff<=1?"soon":"");
       var t=diff<0?"dépassée de "+(-diff)+" j":(diff==0?"aujourd'hui":"dans "+diff+" j");
       return n.l+'<span class="sub '+c+'">'+fr(n.d)+" · "+t+"</span>"}
 
     function render(){
       var q=$("q").value.toLowerCase();
-      var list=db().filter(function(d){
+      var list=DB.filter(function(d){
         if(flt=="open"&&!isOpen(d))return false;
         if(flt=="done"&&isOpen(d))return false;
         if(flt=="late"&&!late(d))return false;
-        return !q||((d.ref||"")+" "+(d.mis||"")+" "+(d.sig||"")+" "+(d.sanc||"")).toLowerCase().indexOf(q)>-1});
-      list.sort(function(a,b){return (b.recu||"").localeCompare(a.recu||"")});
+        return !q||([d.numero,d.mis_en_cause,d.signalant,d.decision,arr(d.manquements).join(" ")].join(" ")).toLowerCase().indexOf(q)>-1});
+      list.sort(function(a,b){return ((pd(b.recu)||0)-(pd(a.recu)||0))});
       $("rows").innerHTML=list.map(function(d){
-        var cls=+d.classe?'<span class="badge '+(d.classe>2?"":"gold")+'">'+esc(LBL[d.classe])+"</span>":'<span class="badge grey">À qualifier</span>';
+        var c=classe(d);
+        var cls=c?'<span class="badge '+(c>2?"":"gold")+'">'+esc(LBL[c])+'</span><span class="sub">'+esc(arr(d.manquements).join(", "))+"</span>":'<span class="badge grey">À qualifier</span>';
         var sb=!isOpen(d)?"grey":(late(d)?"":"gold");
-        return '<tr class="row" data-i="'+DB.indexOf(d)+'"><td><b>'+esc(d.ref)+'</b><span class="sub">Reçu le '+fr(pd(d.recu))+'</span></td><td>'+esc(d.mis||"—")+'<span class="sub">Signalant : '+esc(d.sig||"—")+'</span></td><td>'+cls+'</td><td><span class="badge '+sb+'">'+esc(stLabel(d.statut))+'</span></td><td>'+(dl(d)||'<span class="sub">—</span>')+'</td><td>'+esc(d.sanc||"—")+'</td></tr>'}).join("");
+        return '<tr class="row" data-i="'+DB.indexOf(d)+'"><td><b>'+esc(d.numero||"sans numéro")+'</b><span class="sub">Reçu le '+fr(pd(d.recu))+'</span></td><td>'+esc(d.mis_en_cause||"—")+'<span class="sub">Signalant : '+esc(d.signalant||"—")+'</span></td><td>'+cls+'</td><td><span class="badge '+sb+'">'+esc(el(d))+'</span></td><td>'+(dl(d)||'<span class="sub">—</span>')+'</td><td>'+esc(d.decision||"—")+'</td></tr>'}).join("");
       $("empty").hidden=list.length>0;
       $("empty").textContent=DB.length?"Aucun dossier ne correspond au filtre.":"Aucun dossier enregistré. Ajoutez-les dans le tableau DOSSIERS du script de cette page.";
       $("s-total").textContent=DB.length;
       $("s-open").textContent=DB.filter(isOpen).length;
       $("s-late").textContent=DB.filter(late).length;
-      $("s-sanc").textContent=DB.filter(function(d){return d.sanc&&d.statut!="classe"}).length;
+      $("s-sanc").textContent=DB.filter(function(d){return d.decision&&ek(d)!="classe"}).length;
       var T=[["all","Tous"],["open","En cours"],["late","Échéance dépassée"],["done","Clos et classés"]];
       $("tabs").innerHTML=T.map(function(t){return '<button type="button" class="tab'+(flt==t[0]?" on":"")+'" data-f="'+t[0]+'">'+t[1]+"</button>"}).join("");
     }
-    function db(){return DB}
 
     function show(d){
-      cur=d;$("m-title").textContent="Dossier "+(d.ref||"sans numéro");
-      var ci=ROM.indexOf(d.cat);
-      var f=[["Étape",stLabel(d.statut)],["Classe",+d.classe?LBL[d.classe]:"À qualifier"],
+      cur=d;$("m-title").textContent="Dossier "+(d.numero||"sans numéro");
+      var c=classe(d),l=arr(d.manquements);
+      var mqh=l.length?l.map(function(r){var m=MQ[r];return m?esc(r)+" — "+esc(m.t)+" (classe "+m.c+")":esc(r)+' — <span class="late">référence inconnue</span>'}).join("<br>"):"—";
+      var cir=[["Atténuantes",d.attenuantes],["Aggravantes",d.aggravantes],["Très aggravantes",d.tres_aggravantes]].map(function(x){return x[0]+" : "+(arr(x[1]).join(", ")||"aucune")}).join("<br>");
+      var f=[["Étape",el(d)],["Classe retenue",c?LBL[c]+(d.poste_critique?" (poste critique)":""):"À qualifier"],
         ["Signalement reçu le",fr(pd(d.recu))],["Faits découverts le",fr(pd(d.faits))],
-        ["Auteur du signalement",d.sig],["Personne mise en cause",d.mis],
-        ["Catégorie (art. 7)",ci>-1?CAT[ci]:d.cat],["Circonstances",["Aucune aggravante (palier 1)","Aggravante(s) (palier 2)","Très aggravante(s) (palier 3)"][+d.circ||0]],
-        ["Mis en cause informé le",fr(pd(d.info))],["Procédure complète ouverte le",fr(pd(d.ouv))],
-        ["Mesure conservatoire depuis le",fr(pd(d.cons))],["Séance / délibération le",fr(pd(d.seance))],
-        ["Décision notifiée le",fr(pd(d.notif))],["Appel formé le",fr(pd(d.appel))],
-        ["Déport / récusation",d.dep||"—"],["Décision / sanction",d.sanc||"—"]];
+        ["Auteur du signalement",d.signalant],["Personne mise en cause",d.mis_en_cause],
+        ["Mesure conservatoire depuis le",fr(pd(d.mesure_conservatoire))],["Mis en cause informé le",fr(pd(d.info_mis_en_cause))],
+        ["Procédure complète ouverte le",fr(pd(d.ouverture_complete))],["Séance / délibération le",fr(pd(d.seance))],
+        ["Décision notifiée le",fr(pd(d.notification))],["Appel formé le",fr(pd(d.appel))]];
       var h=f.map(function(x){return "<div><label>"+x[0]+"</label><p>"+esc(x[1]||"—")+"</p></div>"}).join("");
-      var i=[],p=presc(d),n=next(d),s=sugg(d);
+      h+='<div class="full"><label>Manquement(s) reprochés</label><p>'+mqh+"</p></div>";
+      h+='<div><label>Circonstances</label><p>'+(esc(cir).replace(/&lt;br&gt;/g,"<br>"))+"</p></div>";
+      h+='<div><label>Autres éléments</label><p>Récidive : '+(d.recidive?"oui":"non")+"<br>Période probatoire : "+(d.probatoire?"oui":"non")+"<br>Déport / récusation : "+esc(d.deport||"—")+"</p></div>";
+      h+='<div class="full"><label>Décision / sanction prononcée</label><p>'+esc(d.decision||"—")+"</p></div>";
+      var i=[],p=presc(d),n=next(d),s=sugg(d),k=ek(d);
       if(p)i.push("<b>Prescription :</b> "+fr(p)+((d.recu&&pd(d.recu)>p)?' <span class="late">(signalement hors délai : classement possible, art. 9)</span>':""));
-      if(s)i.push("<b>Sanction du barème :</b> "+esc(s)+" <i>(à moduler selon les circonstances, art. 16)</i>");
-      if(d.cons)i.push("<b>Mesure conservatoire :</b> fin au plus tard le "+fr(add(d.cons,7))+" (renouvelable une fois, 7 jours)");
+      if(s)i.push("<b>Palier "+palier(d)+" · sanction du barème :</b> "+esc(s)+" <i>(à moduler par le Département, art. 16)</i>");
+      if(d.mesure_conservatoire)i.push("<b>Mesure conservatoire :</b> fin au plus tard le "+fr(add(d.mesure_conservatoire,7))+" (renouvelable une fois, art. 11)");
       if(n&&isOpen(d))i.push("<b>Prochaine échéance :</b> "+n.l+" le "+fr(n.d));
-      if(+d.classe==1&&d.statut=="complete")i.push("Classe 1 : la procédure simplifiée est normalement applicable (art. 9).");
-      if(+d.classe==4)i.push("Exclusion définitive : unanimité des 3 membres requise (art. 15).");
+      if(k=="simplifiee"&&c>1)i.push('<span class="late">Classe '+c+' : la procédure simplifiée est réservée à la classe 1, ouvrir la procédure complète (art. 9).</span>');
+      if(k=="complete"&&c==1)i.push("Classe 1 : la procédure simplifiée est normalement applicable si les faits ne sont pas contestés (art. 9).");
+      if(c==4)i.push("Exclusion définitive : unanimité requise (art. 15).");
+      if(l.some(function(r){return r=="I-03"||r=="II-03"})&&!d.poste_critique)i.push("I-03 et II-03 passent en classe 3 si le poste est critique : indiquer <code>poste_critique: true</code> le cas échéant.");
       i.push("Vérifier les conflits d'intérêts avant toute action (art. 3).");
       h+='<div class="full info">'+i.join("<br>")+"</div>";
       h+='<div class="full"><label>Notes et historique</label><p style="white-space:pre-wrap">'+esc(d.notes||"—")+"</p></div>";
       $("m-body").innerHTML=h;$("ov").classList.add("open")}
     function close(){$("ov").classList.remove("open");cur=null}
+
     function bloc(d){
-      var K=["ref","statut","recu","faits","sig","mis","cat","classe","circ","long","dep","info","ouv","cons","seance","notif","appel","sanc","notes"];
-      return "{\n"+K.map(function(k){var v=d[k];if(v===undefined)v=(k=="long"?false:(k=="classe"||k=="circ"?0:""));
-        return "  "+k+": "+JSON.stringify(v)}).join(",\n")+"\n},"}
+      var o=["{"];
+      FD.forEach(function(f){
+        if(f.length==1){if(o.length>1)o.push("");o.push("  // — "+f[0]+" —");return}
+        var v;if(d){v=d[f[0]];if(v===undefined)v=Array.isArray(f[1])?[]:(typeof f[1]=="boolean"?false:"")}else v=f[1];
+        o.push("  "+f[0]+": "+JSON.stringify(v)+","+(d||!f[2]?"":"   // "+f[2]))});
+      o.push("},");return o.join("\n")}
+    function copy(btn,t,ok){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){btn.textContent=ok},function(){prompt("Copiez le texte :",t)})}
 
     $("ov").addEventListener("click",function(e){if(e.target===$("ov"))close()});
     $("m-close").onclick=close;
-    $("m-copy").onclick=function(){var b=this,t=bloc(cur||{});
-      (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent="Copié ✓"},function(){prompt("Copiez le bloc :",t)})};
-    $("b-tpl").onclick=function(){var b=this,t=bloc({ref:"IG-2026-001",statut:"recu"});
-      (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent="Modèle copié ✓"},function(){prompt("Copiez le modèle :",t)})};
+    $("m-copy").onclick=function(){copy(this,bloc(cur||{}),"Copié ✓")};
+    $("b-tpl").onclick=function(){copy(this,bloc(null),"Modèle copié ✓")};
     $("rows").addEventListener("click",function(e){var r=e.target.closest("tr.row");if(r)show(DB[+r.getAttribute("data-i")])});
     $("tabs").addEventListener("click",function(e){var f=e.target.getAttribute("data-f");if(f){flt=f;render()}});
     $("q").oninput=render;
+
     $("bar").innerHTML=[1,2,3,4].map(function(c){return "<tr><td>"+LBL[c]+"</td>"+BAR[c].map(function(s){return "<td>"+s+"</td>"}).join("")+"</tr>"}).join("");
-    render();
+    function renderMq(){
+      var q=$("mq-q").value.toLowerCase(),h="";
+      ROM.forEach(function(r,i){
+        var rows=RAW.filter(function(s){return s.split("|")[0].split("-")[0]==r}).filter(function(s){return !q||s.toLowerCase().indexOf(q)>-1||CAT[i].toLowerCase().indexOf(q)>-1});
+        if(!rows.length)return;
+        h+='<tr><td colspan="3" style="background:rgba(232,0,29,.06);font-family:\'Barlow Condensed\',sans-serif;letter-spacing:.06em;text-transform:uppercase;font-size:.78rem">'+CAT[i]+"</td></tr>";
+        rows.forEach(function(s){var p=s.split("|");h+="<tr><td style='color:var(--gold);font-weight:700;white-space:nowrap'>"+p[0]+"</td><td>"+esc(p[2])+"</td><td><span class='badge "+(+p[1]>2?"":"gold")+"'>"+p[1]+"</span></td></tr>"})});
+      $("mq-rows").innerHTML=h||'<tr><td colspan="3" class="empty">Aucun manquement trouvé.</td></tr>'}
+    $("mq-q").oninput=renderMq;
+    renderMq();render();
   })();
   </script>
   <script src="footer.js"></script>

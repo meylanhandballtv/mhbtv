@@ -80,7 +80,7 @@
 <body>
   <script src="nav.js"></script>
   <main class="page">
-    <div class="restricted-banner"><b>🔒 Accès réservé</b> Document interne destiné aux membres de la DCO. Les dossiers sont confidentiels (art. 3). Ne pas diffuser.</div>
+    <div class="restricted-banner"><b>🔒 Accès réservé</b> Document interne destiné aux membres de la Direction de la Coordination Opérationnelle (DCO). Les dossiers sont confidentiels (art. 3). Ne pas diffuser.</div>
 
     <section class="hero-home">
       <div class="hero-content">
@@ -127,11 +127,11 @@
         <div class="rule-card"><span class="art">Art. 9</span><h3>Examen préliminaire · 3 jours</h3><p>Décision motivée, notifiée au signalant : classement, procédure simplifiée (classe 1) ou procédure complète (classes 2 à 4, ou faits contestés).</p></div>
         <div class="rule-card"><span class="art">Art. 10</span><h3>Procédure simplifiée · 3 jours</h3><p>Le mis en cause est informé par écrit et dispose de 3 jours pour ses observations. Avertissement, blâme ou classement.</p></div>
         <div class="rule-card"><span class="art">Art. 11</span><h3>Mesures conservatoires · 7 jours</h3><p>Retrait de poste, suspension d'accès ou retrait provisoire d'accréditation. 7 jours maximum, renouvelable une fois. Pas une sanction, déduite de la sanction éventuelle.</p></div>
-        <div class="rule-card"><span class="art">Art. 14</span><h3>Séance · 3 jours</h3><p>Visioconférence dans les 3 jours après l'ouverture de la procédure complète. Rapport, mis en cause, témoins ; le mis en cause parle en dernier. Un seul report en cas d'absence.</p></div>
-        <div class="rule-card"><span class="art">Art. 15</span><h3>Délibération et notification</h3><p>Huis clos le jour même, majorité (unanimité pour l'exclusion définitive). Décision transmise à la CG le lendemain, notifiée aux parties sous 2 jours, sans communication avant.</p></div>
-        <div class="rule-card"><span class="art">Art. 17</span><h3>Appel · 5 jours + 7 jours</h3><p>Appel motivé sous 5 jours, non suspensif, une seule fois. La formation d'appel statue sous 7 jours sans pouvoir aggraver. Décision notifiée sous 2 jours, définitive.</p></div>
+        <div class="rule-card"><span class="art">Art. 12</span><h3>Séance · 3 jours</h3><p>Visioconférence dans les 3 jours après l'ouverture de la procédure complète. Rapport, mis en cause, témoins ; le mis en cause parle en dernier. Un seul report en cas d'absence.</p></div>
+        <div class="rule-card"><span class="art">Art. 13</span><h3>Délibération et notification</h3><p>Huis clos le jour même, majorité (unanimité pour l'exclusion définitive). Décision transmise à la CG le lendemain, notifiée aux parties sous 2 jours, sans communication avant.</p></div>
+        <div class="rule-card"><span class="art">Art. 15</span><h3>Appel · 5 jours + 7 jours</h3><p>Appel motivé sous 5 jours, non suspensif, une seule fois. La formation d'appel statue sous 7 jours sans pouvoir aggraver. Décision notifiée sous 2 jours, définitive.</p></div>
         <div class="rule-card"><span class="art">Art. 2 et 3</span><h3>Composition et déport</h3><p>Quorum de 3 membres, majorité. Tout conflit d'intérêts impose le déport et le remplacement. Récusation possible par écrit motivé, tranchée par les deux autres membres.</p></div>
-        <div class="rule-card"><span class="art">Art. 16</span><h3>Sanctions</h3><p>Avertissement, blâme, suspension de retransmission, suspension saison, exclusion temporaire, exclusion définitive, plus les accessoires de l'annexe (retrait d'accréditation, inéligibilité, formation, probatoire…).</p></div>
+        <div class="rule-card"><span class="art">Art. 14</span><h3>Sanctions</h3><p>Avertissement, blâme, suspension de retransmission, suspension saison, exclusion temporaire, exclusion définitive, plus les accessoires de l'annexe (retrait d'accréditation, inéligibilité, formation, probatoire…).</p></div>
       </div>
     </section>
 
@@ -399,7 +399,7 @@
        mis_en_cause: "Younes CHIKER",
 
        // — La qualification —
-       manquements: ["II-11"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
+       manquements: ["I-11"],         // Références de la liste en bas de page. Plusieurs : ["III-10", "VII-01"]
        poste_critique: false,           // true si les faits concernent un poste critique (majore I-03 et II-03)
        attenuantes: [],                 // ex. "absence d'antécédents", "reconnaissance spontanée des faits"
        aggravantes: ["récidive"],                 // ex. "faits après avertissement", "perturbation de la retransmission"
@@ -656,12 +656,12 @@
       h+='<div class="full"><label>Décision / sanction prononcée</label><p>'+esc(d.decision||"—")+"</p></div>";
       var i=[],p=presc(d),n=next(d),s=sugg(d),k=ek(d);
       if(p)i.push("<b>Prescription :</b> "+fr(p)+((d.recu&&pd(d.recu)>p)?' <span class="late">(signalement hors délai : classement possible, art. 9)</span>':""));
-      if(s)i.push("<b>Palier "+palier(d)+" · sanction du barème :</b> "+esc(s)+" <i>(à moduler par le Département, art. 16)</i>");
+      if(s)i.push("<b>Palier "+palier(d)+" · sanction du barème :</b> "+esc(s)+" <i>(à moduler par le Département, art. 14)</i>");
       if(d.mesure_conservatoire)i.push("<b>Mesure conservatoire :</b> fin au plus tard le "+fr(add(d.mesure_conservatoire,7))+" (renouvelable une fois, art. 11)");
       if(n&&isOpen(d))i.push("<b>Prochaine échéance :</b> "+n.l+" le "+fr(n.d));
       if(k=="simplifiee"&&c>1)i.push('<span class="late">Classe '+c+' : la procédure simplifiée est réservée à la classe 1, ouvrir la procédure complète (art. 9).</span>');
       if(k=="complete"&&c==1)i.push("Classe 1 : la procédure simplifiée est normalement applicable si les faits ne sont pas contestés (art. 9).");
-      if(c==4)i.push("Exclusion définitive : unanimité requise (art. 15).");
+      if(c==4)i.push("Exclusion définitive : unanimité requise (art. 13).");
       if(l.some(function(r){return r=="I-03"||r=="II-03"})&&!d.poste_critique)i.push("I-03 et II-03 passent en classe 3 si le poste est critique : indiquer <code>poste_critique: true</code> le cas échéant.");
       i.push("Vérifier les conflits d'intérêts avant toute action (art. 3).");
       h+='<div class="full info">'+i.join("<br>")+"</div>";

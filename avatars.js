@@ -27,7 +27,7 @@
     'gaetan':   'https://static.wixstatic.com/media/08ddad_0fc5d5943ab0449cbdfc332c045f44d8~mv2.jpg/v1/crop/x_0,y_15,w_1080,h_1051/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202025-08-22%20%C3%A0%2018_58_17_85fb79ef.jpg',
     'dorina':   'https://static.wixstatic.com/media/08ddad_28f414e3864e4a9eb4f05d693ee61713~mv2.jpg/v1/crop/x_0,y_216,w_1200,h_1167/fill/w_443,h_431,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/WhatsApp%20Image%202025-08-22%20%C3%A0%2018_43_29_fb21d50b.jpg',
     'kyliann':  'https://static.wixstatic.com/media/08ddad_eef6bd79c3504cfc9f5ee8f73e1fc0b2~mv2.jpg/v1/crop/x_0,y_3,w_198,h_193/fill/w_277,h_270,al_c,lg_1,q_80,enc_avif,quality_auto/photo%20kyliann.jpg',
-    'tanguy':   'photos-equipe/WhatsApp Image 2026-11-15 at 13.22.24.jpeg"
+    'tanguy':   'photos-equipe/WhatsApp Image 2026-11-15 at 13.22.24.jpeg'
   };
 
   const norm = s => s.toLowerCase().normalize('NFD')

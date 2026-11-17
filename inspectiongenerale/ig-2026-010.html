@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Décision disciplinaire | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── HERO DÉCISION ── */
+    .hero-decision {
+      position: relative;
+      min-height: 380px;
+      display: flex;
+      align-items: center;
+      padding: 6rem 4rem 3rem;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .hero-decision::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(135deg, rgba(232,0,29,0.08) 0%, transparent 60%),
+        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.015) 80px, rgba(255,255,255,0.015) 81px);
+    }
+    .hero-decision::after {
+      content: 'BIG';
+      position: absolute;
+      right: -2rem; bottom: -3rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22vw;
+      color: rgba(232,0,29,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .hero-decision .hero-content { position: relative; z-index: 1; max-width: 760px; }
+    .badge-official {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 3px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-decision h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .hero-decision h1 em { color: var(--red); font-style: normal; display: block; }
+    .hero-decision p {
+      font-size: 1.02rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── BANDEAU RÉFÉRENCES ── */
+    .ref-banner {
+      background: linear-gradient(90deg, rgba(232,0,29,0.15) 0%, transparent 100%);
+      border: 1px solid rgba(232,0,29,0.3);
+      border-left: 4px solid var(--red);
+      border-radius: 6px;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 2rem 4rem 0;
+      flex-wrap: wrap;
+    }
+    .ref-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .ref-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .ref-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--white);
+    }
+
+    /* ── CARTE SANCTION ── */
+    .sanction-card {
+      background: var(--card);
+      border: 1px solid rgba(240,180,41,0.35);
+      border-top: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 2rem 2.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .sanction-niveau {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--gold);
+      letter-spacing: 0.03em;
+    }
+    .sanction-intitule {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--white);
+      margin: 0.5rem 0 0.75rem;
+    }
+    .sanction-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .info-grid .info {
+      background: var(--darker);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.15rem;
+    }
+    .info-label {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+    .info-value {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--white);
+    }
+
+    /* ── TEXTE DE LA DÉCISION ── */
+    .decision-text { max-width: 820px; }
+    .decision-text h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--white);
+      margin: 2rem 0 0.6rem;
+    }
+    .decision-text p,
+    .decision-text li { font-size: 0.95rem; color: var(--muted); line-height: 1.75; }
+    .decision-text ul { margin: 0.5rem 0 0 1.2rem; }
+    .decision-text li { margin-bottom: 0.4rem; }
+
+    /* ── MEMBRES DU BUREAU ── */
+    .jury-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .jury-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.25rem;
+    }
+    .jury-nom {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--white);
+    }
+    .jury-role { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── VOIES DE RECOURS ── */
+    .recours-box {
+      background: rgba(232,0,29,0.06);
+      border: 1px solid rgba(232,0,29,0.2);
+      border-radius: 6px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .recours-box .recours-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+    .recours-box .recours-body { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    .signature {
+      margin-top: 2.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .signature strong { color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1.05rem; }
+
+    @media (max-width: 900px) {
+      .hero-decision { padding: 5rem 1.5rem 2.5rem; }
+      .ref-banner { margin: 1.5rem 1.5rem 0; flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .info-grid { grid-template-columns: 1fr; }
+      .sanction-card { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero-decision">
+      <div class="hero-content">
+        <div class="badge-official">Bureau de l'Inspection Générale</div>
+        <h1>Décision<em id="d-hero-sub">Disciplinaire</em></h1>
+        <p id="d-intro"></p>
+      </div>
+    </section>
+
+    <!-- RÉFÉRENCES -->
+    <div class="ref-banner">
+      <div class="ref-item"><span class="ref-label">Dossier</span><span class="ref-value" id="d-dossier"></span></div>
+      <div class="ref-item"><span class="ref-label">Date de la décision</span><span class="ref-value" id="d-date"></span></div>
+      <div class="ref-item"><span class="ref-label">Personne concernée</span><span class="ref-value" id="d-personne"></span></div>
+    </div>
+
+    <!-- SANCTION -->
+    <section class="section">
+      <h2 class="section-title">Sanction <span>prononcée</span></h2>
+      <div class="section-line"></div>
+
+      <div class="sanction-card">
+        <div class="sanction-niveau" id="d-niveau"></div>
+        <div class="sanction-intitule" id="d-intitule"></div>
+        <p id="d-resume"></p>
+        <div class="info-grid">
+          <div class="info"><span class="info-label">Prise d'effet</span><span class="info-value" id="d-effet"></span></div>
+          <div class="info"><span class="info-label">Durée</span><span class="info-value" id="d-duree"></span></div>
+          <div class="info"><span class="info-label">Fondement</span><span class="info-value" id="d-fondement"></span></div>
+        </div>
+        <div style="margin-top:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+          <a href="https://meylanhandballtv.github.io/mhbtv/statuts.html" class="btn btn-outline" style="padding:0.5rem 1rem;font-size:0.75rem;">📖 Consulter le règlement disciplinaire →</a>
+          <span style="font-size:0.8rem;color:var(--muted);">Cette décision est rendue sur le fondement du règlement disciplinaire de Meylan Handball TV.</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- MOTIVATION -->
+    <section class="section">
+      <h2 class="section-title">Motifs <span>de la décision</span></h2>
+      <div class="section-line"></div>
+      <div class="decision-text" id="d-motifs"></div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- RECOURS -->
+    <section class="section">
+      <h2 class="section-title">Voies <span>de recours</span></h2>
+      <div class="section-line"></div>
+      <div class="recours-box">
+        <span style="font-size:1.3rem;">⚖️</span>
+        <div>
+          <div class="recours-title">Contester la décision</div>
+          <div class="recours-body" id="d-recours"></div>
+          <div class="recours-body" style="margin-top:0.6rem;">Les conditions et délais de recours sont précisés dans le <a href="https://meylanhandballtv.github.io/mhbtv/statuts.html" style="color:var(--red);text-decoration:underline;">règlement disciplinaire</a>.</div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+    /* ═════════════════════════════════════════════
+       ✏️  À COMPLÉTER — tout le contenu de la page
+       se règle ici, rien d'autre à modifier.
+       Les [crochets] sont des valeurs à remplacer.
+    ═════════════════════════════════════════════ */
+    const DECISION = {
+      dossier:   "IG-2026-010",
+      date:      "14 novembre 2026",
+      personne:  "Younes CHIKER",
+
+      intro: "Le Département de l'Inspection Générale de Meylan Handball TV, réuni en sa qualité de Bureau de l'Inspection Générale, rend la décision suivante à l'issue de la procédure complète ouverte sur signalement.",
+
+      niveau:    "Classe 3 · Palier 3",
+      intitule:  "Exclusion temporaire de 10 retransmissions ferme et 54 retransmissions avec sursis",
+      resume:    "Le membre est suspendu de toute participation à ses 10 prochaines retransmissions.",
+      effet:     "23 novembre 2026",
+      duree:     "10 retransmissions",
+      fondement: "Art. 16 et annexe — Classe 3, palier 2",
+
+      motifs: [
+        { titre: "Manquements retenus",
+          liste: [
+            "Classe 3 | I-04 — Désistement de dernière minute ayant entraîné annulation ou direct dégradé",
+            "Classe 3 | I-11 — Abandon de poste en cours de retransmission, poste majeur ou critique"
+          ] },
+        { titre: "Dispositif",
+          texte: "Le Bureau de l'Inspection Générale décide de prononcer à l'encontre du membre concerné la suspension de 10 retransmissions, à compter du 23 novembre 2026." }
+      ],
+
+      jury: [
+        { nom: "Chef de département de l'Inspection générale", role: "Président du Bureau" },
+        { nom: "Chef de département de l'ICR", role: "Membre de droit" },
+        { nom: "Membre de la Coordination générale", role: "Membre" }
+      ],
+
+      recours: "La personne sanctionnée peut contester la décision par écrit motivé dans les 5 jours de sa notification, devant le Département siégeant en formation d'appel (art. 17). La formation d'appel statue sous 7 jours et ne peut pas aggraver la sanction.",
+
+      signature: {
+        lieu: "Meylan",
+        date: "14 novembre 2026",
+        nom:  "Le Président du Bureau",
+        role: "Chef de département de l'Inspection générale"
+      }
+    };
+
+    /* ═════════════ RENDU (ne pas modifier) ═════════════ */
+    const $ = id => document.getElementById(id);
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const D = DECISION;
+
+    $('d-intro').textContent     = D.intro;
+    $('d-dossier').textContent   = D.dossier;
+    $('d-date').textContent      = D.date;
+    $('d-personne').textContent  = D.personne;
+    $('d-niveau').textContent    = D.niveau;
+    $('d-intitule').textContent  = D.intitule;
+    $('d-resume').textContent    = D.resume;
+    $('d-effet').textContent     = D.effet;
+    $('d-duree').textContent     = D.duree;
+    $('d-fondement').textContent = D.fondement;
+    $('d-recours').textContent   = D.recours;
+
+    $('d-motifs').innerHTML = D.motifs.map(m =>
+      `<h3>${esc(m.titre)}</h3>` +
+      (m.texte ? `<p>${esc(m.texte)}</p>` : '') +
+      (m.liste ? `<ul>${m.liste.map(li => `<li>${esc(li)}</li>`).join('')}</ul>` : '')
+    ).join('');
+
+    $('d-jury').innerHTML = D.jury.map(j =>
+      `<div class="jury-card"><div class="jury-nom">${esc(j.nom)}</div><div class="jury-role">${esc(j.role)}</div></div>`
+    ).join('');
+
+    $('d-signature').innerHTML =
+      `Fait à ${esc(D.signature.lieu)}, le ${esc(D.signature.date)}.<br>` +
+      `<strong>${esc(D.signature.nom)}</strong><br>${esc(D.signature.role)}<br>` +
+      `Bureau de l'Inspection Générale — Meylan Handball TV`;
+  </script>
+
+  <script src="footer.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QCM d'Accréditation — Commentateur sportif | Meylan Handball TV</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="qcm.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+  <script src="nav.js"></script>
+
+  <main class="page">
+    <div class="hero">
+      <div class="hero-accent"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Accréditation Commentateur</div>
+        <h1>Commentateur <em>sportif qualifié</em></h1>
+        <p class="hero-sub">Validez vos qualifications pour commenter les rencontres diffusées par Meylan Handball TV.</p>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="doc-toolbar"><a href="index.html" class="doc-back">← Retour à l'accueil</a></div>
+      <div id="qcm-root"></div>
+
+      <!-- ============================================================ -->
+      <!-- ZONE À MODIFIER : questions                                   -->
+      <!-- Une question = { question, options (2 à 6), answer, article } -->
+      <!--   answer  : index de la bonne réponse (0 = 1re option)        -->
+      <!--   article : référence affichée au-dessus de la question       -->
+      <!--             (laisser "" si aucune)                            -->
+      <!-- Pour ajouter une question : copier un bloc { ... }, + virgule -->
+      <!-- Les anciens tableaux (question/options/answer ou q/opts/ans)  -->
+      <!-- se collent tels quels ici.                                    -->
+      <!-- ============================================================ -->
+      <script>
+        const QUESTIONS = [
+          { question: "Exemple : remplacez ce bloc par vos questions.",
+            options: ["Option A", "Option B", "Option C", "Option D"],
+            answer: 1, article: "" },
+        ];
+
+        /* ⚙️ RÉGLAGES DE CE QCM */
+        window.QCM_CONFIG = {
+          id: "cs",                       // identifiant interne (reçu dans l'e-mail)
+          level: "Commentateur",                 // affiché dans la pastille
+          certificat: "Commentateur sportif qualifié",       // titre complet (e-mail)
+          poste: "Commentateur sportif",                 // poste concerné (e-mail)
+          passMark: 10,                       // seuil de réussite, sur 20
+          draw: 15,                           // 0 = toutes les questions ; N = N questions tirées au hasard
+          showScore: false,                  // afficher la note au candidat
+          showCorrection: false,             // afficher la correction détaillée (si showScore)
+          sendOnlyIfPassed: false,            // true = n'envoyer à l'ICR que les réussites
+          about: [
+            "Ce questionnaire sélectionne <strong>15 questions aléatoires</strong> parmi le référentiel complet. Les tentatives sont illimitées.",
+            "Aucun score ne vous est communiqué : l'évaluation est réalisée par l'ICR."
+          ],
+          questions: QUESTIONS
+        };
+      </script>
+      <!-- ============================================================ -->
+
+      <script src="qcm-engine.js"></script>
+    </section>
+  </main>
+
+  <script src="footer.js"></script>
+</body>
+</html>

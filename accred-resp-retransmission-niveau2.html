@@ -37,19 +37,116 @@
       <!-- ============================================================ -->
       <script>
         const QUESTIONS = [
-          { question: "Exemple : remplacez ce bloc par vos questions.",
-            options: ["Option A", "Option B", "Option C", "Option D"],
-            answer: 1, article: "" },
+          { 
+            question: "Que prévoit le règlement sur la nature des fonctions de Responsable de Retransmission, de Sous-Directeur et de Directeur des Opérations ?",
+            options: ["Ce sont des grades permanents, conservés d'une diffusion à l'autre", "Elles ne constituent pas un grade permanent : elles sont exercées pour une diffusion et pour elle seule, sans statut ni prérogative en dehors", "Elles confèrent la qualité de membre de la Coordination Générale pendant toute la saison", "Elles sont attribuées à vie dès que l'accréditation est obtenue"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Pour une diffusion réalisée en multiplex, que désigne l'autorité de planification ?",
+            options: ["Un Chef d'Équipe par site, sans Directeur des Opérations", "Un Directeur des Opérations par site", "Un Directeur des Opérations et un Sous-Directeur des Opérations par site", "Un Sous-Directeur des Opérations unique pour l'ensemble des sites"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "Quel est le champ d'exercice du Sous-Directeur des Opérations (SDOR) ?",
+            options: ["Un site déterminé dans le cadre d'une retransmission multiplex, avec les mêmes prérogatives qu'un Chef d'Équipe sur le fonctionnement matériel et humain de ce site, sous réserve des instructions de coordination du Directeur des Opérations", "L'ensemble d'une retransmission multiplex, tous sites confondus", "Un match unique sur un seul site, sans lien avec un multiplex", "La seule centralisation des comptes rendus, sans autorité sur le site"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "Un incident propre à son site, n'affectant pas les autres sites d'un multiplex, survient. Que fait le SDOR ?",
+            options: ["Il attend les instructions du Directeur des Opérations avant toute mesure", "Il saisit l'ICR, qui décide à sa place", "Il décide seul, sans avoir à informer le Directeur des Opérations", "Il décide seul des mesures à prendre, dans les conditions des articles 16 à 22, et en informe sans délai le Directeur des Opérations"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Qui est seul compétent pour décider d'une mesure affectant simultanément plusieurs sites, notamment l'interruption générale d'une diffusion multiplex ?",
+            options: ["Les Sous-Directeurs, à la majorité", "Le Directeur des Opérations", "Le chef de département Officiels de Retransmission", "Le club receveur"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Comment sont traités les comptes rendus d'une diffusion multiplex ?",
+            options: ["Chaque Sous-Directeur transmet le sien séparément à l'ICR, sans centralisation", "Le Directeur des Opérations en rédige un seul, sans l'apport des sites", "Le Directeur des Opérations centralise les comptes rendus établis par chaque Sous-Directeur en une fiche unique de diffusion multiplex", "Ils sont centralisés par la Coordinatrice adjointe"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
         ];
 
         /* ⚙️ RÉGLAGES DE CE QCM */
         window.QCM_CONFIG = {
-          id: "sdor",                       // identifiant interne (reçu dans l'e-mail)
+          id: "Responsable de retransmission",                       // identifiant interne (reçu dans l'e-mail)
           level: "Niveau 2",                 // affiché dans la pastille
-          certificat: "Sous-Directeur / Directeur des Opérations de Retransmission (Niveau 3)",       // titre complet (e-mail)
+          certificat: "Sous-Directeur / Directeur des Opérations de Retransmission (Niveau 2)",       // titre complet (e-mail)
           poste: "SDOR / DOR",                 // poste concerné (e-mail)
           passMark: 12,                       // seuil de réussite, sur 20
-          draw: 0,                           // 0 = toutes les questions ; N = N questions tirées au hasard
+          draw: 10,                           // 0 = toutes les questions ; N = N questions tirées au hasard
           showScore: true,                  // afficher la note au candidat
           showCorrection: true,             // afficher la correction détaillée (si showScore)
           sendOnlyIfPassed: false,            // true = n'envoyer à l'ICR que les réussites

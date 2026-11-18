@@ -37,9 +37,114 @@
       <!-- ============================================================ -->
       <script>
         const QUESTIONS = [
-          { question: "Exemple : remplacez ce bloc par vos questions.",
-            options: ["Option A", "Option B", "Option C", "Option D"],
-            answer: 1, article: "" },
+          { 
+            question: "Qui désigne le responsable de retransmission pour chaque rencontre retransmise en direct ?",
+            options: ["Le Coordinateur général", "Le Chef de département Officiels de Retransmission", "L'Assemblée générale", "Le club organisateur de la rencontre"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Commen le responsable de retransmission doit-il être identifiable, et pendant combien de temps ?",
+            options: ["Par un badge nominatif, uniquement pendant la retransmission en direct", "Par un brassard, de l'installation jusqu'au coup d'envoi", "Par un gilet portant le logo du collectif, uniquement pendant le direct", "Par un gilet portant le logo du collectif ou son badge nominatif, pendant toute la durée de l'événement"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Quelle est l'étendue de l'autorité du Chef d'Équipe (RR) sur les membres placés sous sa supervision pour la diffusion ?",
+            options: ["Une autorité disciplinaire immédiate à titre conservatoire (rappel à l'ordre verbal, retrait provisoire d'un poste, exclusion de la retransmission en cours), sans pouvoir prononcer de sanction disciplinire", "Une autorité disciplinaire complète, y compris le pouvoir de prononcer des sanctions", "Aucune autorité disciplinaire : il doit saisir l'ICR avant toute mesure", "Une autorité limité au rappel à l'ordre verbal, sans pouvoir retirer un poste ni d'exclure un membre"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "Quel est l'effectif minimal exigé simultanément pour démarrer une retransmission ?",
+            options: ["Un responsable de retransmission et un opérateur caméra", "Un responsable de retransmission, un opérateur caméra et un technicien de régie", "Un responsable de retransmission accrédité, un opérateur caméra accrédité et un commentateur accrédité (ou, à défaut, un dispositif sans commentaire live validé par la Coordination générale)", "Un responsable de retransmission, deux opérateurs caméra et un commentateur"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: " Lequel de ces éléments doit obligatoirement être opérationnel avant tout lancement ?",
+            options: ["Un système de ralenti", "Le système de diffusion en direct, avec une connexion réseau testée", "Un second dispositif de captation vidéo de secours", "Un éclairage d'appoint"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Les conditions minimales de retransmission ne peuvent être réunies. Que fait le responsable de retransmission ?",
+            options: ["Il informe le chef de département Officiels de Retransmission, qui décide seul", "Il décide seul, après avoir consulté son équipe", "Il demande au club organisateur de trancher", "Il informe sans délai la Coordinatrice adjointe, qui décide du maintien, du report ou de l'annulation"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Une perte audio temporaire survient pendant le direct, sans arrêt total de la diffusion. Que doit faire l'équipe ?",
+            options: ["Interrompre immédiatement le direct et demander l'aval de la Coordinatrice adjointe", "Obtenir l'aval préalable de la Coordinatrice adjointe avant toute adaptation", "Maintenir la retransmission en adaptant les moyens techniques et éditoriaux, sans avoir à en référer à la Coordinatrice adjointe", "Suspendre le direct pendant 5 minutes le temps de rétablir le son"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "Que devient un incident technique mineur qui se prolonge au point de compromettre la qualité globale de la diffusion ?",
+            options: ["Il est requalifié en incident technique majeur et la procédure d'interruption de l'article 16 s'applique", "Il reste mineur tant que le direct n'est pas totalement coupé", "Il est requalifié en cas de force majeure au sens de l'article 21", "Il est transmis à l'ICR, qui décide seule de la suite à donner en direct"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "À la suite d'une panne technique majeure, le responsable de retransmission envisage d'interrompre définitivement le direct. Que doit-il faire ?",
+            options: ["Il peut décider seul, à condition de rédiger un compte rendu", "Il doit obtenir l'aval préalable de la Coordinatrice adjointe ou, à défaut, de toute personne de la Coordination générale", "Il doit obtenir l'aval préalable du chef de département Officiels de Retransmission", "Il décide à la majorité des membres de l'équipe présents"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "En cas d'urgence absolue nécessitant une interruption immédiate du direct :",
+            options: ["Toute suspension sans aval préalable est interdite, même en urgence absolue", "Le responsable peut suspendre le direct, et informer la Coordinatrice adjointe à la fin de la rencontre", "Le responsable peut suspendre le direct uniquement avec l'accord du club organisateur", "Le responsable peut suspendre provisoirement le direct sans autorisation préalable, mais doit en informer sans délai la Coordinatrice adjointe afin de régulariser"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Le corps arbitral demande l'arrêt de la diffusion. Que doit faire le responsable de retransmission ?",
+            options: ["Suspendre immédiatement le direct sans autorisation préalable, puis obtenir l'aval requis pour décider de la reprise ou de l'interruption définitive", "Poursuivre le direct jusqu'à obtenir l'aval de la Coordinatrice adjointe", "Suspendre le direct uniquement si la demande est confirmée par écrit", "Suspendre le direct uniquement si la demande émane du club organisateur"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "Une urgence médicale survient dans les tribunes. Quelle est la première priorité ?",
+            options: ["Informer d'abord la Coordinatrice adjointe", "Interrompre le direct, puis rédiger un compte rendu", "lerter sans délai les secours présents ou, à défaut, les services d'urgence (15, 18, 112), sans que la continuité de la retransmission puisse retarder cette démarche", "Continuer à filmer afin de documenter l'incident"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "Que prévoit le règlement pour les images d'une personne en situation de détresse médicale ?",
+            options: ["Elles peuvent être archivées pour la rédaction du compte rendu", "Aucune image ne peut être diffusée, archivée ou transmise, sauf demande expresse et écrite de la personne concernée ou de ses ayants droit", "Elles peuvent être archivées, mais jamais diffusées", "Elles peuvent être transmises à l'ICR comme pièces du dossier"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Un ballon endommage le matériel de diffusion. Dans quel délai le compte rendu circonstancié doit-il être transmis au chef de département Officiels de Retransmission ?",
+            options: ["24 heures suivant l'événement", "48 heures suivant l'événement", "7 jours suivant l'événement", "Avant la fin de la rencontre"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "En cas de coupure de réseau, de combien de temps dispose le responsable de retransmission pour tenter de rétablir la connexion par des moyens de substitution ?",
+            options: ["2 minutes", "5 minutes", "10 minutes", "15 minutes"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "En cas de coupure d'alimentation électrique, la retransmission est officiellement interrompue lorsque le délai de rétablissement :",
+            options: ["excède 5 minutes ou est indéterminé", "excède 10 minutes ou est indéterminé", "excède 15 minutes ou est indéterminé", "excède 30 minutes ou est indéterminé"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "Laquelle de ces missions n'est PAS une mission du responsable de retransmission ?",
+            options: ["La supervision de l'installation (sécurité, positionnement du matériel, règles des salles)", "La gestion des imprévus techniques, organisationnels ou liés à la salle", "La remontée des incidents techniques ou comportementaux à la Coordination générale, si nécessaire", "Le prononcé de sanctions disciplinaires à l'encontre d'un membre de l'équipe"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Un spectateur pénètre sans autorisation dans l'espace de retransmission. Que doit faire le responsable de retransmission ?",
+            options: ["Le faire sortir lui-même, au besoin par la force", "Filmer l'incident pour disposer d'une preuve", "Lui demander fermement de quitter la zone et, s'il refuse, informer sans délai le service de sécurité ou les responsables de l'établissement, sans aucune intervention physique", "Suspendre immédiatement la retransmission dans tous les cas"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "Laquelle de ces rencontres relève du niveau 1 de priorisation (retransmission impérative, sans dérogation possible) ?",
+            options: ["Un match à domicile de championnat des SF1 ou SG1", "Un quart de finale de la Coupe Jacques Battu", "Un tournoi organisé par le club", "Un match de Coupe de France, à n'importe quel tour, pour une équipe du club engagée"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Un membre accrédité est indisponible de manière imprévue pour une diffusion. Que peut faire le chef de département Officiels de Retransmission ?",
+            options: ["Désigner à titre exceptionnel, pour cette seule diffusion, un membre non encore accrédité, sous la supervision d'un membre accrédité lorsque les circonstances le permettent ; la désignation est motivée et consignée", "Désigner définitivement un membre non accrédité, qui reçoit alors l'accréditation", "Annuler la diffusion, aucune dérogation n'étant prévue", "Laisser un membre non accrédité exercer seul, sans supervision ni motivation"],
+            answer: 0, article: "" 
+          },
+
+
+
+          { 
+            question: "",
+            options: ["", "", "", ""],
+            answer: 0, article: "" 
+          },
         ];
 
         /* ⚙️ RÉGLAGES DE CE QCM */
@@ -54,7 +159,7 @@
           showCorrection: true,             // afficher la correction détaillée (si showScore)
           sendOnlyIfPassed: false,            // true = n'envoyer à l'ICR que les réussites
           about: [
-            "Ce QCM porte sur les pouvoirs propres au grade Responsable de Retransmission, sur les procédures en cas d'incident lors d'un direct, ainsi que sur les conditions d'accès au titre de RR.",
+            "Ce QCM porte sur les pouvoirs propres au titre de Responsable de Retransmission, sur les procédures en cas d'incident lors d'un direct, ainsi que sur les conditions d'accès au titre de RR.",
             "La réussite de ce questionnaire, combinée aux conditions cumulatives nécessaires, conditionne l'attribution du titre de <strong>Responsable de Retransmission (RR)</strong>."
           ],
           questions: QUESTIONS

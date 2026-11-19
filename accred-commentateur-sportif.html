@@ -37,19 +37,111 @@
       <!-- ============================================================ -->
       <script>
         const QUESTIONS = [
-          { question: "Exemple : remplacez ce bloc par vos questions.",
-            options: ["Option A", "Option B", "Option C", "Option D"],
-            answer: 1, article: "" },
+          { 
+            question: "Que faut-il pour pouvoir être désigné commentateur sportif lors d'une retransmission ?",
+            options: ["Avoir déjà exercé comme cadreur pendant une saison", "Détenir l'accréditation correspondante, obtenue grâce au questionnaire d'aptitude et d'accréditation", "Être désigné par le club organisateur de la rencontre", "Être membre de la Coordination générale"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Quelle est la durée de validité d'une accréditation de Commentateur sportif ?",
+            options: ["Deux saisons sportives", "Illimitée, sauf retrait", "Douze mois glissants à compter de l'obtention", "Une saison sportive ; elle est à renouveler au début de chaque saison en remplissant à nouveau le questionnaire d'aptitude"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "En cas de changement significatif de matériel, de procédure ou de règlement, que peut exiger la Coordination générale, et avec quel préavis ?",
+            options: ["Un renouvellement anticipé des accréditations concernées, avec un préavis minimum de 15 jours", "Un renouvellement anticipé des accréditations concernées, avec un préavis minimum de 48 heures", "Une suspension automatique de toutes les accréditations, sans préavis", "Un renouvellement anticipé des accréditations concernées, avec un préavis minimum de 30 jours"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "Un membre n'obtient pas le niveau nécessaire au questionnaire. Que prévoit le règlement ?",
+            options: ["Il peut tout de même être affecté, sous la supervision du Responsable de retransmission", "Il est définitivement exclu du poste de commentateur", "Il ne peut pas être affecté au poste visé ; la Coordination générale peut proposer un accompagnement, une formation interne ou une période d'observation, et fixe la date à laquelle il peut repasser le questionnaire", "Il peut repasser le questionnaire immédiatement, autant de fois qu'il le souhaite"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "En cas de non-respect volontaire de l'obligation d'accréditation, que peut faire la Coordination générale ?",
+            options: ["Prononcer elle-même une sanction disciplinaire", "Saisir l'Instance Compétente des Retransmissions (ICR) afin d'engager une procédure de l'Inspection Générale", "Retirer automatiquement toutes les accréditations du membre", "Demander au Responsable de retransmission de sanctionner le membre"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Que prévoit l'effectif minimal d'une retransmission en matière de commentaire ?",
+            options: ["Obligatoirement deux commentateurs accrédités", "Un commentateur, accrédité ou non", "Aucun commentateur : la retransmission se fait toujours sans commentaire", "Un commentateur accrédité ou, à défaut, un dispositif de diffusion sans commentaire live expressément validé par la Coordination générale"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Que prévoit le Règlement général sur le commentaire dans une équipe de retransmission basique ?",
+            options: ["Un commentateur ou un duo de commentateurs, lorsque cela est prévu ; la composition exacte de l'équipe peut varier selon les ressources, le matériel, le lieu et l'importance de l'évènement", "Un duo de commentateurs est toujours obligatoire", "Le commentaire est réservé aux matchs de Coupe de France", "Le commentateur remplace le réalisateur ou superviseur technique"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "À quoi s'applique le principe de neutralité du média pour un membre désigné sur une retransmission ?",
+            options: ["Uniquement aux commentaires et aux prises de parole", "Uniquement aux membres désignés commentateurs ou réalisateurs", "Aux commentaires et prises de parole, aux interactions avec le public, les joueurs, le staff ou les officiels, aux attitudes visibles à l'image et aux choix techniques pouvant influencer la perception de la retransmission", "Uniquement aux interactions avec les officiels de la rencontre"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "À partir de quand la Coordination générale peut-elle saisir l'ICR pour un manquement avéré au principe de neutralité ?",
+            options: ["Dès le premier propos partial, quelle que soit sa durée", "Lorsque le manquement est constaté sur plus de 5 minutes de la durée totale de la retransmission", "Lorsque le manquement est constaté sur plus de 15 minutes de la durée totale de la retransmission", "Uniquement si le club concerné dépose une plainte écrite"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Une décision arbitrale controversée provoque un désaccord chez un membre de l'équipe pendant l'évènement. Quelle est la bonne conduite ?",
+            options: ["En parler directement aux arbitres à la mi-temps", "L'exprimer à l'antenne, avec modération", "En discuter avec le délégué du club, seul habilité à répondre", "Adopter une attitude neutre et respectueuse ; la remontée de l'incident se fait uniquement auprès de la Coordination générale, jamais directement auprès des officiels pendant l'évènement"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Qui peut accéder aux zones techniques (captation vidéo, régie) ?",
+            options: ["Les membres du collectif identifiés et accrédités comme participants à la retransmission, les responsables d'équipe ayant un rôle technique défini, et toute personne expressément autorisée par la Coordination générale", "Tout licencié du club, sur simple demande", "Les accompagnateurs des joueurs, avec un membre du collectif", "Le public, hors périodes de jeu"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "Lors d'un déplacement hors des installations de Meylan Handball, quelle attitude est attendue vis-à-vis du club hôte ?",
+            options: ["Une liberté d'organisation, le club hôte ne pouvant imposer de consignes", "Un comportement irréprochable : respect des salles, des membres du staff, des consignes et des zones réservées", "Le seul respect des consignes données par le public", "L'accès libre à toutes les zones du gymnase pour optimiser le commentaire"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Le droit à l'image doit être respecté dans toutes les captations. Quelles personnes sont concernées ?",
+            options: ["Uniquement les joueurs", "Les joueurs et les officiels", "Les joueurs, les officiels et le public, mais pas les membres du collectif", "Les joueurs, les officiels, les membres du staff, le public et les autres bénévoles, y compris les membres participant à la retransmission"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "Un commentateur perturbe la retransmission par son comportement. Que peut faire le responsable de retransmission, qui l'a sous sa supervision ?",
+            options: ["Lui adresser un rappel à l'ordre verbal, lui retirer provisoirement son poste pour la durée de la diffusion ou, en cas de manquement grave ou de refus caractérisé de se conformer à ses instructions, l'exclure de la retransmission en cours", "Lui infliger un blâme inscrit au registre des accréditations", "Suspendre son accréditation pour la saison", "Seulement signaler le problème à l'ICR, sans pouvoir agir pendant la diffusion"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "Quelle est la nature des mesures que peut prendre le responsable de retransmission à l'égard des membres placés sous sa supervision ?",
+            options: ["Ce sont des sanctions disciplinaires au sens du Règlement disciplinaire", "Elles sont définitives et irrévocables", "Elles sont purement conservatoires ; elles sont consignées dans la fiche de compte rendu et portées sans délai à la connaissance du chef de département Officiels de Retransmission, qui apprécie l'opportunité de saisir l'ICR", "Elles n'ont pas à être consignées"],
+            answer: 2, article: "" 
+          },
+          { 
+            question: "Une perte audio temporaire survient, sans arrêt total de la diffusion. Quelle est la conduite attendue ?",
+            options: [" Interrompre immédiatement le direct et demander l'aval de la Coordinatrice adjointe", "Maintenir la retransmission : l'équipe adapte les moyens techniques et éditoriaux pour préserver la qualité globale, sans avoir à en référer à la Coordinatrice adjointe", "Attendre le rétablissement du son sans rien faire à l'antenne", "Suspendre le direct pendant 5 minutes"],
+            answer: 1, article: "" 
+          },
+          { 
+            question: "Un commentateur constate qu'un joueur est en détresse médicale. Que doit-il faire ?",
+            options: ["Poursuivre son commentaire pour ne pas interrompre la retransmission", "Attendre l'instruction du responsable de retransmission avant toute démarche", "Informer d'abord la Coordinatrice adjointe", "Alerter sans délai les secours présents dans l'établissement ou, à défaut, les services d'urgence (15, 18, 112) : aucune considération de continuité de la retransmission ne peut retarder cette démarche"],
+            answer: 3, article: "" 
+          },
+          { 
+            question: "La retransmission est suspendue à la suite d'une urgence médicale. Quelle information peut être diffusée au public ?",
+            options: ["Une information sommaire, par tout moyen disponible, sans divulguer d'informations médicales relatives à la personne concernée", "Aucune information tant que la personne n'est pas prise en charge", "L'identité de la personne et la nature de la blessure, par souci de transparence", "Les images de l'incident, avec l'accord du club"],
+            answer: 0, article: "" 
+          },
+          { 
+            question: "Une altercation grave éclate dans les tribunes. Que prévoit le règlement ?",
+            options: ["Commenter l'incident en détail pour informer le public", "Filmer l'incident afin de constituer une preuve", "La captation des personnes impliquées est suspendue immédiatement et les choix éditoriaux sont adaptés ; il ne s'agit pas de documenter ou de filmer l'incident à des fins autres que la retransmission sportive", "Poursuivre sans changement, l'incident ne concernant pas la retransmission"],
+            answer: 2, article: "" 
+          },
         ];
 
         /* ⚙️ RÉGLAGES DE CE QCM */
         window.QCM_CONFIG = {
-          id: "cs",                       // identifiant interne (reçu dans l'e-mail)
+          id: "Commentateur sportif qualifié",                       // identifiant interne (reçu dans l'e-mail)
           level: "Commentateur",                 // affiché dans la pastille
           certificat: "Commentateur sportif qualifié",       // titre complet (e-mail)
           poste: "Commentateur sportif",                 // poste concerné (e-mail)
           passMark: 10,                       // seuil de réussite, sur 20
-          draw: 15,                           // 0 = toutes les questions ; N = N questions tirées au hasard
+          draw: 10,                           // 0 = toutes les questions ; N = N questions tirées au hasard
           showScore: false,                  // afficher la note au candidat
           showCorrection: false,             // afficher la correction détaillée (si showScore)
           sendOnlyIfPassed: false,            // true = n'envoyer à l'ICR que les réussites

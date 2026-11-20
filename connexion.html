@@ -9,90 +9,52 @@
   /* ── PAGE CONNEXION ── */
   .login-wrap {
     min-height: calc(100vh - 64px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3rem 1.5rem;
-    position: relative;
-    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    padding: 3rem 1.5rem; position: relative; overflow: hidden;
   }
   .login-wrap::before {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background:
       linear-gradient(135deg, rgba(232,0,29,0.08) 0%, transparent 60%),
       repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.015) 80px, rgba(255,255,255,0.015) 81px);
     pointer-events: none;
   }
-
   .login-card {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 420px;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 2.5rem 2rem;
-    animation: fadeSlide 0.4s ease;
+    position: relative; z-index: 1; width: 100%; max-width: 420px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 2.5rem 2rem; animation: fadeSlide 0.4s ease;
   }
-
   .login-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.4rem;
-    letter-spacing: 0.03em;
-    line-height: 1;
-    color: var(--white);
-    margin: 1rem 0 0.5rem;
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; letter-spacing: 0.03em;
+    line-height: 1; color: var(--white); margin: 1rem 0 0.5rem;
   }
   .login-title em { color: var(--red); font-style: normal; display: block; }
-
-  .login-sub {
-    font-size: 0.85rem;
-    color: var(--muted);
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
+  .login-sub { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 2rem; }
 
   /* FORM */
   .field { margin-bottom: 1.25rem; }
   .field label {
-    display: block;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 0.5rem;
+    display: block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem;
+    font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 0.5rem;
   }
   .input-wrap { position: relative; }
   .field input {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    padding-right: 2.8rem;
-    background: var(--darker);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    color: var(--text);
-    font-family: 'Barlow', sans-serif;
-    font-size: 0.95rem;
-    outline: none;
-    transition: border-color 0.2s;
+    width: 100%; padding: 0.8rem 1rem; padding-right: 2.8rem;
+    background: var(--darker); border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text); font-family: 'Barlow', sans-serif; font-size: 0.95rem;
+    outline: none; transition: border-color 0.2s;
   }
   .field input:focus { border-color: var(--red); }
   .field input::placeholder { color: var(--muted); }
-
   .toggle-pwd {
     position: absolute; right: 0.85rem; top: 50%; transform: translateY(-50%);
     background: none; border: none; cursor: pointer; color: var(--muted);
-    display: flex; align-items: center; padding: 0;
-    transition: color 0.2s;
+    display: flex; align-items: center; padding: 0; transition: color 0.2s;
   }
   .toggle-pwd:hover { color: var(--text); }
   .toggle-pwd svg { width: 18px; height: 18px; }
 
-  /* Error */
   .error-box {
     display: none; align-items: center; gap: 0.6rem;
     background: rgba(232,0,29,0.08); border: 1px solid rgba(232,0,29,0.3);
@@ -103,19 +65,13 @@
   .error-box svg { width: 16px; height: 16px; flex-shrink: 0; }
 
   .attempts-warn {
-    display: none;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.78rem; color: var(--muted);
-    text-align: center; margin-bottom: 1rem;
+    display: none; font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1rem;
   }
   .attempts-warn.visible { display: block; }
   .attempts-warn span { color: var(--red); font-weight: 700; }
 
-  /* Submit — réutilise .btn .btn-red du design system */
-  .btn-login {
-    width: 100%;
-    justify-content: center;
-  }
+  .btn-login { width: 100%; justify-content: center; }
   .btn-login:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
   .btn-login svg { width: 16px; height: 16px; }
 
@@ -123,24 +79,18 @@
   .lockout-screen { display: none; text-align: center; padding: 1rem 0; }
   .lockout-icon { font-size: 2.5rem; margin-bottom: 1rem; }
   .lockout-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.7rem; letter-spacing: 0.05em; color: var(--red); margin-bottom: 0.5rem;
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem;
+    letter-spacing: 0.05em; color: var(--red); margin-bottom: 0.5rem;
   }
   .lockout-msg { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
   .lockout-timer {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2.2rem; color: var(--white); letter-spacing: 0.1em; margin: 1.25rem 0;
+    font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--white);
+    letter-spacing: 0.1em; margin: 1.25rem 0;
   }
 
-  @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeSlide { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes spin { to { transform: rotate(360deg); } }
-
-  @media (max-width: 480px) {
-    .login-card { padding: 2rem 1.25rem; }
-  }
+  @media (max-width: 480px) { .login-card { padding: 2rem 1.25rem; } }
 </style>
 </head>
 <body>
@@ -211,34 +161,67 @@
 
 <script>
 /* ═══════════════════════════════════════════════════════
-   ⚙️  COMPTES AUTORISÉS  — Modifier ici
-   Chaque entrée : { identifiant: '...', motDePasse: '...', page: '...' },
-   Vous pouvez en ajouter autant que nécessaire.
+   ⚙️  CONFIGURATION — à modifier ici uniquement
    ═══════════════════════════════════════════════════════ */
+
+/* 1) CATALOGUE DES PAGES CONFIDENTIELLES
+      clé  → fichier, nom affiché, icône, description            */
+const PAGES = {
+  'dco':       { fichier: 'dco-inspectiongenerale.html', nom: 'Inspection générale',     icone: '⚖️', desc: 'Suivi disciplinaire et contrôle des retransmissions' },
+  'tableau':   { fichier: 'tableau-bord-rr.html',        nom: 'Tableau de bord RR',      icone: '📊', desc: 'Programmation des retransmissions' },
+  'presence':  { fichier: 'fiche_presence_rr.html',      nom: 'Fiche de présence',       icone: '📝', desc: 'Émargement et présence des responsables' },
+  'pv':        { fichier: 'generateur-pv-ag.html',       nom: 'Générateur de PV d\'AG',  icone: '📄', desc: 'Rédaction des procès-verbaux d\'assemblée générale' }
+};
+
+/* 2) COMPTES
+      motDePasse = en clair, modifiable à tout moment : il suffit de changer le texte entre guillemets
+      pages      = liste de clés du catalogue ci-dessus (1, 2, 3 pages ou plus)
+        • après connexion, la 1re page de la liste s'ouvre directement
+        • avec 2+ pages, une barre de navigation en bas de l'écran permet de passer de l'une à l'autre
+      Pour ajouter un compte : copier une ligne et changer identifiant, motDePasse et pages.        */
 const COMPTES = [
-  { identifiant: 'icr.admin',              motDePasse: 'MhbtvICR2025!',  page: 'dco-inspectiongenerale.html'     },
-  { identifiant: 'xavier.fini',             motDePasse: 'MHBTV2026@',    page: 'tableau-bord-rr.html' },
-  { identifiant: 'marie.dalzotto',          motDePasse: 'MHBTV-CG2026@',    page: 'tableau-bord-rr.html'  },
-  { identifiant: 'emmanuel.alvesdemoura',   motDePasse: 'MhbtvCoord#26',    page: 'tableau-bord-rr.html'  },
-  { identifiant: 'nicolas.marin',           motDePasse: 'Coord-MHBTV2026*',    page: 'tableau-bord-rr.html'  },
-  { identifiant: 'enzo.achour',             motDePasse: 'Mhbtv-Retrans26!',    page: 'tableau-bord-rr.html'  },
-  { identifiant: 'tim.tour',             motDePasse: 'MeylanTV26!',    page: 'tableau-bord-rr.html'  },
-  { identifiant: 'responsable',           motDePasse: 'Coord@MHBTV26', page: 'fiche_presence_rr.html' },
-  { identifiant: 'cg.admin',           motDePasse: 'CG@Mhbtv26!', page: 'generateur-pv-ag.html' },
+  { identifiant: 'xavier.fini',           motDePasse: 'MHBTV2026@',       pages: ['tableau', 'pv', 'dco', 'presence'] },   // 3 pages
+  { identifiant: 'cg.admin',              motDePasse: 'CG@Mhbtv26!',      pages: ['tableau', 'pv', 'dco', 'presence'] },          // 2 pages
+  { identifiant: 'icr.admin',             motDePasse: 'MhbtvICR2025!',    pages: ['dco'] },                    // 1 page
+  { identifiant: 'responsable',           motDePasse: 'Coord@MHBTV26',    pages: ['tableau', 'presence'] },               // 1 page
+  { identifiant: 'marie.dalzotto',        motDePasse: 'MHBTV-CG2026@',    pages: ['tableau', 'dco', 'presence'] },
+  { identifiant: 'emmanuel.alvesdemoura', motDePasse: 'MhbtvCoord#26',    pages: ['tableau', 'dco', 'presence'] },
+  { identifiant: 'nicolas.marin',         motDePasse: 'Coord-MHBTV2026*', pages: ['tableau', 'dco', 'presence'] },
+  { identifiant: 'enzo.achour',           motDePasse: 'Mhbtv-Retrans26!', pages: ['tableau', 'dco', 'presence'] },
+  { identifiant: 'tim.tour',              motDePasse: 'MeylanTV26!',      pages: ['tableau', 'dco', 'presence'] },
 ];
 
-/* ── Paramètres de sécurité ── */
-const MAX_TENTATIVES   = 5;         // Nombre de tentatives avant blocage
-const LOCKOUT_SECONDES = 5 * 60;    // Durée du blocage en secondes (5 min)
+/* 3) Sécurité */
+const MAX_TENTATIVES   = 5;         // tentatives avant blocage
+const LOCKOUT_SECONDES = 5 * 60;    // durée du blocage (5 min)
+const SESSION_HEURES   = 8;         // durée de validité de la session
 /* ═══════════════════════════════════════════════════════ */
 
-let tentatives = 0;
-let lockoutTimer = null;
-let lockoutRemaining = 0;
+const SESSION_KEY = 'mhbtv_session';
+let tentatives = 0, lockoutTimer = null, lockoutRemaining = 0;
 
-function handleKey(e) {
-  if (e.key === 'Enter') tryLogin();
+/* ── Session ── */
+function ouvrirSession(compte) {
+  const pages = compte.pages.map(k => PAGES[k]).filter(Boolean);
+  sessionStorage.setItem(SESSION_KEY, JSON.stringify({
+    id: compte.identifiant,
+    pages: pages,   // [{fichier, nom, icone, ...}] -> utilisé par garde.js pour la barre de navigation
+    exp: Date.now() + SESSION_HEURES * 3600 * 1000
+  }));
+  return pages;
 }
+function lireSession() {
+  try {
+    const s = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+    return s && s.exp > Date.now() ? s : null;
+  } catch (e) { return null; }
+}
+function logout() {
+  sessionStorage.removeItem(SESSION_KEY);
+}
+
+/* ── UI ── */
+function handleKey(e) { if (e.key === 'Enter') tryLogin(); }
 
 function togglePwd() {
   const input = document.getElementById('motdepasse');
@@ -252,27 +235,38 @@ function togglePwd() {
     : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
 }
 
+function showError(msg) {
+  const box = document.getElementById('errorBox');
+  document.getElementById('errorMsg').textContent = msg;
+  box.classList.remove('visible');
+  void box.offsetWidth;
+  box.classList.add('visible');
+}
+
+/* ── Après connexion réussie : ouverture directe de la première page autorisée.
+      La navigation entre les autres pages se fait ensuite via la barre ajoutée par garde.js ── */
+function afficherAcces(compte) {
+  const pages = ouvrirSession(compte);
+  if (pages.length) window.location.href = pages[0].fichier;
+}
+
 function tryLogin() {
   const id  = document.getElementById('identifiant').value.trim();
   const mdp = document.getElementById('motdepasse').value;
   const btn = document.getElementById('btnLogin');
 
-  if (!id || !mdp) {
-    showError('Veuillez remplir les deux champs.');
-    return;
-  }
+  if (!id || !mdp) { showError('Veuillez remplir les deux champs.'); return; }
 
   const compte = COMPTES.find(c => c.identifiant === id && c.motDePasse === mdp);
-  const ok = !!compte;
 
-  if (ok) {
+  if (compte) {
     btn.disabled = true;
     btn.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation:spin .7s linear infinite">
         <circle cx="12" cy="12" r="10" stroke-opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10"/>
       </svg>
       Connexion…`;
-    setTimeout(() => { window.location.href = compte.page; }, 700);
+    setTimeout(() => afficherAcces(compte), 600);
   } else {
     tentatives++;
     document.getElementById('attemptsWarn').classList.add('visible');
@@ -290,14 +284,6 @@ function tryLogin() {
       setTimeout(() => { mdpInput.style.borderColor = ''; }, 1500);
     }
   }
-}
-
-function showError(msg) {
-  const box = document.getElementById('errorBox');
-  document.getElementById('errorMsg').textContent = msg;
-  box.classList.remove('visible');
-  void box.offsetWidth; // force reflow pour relancer l'animation
-  box.classList.add('visible');
 }
 
 function startLockout() {
@@ -333,6 +319,14 @@ function updateLockoutTimer() {
   const s = String(lockoutRemaining % 60).padStart(2, '0');
   document.getElementById('lockoutTimer').textContent = `${m}:${s}`;
 }
+
+/* Si une session est déjà ouverte, on réaffiche directement l'accès */
+(function () {
+  const s = lireSession();
+  if (!s) return;
+  const compte = COMPTES.find(c => c.identifiant === s.id);
+  if (compte) afficherAcces(compte);
+})();
 </script>
 
 </body>

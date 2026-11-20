@@ -275,7 +275,14 @@ function doc(dl){
   +'<div class="divider"></div><div class="signature-block">'+E.sigs.map(function(s){return'<div><div class="sig-role">'+esc(s.role)+'</div>'+(s.sub?'<div class="sig-sub">'+esc(s.sub)+'</div>':'')+'<div class="sig-name">'+esc(s.name)+'</div><div class="sig-line"></div></div>'}).join('')+'</div></main>'
   +'<footer class="doc-footer"><strong>'+esc(E.org)+'</strong> · Procès-Verbal — '+esc(E.mid||m.sub)+' · '+esc(E.rest)+'</footer></body></html>';
 }
-function prev(){document.getElementById('pv').srcdoc=doc(false)}
+var py=0,ready=false;
+function prev(){
+  var f=document.getElementById('pv');
+  if(ready){try{py=f.contentWindow.scrollY}catch(e){}}
+  ready=false;
+  f.onload=function(){ready=true;try{f.contentWindow.scrollTo(0,py)}catch(e){}};
+  f.srcdoc=doc(false);
+}
 function pr(){var f=document.getElementById('pv');f.contentWindow.focus();f.contentWindow.print()}
 function dwn(txt,type,name){var u=URL.createObjectURL(new Blob([txt],{type:type})),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(u)},2000)}
 function slug(){return((state.meta.sub||'document').replace(/[^a-zA-Z0-9]+/g,'-').toLowerCase().slice(0,40).replace(/^-+|-+$/g,''))||'pv'}

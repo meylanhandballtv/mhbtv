@@ -73,34 +73,40 @@
     return bar;
   }
 
-  /* ── Placement sous la nav du site (fixe, sticky ou normale) ── */
-  var bar, spacer;
+  /* ── Placement sous la nav du site (.topbar : fixe, 64 px, z-index 1000) ── */
+  var bar, spacer, basePad = null;
   function placer(nav) {
     var h = nav.getBoundingClientRect().height;
     var pos = getComputedStyle(nav).position;
 
     if (pos === 'fixed') {
-      // nav fixe : barre fixe juste dessous + espace réservé pour ne rien masquer
+      // barre fixe juste sous la nav
       bar.style.position = 'fixed';
       bar.style.top = h + 'px';
       bar.style.left = '0';
       bar.style.right = '0';
-      if (!spacer) {
-        spacer = document.createElement('div');
-        spacer.id = 'mhbtv-switch-spacer';
-        nav.insertAdjacentElement('afterend', spacer);
+
+      // on décale le contenu de la hauteur de la barre pour ne rien masquer
+      var contenu = document.querySelector('.page');
+      if (contenu) {
+        if (basePad === null) basePad = parseFloat(getComputedStyle(contenu).paddingTop) || 0;
+        contenu.style.paddingTop = (basePad + bar.offsetHeight) + 'px';
+      } else {
+        if (!spacer) {
+          spacer = document.createElement('div');
+          spacer.id = 'mhbtv-switch-spacer';
+          nav.insertAdjacentElement('afterend', spacer);
+        }
+        spacer.style.height = bar.offsetHeight + 'px';
       }
-      spacer.style.height = bar.offsetHeight + 'px';
     } else {
-      // nav sticky ou dans le flux : barre collée juste dessous
       bar.style.position = 'sticky';
       bar.style.top = (pos === 'sticky' ? h : 0) + 'px';
-      if (spacer) { spacer.remove(); spacer = null; }
     }
   }
 
   function monter(essais) {
-    var nav = document.querySelector('nav, header, .navbar, #navbar, .nav');
+    var nav = document.querySelector('nav.topbar, .topbar, nav, header');
     if (!nav && essais < 20) { setTimeout(function () { monter(essais + 1); }, 50); return; }
 
     bar = construire();

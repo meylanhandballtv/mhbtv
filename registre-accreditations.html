@@ -39,6 +39,9 @@
     .badge.ok{background:rgba(61,220,132,.12);color:#3ddc84;border-color:rgba(61,220,132,.3)}
     .empty{padding:2.5rem;text-align:center;color:var(--muted);font-size:.9rem}
     .legend{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;font-size:.82rem;color:var(--muted);align-items:center}
+    .who{display:flex;align-items:center;gap:.75rem}
+    .m-avatar{width:40px;height:40px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.05em;overflow:hidden}
+    .m-avatar img{width:100%;height:100%;object-fit:cover;display:block}
     code{background:var(--darker);padding:.1rem .35rem;border-radius:3px;color:var(--gold)}
     @media(max-width:900px){.hero-home{padding:5rem 1.5rem 2.5rem}.stats-bar{grid-template-columns:1fr 1fr}}
   </style>
@@ -66,7 +69,7 @@
       <div class="tabs" id="tabs"></div>
       <div class="tbl-wrap">
         <table class="reg">
-          <thead><tr><th>Membre</th><th>Responsable de retransmission</th><th>Sous-Directeur / Directeur</th><th>Commentateur sportif</th></tr></thead>
+          <thead><tr><th>Membre</th><th>Responsable de retransmission</th><th>Sous-Directeur / Directeur</th><th>Commentateur</th></tr></thead>
           <tbody id="rows"></tbody>
         </table>
         <div class="empty" id="empty" hidden></div>
@@ -74,7 +77,7 @@
       <div class="legend">
         <span class="badge ok">Accrédité</span><span class="badge gold">En attente</span><span class="badge">Expirée</span><span class="badge">Suspendu</span><span class="badge grey">Non accrédité</span>
       </div>
-      <p style="color:var(--muted);font-size:.8rem;margin-top:.9rem;max-width:760px">Les membres se saisissent dans le tableau <code>MEMBRES</code> du script de cette page. Le registre officiel reste la référence.</p>
+      <!--<p style="color:var(--muted);font-size:.8rem;margin-top:.9rem;max-width:760px">Les membres se saisissent dans le tableau <code>MEMBRES</code> du script de cette page. Le registre officiel reste la référence.</p>-->
     </section>
   </main>
 
@@ -92,13 +95,16 @@
      Une accréditation dont la date de péremption est dépassée passe
      automatiquement en « Expirée ».
 
+     Photos : elles viennent du fichier avatars.js du site (liste PHOTOS, par
+     prénom). Un membre sans photo là-bas garde ses initiales. Une couleur
+     peut être imposée avec couleur: "#2980b9" ; sinon elle est automatique.
+
      MODÈLE :
      { nom: "Prénom NOM", RR: "accredite", RR_fin: "31/08/2027", DO: "", DO_fin: "", CS: "attente", CS_fin: "", notes: "" },
      ═══════════════════════════════════════════════════════════════════ */
   var CONFIG = { alerte: 30 };   // Nombre de jours avant péremption à partir duquel on signale « expire bientôt »
   var MEMBRES = [
     { nom: "Xavier FINI", RR: "accredite", RR_fin: "31/06/2027", DO: "accredite", DO_fin: "31/06/2027", CS: "accredite", CS_fin: "31/06/2027", notes: "" },
-
 
   ];
   /* ════════════════════ FIN DE LA ZONE À MODIFIER ════════════════════ */
@@ -122,6 +128,13 @@
     function has(m,s){return FN.some(function(f){var x=st(m,f);return x==s||(s=="accredite"&&x=="bientot")})}
     function count(s){return MEMBRES.reduce(function(a,m){return a+FN.filter(function(f){return st(m,f)==s}).length},0)}
 
+    var COULEURS=["#c0392b","#8e44ad","#2980b9","#27ae60","#e67e22","#16a085","#d35400","#7f8c8d","#1abc9c","#e74c3c"];
+    function initiales(n){var p=String(n||"").trim().split(/\s+/).filter(Boolean);return p.length?(p[0][0]+(p.length>1?p[p.length-1][0]:"")).toUpperCase():"?"}
+    function couleur(m){if(m.couleur)return m.couleur;var h=0,s=String(m.nom||"");for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return COULEURS[h%COULEURS.length]}
+    function avatar(m){
+      var c=couleur(m),st='background:'+c+'22;border:1px solid '+c+'55;color:'+c;
+      return '<div class="m-avatar" style="'+st+'">'+esc(initiales(m.nom))+"</div>"}
+
     function cell(m,f){
       var s=st(m,f);if(!s)return'<span class="sub">—</span>';
       var h='<span class="badge '+LB[s][1]+'">'+LB[s][0]+"</span>";
@@ -130,16 +143,18 @@
       if(d&&s=="expiree")h+='<span class="sub late">expirée le '+fr(d)+"</span>";
       return h}
 
+    var SORTED=MEMBRES.slice().sort(function(a,b){return String(a.nom).localeCompare(String(b.nom),"fr")});
+    function build(){
+      $("rows").innerHTML=SORTED.map(function(m){
+        return '<tr><td><div class="who">'+avatar(m)+'<div><b class="m-fullname">'+esc(m.nom)+"</b>"+(m.notes?'<span class="sub">'+esc(m.notes)+"</span>":"")+"</div></div></td>"+
+          FN.map(function(f){return"<td>"+cell(m,f)+"</td>"}).join("")+"</tr>"}).join("")}
+
     function render(){
-      var q=$("q").value.toLowerCase().trim();
-      var list=MEMBRES.filter(function(m){
-        if(flt!="all"&&!has(m,flt))return false;
-        return !q||String(m.nom||"").toLowerCase().indexOf(q)>-1});
-      list.sort(function(a,b){return String(a.nom).localeCompare(String(b.nom),"fr")});
-      $("rows").innerHTML=list.map(function(m){
-        return "<tr><td><b>"+esc(m.nom)+"</b>"+(m.notes?'<span class="sub">'+esc(m.notes)+"</span>":"")+"</td>"+
-          FN.map(function(f){return"<td>"+cell(m,f)+"</td>"}).join("")+"</tr>"}).join("");
-      $("empty").hidden=list.length>0;
+      var q=$("q").value.toLowerCase().trim(),rows=$("rows").children,vis=0;
+      SORTED.forEach(function(m,i){
+        var ok=(flt=="all"||has(m,flt))&&(!q||String(m.nom||"").toLowerCase().indexOf(q)>-1);
+        rows[i].hidden=!ok;if(ok)vis++});
+      $("empty").hidden=vis>0;
       $("empty").textContent=MEMBRES.length?"Aucun membre ne correspond.":"Aucun membre enregistré. Ajoutez-les dans le tableau MEMBRES du script de cette page.";
       $("s-ok").textContent=count("accredite")+count("bientot");
       $("s-wait").textContent=count("attente");
@@ -150,9 +165,10 @@
 
     $("tabs").addEventListener("click",function(e){var f=e.target.getAttribute("data-f");if(f){flt=f;render()}});
     $("q").oninput=render;
-    render();
+    build();render();
   })();
   </script>
   <script src="footer.js"></script>
+  <script src="avatars.js"></script>
 </body>
 </html>

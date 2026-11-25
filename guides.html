@@ -122,13 +122,11 @@
       max-width: 2900px;
     }
 
-    /* Ancre de section */
     .guide-section {
       margin-bottom: 4.5rem;
       scroll-margin-top: 80px;
     }
 
-    /* Titre de partie */
     .part-header {
       display: flex; align-items: center; gap: 1rem;
       padding: 1.25rem 1.75rem;
@@ -151,7 +149,6 @@
       line-height: 1;
     }
 
-    /* Fiche de poste */
     .fiche {
       background: var(--card);
       border: 1px solid var(--border);
@@ -194,7 +191,6 @@
     }
     .fiche-body { padding: 1.75rem 2rem; }
 
-    /* Grille infos poste */
     .fiche-meta-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -214,7 +210,6 @@
     }
     .fmi-val { font-size: .88rem; color: var(--text); line-height: 1.4; }
 
-    /* Sous-sections de fiche */
     .fiche-subsec { margin-bottom: 1.5rem; }
     .fiche-subsec-title {
       font-family: 'Barlow Condensed', sans-serif;
@@ -234,7 +229,6 @@
       color: var(--red); flex-shrink: 0; margin-top: .05rem;
     }
 
-    /* Table */
     .fiche-table {
       width: 100%; border-collapse: collapse;
       font-size: .85rem; margin-bottom: .5rem;
@@ -256,7 +250,6 @@
     .fiche-table tr:last-child td { border-bottom: none; }
     .fiche-table tr:hover td { background: rgba(255,255,255,.02); }
 
-    /* Règle d'or / alerte */
     .rule-box {
       border-radius: 7px;
       padding: 1rem 1.25rem;
@@ -292,7 +285,6 @@
     .rule-box.blue .rule-box-title { color: #63b3ed; }
     .rule-box.green .rule-box-title { color: #4ade80; }
 
-    /* Standards qualité */
     .quality-row {
       display: flex; align-items: flex-start; gap: .85rem;
       padding: .65rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
@@ -321,22 +313,9 @@
       margin-bottom: .25rem;
     }
     .orga-card-sub { font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
-    .orga-member {
-      display: flex; align-items: center; gap: .65rem;
-      padding: .45rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
-    }
-    .orga-member:last-child { border-bottom: none; }
-    .orga-avatar {
-      width: 30px; height: 30px; border-radius: 50%;
-      font-family: 'Bebas Neue', sans-serif; font-size: .72rem;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; color: var(--white);
-    }
-    .orga-name {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: .88rem; font-weight: 600; color: var(--white);
-    }
-    .orga-role { font-size: .72rem; color: var(--muted); display: block; }
+    .orga-card p { font-size: .86rem; color: var(--muted); line-height: 1.65; margin-bottom: .75rem; }
+    .orga-card p:last-child { margin-bottom: 0; }
+    .orga-card p strong { color: var(--text); }
 
     /* Organigramme */
     .orgchart {
@@ -345,9 +324,12 @@
       margin-bottom: 1.5rem; text-align: center;
     }
     .orgchart-top {
-      background: rgba(232,0,29,.1); border: 1px solid rgba(232,0,29,.3);
+      background: rgba(255,255,255,.04); border: 1px solid var(--border);
       border-radius: 8px; padding: .85rem 1.5rem; display: inline-block;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .orgchart-top.red {
+      background: rgba(232,0,29,.1); border-color: rgba(232,0,29,.3);
     }
     .orgchart-top-label {
       font-family: 'Barlow Condensed', sans-serif; font-size: .65rem;
@@ -358,12 +340,13 @@
       font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
       color: var(--white); letter-spacing: .05em;
     }
+    .orgchart-arrow { color: var(--muted); font-size: 1.1rem; margin: 0 0 1rem; }
     .orgchart-branches {
       display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
     }
     .orgchart-branch {
       background: rgba(255,255,255,.03); border: 1px solid var(--border);
-      border-radius: 8px; padding: 1rem 1.25rem; min-width: 180px;
+      border-radius: 8px; padding: 1rem 1.25rem; min-width: 200px; text-align: left;
     }
     .orgchart-branch-title {
       font-family: 'Barlow Condensed', sans-serif; font-size: .68rem;
@@ -442,17 +425,11 @@
       font-weight: 700; font-size: .95rem; color: var(--white);
       flex: 1;
     }
-    .sanction-sev {
-      display: flex; gap: .2rem;
-    }
-    .sev-dot {
-      width: 7px; height: 7px; border-radius: 50%;
-    }
+    .sanction-sev { display: flex; gap: .2rem; }
+    .sev-dot { width: 7px; height: 7px; border-radius: 50%; }
 
     /* Progression */
-    .parcours-steps {
-      display: flex; flex-direction: column; gap: 0;
-    }
+    .parcours-steps { display: flex; flex-direction: column; gap: 0; }
     .parcours-step {
       display: grid; grid-template-columns: 56px 1fr;
       gap: 1.25rem; position: relative;
@@ -465,9 +442,7 @@
       background: linear-gradient(to bottom, rgba(232,0,29,.3), transparent);
     }
     .parcours-step:last-child::before { display: none; }
-    .p-step-icon-wrap {
-      display: flex; align-items: flex-start; padding-top: .3rem;
-    }
+    .p-step-icon-wrap { display: flex; align-items: flex-start; padding-top: .3rem; }
     .p-step-icon {
       width: 42px; height: 42px;
       border-radius: 50%;
@@ -492,10 +467,7 @@
     .p-step-desc { font-size: .85rem; color: var(--muted); line-height: 1.6; }
 
     /* Barème gratification */
-    .bareme-table {
-      width: 100%; border-collapse: collapse;
-      font-size: .88rem;
-    }
+    .bareme-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
     .bareme-table thead tr { background: rgba(240,180,41,.08); border-bottom: 1px solid rgba(240,180,41,.25); }
     .bareme-table th {
       font-family: 'Barlow Condensed', sans-serif;
@@ -515,9 +487,7 @@
     .pts.bonus { color: #4ade80; }
 
     /* Synthèse incidents */
-    .synth-table {
-      width: 100%; border-collapse: collapse; font-size: .84rem;
-    }
+    .synth-table { width: 100%; border-collapse: collapse; font-size: .84rem; }
     .synth-table thead tr { background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border); }
     .synth-table th {
       font-family: 'Barlow Condensed', sans-serif;
@@ -574,16 +544,16 @@
       <div class="guide-hero-wm">GUIDE</div>
       <div class="guide-hero-content">
         <div style="display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,0,29,.1);border:1px solid rgba(232,0,29,.25);border-radius:4px;padding:.3rem .8rem;margin-bottom:1.2rem;">
-          <span style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);">📖 Guide officiel · Version 2.0</span>
+          <span style="font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);">📖 Guide officiel · Version 2.1</span>
         </div>
         <h1>Guide Complet<br><span>du Bénévole</span></h1>
         <p>Fiches de poste, procédures, gouvernance, règlements et système de gratification. Tout ce dont tu as besoin pour t'impliquer efficacement au sein de Meylan Handball TV.</p>
         <div class="guide-hero-meta">
-          <span class="hmeta">📅 Saison 2025–2026</span>
+          <span class="hmeta">📅 Saison 2026–2027</span>
           <span class="hmeta" style="color:var(--border);">|</span>
           <span class="hmeta">📋 5 parties · 8 fiches de poste</span>
           <span class="hmeta" style="color:var(--border);">|</span>
-          <span class="hmeta">⚖️ Basé sur RG &amp; RARC en vigueur</span>
+          <span class="hmeta">⚖️ Statuts &amp; règlements en vigueur (sept.–oct. 2026)</span>
         </div>
         <div style="display:flex;gap:.75rem;margin-top:1.75rem;flex-wrap:wrap;">
           <a href="#postes" class="btn btn-red" onclick="scrollTo('postes')">📋 Fiches de poste</a>
@@ -602,6 +572,7 @@
           <div class="toc-part"><span class="toc-part-num">I</span>Postes</div>
           <a class="toc-link active" onclick="scrollToSection('postes')" id="toc-postes"><span class="toc-link-icon">📋</span>Vue d'ensemble</a>
           <a class="toc-link" onclick="scrollToSection('rr')" id="toc-rr"><span class="toc-link-icon">🎬</span>Responsable retr.</a>
+          <a class="toc-link" onclick="scrollToSection('grades')" id="toc-grades"><span class="toc-link-icon">🪜</span>Grades &amp; priorisation</a>
           <a class="toc-link" onclick="scrollToSection('superviseur')" id="toc-superviseur"><span class="toc-link-icon">🎓</span>Superviseur</a>
           <a class="toc-link" onclick="scrollToSection('realisateur')" id="toc-realisateur"><span class="toc-link-icon">🎞️</span>Réalisateur</a>
           <a class="toc-link" onclick="scrollToSection('cam-large')" id="toc-cam-large"><span class="toc-link-icon">📷</span>Cadreur Large</a>
@@ -616,6 +587,7 @@
           <a class="toc-link" onclick="scrollToSection('gouvernance')" id="toc-gouvernance"><span class="toc-link-icon">🏗️</span>Structure</a>
           <a class="toc-link" onclick="scrollToSection('bcg')" id="toc-bcg"><span class="toc-link-icon">⚙️</span>Bureau (BCG)</a>
           <a class="toc-link" onclick="scrollToSection('icr')" id="toc-icr"><span class="toc-link-icon">🎛️</span>ICR</a>
+          <a class="toc-link" onclick="scrollToSection('ag')" id="toc-ag"><span class="toc-link-icon">🗳️</span>AG &amp; élections</a>
         </div>
 
         <div class="toc-section">
@@ -651,16 +623,22 @@
             </div>
           </div>
 
-          <!-- Vue d'ensemble -->
           <div class="rule-box blue" style="margin-bottom:1.5rem;">
             <span class="rule-box-icon">ℹ️</span>
             <div>
-              <div class="rule-box-title">Composition d'une équipe — Art. 13 RG</div>
-              <p>Une retransmission repose idéalement sur : un cadreur principal, un cadreur secondaire ou opérateur mobile, un réalisateur ou superviseur technique, et un commentateur. La composition peut varier selon les ressources disponibles, le matériel et les contraintes du lieu.</p>
+              <div class="rule-box-title">Composition d'une équipe — Art. 6 RG</div>
+              <p>Une retransmission repose idéalement sur : un cadreur principal, un cadreur secondaire ou opérateur mobile (si disponible), un réalisateur ou superviseur technique, et un commentateur ou duo de commentateurs lorsque c'est prévu. La composition peut varier selon les ressources disponibles, le matériel, les contraintes du lieu et l'importance de l'événement.</p>
             </div>
           </div>
 
-          <!-- Tableau récap postes -->
+          <div class="rule-box red" style="margin-bottom:1.5rem;">
+            <span class="rule-box-icon">🚦</span>
+            <div>
+              <div class="rule-box-title">Conditions minimales — Art. 15 RARC</div>
+              <p>Aucune retransmission ne démarre sans <strong>un responsable de retransmission désigné et accrédité, un opérateur caméra accrédité et un commentateur accrédité</strong> (ou, à défaut, un dispositif sans commentaire live validé par la Coordination générale). Le matériel principal, le système de diffusion testé, l'audio et l'habillage graphique minimal doivent être opérationnels. Si ces conditions ne sont pas réunies, le RR prévient sans délai le Coordinateur adjoint, qui décide du maintien, du report ou de l'annulation.</p>
+            </div>
+          </div>
+
           <div style="overflow-x:auto;margin-bottom:2rem;">
             <table class="fiche-table">
               <thead>
@@ -673,7 +651,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr><td>🎬 Responsable de retransmission</td><td>1</td><td>2h00</td><td>ICR</td><td><span style="color:var(--red);font-weight:600;">Obligatoire</span></td></tr>
+                <tr><td>🎬 Responsable de retransmission</td><td>1</td><td>2h00</td><td>ICR (dép. Officiels de Retransmission)</td><td><span style="color:var(--red);font-weight:600;">Obligatoire</span></td></tr>
                 <tr><td>🎓 Superviseur</td><td>1 (si formation)</td><td>1h30</td><td>ICR / RR</td><td>—</td></tr>
                 <tr><td>🎞️ Réalisateur</td><td>1</td><td>1h00</td><td>RR</td><td>—</td></tr>
                 <tr><td>📷 Cadreur Plan Large</td><td>1</td><td>45 min</td><td>Réalisateur</td><td>—</td></tr>
@@ -684,6 +662,14 @@
               </tbody>
             </table>
           </div>
+
+          <div class="rule-box gold">
+            <span class="rule-box-icon">🎯</span>
+            <div>
+              <div class="rule-box-title">Postes critiques, majeurs et secondaires</div>
+              <p>Pour chaque retransmission, le RR classe les postes selon l'effet de leur absence sur le direct. <strong>Critique</strong> : le direct est impossible ou compromis sans lui (ex. RR, réalisateur / régie). <strong>Majeur</strong> : le direct reste possible mais nettement dégradé (ex. commentateurs, score / chrono, caméra plan large). <strong>Secondaire</strong> : poste substituable sur place (caméras supplémentaires, replay, interviews, photo). Un <strong>suppléant est désigné pour chaque poste critique</strong> avant l'événement, sa présence est confirmée la veille et il arrive 45 minutes avant le début du direct.</p>
+            </div>
+          </div>
         </div>
 
         <!-- ══ FICHE : RESPONSABLE RETRANSMISSION ══ -->
@@ -693,13 +679,13 @@
               <div class="fiche-icon">🎬</div>
               <div class="fiche-head-text">
                 <div class="fiche-title">Responsable de Retransmission</div>
-                <div class="fiche-subtitle">Chef d'équipe opérationnel de chaque retransmission</div>
-                <div class="fiche-accred">⚖️ Accréditation qualifiée obligatoire · Art. 12 RG</div>
+                <div class="fiche-subtitle">Chef d'équipe opérationnel et interlocuteur unique de chaque retransmission</div>
+                <div class="fiche-accred">⚖️ Accréditation qualifiée obligatoire · Art. 5 RG</div>
               </div>
             </div>
             <div class="fiche-body">
               <div class="fiche-meta-grid">
-                <div class="fiche-meta-item"><div class="fmi-label">Rattachement</div><div class="fmi-val">Instance Compétente des Retransmissions (ICR)</div></div>
+                <div class="fiche-meta-item"><div class="fmi-label">Désignation</div><div class="fmi-val">Par le chef du département Officiels de Retransmission de l'ICR</div></div>
                 <div class="fiche-meta-item"><div class="fmi-label">Effectif type</div><div class="fmi-val">1 par retransmission</div></div>
                 <div class="fiche-meta-item"><div class="fmi-label">Arrivée requise</div><div class="fmi-val">Minimum 2h avant le coup d'envoi</div></div>
                 <div class="fiche-meta-item"><div class="fmi-label">Compétences clés</div><div class="fmi-val">Organisation, leadership, gestion du stress, connaissance technique</div></div>
@@ -710,9 +696,10 @@
               <div class="fiche-subsec">
                 <div class="fiche-subsec-title">Préparation &amp; anticipation</div>
                 <ul class="fiche-list">
-                  <li>Prendre connaissance de la fiche de match transmise par l'ICR (date, heure, lieu, équipes, enjeux).</li>
-                  <li>Vérifier l'état du matériel : batteries, connexions, contraintes du lieu.</li>
-                  <li>Coordonner la composition de l'équipe avec les Coordinateurs délégués.</li>
+                  <li>Prendre connaissance de la fiche de match transmise par l'ICR (date, heure, lieu, équipes, enjeux, niveau de priorisation).</li>
+                  <li>Vérifier l'état du matériel : batteries, connexions, contraintes du lieu et règles de la salle.</li>
+                  <li>Vérifier que les conditions minimales de retransmission sont réunies (Art. 15 RARC).</li>
+                  <li>Classer les postes (critique / majeur / secondaire) et s'assurer qu'un suppléant est prévu sur chaque poste critique.</li>
                   <li>Informer l'équipe des consignes, horaires et plan de déploiement.</li>
                 </ul>
               </div>
@@ -720,10 +707,11 @@
               <div class="fiche-subsec">
                 <div class="fiche-subsec-title">Installation &amp; supervision</div>
                 <ul class="fiche-list">
-                  <li>Superviser le positionnement du matériel en respectant les zones de sécurité (Art. 16.2 RG).</li>
+                  <li>Superviser le positionnement du matériel en respectant les zones de sécurité (Art. 9.2 RG).</li>
                   <li>S'assurer que les câbles sont protégés et ne traversent aucune zone de passage.</li>
+                  <li>Réserver les zones techniques aux membres identifiés (Art. 9.1 RG).</li>
                   <li>Briefer l'équipe sur les rôles de chacun avant le lancement du direct.</li>
-                  <li>Surveiller le bon déroulement technique et logistique en temps réel.</li>
+                  <li>Gérer les imprévus techniques, organisationnels ou liés à l'environnement de la salle.</li>
                 </ul>
               </div>
 
@@ -731,7 +719,7 @@
                 <div class="fiche-subsec-title">Rangement &amp; rapport</div>
                 <ul class="fiche-list">
                   <li>S'assurer du rangement complet du matériel, laisser l'espace en parfait état.</li>
-                  <li>Rédiger un compte rendu d'incident si nécessaire, transmis à l'ICR.</li>
+                  <li>Rédiger le compte rendu d'incident, transmis au chef du département Officiels de Retransmission de l'ICR (sous 24 h pour dommages matériels, urgence médicale, coupure réseau/électricité et incident public).</li>
                   <li>Remonter tout comportement problématique à la Coordination générale.</li>
                 </ul>
               </div>
@@ -739,8 +727,71 @@
               <div class="rule-box red">
                 <span class="rule-box-icon">🔴</span>
                 <div>
-                  <div class="rule-box-title">Art. 13 &amp; 14 RARC — Procédure d'interruption</div>
-                  <p>Le RR <strong>ne peut pas décider seul</strong> d'interrompre définitivement un direct. Il doit obligatoirement obtenir l'aval du Coordinateur adjoint. En cas d'urgence absolue : suspension provisoire autorisée, suivi d'une information immédiate. Toute demande d'arrêt d'un officiel doit être suivie immédiatement, sans discussion.</p>
+                  <div class="rule-box-title">Art. 16 &amp; 17 RARC — Procédure d'interruption</div>
+                  <p>Le RR <strong>ne peut pas décider seul</strong> d'interrompre définitivement un direct : il doit obtenir l'aval du Coordinateur adjoint (ou, s'il est indisponible, de tout membre de la Coordination générale). En cas d'urgence absolue, il peut suspendre provisoirement le direct, puis informe immédiatement le Coordinateur adjoint. Toute demande d'arrêt émanant d'un arbitre, d'un délégué ou du club organisateur entraîne une <strong>suspension immédiate, sans discussion</strong>.</p>
+                </div>
+              </div>
+
+              <div class="rule-box gold">
+                <span class="rule-box-icon">👥</span>
+                <div>
+                  <div class="rule-box-title">Plusieurs responsables présents — Art. 13.5 RARC</div>
+                  <p>Quand plusieurs responsables sont présents (formation, passation, renfort), une seule personne exerce l'autorité fonctionnelle : celle du grade le plus élevé, ou celle désignée à l'avance par l'ICR en cas d'égalité. Les autres restent soumis à ses instructions. En cas de malaise ou d'indisponibilité soudaine, l'autorité est transférée de plein droit à l'autre responsable présent.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ GRADES & PRIORISATION ══ -->
+        <div class="guide-section" id="grades">
+          <div class="fiche">
+            <div class="fiche-head">
+              <div class="fiche-icon">🪜</div>
+              <div class="fiche-head-text">
+                <div class="fiche-title">Grades &amp; priorisation des rencontres</div>
+                <div class="fiche-subtitle">Quel responsable pour quelle rencontre ? · Art. 13.2, 13.3 et 14 RARC</div>
+              </div>
+            </div>
+            <div class="fiche-body">
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Les quatre grades de la fonction de Responsable de retransmission</div>
+                <div style="overflow-x:auto;">
+                  <table class="fiche-table">
+                    <thead><tr><th>Grade</th><th>Pouvoirs</th><th>Conditions d'accès</th></tr></thead>
+                    <tbody>
+                      <tr><td><strong>I · RRS</strong><br>Responsable stagiaire</td><td>Opère la régie sous supervision directe et continue. Aucune autorité de décision sur le dispositif, ne peut évaluer ni valider l'accréditation d'un autre membre.</td><td>Questionnaire d'accréditation validé + observation d'au moins un match aux côtés d'un titulaire du grade II ou supérieur.</td></tr>
+                      <tr><td><strong>II · RR</strong><br>Chef d'équipe</td><td>Encadre les RRS, propose des ajustements techniques, demande du matériel au Bureau, représente MHBTV auprès du club organisateur. Autorité autonome sur les productions de niveau 2 et 3 ; aucune autorité sur l'affectation des équipes en multiplex.</td><td>Questionnaire validé, au moins 3 retransmissions en autonomie, aucune sanction active depuis 12 mois.</td></tr>
+                      <tr><td><strong>III · SDOR</strong><br>Sous-directeur, chef d'antenne</td><td>Autorité sur tous les niveaux de production, y compris le multiplex. Répartit les rôles, peut suspendre à titre conservatoire en cas de risque avéré (en informant sans délai la Coordinatrice adjointe), décide du passage en dispositif dégradé, forme et évalue les RRS.</td><td>Questionnaire validé, une saison complète au grade II, aucune sanction active depuis 12 mois.</td></tr>
+                      <tr><td><strong>IV · DOR</strong><br>Directeur des opérations</td><td>Représente la fonction auprès du Bureau pour les décisions structurantes et disciplinaires, et le collectif auprès des instances externes (Comité de l'Isère, Ligue AURA) sur la retransmission.</td><td>Questionnaire validé, une saison complète au grade III, aucune sanction active depuis 24 mois, nomination par le chef du département Officiels de Retransmission avec approbation du Bureau.</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem;">L'attribution, la confirmation et le retrait d'un grade relèvent du Bureau de la Coordination générale, le cas échéant sur proposition de la Coordinatrice adjointe.</p>
+              </div>
+
+              <div class="fiche-subsec">
+                <div class="fiche-subsec-title">Niveaux de priorisation &amp; grade minimal du responsable</div>
+                <div style="overflow-x:auto;">
+                  <table class="fiche-table">
+                    <thead><tr><th>Niveau</th><th>Exemples de rencontres</th><th>Responsable désigné</th></tr></thead>
+                    <tbody>
+                      <tr><td><strong>1</strong> · Impératif</td><td>Coupe de France (tous tours), demi-finales et finales de la Coupe Jacques Battu jeunes, barrages de la SF1</td><td>Grade III ou IV</td></tr>
+                      <tr><td><strong>2</strong> · Systématique</td><td>Championnat à domicile SF1 et SG1, quarts de finale de la Coupe Jacques Battu, barrages jeunes / SG2 / SF2</td><td>Grade II ou supérieur</td></tr>
+                      <tr><td><strong>3</strong> · Prioritaire</td><td>Championnat jeunes -18, -15, -13, premiers tours de coupe, tournois du club, événements fédéraux</td><td>Grade II ou supérieur (grade I possible sous supervision)</td></tr>
+                      <tr><td><strong>4</strong> · Envisagé</td><td>Championnat SG2 et SF2, -11, événements particuliers du club</td><td>Grade II ou supérieur (grade I possible sous supervision)</td></tr>
+                      <tr><td><strong>5</strong> · Facultatif</td><td>Matchs amicaux, captations expérimentales ou pédagogiques</td><td>Ouvert au grade I, y compris en formation</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem;">Aucune rencontre de niveau 3 ou inférieur ne peut être maintenue si elle réduit les moyens d'une rencontre de niveau 1 ou 2 le même jour ou dans les 48 h.</p>
+              </div>
+
+              <div class="rule-box blue">
+                <span class="rule-box-icon">🔄</span>
+                <div>
+                  <div class="rule-box-title">Remplacement du responsable — Art. 13.4 RARC</div>
+                  <p>Indisponibilité connue plus de 48 h avant : l'ICR désigne un remplaçant en respectant les règles de grade. Moins de 48 h avant ou le jour même : la Coordinatrice adjointe (ou à défaut tout membre du Bureau) désigne un remplaçant provisoire, régularisé ensuite par l'ICR. Sans remplaçant, la Coordinatrice adjointe décide du maintien, du report ou de l'annulation.</p>
                 </div>
               </div>
             </div>
@@ -785,7 +836,7 @@
                 <div class="fiche-subsec-title">Après la retransmission</div>
                 <ul class="fiche-list">
                   <li>Réaliser un débriefing individualisé : points forts, axes de progression.</li>
-                  <li>Transmettre une évaluation synthétique au Bureau de la Coordination générale.</li>
+                  <li>Consigner une appréciation dans la fiche de compte rendu, utile à un futur dossier d'accréditation.</li>
                   <li>Signaler si le membre est prêt pour une future désignation en autonomie.</li>
                 </ul>
               </div>
@@ -794,7 +845,7 @@
                 <span class="rule-box-icon">💡</span>
                 <div>
                   <div class="rule-box-title">Philosophie de la formation MHBTV</div>
-                  <p>La formation se fait par l'expérience réelle, pas uniquement par la théorie. Le Superviseur adopte une posture de <strong>guide bienveillant</strong> : il encourage, valorise les réussites et corrige sans juger. L'objectif est de rendre le membre formé autonome le plus rapidement possible. Ne jamais reprendre le matériel des mains du formé, sauf urgence.</p>
+                  <p>La formation se fait par l'expérience réelle, pas uniquement par la théorie. Le Superviseur adopte une posture de <strong>guide bienveillant</strong> : il encourage, valorise les réussites et corrige sans juger. Un membre non accrédité n'exerce aucune fonction de responsable : il agit sous la supervision directe et continue du responsable désigné. Ne jamais reprendre le matériel des mains du formé, sauf urgence.</p>
                 </div>
               </div>
             </div>
@@ -836,7 +887,7 @@
                   <li>Communiquer en continu avec les cadreurs via l'intercom.</li>
                   <li>Gérer les ralentis, replays et insertions graphiques (score, fautes, mi-temps).</li>
                   <li>Gérer les transitions : intro mi-temps, temps morts, fin de match.</li>
-                  <li>Respecter scrupuleusement la charte graphique MHBTV (Art. 18 RG).</li>
+                  <li>Respecter scrupuleusement la charte graphique MHBTV (Art. 10 RG) : aucun effet, overlay ou incrustation non validé.</li>
                 </ul>
               </div>
 
@@ -888,7 +939,7 @@
                   <li><strong>Cadre de référence : les deux buts entièrement visibles, terrain centré.</strong></li>
                   <li>Vérifier la stabilité du pied — anticiper vibrations du public, soufflerie.</li>
                   <li>Connecter et tester le retour vidéo vers la régie avant le match.</li>
-                  <li>Respecter les règles de sécurité : trépied éloigné des zones de circulation (Art. 16.2 RG).</li>
+                  <li>Respecter les règles de sécurité : trépied éloigné des zones de circulation (Art. 9.2 RG).</li>
                 </ul>
               </div>
               <div class="fiche-subsec">
@@ -989,7 +1040,7 @@
                   <li>Bords de terrain : réactions du banc, zones techniques, arbitres.</li>
                   <li>Sur les temps morts : réunion tactique, échanges staff-joueurs.</li>
                   <li>Tribune supporters : ambiance, banderoles, animations.</li>
-                  <li>Sorties sur blessure ou cartons : images sobres et respectueuses.</li>
+                  <li>Sorties sur blessure ou cartons : images sobres et respectueuses. En cas d'urgence médicale, couper immédiatement la captation de la personne concernée (Art. 20 RARC).</li>
                 </ul>
               </div>
               <div class="fiche-subsec">
@@ -1011,7 +1062,7 @@
               <div class="fiche-head-text">
                 <div class="fiche-title">Commentateur Sportif</div>
                 <div class="fiche-subtitle">La voix et l'âme de la retransmission</div>
-                <div class="fiche-accred">⚖️ Accréditation qualifiée obligatoire · Art. 12 RG</div>
+                <div class="fiche-accred">⚖️ Accréditation qualifiée obligatoire · Art. 5 RG</div>
               </div>
             </div>
             <div class="fiche-body">
@@ -1044,8 +1095,8 @@
               <div class="rule-box red">
                 <span class="rule-box-icon">⚖️</span>
                 <div>
-                  <div class="rule-box-title">Principe de neutralité — Art. 15 RG &amp; Art. 21.3 RARC</div>
-                  <p>Attitude impartiale et respectueuse en toutes circonstances. Équité de traitement des deux équipes. Neutralité dans les interactions avec le public, joueurs, staff et officiels. <strong>Tout manquement de plus de 5 minutes peut entraîner une saisine de l'ICR.</strong></p>
+                  <div class="rule-box-title">Principe de neutralité — Art. 8 RG</div>
+                  <p>Attitude impartiale et respectueuse en toutes circonstances. Équité de traitement des deux équipes. Neutralité dans les commentaires, les interactions avec le public, joueurs, staff et officiels, et dans les attitudes visibles à l'image. <strong>Tout manquement avéré sur plus de 5 minutes de la retransmission peut entraîner une saisine de l'ICR.</strong> Les propos inappropriés ou les prises de position partisanes en direct sont sanctionnés par le barème disciplinaire.</p>
                 </div>
               </div>
 
@@ -1123,27 +1174,37 @@
             </div>
           </div>
 
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;">MHBTV est un collectif de bénévoles, sans cotisation. Ses règles sont fixées par les <strong style="color:var(--text);">statuts</strong> (cadre fondateur) et par plusieurs <strong style="color:var(--text);">règlements</strong> (général, retransmissions, disciplinaire, électoral, fonctions de retransmission). Les personnes qui occupent chaque fonction changent à chaque élection : retrouve leurs noms sur la page <a href="equipe.html" style="color:var(--red);">L'équipe MHBTV</a>.</p>
+
           <!-- Organigramme -->
           <div class="orgchart">
             <div class="orgchart-top">
-              <div class="orgchart-top-label">Direction</div>
-              <div class="orgchart-top-name">COORDINATION GÉNÉRALE</div>
+              <div class="orgchart-top-label">Organe souverain</div>
+              <div class="orgchart-top-name">ASSEMBLÉE GÉNÉRALE</div>
             </div>
+            <div class="orgchart-arrow">▼ élit</div>
+            <div class="orgchart-top red">
+              <div class="orgchart-top-label">Direction exécutive</div>
+              <div class="orgchart-top-name">BUREAU DE LA COORDINATION GÉNÉRALE</div>
+            </div>
+            <div class="orgchart-arrow">▼</div>
             <div class="orgchart-branches">
               <div class="orgchart-branch" style="border-color:rgba(232,0,29,.25);">
-                <div class="orgchart-branch-title" style="color:var(--red);">Bureau (BCG)</div>
-                <div class="orgchart-branch-item">Xavier FINI<span>Coordinateur général</span></div>
-                <div class="orgchart-branch-item">Marie DAL ZOTTO<span>Coordinatrice adjointe</span></div>
-                <div class="orgchart-branch-item">Emmanuel ALVES DE MOURA<span>Secrétaire général</span></div>
+                <div class="orgchart-branch-title" style="color:var(--red);">Coordination générale</div>
+                <div class="orgchart-branch-item">Coordinateur/trice général/e<span>Supervision globale · voix prépondérante</span></div>
+                <div class="orgchart-branch-item">Coordinateur/trice adjoint/e<span>Vie associative · planning · interruptions de direct</span></div>
+                <div class="orgchart-branch-item">Secrétaire général/e<span>Administration · procès-verbaux · registres</span></div>
+                <div class="orgchart-branch-item">Autres fonctions<span>Créées selon les besoins</span></div>
               </div>
               <div class="orgchart-branch" style="border-color:rgba(99,179,237,.2);">
-                <div class="orgchart-branch-title" style="color:#63b3ed;">ICR (indépendante)</div>
-                <div class="orgchart-branch-item">Nicolas MARIN<span>Président</span></div>
-                <div class="orgchart-branch-item">Yoan DUSSERT<span>Vice-président</span></div>
-                <div class="orgchart-branch-item">+ 4 membres</div>
+                <div class="orgchart-branch-title" style="color:#63b3ed;">ICR (intégrée au Bureau)</div>
+                <div class="orgchart-branch-item">Département Gestion et Planification des Diffusions<span>Calendrier · priorisation</span></div>
+                <div class="orgchart-branch-item">Département Officiels de Retransmission<span>Désignation · grades · comptes rendus</span></div>
+                <div class="orgchart-branch-item">Département Inspection générale<span>Discipline · contrôle</span></div>
+                <div class="orgchart-branch-item">Adjoints de département<span>Nommés par la Coordination adjointe</span></div>
               </div>
               <div class="orgchart-branch">
-                <div class="orgchart-branch-title">Équipes retr.</div>
+                <div class="orgchart-branch-title">Équipes de retransmission</div>
                 <div class="orgchart-branch-item">RR · Superviseur</div>
                 <div class="orgchart-branch-item">Réalisateur · Cadreurs</div>
                 <div class="orgchart-branch-item">Commentateur · OTS</div>
@@ -1155,7 +1216,7 @@
             <span class="rule-box-icon">🏗️</span>
             <div>
               <div class="rule-box-title">Principe fondateur</div>
-              <p>La gouvernance repose sur la <strong>collégialité et l'indépendance des organes</strong>. Le BCG assure la direction stratégique et exécutive. L'ICR est un organe indépendant de régulation opérationnelle et de discipline — elle n'exerce aucune fonction exécutive globale.</p>
+              <p>La gouvernance repose sur la <strong>collégialité et la séparation des rôles</strong>. L'Assemblée générale est souveraine. Le Bureau assure la direction stratégique et la mise en œuvre opérationnelle. L'ICR, <strong>désormais intégrée au Bureau</strong>, planifie, désigne et contrôle les retransmissions ; elle n'exerce aucune fonction exécutive globale. Pour la discipline, le département d'Inspection générale <strong>ne reçoit aucune instruction</strong>, ni de l'ICR dans ses autres attributions, ni de la Coordination générale.</p>
             </div>
           </div>
         </div>
@@ -1163,30 +1224,31 @@
         <div class="guide-section" id="bcg">
           <h2 class="section-title">Bureau de la <span>Coordination</span> (BCG)</h2>
           <div class="section-line"></div>
+
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.25rem;">Le Bureau comprend <strong style="color:var(--text);">au maximum 5 membres élus individuellement par l'Assemblée générale</strong>, auxquels s'ajoutent les chefs de département de l'ICR. Ses décisions sont prises à la majorité ; en cas d'égalité, la voix du Coordinateur général est prépondérante. En cas d'urgence, il peut prendre des décisions provisoires, soumises à ratification à la prochaine AG.</p>
+
           <div class="orga-grid">
             <div class="orga-card" style="border-color:rgba(232,0,29,.2);">
-              <div class="orga-card-title">Coordinateur Général</div>
-              <div class="orga-card-sub">Représentant du collectif · Élu en AG</div>
-              <div class="orga-member">
-                <div class="orga-avatar" style="background:#c0392b33;color:#c0392b;">XF</div>
-                <div><div class="orga-name">Xavier FINI</div><span class="orga-role">Saison 2025-2026</span></div>
-              </div>
+              <div class="orga-card-title">Coordinateur/trice Général/e</div>
+              <div class="orga-card-sub">Représentant du collectif · Élu à bulletin secret · Mandat d'un an, rééligible</div>
+              <p>Il ou elle <strong>supervise l'ensemble des activités</strong> du collectif. Une fois élu/e, il ou elle présente à l'AG la composition du Bureau qu'il ou elle a arrêtée et la répartition des fonctions. Il ou elle convoque et préside les assemblées, tient le registre des droits à l'image et peut créer, modifier ou supprimer les autres fonctions du Bureau.</p>
             </div>
             <div class="orga-card">
-              <div class="orga-card-title">Coordinatrice Adjointe</div>
+              <div class="orga-card-title">Coordinateur/trice Adjoint/e</div>
               <div class="orga-card-sub">Vie associative · Communication · Planification</div>
-              <div class="orga-member">
-                <div class="orga-avatar" style="background:#8e44ad33;color:#8e44ad;">MD</div>
-                <div><div class="orga-name">Marie DAL ZOTTO</div><span class="orga-role">Saison 2025-2026</span></div>
-              </div>
+              <p>Il ou elle <strong>anime la vie du collectif</strong> : lien entre licenciés, bénévoles et partenaires, organisation des temps forts, intégration et reconnaissance des bénévoles. Il ou elle établit le planning général et le planning mensuel des activités internes, en concertation avec l'ICR.</p>
+              <p>Côté retransmissions, c'est l'interlocuteur du RR en cas d'incident : <strong>aval pour toute interruption définitive</strong>, décision de maintien, report ou annulation si les conditions minimales ne sont pas réunies. Il ou elle nomme les adjoints des départements de l'ICR et peut proposer au Bureau l'attribution des grades.</p>
             </div>
             <div class="orga-card">
-              <div class="orga-card-title">Secrétaire Général</div>
-              <div class="orga-card-sub">CR réunions · Registre membres · Communications</div>
-              <div class="orga-member">
-                <div class="orga-avatar" style="background:#2980b933;color:#2980b9;">EM</div>
-                <div><div class="orga-name">Emmanuel ALVES DE MOURA</div><span class="orga-role">Saison 2025-2026</span></div>
-              </div>
+              <div class="orga-card-title">Secrétaire Général/e</div>
+              <div class="orga-card-sub">Fonctions administratives du Bureau</div>
+              <p>Il ou elle rédige et diffuse les convocations aux assemblées et réunions de Bureau, tient à jour la liste des membres et les registres internes, rédige et conserve les procès-verbaux, gère la correspondance officielle et archive les documents. En l'absence de secrétaire, ces missions reviennent à la Coordination adjointe ou à un autre membre du Bureau.</p>
+            </div>
+            <div class="orga-card">
+              <div class="orga-card-title">Fonctions complémentaires</div>
+              <div class="orga-card-sub">Postes de référence, non obligatoires</div>
+              <p>Le Coordinateur général peut créer toute autre fonction utile (animation des directs, technique, information…). Ces postes peuvent être <strong>cumulés par une même personne ou laissés vacants</strong>. Le Bureau peut aussi créer des comités permanents ou ponctuels pour l'assister.</p>
+              <p>Un membre du Bureau peut démissionner par simple lettre ou être destitué : la destitution exige les deux tiers du Bureau <em>et</em> les deux tiers des membres présents ou représentés en AG.</p>
             </div>
           </div>
         </div>
@@ -1194,27 +1256,88 @@
         <div class="guide-section" id="icr">
           <h2 class="section-title">Instance Compétente des <span>Retransmissions</span></h2>
           <div class="section-line"></div>
+
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.25rem;">L'ICR est l'organe de référence chargé de l'application, de l'interprétation et du respect des règles de retransmission. Elle fonctionne par <strong style="color:var(--text);">départements</strong>, dirigés par des <strong style="color:var(--text);">chefs de département</strong> élus par l'AG à bulletin secret (mandat de six mois, renouvelable). Chacun peut être assisté d'un ou plusieurs <strong style="color:var(--text);">adjoints</strong>, nommés par la Coordination adjointe après consultation du Bureau, qui ont aussi la qualité de membre du Bureau. Les chefs de département portent la voix de l'ICR dans les délibérations du Bureau.</p>
+
           <div class="orga-grid">
             <div class="orga-card" style="border-color:rgba(99,179,237,.2);">
-              <div class="orga-card-title">Composition 2025-2026</div>
-              <div class="orga-card-sub">6 membres · Mandat 2 ans renouvelable</div>
-              <div class="orga-member"><div class="orga-avatar" style="background:#27ae6033;color:#27ae60;">NM</div><div><div class="orga-name">Nicolas MARIN</div><span class="orga-role">Président</span></div></div>
-              <div class="orga-member"><div class="orga-avatar" style="background:#e67e2233;color:#e67e22;">YD</div><div><div class="orga-name">Yoan DUSSERT</div><span class="orga-role">Vice-président</span></div></div>
-              <div class="orga-member"><div class="orga-avatar" style="background:#9b59b633;color:#9b59b6;">DH</div><div><div class="orga-name">Dorina HELIE-JOLY</div><span class="orga-role">Membre ICR</span></div></div>
-              <div class="orga-member"><div class="orga-avatar" style="background:#7f8c8d33;color:#7f8c8d;">TT</div><div><div class="orga-name">Tim TOUR</div><span class="orga-role">Membre ICR</span></div></div>
-              <div class="orga-member"><div class="orga-avatar" style="background:#16a08533;color:#16a085;">EA</div><div><div class="orga-name">Enzo ACHOUR</div><span class="orga-role">Membre ICR</span></div></div>
-              <div class="orga-member"><div class="orga-avatar" style="background:#d3540033;color:#d35400;">NS</div><div><div class="orga-name">Nabil SABAH</div><span class="orga-role">Membre ICR</span></div></div>
+              <div class="orga-card-title">Gestion &amp; Planification des Diffusions</div>
+              <div class="orga-card-sub">Le calendrier et les priorités</div>
+              <ul class="fiche-list" style="margin-top:.5rem;">
+                <li>Établir le calendrier prévisionnel des retransmissions</li>
+                <li>Désigner les rencontres retransmises et les prioriser (5 niveaux) selon les moyens disponibles</li>
+                <li>Modifier le calendrier en cas d'imprévu sportif, technique ou organisationnel</li>
+                <li>Trancher les conflits de dates entre rencontres de même niveau</li>
+              </ul>
+            </div>
+            <div class="orga-card" style="border-color:rgba(99,179,237,.2);">
+              <div class="orga-card-title">Officiels de Retransmission</div>
+              <div class="orga-card-sub">Les responsables et leurs accréditations</div>
+              <ul class="fiche-list" style="margin-top:.5rem;">
+                <li>Désigner le responsable de chaque retransmission, selon le grade requis</li>
+                <li>Instruire les dossiers d'accréditation et de grade (15 jours) et tenir le registre des accréditations</li>
+                <li>Organiser la formation initiale et complémentaire</li>
+                <li>Recevoir les comptes rendus d'incident</li>
+              </ul>
+            </div>
+            <div class="orga-card" style="border-color:rgba(232,0,29,.2);">
+              <div class="orga-card-title">Inspection Générale</div>
+              <div class="orga-card-sub">La discipline et le contrôle</div>
+              <ul class="fiche-list" style="margin-top:.5rem;">
+                <li>Recevoir les signalements (point d'entrée unique)</li>
+                <li>Enquêter, prononcer les sanctions, juger les appels</li>
+                <li>Mener des inspections de retransmission, des audits et des missions de prévention</li>
+                <li>Présenter chaque saison un rapport annuel anonymisé à l'AG</li>
+              </ul>
             </div>
             <div class="orga-card">
-              <div class="orga-card-title">Attributions</div>
+              <div class="orga-card-title">Attributions communes</div>
               <div class="orga-card-sub">Régulation · Discipline · Contrôle</div>
               <ul class="fiche-list" style="margin-top:.5rem;">
-                <li>Établir le calendrier des retransmissions</li>
-                <li>Désigner le RR pour chaque rencontre</li>
-                <li>Valider les équipes et leurs rôles</li>
-                <li>Traiter les signalements et manquements</li>
-                <li>Engager les procédures disciplinaires</li>
-                <li>Contrôler la régularité des élections</li>
+                <li>Valider les équipes de retransmission et leurs rôles</li>
+                <li>Définir et faire appliquer les protocoles applicables</li>
+                <li>Autoriser, suspendre ou interdire une retransmission</li>
+                <li>Contrôler la régularité des élections (annuler un scrutin, invalider une candidature)</li>
+                <li>Statuer sur toute situation non prévue par les règlements</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="rule-box gold">
+            <span class="rule-box-icon">⚖️</span>
+            <div>
+              <div class="rule-box-title">Impartialité &amp; déport</div>
+              <p>Tout conflit d'intérêts, réel ou potentiel, impose un <strong>déport automatique</strong> : la personne concernée ne participe ni aux débats, ni aux délibérations, ni au vote, et un suppléant est désigné. L'ICR applique les principes de légalité interne, d'impartialité, de contradictoire, d'égalité de traitement, de proportionnalité et de confidentialité des délibérations.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="guide-section" id="ag">
+          <h2 class="section-title">Assemblées générales &amp; <span>élections</span></h2>
+          <div class="section-line"></div>
+
+          <div class="orga-grid">
+            <div class="orga-card">
+              <div class="orga-card-title">Les assemblées</div>
+              <div class="orga-card-sub">Organe souverain du collectif</div>
+              <ul class="fiche-list" style="margin-top:.5rem;">
+                <li><strong>Ordinaire :</strong> une fois par trimestre, sur convocation électronique avec ordre du jour</li>
+                <li><strong>Élective :</strong> une fois par an, elle remplace l'ordinaire de fin de saison</li>
+                <li><strong>Extraordinaire :</strong> en cas de besoin urgent, convoquée par le Bureau sur proposition d'au moins un tiers des membres actifs</li>
+                <li>Quorum : la moitié des membres · une voix par membre · 2 procurations maximum</li>
+                <li>Un procès-verbal est transmis à tous sous 15 jours</li>
+              </ul>
+            </div>
+            <div class="orga-card">
+              <div class="orga-card-title">Les élections</div>
+              <div class="orga-card-sub">Règlement des procédures électorales</div>
+              <ul class="fiche-list" style="margin-top:.5rem;">
+                <li><strong>Électeurs :</strong> membres à jour de leur accréditation, âgés d'au moins 12 ans</li>
+                <li><strong>Candidats :</strong> membres à jour de leur accréditation, sans inéligibilité ; candidature déposée au moins 7 jours avant l'AG</li>
+                <li>Vote à bulletin secret, possible en visioconférence</li>
+                <li>Le/la Coordinateur/trice général/e est élu/e en premier, puis chaque poste du Bureau et chaque chef de département fait l'objet d'un vote individuel</li>
+                <li>Majorité absolue au 1er tour, relative au 2nd ; départage à l'ancienneté, puis tirage au sort</li>
+                <li>Contestation possible sous 72 heures devant l'ICR</li>
               </ul>
             </div>
           </div>
@@ -1237,12 +1360,12 @@
             <div class="proc-step">
               <div class="proc-num-wrap"><div class="proc-num">1</div></div>
               <div class="proc-body">
-                <span class="proc-body-tag">J-7 à J-3 · ICR / Coordinateurs délégués</span>
+                <span class="proc-body-tag">J-7 à J-3 · ICR / Coordination adjointe</span>
                 <div class="proc-body-title">Préparation en amont</div>
                 <ul>
                   <li>Confirmation de la date, du lieu et des équipes avec le club.</li>
-                  <li>Désignation du Responsable de Retransmission par l'ICR.</li>
-                  <li>Constitution et confirmation de l'équipe bénévole.</li>
+                  <li>Désignation du Responsable de Retransmission par l'ICR, selon le niveau de priorisation.</li>
+                  <li>Constitution et confirmation de l'équipe bénévole, avec un suppléant sur chaque poste critique.</li>
                   <li>Envoi de la fiche de match à l'ensemble de l'équipe.</li>
                 </ul>
               </div>
@@ -1255,7 +1378,7 @@
                 <ul>
                   <li>Vérification de l'état du matériel : batteries, câbles, logiciels à jour.</li>
                   <li>Test du réseau de diffusion sur site si possible.</li>
-                  <li>Confirmation finale de l'équipe et des horaires d'arrivée.</li>
+                  <li>Confirmation finale de l'équipe, des suppléants des postes critiques et des horaires d'arrivée.</li>
                 </ul>
               </div>
             </div>
@@ -1266,8 +1389,9 @@
                 <div class="proc-body-title">Installation</div>
                 <ul>
                   <li>Arrivée de l'équipe technique minimum 2h avant le coup d'envoi.</li>
-                  <li>Déploiement selon le plan de salle, respect des zones de sécurité (Art. 16.2 RG).</li>
+                  <li>Déploiement selon le plan de salle, respect des zones de sécurité (Art. 9.2 RG).</li>
                   <li>Test de tous les équipements : caméras, micro, encodeur, réseau.</li>
+                  <li>Vérification des conditions minimales de retransmission (Art. 15 RARC).</li>
                   <li>Briefing d'équipe animé par le RR : rôles, consignes, plan B.</li>
                   <li>Lancement du direct en mode test (non public) 15 min avant le match.</li>
                   <li>Passage en mode public à H-10 min.</li>
@@ -1281,10 +1405,19 @@
                 <div class="proc-body-title">Clôture &amp; rangement</div>
                 <ul>
                   <li>Clôture propre du direct (outro, coupure).</li>
+                  <li>Participation au bilan post-retransmission : un départ anticipé est un manquement.</li>
                   <li>Rangement complet et inventaire du matériel — laisser l'espace en parfait état.</li>
                   <li>Compte rendu d'incident transmis à l'ICR si nécessaire.</li>
                 </ul>
               </div>
+            </div>
+          </div>
+
+          <div class="rule-box blue" style="margin-top:1.5rem;">
+            <span class="rule-box-icon">🚗</span>
+            <div>
+              <div class="rule-box-title">Déplacements en extérieur — Art. 7 RG</div>
+              <p>Respect scrupuleux des horaires, comportement irréprochable envers le club hôte (salles, staff, zones réservées), transport sécurisé du matériel, installation adaptée aux contraintes du gymnase, communication proactive en cas de retard ou d'imprévu, et rangement complet avant le départ. Tout membre en déplacement incarne l'image du collectif.</p>
             </div>
           </div>
         </div>
@@ -1301,39 +1434,51 @@
                   <th>Type d'incident</th>
                   <th>Qui agit</th>
                   <th>Action immédiate</th>
-                  <th>Escalade</th>
+                  <th>Escalade &amp; compte rendu</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Incident technique mineur</strong><br><span style="font-size:.78rem;color:var(--muted);">Perte audio, dégradation image, latence</span></td>
+                  <td><strong>Incident technique mineur</strong><br><span style="font-size:.78rem;color:var(--muted);">Perte audio, dégradation image, latence · Art. 18</span></td>
                   <td>Équipe en autonomie</td>
-                  <td>Maintenir la diffusion, adapter les moyens</td>
-                  <td>RR informe le Réalisateur</td>
+                  <td>Maintenir la diffusion, adapter les moyens techniques et éditoriaux</td>
+                  <td>Pas besoin d'en référer au Coord. adjoint. Si l'incident s'aggrave : requalifié en majeur (Art. 16)</td>
                 </tr>
                 <tr>
-                  <td><strong>Incident sportif sensible</strong><br><span style="font-size:.78rem;color:var(--muted);">Blessure grave, altercation, envahissement</span></td>
-                  <td>RR + Réalisateur</td>
-                  <td>Adapter la captation, retenue et neutralité dans les plans</td>
-                  <td>Suivre consignes des officiels en priorité</td>
+                  <td><strong>Urgence médicale</strong><br><span style="font-size:.78rem;color:var(--muted);">Joueur, officiel, spectateur ou membre · Art. 20</span></td>
+                  <td>Tout membre présent, puis RR</td>
+                  <td><strong style="color:var(--red);">Alerter les secours (15, 18, 112)</strong> sans délai. Couper la captation de la personne ; suspension du direct possible sans autorisation</td>
+                  <td>Informer le Coord. adjoint. Message sommaire au public, sans donnée médicale. Compte rendu sous 24 h. Aucune image de la personne ne peut être diffusée ni archivée</td>
                 </tr>
                 <tr>
-                  <td><strong>Dommages matériels</strong><br><span style="font-size:.78rem;color:var(--muted);">Impact ballon, contact joueur</span></td>
+                  <td><strong>Incident impliquant le public</strong><br><span style="font-size:.78rem;color:var(--muted);">Intrusion, altercation, hostilité envers l'équipe · Art. 22</span></td>
                   <td>RR</td>
-                  <td>Sécuriser la zone. Adapter la retr. selon le matériel restant</td>
-                  <td>Compte rendu ICR obligatoire</td>
+                  <td>Demander fermement de quitter la zone, alerter la sécurité de la salle. <strong>Aucune intervention physique.</strong> Repositionner l'équipe ou suspendre si la sécurité n'est pas garantie</td>
+                  <td>Compte rendu sous 24 h à l'ICR et à la Coordination générale. Ne pas filmer l'incident hors besoin de la retransmission</td>
                 </tr>
                 <tr>
-                  <td><strong>Demande d'arrêt d'un officiel</strong><br><span style="font-size:.78rem;color:var(--muted);">Arbitre, délégué, club organisateur</span></td>
+                  <td><strong>Dommages matériels</strong><br><span style="font-size:.78rem;color:var(--muted);">Impact ballon, contact joueur · Art. 19</span></td>
                   <td>RR</td>
-                  <td><strong style="color:var(--red);">Suspension IMMÉDIATE</strong></td>
-                  <td>RR contacte le Coordinateur adjoint pour validation définitive</td>
+                  <td>Sécuriser la zone et protéger les personnes. Adapter la retr. selon le matériel restant</td>
+                  <td>Ne pas reprendre le direct : aval du Coord. adjoint. Compte rendu sous 24 h</td>
                 </tr>
                 <tr>
-                  <td><strong>Interruption définitive envisagée</strong><br><span style="font-size:.78rem;color:var(--muted);">Panne majeure, sécurité, problème juridique</span></td>
+                  <td><strong>Coupure réseau ou électrique</strong><br><span style="font-size:.78rem;color:var(--muted);">Force majeure · Art. 21</span></td>
+                  <td>RR</td>
+                  <td>Réseau : 5 min pour rétablir (partage de connexion, réseau alternatif). Électricité : sécuriser, contacter le responsable technique de la salle</td>
+                  <td>Interruption officielle si le réseau n'est pas rétabli en 5 min ou si l'électricité dépasse 15 min. Information publique sous 10 min. Compte rendu sous 24 h</td>
+                </tr>
+                <tr>
+                  <td><strong>Demande d'arrêt d'un officiel</strong><br><span style="font-size:.78rem;color:var(--muted);">Arbitre, délégué, club organisateur · Art. 17</span></td>
+                  <td>RR</td>
+                  <td><strong style="color:var(--red);">Suspension IMMÉDIATE</strong>, sans autorisation préalable</td>
+                  <td>Aval du Coord. adjoint (ou d'un membre de la CG) pour la reprise ou l'interruption définitive. Compte rendu à l'ICR</td>
+                </tr>
+                <tr>
+                  <td><strong>Interruption définitive envisagée</strong><br><span style="font-size:.78rem;color:var(--muted);">Panne majeure, sécurité, problème juridique · Art. 16</span></td>
                   <td>RR + Coordinateur adjoint</td>
                   <td>Suspension provisoire possible par le RR en urgence absolue</td>
-                  <td><strong style="color:var(--red);">RR ne peut pas décider seul</strong> · Aval du Coord. adjoint obligatoire</td>
+                  <td><strong style="color:var(--red);">RR ne peut pas décider seul</strong> · Aval obligatoire · Compte rendu à l'ICR</td>
                 </tr>
               </tbody>
             </table>
@@ -1342,8 +1487,8 @@
           <div class="rule-box red">
             <span class="rule-box-icon">⚠️</span>
             <div>
-              <div class="rule-box-title">Rappel fondamental</div>
-              <p>Aucune contestation ne peut être formulée directement auprès des officiels pendant l'événement. En cas de désaccord avec une demande d'arrêt, le RR en informe uniquement la Coordination générale, <strong>après coup</strong>.</p>
+              <div class="rule-box-title">Rappel fondamental — Art. 9.3 RG</div>
+              <p>Les officiels de rencontre (arbitres, délégués, responsables de salle) ont autorité sur l'organisation de l'événement : leurs consignes de sécurité ou de placement s'appliquent sans discussion. En cas de désaccord, le RR en informe uniquement le Bureau de la Coordination générale, <strong>après coup</strong>, jamais directement auprès des officiels pendant l'événement.</p>
             </div>
           </div>
         </div>
@@ -1353,37 +1498,89 @@
           <h2 class="section-title">Procédure <span>disciplinaire</span></h2>
           <div class="section-line"></div>
 
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.25rem;">La discipline relève du <strong style="color:var(--text);">département Inspection générale</strong> de l'ICR, composé de trois membres : le chef du département, qui préside, les chefs des deux autres départements de l'ICR et un membre de la Coordination générale, avec suppléance en cas d'absence ou de déport. Il décide à la majorité et ne siège qu'à trois. Toute personne peut être poursuivie, y compris les membres des instances.</p>
+
           <div class="proc-timeline" style="margin-bottom:1.5rem;">
             <div class="proc-step">
               <div class="proc-num-wrap"><div class="proc-num">1</div></div>
-              <div class="proc-body"><div class="proc-body-title">Signalement</div><p>Signalement écrit et circonstancié transmis à la Coordination générale via le site MHBTV.</p></div>
+              <div class="proc-body"><div class="proc-body-title">Signalement</div><p>Adressé directement au département (point d'entrée unique) via le formulaire du site interne ou par écrit, circonstancié et accompagné des éléments utiles. Les signalements anonymes sont irrecevables. Prescription : 4 mois à compter de la découverte des faits, 3 ans pour harcèlement, violence ou discrimination.</p></div>
             </div>
             <div class="proc-step">
               <div class="proc-num-wrap"><div class="proc-num">2</div></div>
-              <div class="proc-body"><div class="proc-body-title">Examen de recevabilité</div><p>L'ICR examine la recevabilité du signalement.</p></div>
+              <div class="proc-body"><div class="proc-body-title">Examen préliminaire (3 jours)</div><p>Recevabilité et qualification des faits. Trois issues : <strong>classement</strong> (irrecevable ou faits non établis), <strong>procédure simplifiée</strong> (faits de classe 1) ou <strong>procédure complète</strong> (classes 2 à 4 ou faits contestés). Les signalements abusifs ou malveillants peuvent eux-mêmes être poursuivis.</p></div>
             </div>
             <div class="proc-step">
               <div class="proc-num-wrap"><div class="proc-num">3</div></div>
-              <div class="proc-body"><div class="proc-body-title">Ouverture de procédure</div><p>Si recevable : ouverture d'une procédure disciplinaire.</p></div>
+              <div class="proc-body"><div class="proc-body-title">Procédure simplifiée</div><p>La personne mise en cause est informée par écrit et dispose de 3 jours pour présenter ses observations. Le département peut prononcer un avertissement, un blâme, ou classer.</p></div>
             </div>
             <div class="proc-step">
               <div class="proc-num-wrap"><div class="proc-num">4</div></div>
-              <div class="proc-body"><div class="proc-body-title">Instruction</div><p>Instruction par un rapporteur désigné par l'ICR.</p></div>
+              <div class="proc-body"><div class="proc-body-title">Séance en visioconférence</div><p>Dans les 3 jours suivant l'ouverture de la procédure complète : rapport, audition de la personne mise en cause, puis des témoins utiles. <strong>La personne mise en cause a la parole en dernier.</strong> En cas d'absence malgré convocation régulière, le département peut statuer après un report unique.</p></div>
             </div>
             <div class="proc-step">
               <div class="proc-num-wrap"><div class="proc-num">5</div></div>
-              <div class="proc-body"><div class="proc-body-title">Décision &amp; notification</div><p>Délibération confidentielle. Décision motivée, notifiée par écrit.</p></div>
+              <div class="proc-body"><div class="proc-body-title">Délibération &amp; notification</div><p>Délibération à huis clos le jour même, à la majorité (l'exclusion définitive exige l'unanimité). Décision écrite et motivée, transmise à la Coordination générale le lendemain et notifiée aux parties sous 2 jours.</p></div>
+            </div>
+            <div class="proc-step">
+              <div class="proc-num-wrap"><div class="proc-num">6</div></div>
+              <div class="proc-body"><div class="proc-body-title">Appel (une seule fois)</div><p>Contestation écrite et motivée sous 5 jours devant le département en formation d'appel (vice de procédure, erreur d'appréciation, disproportion, méconnaissance des textes). La décision tombe sous 7 jours et est définitive : <strong>l'appel ne peut pas aggraver la sanction</strong>. L'appel n'est pas suspensif, mais la suspension provisoire peut être demandée.</p></div>
             </div>
           </div>
 
-          <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.75rem;">Échelle des sanctions — Art. 29 RARC</div>
+          <div class="rule-box gold">
+            <span class="rule-box-icon">🛡️</span>
+            <div>
+              <div class="rule-box-title">Mesures conservatoires — Art. 11</div>
+              <p>En cas de risque pour une personne, le matériel ou une retransmission, le département peut ordonner un retrait de poste, une suspension d'accès aux outils ou un retrait provisoire d'accréditation. <strong>7 jours maximum, renouvelable une fois.</strong> Ce n'est pas une sanction et elle se déduit de la sanction éventuelle.</p>
+            </div>
+          </div>
+
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin:1.5rem 0 .75rem;">Échelle des sanctions — Art. 14 du Règlement disciplinaire</div>
           <div class="sanctions-list">
-            <div class="sanction-row"><span class="sanction-num">1</span><span class="sanction-label">Avertissement oral</span><div class="sanction-sev"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
-            <div class="sanction-row"><span class="sanction-num">2</span><span class="sanction-label">Avertissement écrit</span><div class="sanction-sev"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
+            <div class="sanction-row"><span class="sanction-num">1</span><span class="sanction-label">Avertissement</span><div class="sanction-sev"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
+            <div class="sanction-row"><span class="sanction-num">2</span><span class="sanction-label">Blâme</span><div class="sanction-sev"><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span><span class="sev-dot" style="background:rgba(74,222,128,.5);"></span></div></div>
             <div class="sanction-row"><span class="sanction-num">3</span><span class="sanction-label">Suspension temporaire de retransmission</span><div class="sanction-sev"><span class="sev-dot" style="background:#fbbf24;"></span><span class="sev-dot" style="background:#fbbf24;"></span><span class="sev-dot" style="background:#fbbf24;"></span></div></div>
-            <div class="sanction-row"><span class="sanction-num">4</span><span class="sanction-label">Suspension temporaire sur la saison sportive</span><div class="sanction-sev"><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span></div></div>
+            <div class="sanction-row"><span class="sanction-num">4</span><span class="sanction-label">Suspension saison</span><div class="sanction-sev"><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span></div></div>
             <div class="sanction-row" style="border-color:rgba(232,0,29,.25);"><span class="sanction-num" style="color:#ff4444;">5</span><span class="sanction-label">Exclusion temporaire</span><div class="sanction-sev"><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span><span class="sev-dot" style="background:#ff4444;"></span></div></div>
             <div class="sanction-row" style="border-color:rgba(232,0,29,.4);background:rgba(232,0,29,.04);"><span class="sanction-num" style="color:var(--red);">6</span><span class="sanction-label" style="color:var(--red);">Exclusion définitive</span><div class="sanction-sev"><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span><span class="sev-dot" style="background:var(--red);"></span></div></div>
+          </div>
+          <p style="font-size:.8rem;color:var(--muted);margin-top:.75rem;">Des sanctions accessoires peuvent s'y ajouter : retrait d'accréditation, inéligibilité à la Coordination générale, retrait du droit de vote, formation obligatoire, période probatoire, remboursement du préjudice réel.</p>
+
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin:1.75rem 0 .75rem;">Barème des manquements — 4 classes de gravité</div>
+          <div style="overflow-x:auto;">
+            <table class="synth-table">
+              <thead>
+                <tr><th>Classe</th><th>Palier 1<br><span style="text-transform:none;letter-spacing:0;">sans circonstance aggravante</span></th><th>Palier 2<br><span style="text-transform:none;letter-spacing:0;">aggravante(s)</span></th><th>Palier 3<br><span style="text-transform:none;letter-spacing:0;">très aggravante(s)</span></th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>1 — Léger</strong></td><td>Avertissement</td><td>Blâme</td><td>Suspension de 2 retransmissions</td></tr>
+                <tr><td><strong>2 — Sérieux</strong></td><td>Blâme</td><td>Suspension de 3 retransmissions (+ formation si accréditation)</td><td>Suspension de 5 retransmissions + retrait d'accréditation 1 mois</td></tr>
+                <tr><td><strong>3 — Grave</strong></td><td>Suspension de 4 retransmissions</td><td>Suspension saison + inéligibilité CG 1 an</td><td>Exclusion temporaire + inéligibilité CG 2 ans</td></tr>
+                <tr><td><strong>4 — Très grave</strong></td><td>Exclusion temporaire + retrait d'accréditation + inéligibilité CG 2 ans</td><td>Exclusion définitive</td><td>Exclusion définitive</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fiche-subsec" style="margin-top:1.5rem;">
+            <div class="fiche-subsec-title">Les huit catégories de manquements — Art. 7</div>
+            <ul class="fiche-list">
+              <li><strong>I.</strong> Présence, ponctualité et engagement (absences, désistements, retards, abandon de poste)</li>
+              <li><strong>II.</strong> Accréditation, rôles et identité opérationnelle (gilet, poste sans accréditation, consignes du RR)</li>
+              <li><strong>III.</strong> Production, qualité technique et éditorial (conducteur, habillage, propos en direct)</li>
+              <li><strong>IV.</strong> Matériel, équipements et ressources</li>
+              <li><strong>V.</strong> Image du collectif et représentation externe</li>
+              <li><strong>VI.</strong> Droits de diffusion, données personnelles et confidentialité</li>
+              <li><strong>VII.</strong> Vie interne et relations entre membres (harcèlement, discrimination : classe 4)</li>
+              <li><strong>VIII.</strong> Responsabilités, gouvernance et atteintes à l'Inspection</li>
+            </ul>
+          </div>
+
+          <div class="rule-box blue">
+            <span class="rule-box-icon">⚖️</span>
+            <div>
+              <div class="rule-box-title">Circonstances &amp; récidive</div>
+              <p><strong>Atténuantes</strong> (jamais en classe 4) : absence d'antécédents, reconnaissance spontanée des faits, coopération, excuses acceptées. <strong>Aggravantes</strong> : faits après avertissement, abus d'autorité, perturbation d'une retransmission, présence de mineurs ou de personnes en formation. <strong>Très aggravantes</strong> : récidive répétée, victime mineure ou vulnérable, préméditation, refus de se conformer aux décisions. Une nouvelle faute de même classe dans la saison relève au minimum du palier supérieur. Le barème complet, avec la liste référencée de chaque manquement, est consultable dans le Règlement disciplinaire.</p>
+            </div>
           </div>
         </div>
 
@@ -1397,7 +1594,7 @@
             </div>
           </div>
 
-          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;">Lancé lors de l'AG d'août 2025 pour valoriser la participation, encourager la polyvalence et garder une trace des réalisations de chaque membre.</p>
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem;">Lancé lors de l'AG d'août 2025 pour valoriser la participation, encourager la polyvalence et garder une trace des réalisations de chaque membre. Les missions sont regroupées par poste (caméra large, zoom, terrain, commentateur, régie, scoring) avec une catégorie de missions créatives.</p>
 
           <div class="fiche-subsec">
             <div class="fiche-subsec-title">Comment ça marche</div>
@@ -1413,22 +1610,40 @@
 
           <div class="rule-box gold" style="margin-bottom:1.5rem;">
             <span class="rule-box-icon">💡</span>
-            <div><p><strong>Cumul possible :</strong> plusieurs missions peuvent être réalisées dans un même match si elles sont compatibles (ex. caméra terrain + interview).</p></div>
+            <div><p><strong>Cumul possible :</strong> plusieurs missions peuvent être réalisées dans un même match si elles sont compatibles (ex. caméra terrain + interview). Chacune est déclarée séparément.</p></div>
           </div>
 
-          <div style="overflow-x:auto;">
+          <div style="overflow-x:auto;margin-bottom:1.5rem;">
             <table class="bareme-table">
               <thead><tr><th>Action / Mission</th><th style="text-align:right;">Points</th></tr></thead>
               <tbody>
                 <tr><td>Match complet — Plan Large, Terrain ou Commentateur</td><td style="text-align:right;"><span class="pts">15 pts</span></td></tr>
-                <tr><td>Match complet — Plan Serré, Régie ou Scoring</td><td style="text-align:right;"><span class="pts">20 pts</span></td></tr>
+                <tr><td>Match complet — Plan Serré (zoom), Régie ou Scoring</td><td style="text-align:right;"><span class="pts">20 pts</span></td></tr>
                 <tr><td>Montage / clip / reportage photo</td><td style="text-align:right;"><span class="pts">10 pts</span></td></tr>
+                <tr><td>Mission de base</td><td style="text-align:right;"><span class="pts">5 pts</span></td></tr>
                 <tr><td>Événement majeur</td><td style="text-align:right;"><span class="pts bonus">+10 bonus</span></td></tr>
                 <tr><td>Formation d'un membre à un poste (Superviseur)</td><td style="text-align:right;"><span class="pts bonus">+15 bonus</span></td></tr>
                 <tr><td>Formation d'un nouveau membre (intégration)</td><td style="text-align:right;"><span class="pts bonus">+20 bonus</span></td></tr>
               </tbody>
             </table>
           </div>
+
+          <div class="fiche-subsec">
+            <div class="fiche-subsec-title">Les grades de gratification</div>
+            <div style="overflow-x:auto;">
+              <table class="fiche-table">
+                <thead><tr><th>Grade</th><th>Points cumulés</th></tr></thead>
+                <tbody>
+                  <tr><td>⬜ Sans grade</td><td>moins de 50</td></tr>
+                  <tr><td>🥉 Bronze</td><td>50 à 200</td></tr>
+                  <tr><td>🥈 Argent</td><td>200 à 450</td></tr>
+                  <tr><td>🥇 Or</td><td>plus de 450</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem;">Ces grades de gratification sont distincts des grades de la fonction de Responsable de retransmission (Partie I). Le classement est remis à jour après chaque événement, par saison.</p>
+          </div>
+
           <div style="text-align:center;margin-top:1.5rem;">
             <a href="gratification.html" class="btn btn-red">🏆 Voir le classement complet →</a>
           </div>
@@ -1444,6 +1659,14 @@
             </div>
           </div>
 
+          <div class="rule-box blue" style="margin-bottom:1.5rem;">
+            <span class="rule-box-icon">👋</span>
+            <div>
+              <div class="rule-box-title">Rejoindre le collectif — Art. 5.2 des statuts &amp; Art. 4 RG</div>
+              <p>L'adhésion est libre, <strong>sans cotisation</strong>, et ouverte à toute personne motivée qui respecte les valeurs du groupe. Elle suppose un échange préalable avec au moins un membre du Bureau, puis une validation par le Coordinateur général ou le Bureau, ainsi que l'acceptation du règlement général. Il faut être licencié au club de Meylan Handball ou entretenir des relations avec un membre du collectif. Une <strong>période d'intégration d'un mois</strong> peut être appliquée.</p>
+            </div>
+          </div>
+
           <h2 class="section-title" style="margin-bottom:.25rem;">Parcours de <span>progression</span></h2>
           <div class="section-line"></div>
 
@@ -1453,7 +1676,7 @@
               <div class="p-step-body">
                 <div class="p-step-phase">Étape 1</div>
                 <div class="p-step-title">Découverte</div>
-                <div class="p-step-desc">Visite de site, présentation du matériel, rencontre avec l'équipe. Observation lors d'une retransmission complète.</div>
+                <div class="p-step-desc">Visite de site, présentation du matériel et des règlements, rencontre avec l'équipe. Observation lors d'une retransmission complète.</div>
               </div>
             </div>
             <div class="parcours-step">
@@ -1461,7 +1684,7 @@
               <div class="p-step-body">
                 <div class="p-step-phase">Étape 2</div>
                 <div class="p-step-title">Prise de poste accompagnée</div>
-                <div class="p-step-desc">1re retransmission sur un poste simple avec un Superviseur désigné. Apprentissage par l'expérience réelle.</div>
+                <div class="p-step-desc">1re retransmission sur un poste simple avec un Superviseur désigné, sous la supervision directe d'un responsable accrédité. Apprentissage par l'expérience réelle.</div>
               </div>
             </div>
             <div class="parcours-step">
@@ -1477,7 +1700,7 @@
               <div class="p-step-body">
                 <div class="p-step-phase">Étape 4 — Si visée</div>
                 <div class="p-step-title">Accréditation qualifiée</div>
-                <div class="p-step-desc">Passer le questionnaire d'accréditation de Responsable de Retransmission ou Commentateur sportif sur le site MHBTV.</div>
+                <div class="p-step-desc">Passer le questionnaire d'accréditation de Responsable de Retransmission ou de Commentateur sportif sur le site MHBTV. Les accréditations sont valables une saison et se renouvellent chaque début de saison. Pour devenir Responsable stagiaire : questionnaire validé et observation d'un match aux côtés d'un responsable accrédité.</div>
                 <div style="margin-top:.75rem;display:flex;gap:.6rem;flex-wrap:wrap;">
                   <a href="accreditations.html" class="btn btn-outline" style="font-size:.72rem;padding:.4rem .85rem;">Voir les accréditations →</a>
                 </div>
@@ -1487,8 +1710,8 @@
               <div class="p-step-icon-wrap"><div class="p-step-icon">🎓</div></div>
               <div class="p-step-body">
                 <div class="p-step-phase">Étape 5</div>
-                <div class="p-step-title">Superviseur</div>
-                <div class="p-step-desc">Après plusieurs retransmissions, former à son tour de nouveaux membres. Bonus de gratification : +15 à +20 pts.</div>
+                <div class="p-step-title">Responsable, puis Superviseur</div>
+                <div class="p-step-desc">Après 3 retransmissions en autonomie, accès au grade de Responsable de Retransmission, puis aux grades de Sous-Directeur (multiplex) et de Directeur des Opérations avec l'expérience requise. Former à son tour de nouveaux membres rapporte un bonus de gratification : +15 à +20 pts.</div>
               </div>
             </div>
             <div class="parcours-step">
@@ -1496,21 +1719,24 @@
               <div class="p-step-body">
                 <div class="p-step-phase">Étape 6</div>
                 <div class="p-step-title">Responsabilités</div>
-                <div class="p-step-desc">Candidature possible aux postes de l'ICR ou du Bureau de la Coordination générale lors des prochaines élections en AG.</div>
+                <div class="p-step-desc">Candidature possible aux postes de chef de département de l'ICR ou du Bureau de la Coordination générale lors des prochaines élections en AG.</div>
               </div>
             </div>
           </div>
 
           <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.75rem;margin-top:2rem;">
-            <div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;">Catégories de membres</div>
-            <table class="fiche-table">
-              <thead><tr><th>Catégorie</th><th>Critère</th><th>Droits</th></tr></thead>
-              <tbody>
-                <tr><td><strong>Membre actif</strong></td><td>≥ 4 retransmissions / 3 mois ou engagement régulier</td><td>Vote AG · Éligible Coordination</td></tr>
-                <tr><td><strong>Membre occasionnel</strong></td><td>&lt; 6 retransmissions sur la saison</td><td>Vote AG · Éligible Coordination</td></tr>
-                <tr><td><strong>Membre d'honneur</strong></td><td>Soutien notable (anciens membres)</td><td>Pas de pouvoir décisionnel</td></tr>
-              </tbody>
-            </table>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.85rem;">Catégories de membres — Art. 5.1 des statuts</div>
+            <div style="overflow-x:auto;">
+              <table class="fiche-table">
+                <thead><tr><th>Catégorie</th><th>Critère</th><th>Droits</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>Membre actif</strong></td><td>Au moins 4 retransmissions en direct sur les 3 derniers mois, ou poste régulier, ou contribution stable à l'organisation</td><td>Vote en AG · Éligible à la Coordination générale</td></tr>
+                  <tr><td><strong>Membre occasionnel</strong></td><td>Moins de 4 retransmissions sur les 3 derniers mois, soutien ponctuel</td><td>Vote en AG · Éligible à la Coordination générale</td></tr>
+                  <tr><td><strong>Membre d'honneur</strong></td><td>Soutien notable (anciens membres, partenaires, sponsors, membres du club)</td><td>Vote en AG · Éligible à la Coordination générale</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:.8rem;color:var(--muted);margin-top:.5rem;">La Coordination générale révise la liste des membres actifs et occasionnels chaque mois. Tu peux demander à consulter ton statut à tout moment.</p>
           </div>
         </div>
 
@@ -1531,36 +1757,41 @@
             <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
               <div style="font-size:1.4rem;margin-bottom:.5rem;">📅</div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Honorer ses engagements</div>
-              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Prévenir au plus tôt en cas d'empêchement — ne pas laisser l'équipe sans nouvelles.</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Prévenir au plus tôt en cas d'empêchement, idéalement en proposant un remplaçant — ne pas laisser l'équipe sans nouvelles.</div>
             </div>
             <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
               <div style="font-size:1.4rem;margin-bottom:.5rem;">⚖️</div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Respecter la neutralité</div>
-              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Le principe de neutralité s'applique à toutes les retransmissions, quel que soit le poste.</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Le principe de neutralité s'applique à toutes les retransmissions, quel que soit le poste (Art. 8 RG).</div>
             </div>
             <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
               <div style="font-size:1.4rem;margin-bottom:.5rem;">🎒</div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Prendre soin du matériel</div>
-              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Le matériel appartient au collectif. Vérification avant usage, rangement soigneux après.</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Le matériel appartient au collectif. Vérification avant usage, rangement soigneux après, aucun usage personnel sans autorisation.</div>
             </div>
             <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
               <div style="font-size:1.4rem;margin-bottom:.5rem;">🎬</div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Respecter le RR</div>
-              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Suivre les consignes du Responsable de Retransmission en toutes circonstances.</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Suivre les consignes du Responsable de Retransmission en toutes circonstances et porter le gilet MHBTV.</div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
+              <div style="font-size:1.4rem;margin-bottom:.5rem;">📸</div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Respecter le droit à l'image</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Joueurs, officiels, public et bénévoles : des formulaires de consentement peuvent être exigés (Art. 11 RG).</div>
             </div>
             <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.25rem;">
               <div style="font-size:1.4rem;margin-bottom:.5rem;">🚨</div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);margin-bottom:.3rem;">Signaler les problèmes</div>
-              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Tout comportement inapproprié doit être signalé via le site MHBTV.</div>
+              <div style="font-size:.82rem;color:var(--muted);line-height:1.5;">Tout comportement inapproprié doit être signalé via le site MHBTV, par écrit et de façon circonstanciée.</div>
             </div>
           </div>
 
           <div style="background:rgba(232,0,29,.05);border:1px solid rgba(232,0,29,.2);border-radius:8px;padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
             <div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:.3rem;">Signalement d'un comportement</div>
-              <div style="font-size:.85rem;color:var(--muted);">Comportement discriminatoire, agressif, sexiste, raciste ou portant atteinte à l'image du collectif.</div>
+              <div style="font-size:.85rem;color:var(--muted);">Comportement discriminatoire, agressif, sexiste, raciste ou portant atteinte à l'image du collectif. Les signalements anonymes ne sont pas recevables.</div>
             </div>
-            <a href="https://meylanhandballtv.wixsite.com/meylan-handball-tv/signaler-un-comportement" target="_blank" class="btn btn-red" style="font-size:.78rem;">Signaler via le site →</a>
+            <a href="signalement-comportement.html" class="btn btn-red" style="font-size:.78rem;">Signaler via le site →</a>
           </div>
         </div>
 
@@ -1571,7 +1802,7 @@
   <footer>
     <div class="footer-brand">
       <div class="logo-text">MEYLAN <span>HANDBALL</span> TV</div>
-      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2025-2026.</p>
+      <p>Association bénévole de retransmission sportive du handball isérois. Saison 2026-2027.</p>
     </div>
     <div>
       <h4>Navigation</h4>
@@ -1588,12 +1819,12 @@
         <li><a href="accreditations.html">Accréditations</a></li>
         <li><a href="planning.html">Planning</a></li>
         <li><a href="guides.html">Guides &amp; formations</a></li>
-        <li><a href="reglement-general.html">Règlement général</a></li>
+        <li><a href="statuts.html">Statuts &amp; règlements</a></li>
       </ul>
     </div>
   </footer>
   <div class="footer-bottom">
-    <p>© 2025-2026 Meylan Handball TV · Guide bénévole v2.0</p>
+    <p>© 2026-2027 Meylan Handball TV · Guide bénévole v2.1</p>
     <p>Site interne — Usage réservé aux membres</p>
   </div>
 
@@ -1606,9 +1837,9 @@
 
     /* ── Highlight TOC au scroll ── */
     const sections = [
-      'postes','rr','superviseur','realisateur','cam-large','cam-serre',
+      'postes','rr','grades','superviseur','realisateur','cam-large','cam-serre',
       'cam-terrain','commentateur','ots',
-      'gouvernance','bcg','icr',
+      'gouvernance','bcg','icr','ag',
       'procedures','incidents','discipline',
       'gratification',
       'integration','conduite'
@@ -1622,7 +1853,6 @@
           const active = document.getElementById('toc-' + id);
           if (active) {
             active.classList.add('active');
-            // scroll TOC si nécessaire
             const toc = document.getElementById('guideToc');
             if (toc.scrollHeight > toc.clientHeight) {
               active.scrollIntoView({ block: 'nearest' });

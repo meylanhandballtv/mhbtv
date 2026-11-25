@@ -45,28 +45,20 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       overflow: hidden;
-      cursor: pointer;
       transition: transform 0.25s, border-color 0.25s;
     }
     .audience-card:hover { transform: translateY(-4px); border-color: var(--red); }
-    .audience-card img {
-      width: 100%;
-      display: block;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      transition: transform 0.4s;
-    }
-    .audience-card:hover img { transform: scale(1.02); }
-    .audience-card-info {
+    .audience-card-head {
       padding: 1rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid var(--border);
     }
     .audience-month {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
       color: var(--white);
     }
     .audience-season {
@@ -81,75 +73,51 @@
       border-radius: 3px;
     }
 
-    /* ── LIGHTBOX ── */
-    .lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(0,0,0,0.92);
-      backdrop-filter: blur(6px);
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
+    /* ── STATS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
     }
-    .lightbox.open { display: flex; }
-    .lightbox-inner {
-      position: relative;
-      max-width: 900px;
-      width: 100%;
-    }
-    .lightbox-inner img {
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      display: block;
-    }
-    .lightbox-close {
-      position: absolute;
-      top: -2.5rem;
-      right: 0;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      cursor: pointer;
-      border: none;
-      background: none;
-      transition: color 0.2s;
-    }
-    .lightbox-close:hover { color: var(--white); }
-    .lightbox-nav {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
-    }
-    .lightbox-nav button {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.5rem 1.2rem;
-      border: 1px solid var(--border);
+    .stat {
       background: var(--card);
-      color: var(--text);
-      border-radius: 4px;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
+      padding: 1rem 1.25rem;
     }
-    .lightbox-nav button:hover { border-color: var(--red); color: var(--red); }
-    .lightbox-caption {
-      text-align: center;
+    .stat-label {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.85rem;
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
-      margin-top: 0.75rem;
+      margin-bottom: 0.35rem;
     }
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      line-height: 1;
+      color: var(--white);
+      letter-spacing: 0.03em;
+    }
+    .stat-value small {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-left: 0.2rem;
+    }
+    .stat-value.empty { color: var(--muted); }
+    .stat-delta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      margin-top: 0.3rem;
+      color: var(--muted);
+    }
+    .stat-delta.up { color: #3ecf6e; }
+    .stat-delta.down { color: var(--red); }
 
-    /* ── STATS SUMMARY ── */
+    /* ── SEASON BLOCK ── */
     .season-block {
       background: var(--card);
       border: 1px solid var(--border);
@@ -192,313 +160,136 @@
 
       <div class="season-block">
         <div class="season-block-title">Saison en cours — 2026-2027</div>
-        <p>Rapports d'audiences disponibles depuis octobre 2025. Les rapports sont mis à jour chaque mois par le Bureau.</p>
+        <p>Rapports d'audiences disponibles depuis octobre 2024. Les rapports sont mis à jour chaque mois par le Bureau.</p>
       </div>
 
       <div class="filter-bar">
-        <button class="filter-btn active" onclick="filterAudiences('all', this)">Toutes les saisons</button>
-        <button class="filter-btn" onclick="filterAudiences('2026-2027', this)">2026-2027</button>
-        <button class="filter-btn" onclick="filterAudiences('2025-2026', this)">2025-2026</button>
-        <button class="filter-btn" onclick="filterAudiences('2024-2025', this)">2024-2025</button>
+        <button class="filter-btn active" data-season="all">Toutes les saisons</button>
+        <button class="filter-btn" data-season="2026-2027">2026-2027</button>
+        <button class="filter-btn" data-season="2025-2026">2025-2026</button>
+        <button class="filter-btn" data-season="2024-2025">2024-2025</button>
       </div>
 
-      <div class="audience-grid" id="audienceGrid">
-
-        <!-- ── SAISON 2026-2027 ── -->
-        <div class="audience-card" data-season="2026-2027" onclick="openLightbox(0)">
-          <img src="audience/Audiences15.jpg" alt="Audiences Octobre 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Octobre 2026</span>
-            <span class="audience-season">2026-2027</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2026-2027" onclick="openLightbox(1)">
-          <img src="audience/Audiences14.jpg" alt="Audiences Septembre 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Septembre 2026</span>
-            <span class="audience-season">2026-2027</span>
-          </div>
-        </div>
-
-        <!-- ── SAISON 2025-2026 ── -->
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(2)">
-          <img src="audience/Audiences13.jpg" alt="Audiences Août 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Août 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(3)">
-          <img src="audience/Audiences12.jpg" alt="Audiences Juillet 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Juillet 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(4)">
-          <img src="audience/Audiences11.jpg" alt="Audiences Juin 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Juin 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(5)">
-          <img src="audience/Audiences10.jpg" alt="Audiences Mai 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Mai 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(6)">
-          <img src="audience/Audiences9.jpg" alt="Audiences Avril 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Avril 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(7)">
-          <img src="audience/Audiences8.jpg" alt="Audiences Mars 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Mars 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(8)">
-          <img src="audience/Audiences7.jpg" alt="Audiences Février 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Février 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(9)">
-          <img src="audience/Audiences6.jpg" alt="Audiences Janvier 2026" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Janvier 2026</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(10)">
-          <img src="audience/Audiences5.jpg" alt="Audiences Décembre 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Décembre 2025</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(11)">
-          <img src="audience/Audiences4.jpg" alt="Audiences Novembre 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Novembre 2025</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-        
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(12)">
-          <img src="audience/Audiences3.jpg" alt="Audiences Octobre 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Octobre 2025</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2025-2026" onclick="openLightbox(13)">
-          <img src="audience/Audiences2.jpg" alt="Audiences Septembre 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Septembre 2025</span>
-            <span class="audience-season">2025-2026</span>
-          </div>
-        </div>
-
-        <!-- ── SAISON 2024-2025 ── -->
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(14)">
-          <img src="https://static.wixstatic.com/media/08ddad_b186acbd8064483caf02ea95d7e9130f~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11Audiences%20Aout%202025.jpg" alt="Audiences Août 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Août 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(15)">
-          <img src="https://static.wixstatic.com/media/08ddad_6f9d55275b3145ae9b4315e97fc948c0~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/10Audiences%20Juillet%202025.jpg" alt="Audiences Juillet 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Juillet 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(16)">
-          <img src="https://static.wixstatic.com/media/08ddad_b5d6e77d26774a0086b5835ce3873161~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/9Audiences%20Juin%202025.jpg" alt="Audiences Juin 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Juin 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(17)">
-          <img src="https://static.wixstatic.com/media/08ddad_bc747dd1472e4dddb7f70a21b4af992c~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8Audiences%20Mai%202025.jpg" alt="Audiences Mai 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Mai 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(18)">
-          <img src="https://static.wixstatic.com/media/08ddad_4482b06cf39a46818f4a72d61f7329f2~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7Audiences%20Avril%202025.jpg" alt="Audiences Avril 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Avril 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(19)">
-          <img src="https://static.wixstatic.com/media/08ddad_f838552800694c159d351f5fb690de47~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6Audiences%20Mars%202025.jpg" alt="Audiences Mars 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Mars 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(20)">
-          <img src="https://static.wixstatic.com/media/08ddad_6f8887e1d50b4548bdd187cfe1acff92~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5Audiences%20F%C3%A9vrier%202025.jpg" alt="Audiences Février 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Février 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(21)">
-          <img src="https://static.wixstatic.com/media/08ddad_fd73a31135b3431b9eea7d8e30a294a5~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4Audiences%20Janvier%202025.jpg" alt="Audiences Janvier 2025" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Janvier 2025</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(22)">
-          <img src="https://static.wixstatic.com/media/08ddad_707159a079894615a14c3002f0c35d13~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3Audiences%20D%C3%A9cembre%202024.jpg" alt="Audiences Décembre 2024" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Décembre 2024</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(23)">
-          <img src="https://static.wixstatic.com/media/08ddad_e903adec7e1945bcb320bde9379e8504~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2Audiences%20Novembre%202024.jpg" alt="Audiences Novembre 2024" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Novembre 2024</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-        <div class="audience-card" data-season="2024-2025" onclick="openLightbox(24)">
-          <img src="https://static.wixstatic.com/media/08ddad_ebcd8259e45448e4b1e81d671a363a2d~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1Audiences%20Octobre%202024.jpg" alt="Audiences Octobre 2024" loading="lazy">
-          <div class="audience-card-info">
-            <span class="audience-month">Octobre 2024</span>
-            <span class="audience-season">2024-2025</span>
-          </div>
-        </div>
-
-      </div>
+      <div class="audience-grid" id="audienceGrid"></div>
     </section>
   </main>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <div class="lightbox-inner">
-      <button class="lightbox-close" onclick="closeLightboxBtn()">✕ Fermer</button>
-      <img id="lightboxImg" src="" alt="">
-      <div class="lightbox-caption" id="lightboxCaption"></div>
-      <div class="lightbox-nav">
-        <button onclick="lightboxNav(-1)">← Précédent</button>
-        <button onclick="lightboxNav(1)">Suivant →</button>
-      </div>
-    </div>
-  </div>
 
   <script src="footer.js"></script>
 
   <script>
-    // ── DATA ──
-    const audienceData = [
-      { src: 'audience/Audiences11.jpg', label: 'Audiences — Juin 2026' },
-      { src: 'audience/Audiences10.jpg', label: 'Audiences — Mai 2026' },
-      { src: 'audience/Audiences9.jpg', label: 'Audiences — Avril 2026' },
-      { src: 'audience/Audiences8.jpg', label: 'Audiences — Mars 2026' },
-      { src: 'audience/Audiences7.jpg', label: 'Audiences — Février 2026' },
-      { src: 'audience/Audiences6.jpg', label: 'Audiences — Janvier 2026' },
-      { src: 'audience/Audiences5.jpg', label: 'Audiences — Décembre 2025' },
-      { src: 'audience/Audiences4.jpg', label: 'Audiences — Novembre 2025' },
-      { src: 'audience/Audiences3.jpg', label: 'Audiences — Octobre 2025' },
-      { src: 'audience/Audiences2.jpg', label: 'Audiences — Septembre 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_b186acbd8064483caf02ea95d7e9130f~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11Audiences%20Aout%202025.jpg', label: 'Audiences — Août 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_6f9d55275b3145ae9b4315e97fc948c0~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/10Audiences%20Juillet%202025.jpg', label: 'Audiences — Juillet 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_b5d6e77d26774a0086b5835ce3873161~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/9Audiences%20Juin%202025.jpg', label: 'Audiences — Juin 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_bc747dd1472e4dddb7f70a21b4af992c~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/8Audiences%20Mai%202025.jpg', label: 'Audiences — Mai 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_4482b06cf39a46818f4a72d61f7329f2~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/7Audiences%20Avril%202025.jpg', label: 'Audiences — Avril 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_f838552800694c159d351f5fb690de47~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/6Audiences%20Mars%202025.jpg', label: 'Audiences — Mars 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_6f8887e1d50b4548bdd187cfe1acff92~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/5Audiences%20F%C3%A9vrier%202025.jpg', label: 'Audiences — Février 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_fd73a31135b3431b9eea7d8e30a294a5~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/4Audiences%20Janvier%202025.jpg', label: 'Audiences — Janvier 2025' },
-      { src: 'https://static.wixstatic.com/media/08ddad_707159a079894615a14c3002f0c35d13~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/3Audiences%20D%C3%A9cembre%202024.jpg', label: 'Audiences — Décembre 2024' },
-      { src: 'https://static.wixstatic.com/media/08ddad_e903adec7e1945bcb320bde9379e8504~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/2Audiences%20Novembre%202024.jpg', label: 'Audiences — Novembre 2024' },
-      { src: 'https://static.wixstatic.com/media/08ddad_ebcd8259e45448e4b1e81d671a363a2d~mv2.jpg/v1/fill/w_977,h_550,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1Audiences%20Octobre%202024.jpg', label: 'Audiences — Octobre 2024' },
+    // ════════════════════════════════════════════════════════════
+    //  DONNÉES — à compléter chaque mois (ajouter une ligne en haut)
+    //  y = année, m = mois (1-12)
+    //  vues         : nombre de vues
+    //  heures       : heures de visionnage
+    //  spectateurs  : téléspectateurs cumulés
+    //  retrans      : heures de retransmission (direct)
+    //  Laisser null tant que la valeur n'est pas connue (affiche « — »).
+    // ════════════════════════════════════════════════════════════
+    const AUDIENCES = [
+      // ── Saison 2026-2027 ──
+      { y: 2026, m: 10, vues: 2 283, heures: 191.7, spectateurs: 591, retrans: 12.8 },
+      { y: 2026, m: 9,  vues: 1 861, heures: 126.4, spectateurs: 479, retrans: 10.4 },
+      // ── Saison 2025-2026 ──
+      { y: 2026, m: 8,  vues: 865, heures: 78.9, spectateurs: 248, retrans: 16.8 },
+      { y: 2026, m: 7,  vues: 215, heures: 25.4, spectateurs: 66, retrans: 5.1 },
+      { y: 2026, m: 6,  vues: 2 025, heures: 251.6, spectateurs: 905, retrans: 10.0 },
+      { y: 2026, m: 5,  vues: 583, heures: 72.6, spectateurs: 244, retrans: 4.9 },
+      { y: 2026, m: 4,  vues: 461, heures: 47.8, spectateurs: 194, retrans: 1.4 },
+      { y: 2026, m: 3,  vues: 1 364, heures: 142.3, spectateurs: 657, retrans: 12.4 },
+      { y: 2026, m: 2,  vues: 1 081, heures: 133.0, spectateurs: 499, retrans: 8.1 },
+      { y: 2026, m: 1,  vues: 1 690, heures: 212.2, spectateurs: 722, retrans: 16.3 },
+      { y: 2025, m: 12, vues: 691, heures: 80.8, spectateurs: 298, retrans: 4.7 },
+      { y: 2025, m: 11, vues: 1 428, heures: 182.8, spectateurs: 653, retrans: 14.9 },
+      { y: 2025, m: 10, vues: 1 179, heures: 153.6, spectateurs: 537, retrans: 15.2 },
+      { y: 2025, m: 9,  vues: 1 014, heures: 131.6, spectateurs: 536, retrans: 6.4 },
+      // ── Saison 2024-2025 ──
+      { y: 2025, m: 8,  vues: 668, heures: 102.2, spectateurs: 335, retrans: 8.2 },
+      { y: 2025, m: 7,  vues: 144, heures: 23.9, spectateurs: 58, retrans: null },
+      { y: 2025, m: 6,  vues: 528, heures: 50.3, spectateurs: 280, retrans: 3.4 },
+      { y: 2025, m: 5,  vues: 2 354, heures: 260.8, spectateurs: 1.064, retrans: 23.1 },
+      { y: 2025, m: 4,  vues: 140, heures: 12.0, spectateurs: 70, retrans: null },
+      { y: 2025, m: 3,  vues: 1 211, heures: 126.7, spectateurs: 489, retrans: 10.3 },
+      { y: 2025, m: 2,  vues: 652, heures: 74.2, spectateurs: 263, retrans: 6.3 },
+      { y: 2025, m: 1,  vues: 1 217, heures: 157.4, spectateurs: 526, retrans: 11.7 },
+      { y: 2024, m: 12, vues: 537, heures: 32.8, spectateurs: 293, retrans: 2.8 },
+      { y: 2024, m: 11, vues: 457, heures: 66.3, spectateurs: 226, retrans: 7.3 },
+      { y: 2024, m: 10, vues: 531, heures: 69.8, spectateurs: 284, retrans: 9.3 },
     ];
 
-    let currentIndex = 0;
+    // Les 4 critères : clé, libellé, suffixe d'unité
+    const METRICS = [
+      { key: 'vues',        label: 'Vues',                    unit: '' },
+      { key: 'heures',      label: 'Heures de visionnage',    unit: 'h' },
+      { key: 'spectateurs', label: 'Téléspectateurs cumulés', unit: '' },
+      { key: 'retrans',     label: 'Heures de retransmission', unit: 'h' },
+    ];
 
-    function openLightbox(i) {
-      currentIndex = i;
-      document.getElementById('lightboxImg').src = audienceData[i].src;
-      document.getElementById('lightboxCaption').textContent = audienceData[i].label;
-      document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
+    const MONTHS = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+    // Saison sportive : septembre → août
+    function seasonOf(y, m) {
+      return m >= 9 ? `${y}-${y + 1}` : `${y - 1}-${y}`;
     }
 
-    function closeLightbox(e) {
-      if (e.target === document.getElementById('lightbox')) {
-        closeLightboxBtn();
-      }
+    function fmt(n) {
+      return n.toLocaleString('fr-FR', { maximumFractionDigits: 1 });
     }
 
-    function closeLightboxBtn() {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
+    // Variation vs mois précédent (l'entrée suivante dans le tableau)
+    function deltaHTML(cur, prev) {
+      if (typeof cur !== 'number' || typeof prev !== 'number' || prev === 0) return '';
+      const pct = ((cur - prev) / prev) * 100;
+      const cls = pct > 0 ? 'up' : pct < 0 ? 'down' : '';
+      const arrow = pct > 0 ? '▲' : pct < 0 ? '▼' : '=';
+      const sign = pct > 0 ? '+' : '';
+      return `<div class="stat-delta ${cls}">${arrow} ${sign}${pct.toFixed(1).replace('.', ',')} % vs mois préc.</div>`;
     }
 
-    function lightboxNav(dir) {
-      currentIndex = (currentIndex + dir + audienceData.length) % audienceData.length;
-      document.getElementById('lightboxImg').src = audienceData[currentIndex].src;
-      document.getElementById('lightboxCaption').textContent = audienceData[currentIndex].label;
+    function render() {
+      const grid = document.getElementById('audienceGrid');
+      grid.innerHTML = AUDIENCES.map((a, i) => {
+        const season = seasonOf(a.y, a.m);
+        const prev = AUDIENCES[i + 1];
+        const stats = METRICS.map(mt => {
+          const v = a[mt.key];
+          const has = typeof v === 'number';
+          const value = has
+            ? `${fmt(v)}${mt.unit ? `<small>${mt.unit}</small>` : ''}`
+            : '—';
+          return `
+            <div class="stat">
+              <div class="stat-label">${mt.label}</div>
+              <div class="stat-value ${has ? '' : 'empty'}">${value}</div>
+              ${prev ? deltaHTML(v, prev[mt.key]) : ''}
+            </div>`;
+        }).join('');
+
+        return `
+          <div class="audience-card" data-season="${season}">
+            <div class="audience-card-head">
+              <span class="audience-month">${MONTHS[a.m - 1]} ${a.y}</span>
+              <span class="audience-season">${season}</span>
+            </div>
+            <div class="stats-grid">${stats}</div>
+          </div>`;
+      }).join('');
     }
 
-    document.addEventListener('keydown', e => {
-      const lb = document.getElementById('lightbox');
-      if (!lb.classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightboxBtn();
-      if (e.key === 'ArrowLeft') lightboxNav(-1);
-      if (e.key === 'ArrowRight') lightboxNav(1);
-    });
-
-    // ── FILTER ──
+    // ── FILTRE ──
     function filterAudiences(season, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       document.querySelectorAll('.audience-card').forEach(card => {
-        if (season === 'all' || card.dataset.season === season) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
+        card.style.display = (season === 'all' || card.dataset.season === season) ? '' : 'none';
       });
     }
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => filterAudiences(btn.dataset.season, btn));
+    });
+
+    render();
   </script>
 </body>
 </html>

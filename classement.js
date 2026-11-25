@@ -103,7 +103,6 @@ function rendrePeriode(id) {
       <div class="lb-row ${cls}">
         <span class="lb-rank"${r && r <= 3 ? "" : ' style="color:var(--muted);"'}>${rangTxt}</span>
         <div class="lb-name"${opacite}><div class="lb-avatar" style="background:${st.bg};color:${st.col};">${initiales(m)}</div>${nomComplet(m)}</div>
-        <span class="lb-grade" style="color:${g.couleur};text-align:center;">${g.nom}</span>
         <div class="lb-pts" style="${couleurPts}">${m.score.toLocaleString("fr-FR")} <span class="pts-label">pts</span></div>
       </div>`;
   }).join("");
@@ -119,7 +118,7 @@ function rendrePeriode(id) {
   el.innerHTML = `${bandeau}
     <div class="leaderboard">
       <div class="lb-header">
-        <span>#</span><span>Membre</span><span style="text-align:center;">Grade</span><span style="text-align:right;">Points</span>
+        <span>#</span><span>Membre</span><span style="text-align:right;">Points</span>
       </div>${lignes}
     </div>${note}`;
 }

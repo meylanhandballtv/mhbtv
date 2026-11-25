@@ -135,6 +135,56 @@
     }
     .season-block p { font-size: 0.85rem; color: var(--muted); }
 
+
+    /* ── TOTAUX ── */
+    .totals {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--red);
+      border-radius: 8px;
+      margin-bottom: 2.5rem;
+      overflow: hidden;
+    }
+    .totals-head {
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .totals-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      color: var(--white);
+    }
+    .totals-scope {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .totals-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+    .totals-grid .stat { padding: 1.25rem 1.5rem; }
+    .totals-grid .stat-value { font-size: 2.4rem; }
+    .totals-note {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 900px) {
+      .totals-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
     @media (max-width: 900px) {
       .audience-grid { grid-template-columns: 1fr; }
     }
@@ -163,6 +213,8 @@
         <p>Rapports d'audiences disponibles depuis octobre 2024. Les rapports sont mis à jour chaque mois par le Bureau.</p>
       </div>
 
+      <div class="totals" id="totals"></div>
+
       <div class="filter-bar">
         <button class="filter-btn active" data-season="all">Toutes les saisons</button>
         <button class="filter-btn" data-season="2026-2027">2026-2027</button>
@@ -182,36 +234,36 @@
     //  y = année, m = mois (1-12)
     //  vues         : nombre de vues
     //  heures       : heures de visionnage
-    //  spectateurs  : téléspectateurs cumulés
+    //  spectateurs  : téléspectateurs uniques (sur le mois)
     //  retrans      : heures de retransmission (direct)
     //  Laisser null tant que la valeur n'est pas connue (affiche « — »).
     // ════════════════════════════════════════════════════════════
     const AUDIENCES = [
       // ── Saison 2026-2027 ──
-      { y: 2026, m: 10, vues: 2 283, heures: 191.7, spectateurs: 591, retrans: 12.8 },
-      { y: 2026, m: 9,  vues: 1 861, heures: 126.4, spectateurs: 479, retrans: 10.4 },
+      { y: 2026, m: 10, vues: 2283, heures: 191.7, spectateurs: 591, retrans: 12.8 },
+      { y: 2026, m: 9,  vues: 1861, heures: 126.4, spectateurs: 479, retrans: 10.4 },
       // ── Saison 2025-2026 ──
       { y: 2026, m: 8,  vues: 865, heures: 78.9, spectateurs: 248, retrans: 16.8 },
       { y: 2026, m: 7,  vues: 215, heures: 25.4, spectateurs: 66, retrans: 5.1 },
-      { y: 2026, m: 6,  vues: 2 025, heures: 251.6, spectateurs: 905, retrans: 10.0 },
+      { y: 2026, m: 6,  vues: 2025, heures: 251.6, spectateurs: 905, retrans: 10.0 },
       { y: 2026, m: 5,  vues: 583, heures: 72.6, spectateurs: 244, retrans: 4.9 },
       { y: 2026, m: 4,  vues: 461, heures: 47.8, spectateurs: 194, retrans: 1.4 },
-      { y: 2026, m: 3,  vues: 1 364, heures: 142.3, spectateurs: 657, retrans: 12.4 },
-      { y: 2026, m: 2,  vues: 1 081, heures: 133.0, spectateurs: 499, retrans: 8.1 },
-      { y: 2026, m: 1,  vues: 1 690, heures: 212.2, spectateurs: 722, retrans: 16.3 },
+      { y: 2026, m: 3,  vues: 1364, heures: 142.3, spectateurs: 657, retrans: 12.4 },
+      { y: 2026, m: 2,  vues: 1081, heures: 133.0, spectateurs: 499, retrans: 8.1 },
+      { y: 2026, m: 1,  vues: 1690, heures: 212.2, spectateurs: 722, retrans: 16.3 },
       { y: 2025, m: 12, vues: 691, heures: 80.8, spectateurs: 298, retrans: 4.7 },
-      { y: 2025, m: 11, vues: 1 428, heures: 182.8, spectateurs: 653, retrans: 14.9 },
-      { y: 2025, m: 10, vues: 1 179, heures: 153.6, spectateurs: 537, retrans: 15.2 },
-      { y: 2025, m: 9,  vues: 1 014, heures: 131.6, spectateurs: 536, retrans: 6.4 },
+      { y: 2025, m: 11, vues: 1428, heures: 182.8, spectateurs: 653, retrans: 14.9 },
+      { y: 2025, m: 10, vues: 1179, heures: 153.6, spectateurs: 537, retrans: 15.2 },
+      { y: 2025, m: 9,  vues: 1014, heures: 131.6, spectateurs: 536, retrans: 6.4 },
       // ── Saison 2024-2025 ──
       { y: 2025, m: 8,  vues: 668, heures: 102.2, spectateurs: 335, retrans: 8.2 },
       { y: 2025, m: 7,  vues: 144, heures: 23.9, spectateurs: 58, retrans: null },
       { y: 2025, m: 6,  vues: 528, heures: 50.3, spectateurs: 280, retrans: 3.4 },
-      { y: 2025, m: 5,  vues: 2 354, heures: 260.8, spectateurs: 1.064, retrans: 23.1 },
+      { y: 2025, m: 5,  vues: 2354, heures: 260.8, spectateurs: 1064, retrans: 23.1 },
       { y: 2025, m: 4,  vues: 140, heures: 12.0, spectateurs: 70, retrans: null },
-      { y: 2025, m: 3,  vues: 1 211, heures: 126.7, spectateurs: 489, retrans: 10.3 },
+      { y: 2025, m: 3,  vues: 1211, heures: 126.7, spectateurs: 489, retrans: 10.3 },
       { y: 2025, m: 2,  vues: 652, heures: 74.2, spectateurs: 263, retrans: 6.3 },
-      { y: 2025, m: 1,  vues: 1 217, heures: 157.4, spectateurs: 526, retrans: 11.7 },
+      { y: 2025, m: 1,  vues: 1217, heures: 157.4, spectateurs: 526, retrans: 11.7 },
       { y: 2024, m: 12, vues: 537, heures: 32.8, spectateurs: 293, retrans: 2.8 },
       { y: 2024, m: 11, vues: 457, heures: 66.3, spectateurs: 226, retrans: 7.3 },
       { y: 2024, m: 10, vues: 531, heures: 69.8, spectateurs: 284, retrans: 9.3 },
@@ -221,7 +273,7 @@
     const METRICS = [
       { key: 'vues',        label: 'Vues',                    unit: '' },
       { key: 'heures',      label: 'Heures de visionnage',    unit: 'h' },
-      { key: 'spectateurs', label: 'Téléspectateurs cumulés', unit: '' },
+      { key: 'spectateurs', label: 'Téléspectateurs uniques', unit: '' },
       { key: 'retrans',     label: 'Heures de retransmission', unit: 'h' },
     ];
 
@@ -276,10 +328,32 @@
       }).join('');
     }
 
+    // ── TOTAUX (suivent le filtre de saison) ──
+    function renderTotals(season) {
+      const rows = AUDIENCES.filter(a => season === 'all' || seasonOf(a.y, a.m) === season);
+      const stats = METRICS.map(mt => {
+        const total = rows.reduce((sum, a) => sum + (typeof a[mt.key] === 'number' ? a[mt.key] : 0), 0);
+        return `
+          <div class="stat">
+            <div class="stat-label">${mt.label}</div>
+            <div class="stat-value">${fmt(total)}${mt.unit ? `<small>${mt.unit}</small>` : ''}</div>
+          </div>`;
+      }).join('');
+      const scope = season === 'all' ? 'Toutes les saisons' : `Saison ${season}`;
+      document.getElementById('totals').innerHTML = `
+        <div class="totals-head">
+          <span class="totals-title">Statistiques totales</span>
+          <span class="totals-scope">${scope} · ${rows.length} mois</span>
+        </div>
+        <div class="totals-grid">${stats}</div>
+        <div class="totals-note">Les téléspectateurs uniques sont comptés par mois. Dans les totaux, un même spectateur présent sur plusieurs mois est donc compté à chaque mois.</div>`;
+    }
+
     // ── FILTRE ──
     function filterAudiences(season, btn) {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      renderTotals(season);
       document.querySelectorAll('.audience-card').forEach(card => {
         card.style.display = (season === 'all' || card.dataset.season === season) ? '' : 'none';
       });
@@ -290,6 +364,7 @@
     });
 
     render();
+    renderTotals('all');
   </script>
 </body>
 </html>

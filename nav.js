@@ -11,7 +11,7 @@
         <li><a href="index.html" ${currentPage==='index.html'?'class="active"':''}>Accueil</a></li>
         <li><a href="accreditations.html" ${currentPage==='accreditations.html'?'class="active"':''}>Accréditations</a></li>
         <li><a href="equipe.html" ${currentPage==='equipe.html'?'class="active"':''}>L'Équipe</a></li>
-        <li><a href="classement.html" ${currentPage==='gratification.html'?'class="active"':''}>Classement</a></li>
+        <li><a href="classement.html" ${currentPage==='classement.html'?'class="active"':''}>Classement</a></li>
         <li><a href="documentation.html" ${currentPage==='documentation.html'?'class="active"':''}>Documentation</a></li>
         <li><a href="statuts.html" ${currentPage==='statuts.html'?'class="active"':''}>Règlements</a></li>
         <li><a href="connexion.html">Se connecter</a></li>
